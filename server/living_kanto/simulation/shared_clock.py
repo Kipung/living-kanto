@@ -91,7 +91,12 @@ class SharedClockMixin:
 
     def _shared_event(self,state,head,changes,*,kind,causation,details=None):
         from .world import expand_entity_sets
-        changes=expand_entity_sets(changes);new=state.with_advanced_version(changes);idx=state.state_version;eid=f'evt-{idx}-{content_hash(changes)[:24]}'
+        changes=expand_entity_sets(changes)
+        # apply_changes already constructs and validates an independent state.
+        # Preserve the prior-hash gate, then advance its version in place rather
+        # than copying the entire validated world into/from another plain dict.
+        state.verify();new=state.apply_changes(copy.deepcopy(changes));new.state_hash='';new.state_version=state.state_version+1;new.validate();new.state_hash=new.compute_state_hash()
+        idx=state.state_version;eid=f'evt-{idx}-{content_hash(changes)[:24]}'
         update=StateUpdate(run_id=state.run_id,event_id=eid,event_index=idx,prior_state_version=idx,prior_state_hash=state.state_hash,previous_head=head,state_version=new.state_version,state_hash=new.state_hash,changes=changes).validate()
         event=CanonicalEvent(run_id=state.run_id,event_id=eid,event_index=idx,state_version=new.state_version,previous_head=head,event_kind=kind,tick=new.tick,simulated_time=new.simulated_time,real_wall_time=self._wall_time(),causation=causation,affected=[{'human_id':hid} for hid in sorted({c['path'].split('.')[1] for c in changes if c.get('path','').startswith('humans.')})],before={},after={},deterministic_inputs=details or {},transaction={'kind':'state_update',**update.to_dict()},visibility={'public':True}).validate()
         return event,new
@@ -167,6 +172,36 @@ class SharedClockMixin:
             steps.append({'kind':'transfer','map_id':segment['map_id'],'source':segment['source_exit'],'destination_map':segment['destination_map']})
         return steps
 
+    def _ordinary_tile_effects(self,state,hid,intent,cell,evidence,changes,rng):
+        """Reuse pure source counters without copying immutable route/history.
+
+        Encounter terrain stays on the existing interceptor. Poison whiteout
+        also falls back to it with RNG restored, preserving its exact recovery.
+        """
+        from ..mechanics.field_steps import field_steps
+        from ..mechanics.encounters import walking_encounter
+        h=state.humans[hid]
+        compact={key:h[key] for key in ('human_id','map_id','field_steps','field_encounter','battle_id','safari') if key in h}
+        compact.update(x=evidence['steps'][0][0],y=evidence['steps'][0][1])
+        party=[state.pokemon[pid] for pid in h.get('party',[]) if pid in state.pokemon]
+        before_rng=rng.getstate();behavior=int(cell.get('behavior',0))
+        forced=bool(intent.get('forced_movement')) or behavior in range(0x50,0x58)
+        actor,party,blackout=field_steps(compact,party,rng,forced=forced)
+        if blackout:
+            rng.setstate(before_rng)
+            return None
+        if behavior==0x58 or behavior not in range(0x50,0x54) and behavior not in range(0x54,0x58):forced=False
+        actor,hit=walking_encounter(actor,cell,self.encounter_table(h['map_id']),party,rng,surfing=h.get('status',{}).get('surfing',False),bicycle=h.get('status',{}).get('bicycle',False))
+        if hit:
+            rng.setstate(before_rng)
+            return None
+        for mon in party:
+            original=state.pokemon[mon['pokemon_id']]
+            for key,value in mon.items():
+                if original.get(key)!=value:changes.append({'op':'set','path':f"pokemon.{mon['pokemon_id']}.{key}",'value':value})
+        changes.extend([{'op':'set','path':f'humans.{hid}.field_steps','value':actor.get('field_steps',{})},{'op':'set','path':f'humans.{hid}.field_encounter','value':actor.get('field_encounter',{})}])
+        return changes,{**evidence,'forced_movement':forced}
+
     def next_shared_due(self,state):
         times=[]
         for h in state.humans.values():
@@ -186,7 +221,9 @@ class SharedClockMixin:
         changes=[];routes=[];working=s
         rng=random.Random(s.world_facts.get('seed',1)+s.state_version*1009)
         for hid,h in sorted(s.humans.items()):
-            intent=copy.deepcopy(h.get('movement_intent'))
+            # Planned steps/provenance are immutable after acceptance; only
+            # scalar execution fields change. Do not clone the route every tile.
+            intent=copy.copy(h.get('movement_intent'))
             if not intent or h.get('battle_id') or intent.get('paused_for_battle') or intent['next_due_at']>target:continue
             step=intent['steps'][intent['cursor']];prefix=f'humans.{hid}.';extra=[];evidence=None;kind=None
             if step['kind']=='tile':
@@ -199,7 +236,10 @@ class SharedClockMixin:
                 extra=[{'op':'set','path':prefix+'x','value':p[0]},{'op':'set','path':prefix+'y','value':p[1]},{'op':'set','path':prefix+'facing','value':facing}]
                 if h.get('status',{}).get('surfing') and int(m.cells.get(p,{}).get('behavior',0)) not in WATER:extra.append({'op':'set','path':prefix+'status.surfing','value':False})
                 evidence={'map_id':h['map_id'],'start':[h['x'],h['y']],'steps':[list(p)],'duration_seconds':1}
-                extra,_,evidence,kind=intercept(self,working,hid,'travel_to',{'x':p[0],'y':p[1]},intent['provenance'],intent['explanation'],evidence,extra,1,rng=rng)
+                cell=m.cells.get(p,{})
+                ordinary=self._ordinary_tile_effects(working,hid,intent,cell,evidence,extra,rng) if int(cell.get('encounter_type',0))==0 else None
+                if ordinary is not None:extra,evidence=ordinary
+                else:extra,_,evidence,kind=intercept(self,working,hid,'travel_to',{'x':p[0],'y':p[1]},intent['provenance'],intent['explanation'],evidence,extra,1,rng=rng)
                 if not kind and int(m.cells.get(p,{}).get('behavior',0))==0x66:
                     dst,nx,ny=resolve_transfer(self.maps,m,*p,m.exit_target(*p),surfing=True);actor,scripts=transition_effects(self.maps,h,m,p,dst,(nx,ny))
                     for key in ('map_id','x','y','field','status','facing'):extra.append({'op':'set','path':prefix+key,'value':actor[key]})
