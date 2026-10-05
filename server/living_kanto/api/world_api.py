@@ -160,6 +160,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
                 else:
                     event,new=engine().build_action_event(store,run_id,'player',action=req.action,arguments=req.arguments,observation_version=req.expected_state_version,expected_state_version=req.expected_state_version,decision_explanation='User-controlled trainer action',decision_provenance={'kind':'user','author':'user'})
                 head=engine().commit(store,event)
+                c._wake.set()
             except (EngineError,ContractError,ValueError) as exc:fail(exc)
         return {'state_version':new.state_version,'event_head_hash':head}
 
@@ -227,6 +228,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
             changes.extend([{'op':'set','path':'world_facts.creative_modified','value':True},{'op':'set','path':'world_facts.last_intervention','value':{'author':req.author,'human_id':req.human_id,'kind':req.kind,'before':before,'after':after}}])
             try:event,new=engine().commit_changes(store,run_id,changes,kind='intervention.applied',actor=req.author,explanation='Explicit Creative intervention',provenance={'kind':'creative','author':req.author},expected_version=req.expected_state_version,details={'intervention':req.kind,'before':before,'after':after})
             except (EngineError,ContractError) as exc:fail(exc)
+            c._wake.set()
         return {'state_version':new.state_version,'event_id':event.event_id,'creative_modified':True}
 
     @app.get('/runs/{run_id}/battles')

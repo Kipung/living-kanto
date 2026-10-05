@@ -11,8 +11,10 @@ def test_player_accepts_movement_without_advancing_shared_clock(world_client):
     observation=client.get(f'/runs/{run}/observations/player').json()
     choice=next(action for action in observation['legal_actions'] if action['action']=='walk_to')
     request={'expected_state_version':before['state_version'],'action':choice['action'],'arguments':choice['arguments']}
+    controller._wake.clear()
     accepted=client.post(f'/runs/{run}/player',json=request)
     assert accepted.status_code==200,accepted.text
+    assert controller._wake.is_set(), 'An accepted player route must wake the idle shared-clock pump'
     pending=snapshot(client,run)
     assert pending['simulated_time']==before['simulated_time']
     assert pending['humans']['player']['movement_intent']
