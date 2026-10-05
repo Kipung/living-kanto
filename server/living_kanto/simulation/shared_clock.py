@@ -62,7 +62,7 @@ class SharedClockMixin:
         # Clock-derived needs/bookkeeping do not invalidate an in-flight mind.
         keys=('map_id','x','y','facing','party','box','inventory','money','badges','goal','memories','field','access','activity','service_request','movement_intent','battle_id')
         owned={pid:state.pokemon[pid] for pid in h.get('party',[])+h.get('box',[]) if pid in state.pokemon}
-        return content_hash({'actor':{k:h.get(k) for k in keys},'pokemon':owned})
+        return content_hash({'actor':{k:h.get(k) for k in keys},'traversal_status':{k:h.get('status',{}).get(k) for k in ('surfing','source_forced_surfing','bicycle')},'pokemon':owned})
 
     def capture_decision_boundary(self,state,hid):
         observation=self.observation_for(state,hid)

@@ -163,3 +163,24 @@ def test_actual_shared_lab_exit_marks_fossil_departure(game):
  scenario(game,[{'op':'set','path':'humans.human-001.acquisition','value':{'reviving':{'left_lab':False,'input_item':'helix_fossil','species':'OMANYTE'}}}]);activate(game)
  choose(game,'human-001','enter_map',{'map_id':'CinnabarIsland_PokemonLab_Entrance'});s=state(game);e.tick_shared_time(store,'gameplay-test',s.simulated_time+1)
  assert state(game).humans['human-001']['acquisition']['left_lab'] is True
+
+def test_source_forced_spin_path_cannot_be_cancelled_mid_motion(game):
+ e,store=game;gm=e.maps['RocketHideout_B2F'];candidate=None
+ for point,cell in gm.cells.items():
+  if not gm.is_walkable(*point):continue
+  for direction in ('north','south','east','west'):
+   path=gm.step_path(point,direction)
+   if path and len(path)>1 and int(gm.cells.get(path[0],{}).get('behavior',0)) in range(0x54,0x58):candidate=(point,direction,path);break
+  if candidate:break
+ assert candidate;point,direction,path=candidate;locate(game,'human-001','RocketHideout_B2F',point);activate(game);choose(game,'human-001','walk_to',{'direction':direction})
+ s=state(game);e.tick_shared_time(store,'gameplay-test',s.simulated_time+1);s=state(game)
+ assert s.humans['human-001']['movement_intent']['forced_movement'] is True
+ assert not e.legal_actions(s,'human-001')
+ with pytest.raises(EngineError):choose(game,'human-001','cancel_movement',{})
+ assert state(game).state_hash==s.state_hash
+
+def test_traversal_status_change_invalidates_local_boundary(game):
+ e,store=game;activate(game);s=state(game);obs,token=e.capture_decision_boundary(s,'human-001')
+ scenario(game,[{'op':'set','path':'humans.human-001.status.surfing','value':True}]);before=state(game)
+ with pytest.raises(StaleActionError):choose(game,'human-001','remember',{'text':'Obsolete traversal context'},token=token,version=obs.state_version)
+ assert state(game).state_hash==before.state_hash
