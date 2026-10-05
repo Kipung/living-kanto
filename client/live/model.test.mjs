@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {routeSegments,activity,battleMessages,eventText,actorId,groupByMap,walkingDuration} from './model.mjs';
+import {routeSegments,activity,battleMessages,eventText,actorId,groupByMap,walkingDuration,clockOnly,sharedClockLabel} from './model.mjs';
 test('accepted journey preserves map boundaries and every path tile',()=>{
  const e={deterministic_inputs:{route:{journey:[{map_id:'PalletTown',start:[6,8],steps:[[7,8],[8,8]]},{map_id:'Route1',start:[12,39],steps:[[12,38],[11,38]]}]}}};
  assert.deepEqual(routeSegments(e),[{map:'PalletTown',points:[[6,8],[7,8],[8,8]]},{map:'Route1',points:[[12,39],[12,38],[11,38]]}]);
@@ -26,3 +26,33 @@ test('atomic daily activity batches retain every individual name',()=>{const e={
 
 test('overview accounts for all100 humans across interiors and routes',()=>{const people=Array.from({length:100},(_,i)=>({human_id:'h'+i,map_id:i<35?'PalletTown':i<60?'PalletTown_ProfessorOaksLab':'Route1'}));const groups=groupByMap(people);assert.equal(groups.length,3);assert.equal(groups.reduce((n,[,members])=>n+members.length,0),100);assert.equal(new Set(groups.flatMap(([,members])=>members.map(h=>h.human_id))).size,100);});
 test('smooth walking retains duration of long recorded routes instead of six-second bursts',()=>{const points=Array.from({length:101},(_,i)=>[i,0]);assert.equal(walkingDuration(points),36000);assert.equal(walkingDuration(points,{smooth:false}),14500);assert.equal(walkingDuration([[0,0],[1,0]]),360);});
+
+test('one shared tick retains both nested canonical actor routes',()=>{
+ const e={event_kind:'world.shared_tick',causation:{human_id:'engine'},deterministic_inputs:{shared_time:{from:5,to:6,elapsed:1},routes:[{human_id:'a',route:{map_id:'PalletTown',start:[1,1],steps:[[2,1]]}},{human_id:'b',route:{map_id:'Route1',start:[4,5],steps:[[4,4]]}}]}};
+ assert.deepEqual(routeSegments(e,'a'),[{map:'PalletTown',points:[[1,1],[2,1]]}]);
+ assert.deepEqual(routeSegments(e,'b'),[{map:'Route1',points:[[4,5],[4,4]]}]);
+ assert.equal(routeSegments(e).length,2);assert.equal(actorId(e),'a');
+ assert.equal(eventText(e,{a:{name:'Ari'},b:{name:'Bea'}}),'Ari · Bea advanced together · 1s');
+});
+test('recorded warp never invents walking between its two maps',()=>{
+ const e={event_kind:'world.shared_tick',deterministic_inputs:{routes:[{human_id:'a',route:{transfer:{source_map:'PalletTown',source:[1,1],destination_map:'Route1',destination:[3,4]}}}]}};
+ assert.deepEqual(routeSegments(e,'a'),[]);
+});
+test('persisted movement and runtime thinking are different facts',()=>{
+ assert.equal(activity({human_id:'a',movement_intent:{kind:'scheduled_movement'}},{simulated_time:9}).kind,'movement');
+ assert.equal(activity({human_id:'b'},{simulated_time:9},{inflight_actors:['b']}).kind,'thinking');
+ assert.equal(activity({human_id:'c'},{simulated_time:9},{inflight_actors:['b']}).kind,'ready');
+});
+test('battle interrupts an accepted traveller without showing them moving',()=>{
+ assert.equal(activity({battle_id:'b',movement_intent:{paused_for_battle:true}},{},{}).kind,'battle');
+});
+
+test('movement-only ticks do not drown real conversations or completion receipts',()=>{
+ assert.equal(clockOnly({event_kind:'world.shared_tick',deterministic_inputs:{routes:[{human_id:'a',event_kind:'human.moved'}]}}),true);
+ assert.equal(clockOnly({event_kind:'world.shared_tick',deterministic_inputs:{activity_completions:[{human_id:'a'}]}}),false);
+ assert.equal(clockOnly({event_kind:'human.talked',causation:{action:'talk_to'}}),false);
+});
+test('requested and actual shared clock rate remain distinct',()=>{
+ assert.equal(sharedClockLabel({clock_mode:'shared',speed:20,actual_simulated_seconds_per_wall_second:3.2,clock_processing_limited:true}),'Requested 20× · actual 3.20× · processing limits the clock');
+ assert.equal(sharedClockLabel({clock_mode:'legacy'}),'');
+});

@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+const source=fs.readFileSync(new URL('../js/recorded-motion.js',import.meta.url),'utf8');
+const {matchingCurrentPaths,recordedEventPaths,joinRecordedPaths}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const tick={deterministic_inputs:{routes:[{human_id:'a',route:{map_id:'PalletTown',start:[1,1],steps:[[2,1]]}},{human_id:'b',map_id:'PalletTown',start:[3,3],steps:[[3,4]]}]}};
+const people={a:{map_id:'PalletTown',x:3,y:1},b:{map_id:'PalletTown',x:3,y:4}};
+const next={deterministic_inputs:{routes:[{human_id:'a',map_id:'PalletTown',start:[2,1],steps:[[3,1]]}]}};
+const paths=matchingCurrentPaths([tick,next],id=>people[id]);
+assert.equal(paths.length,2);assert.deepEqual(paths.find(p=>p.human_id==='a').points,[[1,1],[2,1],[3,1]]);
+assert.equal(recordedEventPaths({causation:{human_id:'a'},before:{position:{x:1,y:1}},after:{position:{x:8,y:8}}}).length,0,'No invented straight line from snapshots');
+assert.equal(matchingCurrentPaths([tick],id=>people[id]).length,1,'Old endpoint cannot animate as current route');
+assert.equal(joinRecordedPaths([{human_id:'a',map_id:'PalletTown',points:[[NaN,0],[1,0]]}]).length,0);
+const warp=joinRecordedPaths([{human_id:'a',map_id:'PalletTown',points:[[1,1],[2,1]]},{human_id:'a',map_id:'Route1',points:[[4,4],[4,3]]}]);
+assert.deepEqual(warp[0].points,[[4,4],[4,3]],'No fictional crossing between maps');
+console.log('Recorded parallel motion: 5 assertions passed');

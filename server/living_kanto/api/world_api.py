@@ -153,7 +153,12 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
             store=open_store(run_id);_,s,_=store.load_run(run_id)
             if interaction_mode(s)=='observer':raise HTTPException(403,detail='Observer worlds do not accept player mutations')
             try:
-                event,new=engine().build_action_event(store,run_id,'player',action=req.action,arguments=req.arguments,observation_version=req.expected_state_version,expected_state_version=req.expected_state_version,decision_explanation='User-controlled trainer action',decision_provenance={'kind':'user','author':'user'})
+                if req.expected_state_version!=s.state_version:raise StaleActionError('Player state changed; refresh before acting')
+                if engine().shared_clock_enabled(s):
+                    observation,token=engine().capture_decision_boundary(s,'player')
+                    event,new=engine().build_revalidated_action_event(store,run_id,'player',{'action':req.action,'arguments':req.arguments,'decision_explanation':'User-controlled trainer action'},observation.observation_version,token,{'kind':'user','author':'user'})
+                else:
+                    event,new=engine().build_action_event(store,run_id,'player',action=req.action,arguments=req.arguments,observation_version=req.expected_state_version,expected_state_version=req.expected_state_version,decision_explanation='User-controlled trainer action',decision_provenance={'kind':'user','author':'user'})
                 head=engine().commit(store,event)
             except (EngineError,ContractError,ValueError) as exc:fail(exc)
         return {'state_version':new.state_version,'event_head_hash':head}

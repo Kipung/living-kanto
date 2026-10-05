@@ -1,21 +1,28 @@
 // Presentation helpers: consume accepted engine facts; never create actions.
 export const place = value => String(value || '').replaceAll('_', ' / ').replace(/([a-z])([A-Z])/g, '$1 $2');
-export const actorId = event => event.causation?.decisions?.[0]?.human_id || event.causation?.human_id || event.causation?.actor_id;
-export function routeSegments(event) {
+export const actorId = event => event.causation?.decisions?.[0]?.human_id || event.deterministic_inputs?.routes?.[0]?.human_id || event.causation?.human_id || event.causation?.actor_id;
+export function eventActors(event){return [...new Set([...(event.deterministic_inputs?.routes||[]).map(row=>row.human_id),...(event.causation?.decisions||[]).map(row=>row.human_id),actorId(event)].filter(Boolean))];}
+export function routeSegments(event,humanId) {
   const route = event.deterministic_inputs?.route;
-  const rows = route?.journey || (route?.map_id ? [route] : []);
+  const legacy=(!humanId||humanId===actorId(event))?(route?.journey || (route?.map_id ? [route] : [])):[];
+  const recorded=(event.deterministic_inputs?.routes||[]).filter(row=>!humanId||row.human_id===humanId).map(row=>row.route||row);
+  const rows=[...legacy,...recorded];
   const segments = rows.filter(row => Array.isArray(row.start) && Array.isArray(row.steps) && row.steps.length)
     .map(row => ({map: row.map_id, points: [row.start, ...row.steps].map(p => [p[0], p[1]])}));
   // Single cardinal steps have an explicit source and destination. Never invent
   // a straight route for a distant endpoint or Creative teleport.
-  if (!segments.length && event.event_kind === 'human.moved') {
+  if (!segments.length && (!humanId||humanId===actorId(event)) && event.event_kind === 'human.moved') {
     const a = event.before?.position, b = event.after?.position;
     if (a && b && a.map_id === b.map_id && Math.abs(a.x-b.x)+Math.abs(a.y-b.y) === 1)
       segments.push({map:a.map_id, points:[[a.x,a.y],[b.x,b.y]]});
   }
   return segments;
 }
-export function activity(human, state) {
+export function activity(human, state, runtime) {
+  if(human.battle_id)return {label:runtime?.inflight_actors?.includes(human.human_id)?'Thinking in battle':'Battling',icon:'⚔',kind:'battle'};
+  if(human.movement_intent?.paused_for_battle)return {label:'Route paused for battle',icon:'◷',kind:'paused'};
+  if(human.movement_intent)return {label:'Moving along an accepted route',icon:'➜',kind:'movement'};
+  if(runtime?.inflight_actors?.includes(human.human_id))return {label:'Thinking locally',icon:'◌',kind:'thinking'};
   if (human.battle_id) return {label:'Battling', icon:'⚔', kind:'battle'};
   if (human.service_request) return {label:'Waiting for service', icon:'◷', kind:'queue'};
   if (human.activity) {
@@ -26,7 +33,10 @@ export function activity(human, state) {
   if (human.active_plan) return {label:'Travelling to '+place(human.active_plan.destination_map),icon:'➜',kind:'journey'};
   return {label:'Ready',icon:'·',kind:'ready'};
 }
+export function sharedClockLabel(runtime){if(runtime?.clock_mode!=='shared')return '';const requested=runtime.speed==='fastest'?'fastest':(runtime.speed||1)+'×',rate=runtime.actual_simulated_seconds_per_wall_second;return 'Requested '+requested+(Number.isFinite(rate)?' · actual '+rate.toFixed(2)+'×':'')+(runtime.clock_processing_limited?' · processing limits the clock':'');}
+export function clockOnly(event){return event.event_kind==='world.shared_tick'&&!event.deterministic_inputs?.activity_completions?.length&&(event.deterministic_inputs?.routes||[]).every(row=>!row.event_kind||['human.moved','human.entered_map'].includes(row.event_kind));}
 export function eventText(event, humans) {
+  if(event.event_kind==='world.shared_tick'){const ids=(event.deterministic_inputs?.routes||[]).map(row=>row.human_id);return (ids.length?ids.map(id=>humans[id]?.name||id).join(' · ')+' advanced together':'Shared time advanced')+' · '+(event.deterministic_inputs?.shared_time?.elapsed??0)+'s';}
   if(event.causation?.decisions?.length)return event.causation.decisions.map(d=>(humans[d.human_id]?.name||d.human_id)+(d.action==='rest'?' started resting':' started work')).join(' · ');
   const who=humans[actorId(event)]?.name || 'World';
   const action=event.causation?.action || event.event_kind;
