@@ -2,13 +2,17 @@
 
 Living Kanto is a runnable development build made directly after OpenRig was stopped. The original Jetson project and earlier histories are preserved. The project guide remains authoritative. The full release is incomplete.
 
+The later shared-clock upgrade runs independent local decisions while accepted movement continues on one persisted time line. The user's fresh world is running with four requests, requested 1× time and all 100 people preserved. A bounded real-model check recorded 22 choices and 3 conversations; up to 6 people moved in a shared tick. Its historical prefix/genesis and frozen version 193 replay match exactly. The 120.048-second observation advanced 89 simulated seconds, so the UI displays measured pace. See SHARED_CLOCK.md and evidence/parallel-runtime/. Earlier soak/capacity/suite results below describe the serial source; the separate full-suite.json receipt records verification of the upgrade. This does not close the release gates.
+
+The upgrade passed 369 server checks, exit 0, with unchanged fingerprinted source throughout the 432.897-second suite. The viewer passed 14 helper tests and 5 recorded-motion assertions. The original serial-source receipts below remain historical evidence.
+
 ## Implemented
 
 The application includes 256 source-derived mainland maps, original front/back artwork for the first 151 species, exactly 100 persistent AI humans and an optional separate player. Private local models choose intentions; the engine validates movement, battles, ownership, progression and rewards. The viewer supports Observer, Survival, Creative, saved history, portable exports and permanent intervention provenance. Source field puzzles, progression stations, deferred activities, shared service queues and champion succession are implemented. Fidelity, adaptations and limitations are tracked in the two fidelity documents.
 
 ## Automatically verified
 
-The final source passed **345 checks**, exit code 0, with unchanged fingerprinted source during the suite. Use `evidence/direct-build/final-suite-after-service-fix.json` and its log. The earlier 334-check suite predates the queue repair. Focused service checks also passed: cancellation, single refunds, no-charge self-request rejection, normal FIFO service, player behavior and replay.
+The repaired serial source passed **345 checks**, exit code0, with unchanged fingerprinted source during the suite. Use `evidence/direct-build/final-suite-after-service-fix.json` and its log. The earlier 334-check suite predates the queue repair. Focused service checks also passed: cancellation, single refunds, no-charge self-request rejection, normal FIFO service, player behavior and replay.
 
 Coverage includes privacy, persistence, recovery, battles, lifecycle mechanics, traversal, acquisitions, modes, save import/export and replay. These checks do not prove exhaustive cartridge equivalence, a complete earned mainland journey or autonomous success.
 
@@ -36,4 +40,4 @@ Separate, permanently marked Creative fixtures verified a Mansion source switch,
 
 The autonomous Brock gate, complete legal mainland/League journey, fresh-source earned championship and later defense, autonomous zero-badge championship, repaired-source two-hour soak, complete capacity measurements and full presentation/individuality acceptance remain open. Initial officeholders and fixture teams do not count as earned achievements. `release_verified` remains false.
 
-OpenRig workers and its recurring supervisor remain stopped. Only the loopback game backend and the separate Qwen38 human-mind endpoint are left available; demonstration worlds are paused. See `OPERATIONS.md` and `SESSION_HANDOFF.md` to continue from the actual saves.
+OpenRig workers and its recurring supervisor remain stopped. Only the loopback game backend and separate Qwen38 human-mind endpoint are available. Earlier demonstrations are paused; the fresh shared-clock world is running. See OPERATIONS.md and SESSION_HANDOFF.md to continue from the actual saves.

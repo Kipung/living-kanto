@@ -4,7 +4,7 @@ The current working application is the separate macOS checkout linked from READM
 
 ## Launch and model connection
 
-Run `bash tools/setup_local.sh` once, then `bash tools/run_local.sh`; open http://localhost:8877. The service binds loopback by default. Worlds start paused. In “Local mind connection,” enter a local OpenAI-compatible endpoint and its actual model identifier. Ollama configuration is also supported through environment variables described in README.md. Start with one concurrent mind based on the small live-worker benchmark; increase only with measurements for your actual workload. The earlier read-only endpoint benchmark recommended two. No cloud or scripted fallback is supplied. Development agents are separate from the 100 runtime humans.
+Run `bash tools/setup_local.sh` once, then `bash tools/run_local.sh`; open http://localhost:8877. The service binds loopback by default. Worlds start paused. In “Local mind connection,” enter a local OpenAI-compatible endpoint and its actual model identifier. Ollama configuration is also supported through environment variables described in README.md. The current live trial uses four concurrent requests for 100 separate private humans. The model server reports an eight-request maximum. Earlier one/two-request recommendations describe the serial scheduler; remeasure capacity for the shared-clock scheduler. No cloud or scripted fallback is supplied. Development agents are separate from the 100 runtime humans.
 
 ## Controls
 
@@ -26,4 +26,4 @@ Use tools/soak_runtime.py for a bounded real-model run and tools/verify_legal_jo
 
 ## Current handoff
 
-The loopback game and separate Qwen38 runtime-human endpoint remain available, with the clean player demo and actual-model world paused. The endpoint is currently forwarded to 127.0.0.1:18880/v1; its local settings stay outside portable saves. OpenRig's worker service is disabled, has no process/listener and its supervisor is paused. Unrelated terminal sessions and the standalone ResumeCompiler application are preserved. If the endpoint stops, reconnect a local model explicitly; the app will pause without a replacement action. The final queue repair and its source boundary are documented in DIRECT_BUILD_REPORT.md.
+The loopback game and separate Qwen38 runtime-human endpoint remain available. `fresh-kanto-20261005-152534` is running with four parallel requests and shared requested 1× time; earlier demonstrations remain paused. The endpoint is forwarded to 127.0.0.1:18880/v1; local settings stay outside portable saves. OpenRig's worker service is disabled, has no process/listener and its supervisor is paused. Unrelated terminal sessions and ResumeCompiler are preserved. If the endpoint stops, the app pauses without a replacement action. See SHARED_CLOCK.md for intent execution, honest short-action cooldowns and requested versus measured pace. Pause/restart retains accepted routes and never simulates offline time.
