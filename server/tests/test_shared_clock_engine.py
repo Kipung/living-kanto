@@ -184,3 +184,15 @@ def test_traversal_status_change_invalidates_local_boundary(game):
  scenario(game,[{'op':'set','path':'humans.human-001.status.surfing','value':True}]);before=state(game)
  with pytest.raises(StaleActionError):choose(game,'human-001','remember',{'text':'Obsolete traversal context'},token=token,version=obs.state_version)
  assert state(game).state_hash==before.state_hash
+
+def test_other_customer_append_does_not_invalidate_staff_head_or_purchase(game):
+ e,store=game;staff=next(h for h in state(game).humans.values() if h['role']=='shop_staff' and 'poke_ball' in e.shop_prices(h['map_id']))
+ for hid in ('human-001','human-002'):locate(game,hid,staff['map_id'])
+ activate(game);s=state(game);second_obs,second_token=e.capture_decision_boundary(s,'human-002')
+ choose(game,'human-001','shop_buy',{'item':'poke_ball','quantity':1})
+ s=state(game);staff_obs,staff_token=e.capture_decision_boundary(s,staff['human_id']);head=e.service_actions(s,staff['human_id'])[0]
+ choose(game,'human-002','shop_buy',{'item':'poke_ball','quantity':1},token=second_token,version=second_obs.state_version)
+ after=choose(game,staff['human_id'],head.action,head.arguments,token=staff_token,version=staff_obs.state_version)
+ queue=e.service_queue(after,staff['map_id']);assert len(queue)==1 and queue[0]['human_id']=='human-002'
+ assert after.humans['human-001']['service_request'] is None
+ assert store.replay('gameplay-test').state_hash==after.state_hash

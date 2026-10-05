@@ -66,7 +66,7 @@ class SharedClockMixin:
 
     def capture_decision_boundary(self,state,hid):
         observation=self.observation_for(state,hid)
-        token={'actor':self._actor_dependency(state,hid),'targets':{other:content_hash({'map_id':h.get('map_id'),'x':h.get('x'),'y':h.get('y'),'party':h.get('party'),'battle_id':h.get('battle_id'),'activity':h.get('activity'),'service_request':h.get('service_request')}) for other,h in state.humans.items() if other!=hid},'queues':{mid:content_hash(q) for mid,q in state.world_facts.get('service_queues',{}).items()},'original_observation_hash':content_hash(observation.to_dict())}
+        token={'actor':self._actor_dependency(state,hid),'targets':{other:content_hash({'map_id':h.get('map_id'),'x':h.get('x'),'y':h.get('y'),'party':h.get('party'),'battle_id':h.get('battle_id'),'activity':h.get('activity'),'service_request':h.get('service_request')}) for other,h in state.humans.items() if other!=hid},'queue_heads':{mid:content_hash(q[0]) for mid,q in state.world_facts.get('service_queues',{}).items() if q},'original_observation_hash':content_hash(observation.to_dict())}
         if state.humans[hid].get('battle_id'):
             from ..mechanics import BattleSession
             b=state.world_facts['battles'][state.humans[hid]['battle_id']]
@@ -81,9 +81,9 @@ class SharedClockMixin:
             h=state.humans.get(target,{})
             current=content_hash({k:h.get(k) for k in ('map_id','x','y','party','battle_id','activity','service_request')})
             if current!=token['targets'][target]:raise StaleActionError('local interaction target changed')
-        if action in ('shop_buy','heal_party','serve_customer'):
-            mid=state.humans[hid]['map_id']
-            if token.get('queues',{}).get(mid,content_hash([]))!=content_hash(self.service_queue(state,mid)):raise StaleActionError('local service queue changed')
+        if action=='serve_customer':
+            mid=state.humans[hid]['map_id'];queue=self.service_queue(state,mid)
+            if not queue or token.get('queue_heads',{}).get(mid)!=content_hash(queue[0]):raise StaleActionError('local service queue head changed')
         if 'battle_request' in token:
             from ..mechanics import BattleSession
             b=state.world_facts['battles'][state.humans[hid]['battle_id']]
