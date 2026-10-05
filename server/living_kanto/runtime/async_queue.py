@@ -195,7 +195,11 @@ class AsyncHumanQueue:
                 waiting.append((index, actor))
         self._ready_queue_depth = len(waiting)
         dispatched = 0
-        for index, actor in waiting:
+        # Route/legal-action preparation can take hundreds of milliseconds.
+        # Prepare at most one observation before yielding to the clock and
+        # completed responses; an entire 4/8-person fill must not monopolize
+        # the canonical commit pump for several seconds.
+        for index, actor in waiting[:1]:
             if dispatched >= capacity:
                 break
             observation, token = self.engine.capture_decision_boundary(state, actor)
@@ -206,6 +210,10 @@ class AsyncHumanQueue:
             dispatched += 1
         self._ready_queue_depth = max(0, self._ready_queue_depth - dispatched)
         self._update_async_status()
+        if dispatched and len(waiting)>dispatched and len(self._async_jobs)<self.concurrency:
+            # Fill remaining slots promptly, but through another complete pump
+            # pass with refreshed state, ticks and accepted responses first.
+            self._wake.set()
 
     def _manual_shared_step(self, human_id):
         """A paused shared save accepts one intention or advances one due tick."""

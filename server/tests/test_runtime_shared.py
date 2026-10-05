@@ -192,3 +192,31 @@ def test_manual_step_in_activated_save_accepts_then_ticks_movement(shared_world)
         assert final.simulated_time==initial.simulated_time+1
         assert store.replay('shared').state_hash==final.state_hash
     finally:controller.close()
+
+
+def test_slow_observation_preparation_yields_to_clock_and_completed_minds(tmp_path,monkeypatch):
+    write_fixture_map(tmp_path,width=14,height=14);engine=WorldEngine(tmp_path)
+    store=RunStore(tmp_path/'slow-preparation.db')
+    actors=['alice','bob','carol','dave']
+    create_fixture_run(engine,store,'slow-preparation',actors)
+    captures=[];capture=engine.capture_decision_boundary
+    def slow_capture(state,actor):
+        captures.append({'actor':actor,'simulated_time':state.simulated_time,
+            'accepted_before':sum(h.get('last_decision',{}).get('provenance',{}).get('kind')=='model' for h in state.humans.values())})
+        time.sleep(0.06)
+        return capture(state,actor)
+    monkeypatch.setattr(engine,'capture_decision_boundary',slow_capture)
+    provider=ConcurrentProvider()
+    controller=RuntimeController(engine,store,'slow-preparation',provider,concurrency=4)
+    try:
+        controller.resume('20')
+        wait_until(lambda:len(captures)>=4)
+        controller.pause()
+        assert [row['actor'] for row in captures[:4]]==actors
+        assert captures[1]['simulated_time']>captures[0]['simulated_time']
+        assert captures[1]['accepted_before']>=1
+        assert captures[3]['accepted_before']>=2
+        assert provider.maximum_active<=4
+        final=store.load_run('slow-preparation')[1]
+        assert store.replay('slow-preparation').state_hash==final.state_hash
+    finally:controller.close();store.close()
