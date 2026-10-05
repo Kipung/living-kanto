@@ -6,6 +6,8 @@ Production scheduling uses a bounded queue of independent human decisions. The l
 
 Everyone uses the same integer simulated time. Movement is an accepted, persistent intention whose physical steps occur as that clock advances. Two people walking for ten seconds overlap within the same ten-second interval. A slow model response must not block another person's accepted journey. Work and rest also have deadlines on this clock. Battle input from the user pauses advancement as required by the project guide.
 
+Short interactions apply their validated effects at acceptance and occupy the relevant person until their shared-clock cooldown ends. Service receipts distinguish the effect time from `busy_until`; they do not claim that a future completion already happened. Source warp scripts remain atomic transfers with recorded duration. The approach, ordinary walking and forced tile paths use scheduled physical steps; the viewer does not invent an interpolated path between maps.
+
 At 1×, the scheduler aims for one world second per real second. At 5× and 20× it requests the corresponding shared pace. Processing limits may make the world slower; elapsed time must never be reported independently per character. Fastest advances through scheduled engine work and may wait when only model requests are pending. Pause stops advancement and rejects late decisions from the cancelled generation. Restart begins paused and does not simulate time spent offline.
 
 The observer animates only recorded traversal. Thinking, talking, working, resting and battling are valid reasons for a person to stay in place. Parallel scheduling does not guarantee that all 100 people are walking simultaneously.

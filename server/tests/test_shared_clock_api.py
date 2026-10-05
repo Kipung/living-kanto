@@ -19,7 +19,9 @@ def test_player_accepts_movement_without_advancing_shared_clock(world_client):
     assert [(pending['humans']['player'][k]) for k in ('map_id','x','y')]==[before['humans']['player'][k] for k in ('map_id','x','y')]
     assert client.post(f'/runs/{run}/player',json=request).status_code==409
     with controller.shared_lock:
-        controller.engine.tick_shared_time(controller.store,run,before['simulated_time']+1)
+        controller.store.set_status(run,'running')
+        try:controller.engine.tick_shared_time(controller.store,run,before['simulated_time']+1)
+        finally:controller.store.set_status(run,'paused')
     after=snapshot(client,run)
     assert after['simulated_time']==before['simulated_time']+1
     assert (after['humans']['player']['x'],after['humans']['player']['y'])!=(before['humans']['player']['x'],before['humans']['player']['y'])
