@@ -230,12 +230,24 @@ class RunStore:
         if status not in {"running", "paused"}:
             raise StoreError(f"invalid status {status!r}")
         with self._lock:
-            row=self._get_run_row(run_id)  # raises if unknown
-            if row["status"]==status:return
-            self._conn.execute(
-                "UPDATE runs SET status = ? WHERE run_id = ?", (status, run_id)
-            )
-            self._conn.commit()
+            try:
+                if not self._conn.in_transaction:self._conn.execute("BEGIN IMMEDIATE")
+                row=self._get_run_row(run_id)  # raises if unknown
+                cached=self._verified_cache.get(run_id)
+                verified=cached is not None and cached[0]==self._cache_key(row)
+                if row["status"]!=status:
+                    self._conn.execute(
+                        "UPDATE runs SET status = ? WHERE run_id = ?", (status, run_id)
+                    )
+                # A status-only write cannot change verified canonical content.
+                # Rekey only a matching prior cache, under the SQLite writer
+                # lock; unknown/raw/external writes still require full replay.
+                prepared=(self._cache_key(self._get_run_row(run_id)),cached[1]) if verified else None
+                self._conn.commit()
+                if prepared is not None:self._verified_cache[run_id]=prepared
+            except Exception:
+                self._conn.rollback()
+                raise
 
     # ---------------------------------------------------------------- events
 

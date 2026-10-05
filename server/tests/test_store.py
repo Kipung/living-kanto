@@ -345,3 +345,31 @@ def test_tampered_genesis_json_mode_rejected_on_read(store):
         store.load_genesis(run_id)
     with pytest.raises(StoreError, match="does not match"):
         store.load_run(run_id)
+
+
+def test_verified_status_changes_do_not_replay_history(store, monkeypatch):
+    run_id = _create(store)
+    before = store.load_run(run_id)[1]
+    def unexpected_replay(run_id):
+        raise AssertionError('A trusted status-only transition replayed history')
+    monkeypatch.setattr(store, 'replay', unexpected_replay)
+    for status in ('paused', 'running', 'running', 'paused'):
+        store.set_status(run_id, status)
+        assert store.load_run(run_id)[1].state_hash == before.state_hash
+        assert store.get_status(run_id) == status
+
+
+@pytest.mark.parametrize('external', [False, True])
+def test_status_change_does_not_rekey_a_tampered_cache(store, external):
+    import sqlite3
+    run_id = _create(store)
+    store.load_run(run_id)
+    connection = sqlite3.connect(store.path) if external else store._conn
+    try:
+        connection.execute('UPDATE runs SET state_hash=? WHERE run_id=?', ('f'*64, run_id))
+        connection.commit()
+    finally:
+        if external: connection.close()
+    store.set_status(run_id, 'paused')
+    with pytest.raises(StoreError):
+        store.load_run(run_id)
