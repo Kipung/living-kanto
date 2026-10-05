@@ -1,0 +1,55 @@
+{
+  "source_revision": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "sources": [
+    {
+      "path": "data/maps/Route5_SouthEntrance/scripts.inc",
+      "sha256": "bb6c697875fe58bb53e0d604093a34511721437e4111396097bbe9be00c435e9"
+    },
+    {
+      "path": "data/maps/Route6_NorthEntrance/scripts.inc",
+      "sha256": "0225f7ad64ca88726d25592d39620bff93670910b4ae48ae9467aeced98ce6c7"
+    },
+    {
+      "path": "data/maps/Route7_EastEntrance/scripts.inc",
+      "sha256": "fd31638fa61d27a5a58638dd62ad49fc1623a24146183bfd707164516c9af3f0"
+    },
+    {
+      "path": "data/maps/Route8_WestEntrance/scripts.inc",
+      "sha256": "2ceb4a0f2c32bdb2fecaa791d4cf295df0afb5bde1a3bbc423d7bc9b9d1cca0a"
+    },
+    {
+      "path": "data/maps/VermilionCity/scripts.inc",
+      "sha256": "f6b97403b5ba7b183e00c60052155b4515fac4037945c08a734e65c25fde3465"
+    },
+    {
+      "path": "data/maps/CinnabarIsland/scripts.inc",
+      "sha256": "58ee5ed2f19deb369e24ff9b1cd4009b872ce1d49ed2e8fe453bf70a668e6a8b"
+    },
+    {
+      "path": "data/maps/Route22_NorthEntrance/scripts.inc",
+      "sha256": "ca911061c506bc3de87798c4223e9c5e09a32609a95baae4b695234e3ff6b7b3"
+    },
+    {
+      "path": "data/maps/Route23/scripts.inc",
+      "sha256": "c8f109eb87df8be7bd99337ec562d478e0f365f7106a2773f1dbcdb5a431fec2"
+    },
+    {
+      "path": "data/maps/ViridianCity/scripts.inc",
+      "sha256": "2f23053443e399983324ed7461923bba1267ca3d3c8961ce33a6d10be140f72d"
+    }
+  ],
+  "adaptations": [
+    "Tea guards are mechanical per-trainer checkpoints: one delivery is consumed and unlocks all four entrances for that trainer, never globally.",
+    "SS Anne remains available to all ticketed trainers and never globally departs.",
+    "Secret Key possession replaces source global pickup flag at Cinnabar gym door.",
+    "Giovanni opens after all other seven earned badges instead of global Rocket plot state.",
+    "All eight badges are checked at Route23 entry rather than separate scripted guard stops along the route. Boulder still gates Route22 entrance.",
+    "Guard checks validate the same engine actions for model and user; they do not script persistent guard humans.",
+    "Silph Scope is a source-position environmental navigation reward requiring own Lift Key, replacing the excluded Rocket campaign without inventing Giovanni or grunt victories."
+  ],
+  "incomplete": [
+    "Card Key doors and Silph story layouts are not yet a complete per-trainer scenario.",
+    "Seafoam falling boulders/current layout swaps remain incomplete.",
+    "Tower ghost and Snorlax battle integrations require their separate actual-victory test evidence."
+  ]
+}

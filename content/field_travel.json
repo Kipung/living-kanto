@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "fly_destinations": [
+    {
+      "map_id": "PalletTown",
+      "x": 6,
+      "y": 8,
+      "heal_location": "HEAL_LOCATION_PALLET_TOWN"
+    },
+    {
+      "map_id": "ViridianCity",
+      "x": 26,
+      "y": 27,
+      "heal_location": "HEAL_LOCATION_VIRIDIAN_CITY"
+    },
+    {
+      "map_id": "PewterCity",
+      "x": 17,
+      "y": 26,
+      "heal_location": "HEAL_LOCATION_PEWTER_CITY"
+    },
+    {
+      "map_id": "CeruleanCity",
+      "x": 22,
+      "y": 20,
+      "heal_location": "HEAL_LOCATION_CERULEAN_CITY"
+    },
+    {
+      "map_id": "LavenderTown",
+      "x": 6,
+      "y": 6,
+      "heal_location": "HEAL_LOCATION_LAVENDER_TOWN"
+    },
+    {
+      "map_id": "VermilionCity",
+      "x": 15,
+      "y": 7,
+      "heal_location": "HEAL_LOCATION_VERMILION_CITY"
+    },
+    {
+      "map_id": "CeladonCity",
+      "x": 48,
+      "y": 12,
+      "heal_location": "HEAL_LOCATION_CELADON_CITY"
+    },
+    {
+      "map_id": "FuchsiaCity",
+      "x": 25,
+      "y": 32,
+      "heal_location": "HEAL_LOCATION_FUCHSIA_CITY"
+    },
+    {
+      "map_id": "CinnabarIsland",
+      "x": 14,
+      "y": 12,
+      "heal_location": "HEAL_LOCATION_CINNABAR_ISLAND"
+    },
+    {
+      "map_id": "IndigoPlateau_Exterior",
+      "x": 11,
+      "y": 7,
+      "heal_location": "HEAL_LOCATION_INDIGO_PLATEAU"
+    },
+    {
+      "map_id": "SaffronCity",
+      "x": 24,
+      "y": 39,
+      "heal_location": "HEAL_LOCATION_SAFFRON_CITY"
+    },
+    {
+      "map_id": "Route4",
+      "x": 12,
+      "y": 6,
+      "heal_location": "HEAL_LOCATION_ROUTE4"
+    },
+    {
+      "map_id": "Route10",
+      "x": 13,
+      "y": 21,
+      "heal_location": "HEAL_LOCATION_ROUTE10"
+    }
+  ],
+  "flash_radii_pixels": [
+    200,
+    72,
+    56,
+    40,
+    24
+  ],
+  "source": [
+    {
+      "path": "src/region_map.c",
+      "sha256": "b761f02803a1c5aada4465b9a93bf2b02c5ef1118432e677a30a5a4a4b78e0cb"
+    },
+    {
+      "path": "src/data/heal_locations.json",
+      "sha256": "b1529aa7f732c3df085535e65b89ee12c183f9f0e4c884b39ec8170867d78c74"
+    },
+    {
+      "path": "src/field_screen_effect.c",
+      "sha256": "2b4e9e17b4528008ce36a38bab6108cb396f0aff2ef35cf6028bad49820c88e6"
+    },
+    {
+      "path": "src/overworld.c",
+      "sha256": "df352e738b56856765aec65adc6fdea0a4b25fe567bc760d4ce2d34afc6ff7e2"
+    },
+    {
+      "path": "src/fldeff_flash.c",
+      "sha256": "e9d52450071d1a7b54c1774c98b1317910fbdbc6916e4839c42d9ae5dc8307a9"
+    },
+    {
+      "path": "src/item_use.c",
+      "sha256": "035ca3bdb70f5708dc8771d2bc6cc5450e775e3144278e7683aacba218cb9c98"
+    }
+  ],
+  "adaptations": [
+    "Fly unlocks by this trainer physically visiting a destination, rather than one shared protagonist flag.",
+    "Field action duration is one simulation second; visual animation timing does not change outcomes.",
+    "Bicycle uses source permissions and encounter-rate reduction; integer simulation tile timing remains one second."
+  ]
+}

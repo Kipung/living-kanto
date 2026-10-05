@@ -1,0 +1,582 @@
+{
+  "border": {
+    "height": 2,
+    "width": 2
+  },
+  "cells": [
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 747,
+      "raw": 1771,
+      "terrain": 0,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 744,
+      "raw": 1768,
+      "terrain": 0,
+      "x": 1,
+      "y": 0
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 744,
+      "raw": 1768,
+      "terrain": 0,
+      "x": 2,
+      "y": 0
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 744,
+      "raw": 1768,
+      "terrain": 0,
+      "x": 3,
+      "y": 0
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 748,
+      "raw": 1772,
+      "terrain": 0,
+      "x": 4,
+      "y": 0
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 755,
+      "raw": 1779,
+      "terrain": 0,
+      "x": 0,
+      "y": 1
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 752,
+      "raw": 1776,
+      "terrain": 0,
+      "x": 1,
+      "y": 1
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 752,
+      "raw": 1776,
+      "terrain": 0,
+      "x": 2,
+      "y": 1
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 752,
+      "raw": 1776,
+      "terrain": 0,
+      "x": 3,
+      "y": 1
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 756,
+      "raw": 1780,
+      "terrain": 0,
+      "x": 4,
+      "y": 1
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 763,
+      "raw": 1787,
+      "terrain": 0,
+      "x": 0,
+      "y": 2
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 760,
+      "raw": 1784,
+      "terrain": 0,
+      "x": 1,
+      "y": 2
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 760,
+      "raw": 1784,
+      "terrain": 0,
+      "x": 2,
+      "y": 2
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 760,
+      "raw": 1784,
+      "terrain": 0,
+      "x": 3,
+      "y": 2
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 764,
+      "raw": 1788,
+      "terrain": 0,
+      "x": 4,
+      "y": 2
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 749,
+      "raw": 13037,
+      "terrain": 0,
+      "x": 0,
+      "y": 3
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 750,
+      "raw": 13038,
+      "terrain": 0,
+      "x": 1,
+      "y": 3
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 750,
+      "raw": 13038,
+      "terrain": 0,
+      "x": 2,
+      "y": 3
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 750,
+      "raw": 13038,
+      "terrain": 0,
+      "x": 3,
+      "y": 3
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 750,
+      "raw": 13038,
+      "terrain": 0,
+      "x": 4,
+      "y": 3
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 757,
+      "raw": 13045,
+      "terrain": 0,
+      "x": 0,
+      "y": 4
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 758,
+      "raw": 13046,
+      "terrain": 0,
+      "x": 1,
+      "y": 4
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 758,
+      "raw": 13046,
+      "terrain": 0,
+      "x": 2,
+      "y": 4
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 758,
+      "raw": 13046,
+      "terrain": 0,
+      "x": 3,
+      "y": 4
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 751,
+      "raw": 13039,
+      "terrain": 0,
+      "x": 4,
+      "y": 4
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 757,
+      "raw": 13045,
+      "terrain": 0,
+      "x": 0,
+      "y": 5
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 765,
+      "raw": 13053,
+      "terrain": 0,
+      "x": 1,
+      "y": 5
+    },
+    {
+      "behavior": 101,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 766,
+      "raw": 13054,
+      "terrain": 0,
+      "x": 2,
+      "y": 5
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 759,
+      "raw": 13047,
+      "terrain": 0,
+      "x": 3,
+      "y": 5
+    },
+    {
+      "behavior": 0,
+      "collision": 0,
+      "elevation": 3,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 751,
+      "raw": 13039,
+      "terrain": 0,
+      "x": 4,
+      "y": 5
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 8,
+      "raw": 1032,
+      "terrain": 0,
+      "x": 0,
+      "y": 6
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 26,
+      "raw": 1050,
+      "terrain": 0,
+      "x": 1,
+      "y": 6
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 27,
+      "raw": 1051,
+      "terrain": 0,
+      "x": 2,
+      "y": 6
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 1,
+      "metatile_id": 28,
+      "raw": 1052,
+      "terrain": 0,
+      "x": 3,
+      "y": 6
+    },
+    {
+      "behavior": 0,
+      "collision": 1,
+      "elevation": 0,
+      "encounter_type": 0,
+      "layer_type": 0,
+      "metatile_id": 8,
+      "raw": 1032,
+      "terrain": 0,
+      "x": 4,
+      "y": 6
+    }
+  ],
+  "events": {
+    "allow_cycling": false,
+    "allow_escaping": false,
+    "allow_running": true,
+    "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+    "bg_events": [
+      {
+        "elevation": 3,
+        "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+        "script": "SilphCo_Elevator_EventScript_FloorSelect",
+        "type": "sign",
+        "x": 0,
+        "y": 2
+      }
+    ],
+    "card_key_doors": [],
+    "connections": [],
+    "coord_events": [],
+    "elevator_destinations": [
+      {
+        "map_id": "MAP_SILPH_CO_1F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 22,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_2F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 22,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_3F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 22,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_4F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 22,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_5F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 22,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_6F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 20,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_7F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 23,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_8F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 22,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_9F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 24,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_10F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 13,
+        "y": 3
+      },
+      {
+        "map_id": "MAP_SILPH_CO_11F",
+        "source": "data/maps/SilphCo_Elevator/scripts.inc",
+        "source_sha256": "cf1da1c2b7a3528e800310fd6b043a32a6308959227a235e4c4549c060d252c7",
+        "x": 13,
+        "y": 3
+      }
+    ],
+    "floor_number": 0,
+    "map_type": "MAP_TYPE_INDOOR",
+    "music": "MUS_SILPH",
+    "object_events": [],
+    "region_map_section": "MAPSEC_SILPH_CO",
+    "requires_flash": false,
+    "warp_events": [
+      {
+        "dest_map": "MAP_DYNAMIC",
+        "dest_warp_id": "WARP_ID_DYNAMIC",
+        "destination_coordinates": null,
+        "destination_map_name": null,
+        "elevation": 3,
+        "index": 0,
+        "x": 2,
+        "y": 5
+      }
+    ],
+    "weather": "WEATHER_NONE"
+  },
+  "height": 7,
+  "layout": "LAYOUT_SILPH_CO_ELEVATOR",
+  "map_id": "MAP_SILPH_CO_ELEVATOR",
+  "map_name": "SilphCo_Elevator",
+  "palette_slots": {
+    "primary": "slots 0-6 from primary palettes[0:]",
+    "secondary": "slots 7-12 from secondary palettes[7:]"
+  },
+  "primary_tiles_png_sha256": "0c6faa0058210ffd5794613c28969d1982737cc3b7d4feeab03a13895c8363f2",
+  "primary_tileset": "gTileset_Building",
+  "primary_tileset_dir": "data/tilesets/primary/building",
+  "secondary_tiles_png_sha256": "6a41ec8c2a5a1612ce7f76b5a1325e0c40e5f2dd3f8a351f9d1f19960cf96b34",
+  "secondary_tileset": "gTileset_SilphCo",
+  "secondary_tileset_dir": "data/tilesets/secondary/silph_co",
+  "source_map_bin": "reference/pokefirered/data/layouts/SilphCo_Elevator/map.bin",
+  "source_map_bin_sha256": "84557c1c0d7fec4344fd62a18b9c32fcdaab83cc8f63416012089328dc5344cd",
+  "source_map_json": "reference/pokefirered/data/maps/SilphCo_Elevator/map.json",
+  "source_map_json_sha256": "8bf11690d0dd0338b7eda753f85b31a6720e7a5fb543aece47fdea3205b7fe70",
+  "source_revision": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "uncertainties": [
+    "metatile-entry palette bits 0xF000 read as the GLOBAL 4-bit bank slot: slots 0-6 from primary palettes and slots 7-12 from secondary palettes[7:], per LoadTilesetPalette in src/fieldmap.c.  Measured over all 87224 metatile entries in every pinned tileset the slot value spans only 0-12 (never 13-15), so nothing exceeds NUM_PALS_TOTAL-1 and no wrap-around case arises.  Slot assignment confirmed by render inspection, not against a ROM/emulator screenshot.",
+    "layer_type/behavior/terrain byte positions per src/fieldmap.c ExtractMetatileAttribute; full engine passability NOT verified",
+    "border metatile (layout border id) not substituted for out-of-grid cells because grids here are fully populated"
+  ],
+  "unloaded_tile_provenance": {
+    "rule": "Unwritten allocated VRAM tiles are zero after ResetScreenForMapLoad. Copy length is min(decompressed size, allocated bank size); these are source-backed zero pixels, not generated artwork.",
+    "source_sha256": {
+      "src/new_menu_helpers.c": "d115f81a76f93ba1a34894acd58f266a1920215784176f94188e4bad8ba51b1c",
+      "src/overworld.c": "df352e738b56856765aec65adc6fdea0a4b25fe567bc760d4ce2d34afc6ff7e2"
+    },
+    "sources": [
+      "src/overworld.c:ResetScreenForMapLoad",
+      "src/new_menu_helpers.c:DecompressAndCopyTileDataToVram2",
+      "src/new_menu_helpers.c:DecompressAndLoadBgGfxUsingHeap2"
+    ]
+  },
+  "width": 5
+}

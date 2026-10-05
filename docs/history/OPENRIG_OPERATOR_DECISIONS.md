@@ -1,0 +1,5 @@
+# Operator decisions — October 4, 2026
+The user authorized autonomous development with the lab local models under Jetson OpenRig. The pasted project guide is authoritative except its original-art fallback: the user explicitly requires existing original assets downloaded online. No generated or recreated artwork.
+Start with three development roles; expand only after a complete reviewed/integrated passing task. Spark-worker1+2 Flash-Next coordinate development. PC-left Qwen27 implements. Mac-left Qwen27 reviews. Spark-master Qwen27 is reserved for runtime human minds. PC-right and Mac-right remain available for later distinct workstreams. All serving uses cached validated pinned artifacts, localhost listeners and SSH tunnels. Local model errors remain visible; no cloud fallback.
+Operator setup/serving supervision is performed by Codex. Project implementation/review work is attributed through Pi transcripts to declared local models. Do not conflate the two workloads.
+User expects eventual playable end-to-end release, not completion merely because a build started. Keep all milestone/final gates open until their artifact evidence passes.

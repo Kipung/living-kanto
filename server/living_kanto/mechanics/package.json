@@ -1,0 +1,8 @@
+{
+  "name": "living-kanto-gen3-mechanics",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Pinned local Generation III battle simulator for Living Kanto",
+  "type": "commonjs",
+  "dependencies": {"pokemon-showdown": "0.11.11"}
+}

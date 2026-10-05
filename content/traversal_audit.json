@@ -1,0 +1,4078 @@
+{
+  "scope": "Read-only source exit audit. This is not proof of a legal trainer journey.",
+  "source_pin": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "implementation_sha256": {
+    "server/living_kanto/simulation/__init__.py": "b4ea4678ab4566bb81aebeb4295f7b91510c62e30afd377257f60a24ef3788c9",
+    "server/living_kanto/simulation/access.py": "f2fa9490d79f318f7f36d4dc1ea6910cc817589d14d81e80e1262727147d4e35",
+    "server/living_kanto/simulation/engine.py": "c0ded515866afca3d3796eec6d88956f91662c32d264e38d1eb0af2554553f44",
+    "server/living_kanto/simulation/field.py": "2eb6bcc61ae2dc3de09a0239361633dfaf71f2c3db709a73113f0dfed7a8bfe9",
+    "server/living_kanto/simulation/field_scripts.py": "31b9cab8d4c934bc0a954bb6eb1f1ae73dd0c2060fe8511b8f1a5586816da490",
+    "server/living_kanto/simulation/field_travel.py": "30909051873f94e0afee10465adc4a39ea89d46f3abd2fd529e07d97312cb127",
+    "server/living_kanto/simulation/gameplay.py": "c1b8797028f92cad1c1aab4177fe5391e3ea82cb36663908d270458baae42962",
+    "server/living_kanto/simulation/maps.py": "c729843d3337101731ffae516a802c3edbecfc21502d8bb19278d1aaa2504384",
+    "server/living_kanto/simulation/movement_encounters.py": "51a482f021a67d610df552e3481cdd746cee2672191a3483e30697239b90439a",
+    "server/living_kanto/simulation/pathfinding.py": "e214865062cdb20a44c0c4af2374422f626cab634f26ca9406d700dc71eabe0a",
+    "server/living_kanto/simulation/pickups.py": "c2295fc489055436d893829170d0ecd493ec8124d02b74e7fcecec350ee37685",
+    "server/living_kanto/simulation/routeplanner.py": "349d1eab936ddfb37aa8df92659de4405287de38890b5e8a35351d1875207f33",
+    "server/living_kanto/simulation/scenarios.py": "15303705d785a9e2ddfa04cf39f70be2e1e4d689d4807771fd023f3e0775d1dd",
+    "server/living_kanto/simulation/scheduling.py": "e3650f32f4e854e7b3a46061d33f33038e6dd464599a8b4e940e3e61c78689ba",
+    "server/living_kanto/simulation/services.py": "81040de032aaf00f16cd79f267c216f9d7bb3cb7bae5ddb09a734ac73daac18d",
+    "server/living_kanto/simulation/world.py": "dbbcd5a72a3f5372c856e014952f6d77c27370b62c1ccd38f270066846cc81d0"
+  },
+  "source_map_metadata_sha256": {
+    "content/maps/CeladonCity.json": "ab4b2c8ac438651d259435cf89db445923b392d5d808d49b2dafee8d338b6c0e",
+    "content/maps/CeladonCity_Condominiums_1F.json": "9b0f22692b84a7b26edd8d83047a1fef50a7ef35fb21e6310a67e8dbd873096a",
+    "content/maps/CeladonCity_Condominiums_2F.json": "99e3bd9b8edf6ec5d278b2970c0607748f80e497d66ba08f3a2e7877aa45e69d",
+    "content/maps/CeladonCity_Condominiums_3F.json": "2402f5c90097caeee44cd4352c939e92d18dc85d10f9500aa581fb53dca1dd21",
+    "content/maps/CeladonCity_Condominiums_Roof.json": "b0fa2a45720385260d4676c9e84e97c0f00ae6facf691e24459b7980c4177b4d",
+    "content/maps/CeladonCity_Condominiums_RoofRoom.json": "df8653cd2ca9a8dc7a35aea63d82a6eddd41618cb5afb8125cb1bd7e9db0957a",
+    "content/maps/CeladonCity_DepartmentStore_1F.json": "e3c437e899dfff3962e90ec690085c29213e46a41111fa4a7f4712600485300d",
+    "content/maps/CeladonCity_DepartmentStore_2F.json": "d7760ca193104411e8ed3b7183f7df6b5462e380e41220389bdc897b345701c4",
+    "content/maps/CeladonCity_DepartmentStore_3F.json": "387bccd9ca81c5b899591100535e57d7c28613ce4dfc844c809fc9eaf9c17640",
+    "content/maps/CeladonCity_DepartmentStore_4F.json": "72c0402542e21ab74593aa68d534118788cc519b09ef00aa2ea4850ad07e870f",
+    "content/maps/CeladonCity_DepartmentStore_5F.json": "3e5bf1efadd2ff0cb38e333b9cd1abd005a77f2dc08163cef1f7e8b8fff9d4d6",
+    "content/maps/CeladonCity_DepartmentStore_Elevator.json": "204f140d315e91b5df7a7e1cc1f151a5d24d6b9bce60f27a65916d88cd6a058d",
+    "content/maps/CeladonCity_DepartmentStore_Roof.json": "4134daae9967986429c1c35730c6b350d9b376b59dc114708c4943afe1c3b3d2",
+    "content/maps/CeladonCity_GameCorner.json": "ef0d263b3c358f807800be07cb0e4da1338f5955f6d2b21f41272e2f7d99f0dd",
+    "content/maps/CeladonCity_GameCorner_PrizeRoom.json": "286addbe6a788caa97118f73300fbcecf57d9caff280af61e74e9b0b58883015",
+    "content/maps/CeladonCity_Gym.json": "ac7cf673e6307e29b6cd7a6863ffb37b0a12b34dc3e64a4132a6da127fa3800b",
+    "content/maps/CeladonCity_Hotel.json": "8945e5ba8ecf57cf897d73df93987eaa70004bdd6429f33d2e0d1bb6f4d48f08",
+    "content/maps/CeladonCity_House1.json": "0c0f55caf97d5f68ae61ca6a7522f53d39973420ec1579448b40b34a0b705b9d",
+    "content/maps/CeladonCity_PokemonCenter_1F.json": "be37b6ccbf2bb83a64c16e95344eee9c9a7c618811a7c064358261d684f5f791",
+    "content/maps/CeladonCity_PokemonCenter_2F.json": "c7aa72717255f28ec9f91b31a719bd1ddf703f6437fdb824b6e73f268396b6db",
+    "content/maps/CeladonCity_Restaurant.json": "8bd834aab031b00308e8988c10b6d0d491f61721a2a3fbb06e796b40f998a2a8",
+    "content/maps/CeruleanCave_1F.json": "94885beff43eea7e8cb764e09e49e200c060788aa4f2f57f434f553f5709d8cf",
+    "content/maps/CeruleanCave_2F.json": "412a63db9d2e9213af4ae5ff64c748b5b4e6769b288e3ca1d79194a9031afaec",
+    "content/maps/CeruleanCave_B1F.json": "ba23b20566326e2b4963ec35d66d209592309ab370315fb1cf23376b9879abb7",
+    "content/maps/CeruleanCity.json": "ebc15485d8a1b5f2b127431398d5f234a4e5855b30b131eee54199a670bba9f9",
+    "content/maps/CeruleanCity_BikeShop.json": "87c1921bcd3d1714db68cbe9b0ec8bc31c1a098d0ec51a0d79dfd1c3d7f219f9",
+    "content/maps/CeruleanCity_Gym.json": "41bd67ea9e448329c107f3338b5bb5396384d084cad0bcea75a247740c463258",
+    "content/maps/CeruleanCity_House1.json": "f871eda64952b6c2ad538c30e619a11acb5fc82ea885e0d40b56689e285b9bb4",
+    "content/maps/CeruleanCity_House2.json": "3c5e24369026b3bb2230601a44142ad89c44e30442116338665b4c1e6fce2959",
+    "content/maps/CeruleanCity_House3.json": "690ff96541f8161b96f08938a2af1c686033f09d1d611270b8e514b13c3b881e",
+    "content/maps/CeruleanCity_House4.json": "e0fac2ebca7853c36e6c17967c71939cb254f130f4454db85d9295d7ccd8195b",
+    "content/maps/CeruleanCity_House5.json": "aa2521bc75a195c51fb115419b6e4bf5e4bfffff1b404161b48e1dc2ae6f2cf6",
+    "content/maps/CeruleanCity_Mart.json": "363f11efab23cb0a46aaf621afa6bd47d9f12a525af80f903f4a1f24b86dc41c",
+    "content/maps/CeruleanCity_PokemonCenter_1F.json": "15a5ea72d0a643f69e402564160e53e8b889b1182c3fc12decc1e2479c2ce7b7",
+    "content/maps/CeruleanCity_PokemonCenter_2F.json": "111d3b9af06dcc6c5d7b2dbe3d34a66cf60f1229beff4833d53008c845ff15ba",
+    "content/maps/CinnabarIsland.json": "1236f0691f4d68bb9b037da90804d278f4eaa912e59acc54b1bb984d79d78439",
+    "content/maps/CinnabarIsland_Gym.json": "a220da8b762e9d67acc55a6006a4ad7f3115dfc4e6666c58a813946f90e2f54a",
+    "content/maps/CinnabarIsland_Mart.json": "8622e890c5bc66b9f716f7c78d341a717d61123416b85ea71aba43528a529ed1",
+    "content/maps/CinnabarIsland_PokemonCenter_1F.json": "d6f8dab536eb6032bc3e9837bd44dc037347fd59174985371b4f34c99ef17274",
+    "content/maps/CinnabarIsland_PokemonCenter_2F.json": "a5de2fb02b2c8a7ff305a1ceaf08f1a4c7ae55f43cb4489e7bf637b4789ba259",
+    "content/maps/CinnabarIsland_PokemonLab_Entrance.json": "5557e2f5b3e27dd769de686180e15e7b3d52fee7ed64d4ff56cefcec85d0856f",
+    "content/maps/CinnabarIsland_PokemonLab_ExperimentRoom.json": "0d8720ec653b03ddb6a1121d012a837f99080f8b4dcd1b087b3f8f26fe4a8858",
+    "content/maps/CinnabarIsland_PokemonLab_Lounge.json": "a080d6de1f8f13aeae616a5af07303e560d9675bb2ea45b0865ec66bad6565b3",
+    "content/maps/CinnabarIsland_PokemonLab_ResearchRoom.json": "4a63d7d42186c1bb7606c834104704b6525976c6a4c63840b1c34afa5fec648a",
+    "content/maps/DiglettsCave_B1F.json": "6f2fa5911d8516e7fd11db246dbec39868c65b59059156dd1964be97b92b5d22",
+    "content/maps/DiglettsCave_NorthEntrance.json": "e1ff32e81bcda936d3b0972bd33464ea66937a032f66dff2b459c41817d1b0e5",
+    "content/maps/DiglettsCave_SouthEntrance.json": "dba1c31f872acacbf5cdf04ea893b2ea99d25666fc3732e818f6815d7074106a",
+    "content/maps/FuchsiaCity.json": "e3d223a7599a010ce34b43b5537195893665680c86436ee3b6ac1a7047a9c3b9",
+    "content/maps/FuchsiaCity_Gym.json": "4e18a281a2234ed3b5fbb8721ef40ddb556ae193c0b29d2962279980764618b8",
+    "content/maps/FuchsiaCity_House1.json": "3a8c0c3c47afead4df40e147c2dc5d9c7b973c5886779696363e3479a62a896e",
+    "content/maps/FuchsiaCity_House2.json": "91f5aa621a46c6a03dda8c8b5a6c9df73ed64dbfa0ca75a5816abc863b2c3b8b",
+    "content/maps/FuchsiaCity_House3.json": "0c39eb1137fdb0f081137f1afd45a377dfc7dc22e3adacc1e2dd083fab6245e2",
+    "content/maps/FuchsiaCity_Mart.json": "115a2a44816690e1ffc7e4fb965d0144b8b797cef63e38442279be67cc71adc6",
+    "content/maps/FuchsiaCity_PokemonCenter_1F.json": "9dacc8b2401e1f0805f99e46a2544f18f29abfc49488a2a0d273d99b2112d567",
+    "content/maps/FuchsiaCity_PokemonCenter_2F.json": "642668a829efdd3d72b1004646b09e8ffe906cb5124f07614944698d4cc81935",
+    "content/maps/FuchsiaCity_SafariZone_Entrance.json": "b0d13eb5c2c4bbc0e447378f0c5afbe3e7da2d1048566f587302da31740628e7",
+    "content/maps/FuchsiaCity_SafariZone_Office.json": "6822bb9f32af68621952bce733d6a70b68acf51b0422532b2b98e4e13b8ff4aa",
+    "content/maps/FuchsiaCity_WardensHouse.json": "14e8f99a50350453cedbefd9668e086591c3e87c9c41149b4db3e1c7a6f44394",
+    "content/maps/IndigoPlateau_Exterior.json": "a41c2575fdeec3fd244886f62ee1408b688a6f4ca92879a0033720129ec9408f",
+    "content/maps/IndigoPlateau_PokemonCenter_1F.json": "0fb885fc058e57053d1f104d9ad7b7a97c9657731a7198641d8985c11160aef7",
+    "content/maps/IndigoPlateau_PokemonCenter_2F.json": "b9dae5e9e7a8a9012c264e7219b660dd6f923ec23a4ac928214299c349eecfb4",
+    "content/maps/LavenderTown.json": "ca2ceea877d53d3a150407cc1d81f46c20ba87a5833b102bfcd00c36dd40fdbc",
+    "content/maps/LavenderTown_House1.json": "ce00c513c51ff32ef7027b8a27f50ce1259219d9cc95eb63a5b8178f6d37e4bd",
+    "content/maps/LavenderTown_House2.json": "0a1444dc69df90be457b1f5e0511c73eca6f4363560749ae8934f03c4d125c13",
+    "content/maps/LavenderTown_Mart.json": "1c89c183b735a788d7fbb0fc5fc05fc658f1a09cd3c1d4b66238fda51bef727a",
+    "content/maps/LavenderTown_PokemonCenter_1F.json": "569879b7ba5150e5c219236f0da67368972dbcd671695f6d0dd10c1e46af38a3",
+    "content/maps/LavenderTown_PokemonCenter_2F.json": "07d7001896fe232aee34105abfe8b63b827b36e641ae9345cbf7236c85a8bbd4",
+    "content/maps/LavenderTown_VolunteerPokemonHouse.json": "0395cb9d9f99e97274235cdfac78907d5a4c71569fd7ac2f6d3ab370892ddfd5",
+    "content/maps/MtMoon_1F.json": "592752a6f66ad2ca66a78639a33956db376b6e3d75505af47f71fc14c5fbfd80",
+    "content/maps/MtMoon_B1F.json": "060cf5736d7a6ac8a4f851d40fcbfbec743ad9a1e9937bb408b739987361456f",
+    "content/maps/MtMoon_B2F.json": "71db04a198a736d6e8dfdbf045e5ddfe9e7dd68b143842b5b8d17a8c9afd4a6a",
+    "content/maps/PalletTown.json": "cf6caa81fe46bc10dd9c34fd20d62d05d98668243e96de64d7a0912cce3ad0e9",
+    "content/maps/PalletTown_PlayersHouse_1F.json": "4f9803f3ec809dc9206424e1826193d3a2b7e8d4a95e11a51ec29f200f0a50e3",
+    "content/maps/PalletTown_PlayersHouse_2F.json": "19475be8547ba6c39b8b8cc671119121b14f4e70e04ac3db5a7679f5b570f88e",
+    "content/maps/PalletTown_ProfessorOaksLab.json": "4572580be37ff001e391157ea286239d62ffc9b3a16bad27dcc685c81955fa78",
+    "content/maps/PalletTown_RivalsHouse.json": "a71be3d429240640e69d01987f1d1c9e84b3b3ec7d49106dc1edec9178e9c3a6",
+    "content/maps/PewterCity.json": "c1562cf0b368d48b0022501a252b2a51ac4bd9e6c2f71defc34591e93df4a752",
+    "content/maps/PewterCity_Gym.json": "4a6286f52d5af7c1004b3137204fac9529858f947925ee1b6481f424642ba30e",
+    "content/maps/PewterCity_House1.json": "fdfe8b05c930ee9d178c669a3e05506b9ac2a4b52a06ddc6b1e52b1298674c45",
+    "content/maps/PewterCity_House2.json": "7635eb553511bddc8cc9e8ea22b4d616ce9ac506fbf8d8aec1ecb8c325f16eef",
+    "content/maps/PewterCity_Mart.json": "801ebdd11df34fbba842840ecd6b7bef27f0f67692674939bf118d53acaf181e",
+    "content/maps/PewterCity_Museum_1F.json": "403b1fa2b0dd83203a8b073b726db908fcda90607a288f3d665fe51fc9fbe703",
+    "content/maps/PewterCity_Museum_2F.json": "756c38f848d54acd0f2a49ff3ebfc0bc0b04713b6607ac800463b27575c5c43f",
+    "content/maps/PewterCity_PokemonCenter_1F.json": "efad3830e83c059ab47d5028f181492ebb488da1f3ecd4f0c4a3a010ef74c1de",
+    "content/maps/PewterCity_PokemonCenter_2F.json": "e49c7c0615dac3ccc6a4f02670c57d2675f3bbf84dd32c2497651a689a4f8328",
+    "content/maps/PokemonLeague_AgathasRoom.json": "7d4bc395fb83b6c0051483bc8f574ec979409081c63b0955a0ffff5fc1c0455f",
+    "content/maps/PokemonLeague_BrunosRoom.json": "9860fcf134e1be3a507a7df42f4f969b685d021098e85f2b601e4933ab283693",
+    "content/maps/PokemonLeague_ChampionsRoom.json": "2eed9cfb813da7efbb51365668c6efa7e9e13cc0cabdd08c39629baa58086c8d",
+    "content/maps/PokemonLeague_HallOfFame.json": "8121d135ae339bb990625caa4275036b3dc1f356e6072bc8472df92712dad3ce",
+    "content/maps/PokemonLeague_LancesRoom.json": "f81c6c53de18b9bd9479fa7ca2386c2b7b0b57518826b999f2f8f1e3168f0eb6",
+    "content/maps/PokemonLeague_LoreleisRoom.json": "73f2ae5f346966a882173292c3c186008336352e671baff84a4bf82b15bb4101",
+    "content/maps/PokemonMansion_1F.json": "09180a7db98000bfc7d4e3d262649880ddc57fd8169a58a53a9db6354c552b83",
+    "content/maps/PokemonMansion_2F.json": "da101692e48bdc19e71468da1acb82a02ef9ae753f951f1947f9250e69762253",
+    "content/maps/PokemonMansion_3F.json": "fd2b258efd8dabc70f239edc454b22c291643bee80436745ba2975bf1dc86367",
+    "content/maps/PokemonMansion_B1F.json": "bbf7b55094bc873e8d31376ea87123d5a0fef0ab5f7d1e8391ab2100dc2460cd",
+    "content/maps/PokemonTower_1F.json": "2fc86dd675f6c06f552d346102651df7cddd78422d1c638cee75382be0fd5b89",
+    "content/maps/PokemonTower_2F.json": "a2cbb03d8dbd39004f77d549e8a9b26c0f17fbd263c1fa245df4b3021dfa6b39",
+    "content/maps/PokemonTower_3F.json": "75f6f1dad082274766d0b4e33366047d143cfa6c11ff42c4b92c67e4b39fba86",
+    "content/maps/PokemonTower_4F.json": "8b2b250c2930128b8b5f90c21a18485b7351fed41934ba24431fc83b8a9b6853",
+    "content/maps/PokemonTower_5F.json": "893058d018178aa4466c9140f7456e9254c79f57beef782f1585d336aa9050a3",
+    "content/maps/PokemonTower_6F.json": "b5c7fd850f0a80a9d1b42299109a67b71952567c7576dc57816f89b2c563b8c6",
+    "content/maps/PokemonTower_7F.json": "06d4581afc807d439a6265867c848963b22f8c5a9b860ab2cde54bfdba0bf98b",
+    "content/maps/PowerPlant.json": "2bbcb73e2c3949e5924a5397c90c6a8c1a35bbf2c1a4c2f47c5365899e2cebc1",
+    "content/maps/RockTunnel_1F.json": "3e1dc54407b7c24b8e76e3d72860d24b8838989f09cf9dbf2afc99cd971ce179",
+    "content/maps/RockTunnel_B1F.json": "e009f789cfa377bbf3d7e263eda6c4636970e4bdf05d6f186b440dce9f91440c",
+    "content/maps/RocketHideout_B1F.json": "1263f1a8805404726b084fbce327ca668725978de81f5c0d370f7276a8c30237",
+    "content/maps/RocketHideout_B2F.json": "c84f526063f78e132918fc1017f2d0afb1a2fc0046de0f47a21a33d2a9ca5347",
+    "content/maps/RocketHideout_B3F.json": "7cf0eaf0aa44e115dc015b61ffd99dfbf0e459012e6a3e2acd9c1c8b6c6749ff",
+    "content/maps/RocketHideout_B4F.json": "08d51636e48614247ef28f9c1a24c5849db4ae72eb8394a2bb596b78be42779c",
+    "content/maps/RocketHideout_Elevator.json": "4eda6be2a47ca48598d799a892543ea0de5594d09134ef7ecdebe9be3355a682",
+    "content/maps/Route1.json": "66109e0371f552b3b143e660b57c3db089d1e3b3a5d30c5f14b436bff006cda0",
+    "content/maps/Route10.json": "f25d36d40500beb0cba8e235553978674eb2177ca4e4a0a920aecf85dd7d5294",
+    "content/maps/Route10_PokemonCenter_1F.json": "50181525e7e4485e4b04db19f6ed26120bb0ca8e84313530e2057f77e5fc66a7",
+    "content/maps/Route10_PokemonCenter_2F.json": "b4975ae86165b4f05ef0d8478a7e656aa4a867457041df45dcfe35790f533839",
+    "content/maps/Route11.json": "404fd06d854b5fdee3abf974fc27f45dad531665d9a691fc438fe8052e70f405",
+    "content/maps/Route11_EastEntrance_1F.json": "c9b68fe990b1cdac1ae587d4d2af90232ebc15393746a5e6ef3f4986f7b94e0b",
+    "content/maps/Route11_EastEntrance_2F.json": "76842eb1830f9e196eb402d2f6ba404731581e5e7804f2f92a1e28e4173c1f92",
+    "content/maps/Route12.json": "979ab232ec3e5e66302904c78bc5c90ec2bbff88f26fedf7bdb55b9b80fbbe68",
+    "content/maps/Route12_FishingHouse.json": "2f1543868fb4875300ac7f4e6762447b95e497024271dade658d4e15060bf3d8",
+    "content/maps/Route12_NorthEntrance_1F.json": "61ed5515c2accf2ee8430fde4db3ac9c1e93790967f544e5e8735144d421676e",
+    "content/maps/Route12_NorthEntrance_2F.json": "101ed7f990c49f5052d49c5c5f962f8d8c38d37df5aa46aa1e507f561e077c31",
+    "content/maps/Route13.json": "2e8341b4776aeaca9cf415da822d4595a3621f73ab1c757d5771e55673500dcc",
+    "content/maps/Route14.json": "d79797397f028688326090c8ce6c2b3ec489b39905cd08d24967564d66a2e103",
+    "content/maps/Route15.json": "5cddd1797bb02d4c8ccced709d73ae9ac440da5abacbc50029533117ffe1086e",
+    "content/maps/Route15_WestEntrance_1F.json": "a46957df4ce08158964170948005d1ca760a7714abf68799ee010a71b5b71bfc",
+    "content/maps/Route15_WestEntrance_2F.json": "7b21358c48ac7787e63e8e11f300c0b5c2bb5b71b00395bc4aed374c1e0e7135",
+    "content/maps/Route16.json": "0f914f6c18add5bd75c33f5f0db977ed8e5b65863cbd2928d5abc4ac1c3f8a88",
+    "content/maps/Route16_House.json": "9a4ff3481a65cebacaef0c6266d1e6ee214a47f70dab11888b3875d4f7c3d422",
+    "content/maps/Route16_NorthEntrance_1F.json": "a714eeb7f35faa2ae7a92f8c637f2037003b31653b928d736205188f991655f5",
+    "content/maps/Route16_NorthEntrance_2F.json": "77ad8e43054c502f26dc585280ffe12ee12a5627a4842304042b3fcabb891e6a",
+    "content/maps/Route17.json": "12ef10883124ace84db031e4b087b4689ed21be85f01df95721a46de9ae6338d",
+    "content/maps/Route18.json": "ebc9d85160ac045343173ac8d0f3190d17f472ae5d27e5dac2670f256f60cd8e",
+    "content/maps/Route18_EastEntrance_1F.json": "3cc6d88dbced030d4346405fe28d2a320f6b1f833ceeb6f72c944ca50c3f228a",
+    "content/maps/Route18_EastEntrance_2F.json": "c402c16b358f831c79ed8d97a6ad6fc174426b7252868e73cf5796503ceedf5f",
+    "content/maps/Route19.json": "9c33c837bbf2363758a90837607dc7c830296d64293dc2a6c5e150abc4a9c44c",
+    "content/maps/Route19_UnusedHouse.json": "5cd02bb064e128c388002941654ff8df1da67314b1cdd6ab2c83e0415dc2fbdd",
+    "content/maps/Route2.json": "5abbbbfcbd54e1e46d93e7803942667257fdf3cd2b4f3af3579dc11dea17dbe8",
+    "content/maps/Route20.json": "dee201794eb2a37590beb6bb7185283ad99702f81982a6f91e4845e3be6af856",
+    "content/maps/Route21_North.json": "3c901403e766540006c977e777e36e7a7fb974479d282f3a1b074fe5d0b9e131",
+    "content/maps/Route21_South.json": "98453459a5d33545169cfe5e15c62eb7cf7fba71827033267bd1beade3d12f4d",
+    "content/maps/Route22.json": "85f2e005df214d218edd4e022ba81ee397476476d026f393c1d820ba6b843931",
+    "content/maps/Route22_NorthEntrance.json": "cc14ca7472684adb29b07c94bf3ce33f6bf661e4b62eb262330f11e40a41e0e0",
+    "content/maps/Route23.json": "4ca7434b8be2ba506b461c31308571eb1c74a04125a9203c71d5f31ff3325ef3",
+    "content/maps/Route23_UnusedHouse.json": "7b8bbd2068a70422c1c863a241b768e90cd73e2b596bb28be4276396c119c4eb",
+    "content/maps/Route24.json": "1bb0c7021222ad7e86fba2bb41330cc37724b4e034898121c9fab19bdf0e66d6",
+    "content/maps/Route25.json": "84f9974f8d30aea40d05481b6ec307f384b16c73fa4cddcc39ab72d08552acc2",
+    "content/maps/Route25_SeaCottage.json": "fb4bf06306d84ebc61d122d5a11f906f852f9be1ebdc716656ba83965bc0550f",
+    "content/maps/Route2_EastBuilding.json": "7a9eafcbe1243538228faf929725710b742ed676280c2b9ac7f485ab07bb9d86",
+    "content/maps/Route2_House.json": "b45960bba4bc2dd04468f5bf2a0ccc4878d550a3b3808169d049aeb859bf462e",
+    "content/maps/Route2_ViridianForest_NorthEntrance.json": "5fab91603f10d282421d93549885fa2270cbda8c01f115b2d4852d7fcd8d79b6",
+    "content/maps/Route2_ViridianForest_SouthEntrance.json": "483389486e1761ebdbc28c90bfa022f443e122d88d11f4e6d1839cb6e6b92e21",
+    "content/maps/Route3.json": "2da3b7e5948e71b179554d3b884c3da04ae766d6059e27bdafc763620c0f3d38",
+    "content/maps/Route4.json": "ef14aa814f103498e86e8528b545fc33664fcf4bef6802225b4838ec2e64113f",
+    "content/maps/Route4_PokemonCenter_1F.json": "8090caba8aa807bdab918af8ff95aceba9d05655430cd187549eab0d8cddff78",
+    "content/maps/Route4_PokemonCenter_2F.json": "e03ea4bb9ed7f46e65aeb27205a46c29f3bdb13163036715c95a7aa2134780df",
+    "content/maps/Route5.json": "438cd922d0f26595c2495e37426e08cc6b9d70fca04fc1d9d0916184cf9355f2",
+    "content/maps/Route5_PokemonDayCare.json": "c2fede7b613afdbf3edbd80f728e115a1519759f4364e5c24d138f1c1b69e0e3",
+    "content/maps/Route5_SouthEntrance.json": "c28bd2f0370e25161562b901853d5076403b3404aabbebc51228b7527e16aa8e",
+    "content/maps/Route6.json": "e6a8f9deaa4806edc58044e4ff9afcf6bb61322bd4fa51a29f252566163e8671",
+    "content/maps/Route6_NorthEntrance.json": "4d25ed87f23c180184b4633f6636c29f96f09d4ea69b3f408d0a9265d08d145d",
+    "content/maps/Route6_UnusedHouse.json": "951531089658b76023b9922779a276b88c2d6147a72fe94f2ff62a5d174f945d",
+    "content/maps/Route7.json": "517d7921eb9c7cb7f251e5fe63c167ff7260c3deff49e9a9f2d7e820ef2ec533",
+    "content/maps/Route7_EastEntrance.json": "be2214c677b53abf099c1dec61a8b245cd8f4503de482e8923b1b977a6448abf",
+    "content/maps/Route8.json": "0e17fad22a0c0e5c9a5f1e9410f3f62ba75703ffd55e20b673123837129d5b22",
+    "content/maps/Route8_WestEntrance.json": "1695f9fabd6e847e8f18a3b348b764b37f306cbf3b0ef8b2e1ee0b92d9c36866",
+    "content/maps/Route9.json": "7cb45e966feb64ed6c7eb6c44b497ca35873074d92978a2a0de11d905af670f6",
+    "content/maps/SSAnne_1F_Corridor.json": "866ee5c9b1592bb9ad1824c0062a084e4e0227be29a6e63642ccdc93ac7fde2d",
+    "content/maps/SSAnne_1F_Room1.json": "004a09e12f40d6051f48b0e034a81023f6a78a568275b5939897591fde0d6a2f",
+    "content/maps/SSAnne_1F_Room2.json": "a0d3b30ee09132f003371878e0786a6e87163388d9f74873404123564c20c47c",
+    "content/maps/SSAnne_1F_Room3.json": "30ffe55aae897e05269bdd5600d1f05d13d77198ba10a4f74ff3d2b9d83cbd9e",
+    "content/maps/SSAnne_1F_Room4.json": "0b39f22492cd614e2ff0ac745bdc7145ab489a88068f9c94d3285e3390abd498",
+    "content/maps/SSAnne_1F_Room5.json": "3733c7d89c5e67d7d17a2e4548bb15f9b5e0a080b4e7353eaaf647ea6911166f",
+    "content/maps/SSAnne_1F_Room6.json": "66893d91e8a7d4f54391a21042663043bf81a57533ccaccfd6cbc94ac6f70d0f",
+    "content/maps/SSAnne_1F_Room7.json": "3b0f76689cd117d7573c0dd49b3499ad8a93926d781788335eef76a61db0c4c3",
+    "content/maps/SSAnne_2F_Corridor.json": "e23254222dd587307b2f14ac50c202731b3296c06e7f0433d6ca3688361f57dc",
+    "content/maps/SSAnne_2F_Room1.json": "ef2371e6f2c173973edc29b48395e69cab145d6e00b3860fd5bb348cd4b2b14a",
+    "content/maps/SSAnne_2F_Room2.json": "706e1e276775381702f6dcac65f797875cc91aa6bb35b930dc59a7298dbcdccd",
+    "content/maps/SSAnne_2F_Room3.json": "f8ab6ecb62edf690e1e5880f0b2f1188f162891e1c857d1f97608d39b8841bb6",
+    "content/maps/SSAnne_2F_Room4.json": "1a283dfe615e0f51c73f2ddcfbe9eef44821921c2b6026963f851a4e0131c1c0",
+    "content/maps/SSAnne_2F_Room5.json": "b69a2989e06088cf09257b16657dbefa0d6f0930105296b102b8d43121c4de70",
+    "content/maps/SSAnne_2F_Room6.json": "bd323ccff8b97666540637c0ba2c7725201d7c77d709aa7ff2971f55271b00e2",
+    "content/maps/SSAnne_3F_Corridor.json": "b56881c06f2f6e3a994d22db871481f89080e6065069b1bea367f95801b8c90f",
+    "content/maps/SSAnne_B1F_Corridor.json": "003b2ea6799ac7435d31237b35829e7faf5d5fb515b8bb155a4090cb40a4d270",
+    "content/maps/SSAnne_B1F_Room1.json": "eba6453d263dcb601f7ecd1be010499e387ee21034904fd4220ad415bba26e59",
+    "content/maps/SSAnne_B1F_Room2.json": "cb3b5fffeb64c0a51e4c0f7c4509cd2616f2668375c633900fc90604f7f41d71",
+    "content/maps/SSAnne_B1F_Room3.json": "7fb44a55682b00bb7006a2e052e1cebfb717af93e6a3dc9c17637c285c765615",
+    "content/maps/SSAnne_B1F_Room4.json": "55cfd9a935d1ed5b2d2ff9aee6c47ac93d40a89fb759cb3bc7cc2887818afac8",
+    "content/maps/SSAnne_B1F_Room5.json": "3ca24590ac625f0096c68512f9d3b4c7bce6cce56d83e6737b18f0eed5b22da4",
+    "content/maps/SSAnne_CaptainsOffice.json": "47e7184bf958d787ca414b630fa56e7ff32c747ed999f35731fb793992aedf87",
+    "content/maps/SSAnne_Deck.json": "b76dc4c438e88f1fff4630b0a36b1a8b3a13b457ec4ecda31f2a45448668d593",
+    "content/maps/SSAnne_Exterior.json": "8105bf5cf5aefc6c0e4c89ee4a419fc2da2132fadb18f5b0b675e9429603f745",
+    "content/maps/SSAnne_Kitchen.json": "38e779efa23cf5f54ae417416b30f3cd59f3cea408f9eba8729626ec54bd603b",
+    "content/maps/SafariZone_Center.json": "a9a8e257bc396205f21dc7a6763f8bfadc2a8a00cc08ef0280c8bb746ba323da",
+    "content/maps/SafariZone_Center_RestHouse.json": "0dc6e319894afa8da18d354840c82dfba38512c5b00aa26918515f10e100b400",
+    "content/maps/SafariZone_East.json": "b7a6110e1e60450732b415761b5c36b5979eb76bb7411905471581eca4d894f0",
+    "content/maps/SafariZone_East_RestHouse.json": "133a3590b7d460c775829e1cadefc116e766270d0966fc5accdb30a69722bc99",
+    "content/maps/SafariZone_North.json": "9fbc4a30c6e3b61de09b46eca876ca6f610fe437a9ec2e293f1fc5a331c6e24a",
+    "content/maps/SafariZone_North_RestHouse.json": "6f685632b0c809ce49389d73190140de517bb47b537185b4190a2658653cffe5",
+    "content/maps/SafariZone_SecretHouse.json": "f433d948102a28ced181ff26baf942f2d0d1615a26ecef73167f859d94db980a",
+    "content/maps/SafariZone_West.json": "8959fe9217190e649a2cb070e0014ed77cc8c5732ad2ed0468c59f8c7554b657",
+    "content/maps/SafariZone_West_RestHouse.json": "5e9ebd6abfb65aedb0acfd2af1dc7ee9a958f01f2ccbe5d1001e2c8212ea9b3d",
+    "content/maps/SaffronCity.json": "dd1dd3403ec567f92230bab76db0c6a6541f9d59ff1e088b7ae574ed82e3028d",
+    "content/maps/SaffronCity_Connection.json": "359be16278df01f3fb67f34a9e36e11008535431a284a4786bad9b2558965599",
+    "content/maps/SaffronCity_CopycatsHouse_1F.json": "d4f9560cb52e5cac7e33d4605917dda0d8198a80c9d72ae5c60d3b963c0805bd",
+    "content/maps/SaffronCity_CopycatsHouse_2F.json": "8f6657ee77bc0be4a8a400f1f0ac61087e4a2b505adb57ca5ce1e690f1ecfbb5",
+    "content/maps/SaffronCity_Dojo.json": "03949b7de32634de6f072753a6189da9371d658bc271395bcf80b1c2c263e4a2",
+    "content/maps/SaffronCity_Gym.json": "809e47bba7b8f77c0bd5434d75f030a95da3f325a5d2bb5740fa6bb976291af6",
+    "content/maps/SaffronCity_House.json": "33741bdd3f1deea2bad4cd6e11a074e2f2a1ad44c9466739e33274e126d9ca69",
+    "content/maps/SaffronCity_Mart.json": "35dea91fd9304e20416d8056e8ff0ed7c807a351c1ad26f195f2e07149d8ac9a",
+    "content/maps/SaffronCity_MrPsychicsHouse.json": "8cf63f718c77510bcca91b57b3e7ba55ea7d2e6b78f90c25cb774bf31eb11bf8",
+    "content/maps/SaffronCity_PokemonCenter_1F.json": "f510bd4ff1296a74deaec4531fb3e8b116c09ea0b5ec5a6346e5dec5eb25c3b2",
+    "content/maps/SaffronCity_PokemonCenter_2F.json": "6cc6fa52bbb4221fc5d33da62e43e47cc91b29af9d0def2d3ec2974f6e561fca",
+    "content/maps/SaffronCity_PokemonTrainerFanClub.json": "7756b193dd52098de5732cad0a5be28b15ed4184f7ade8bbdca16b6a24bed525",
+    "content/maps/SeafoamIslands_1F.json": "e6a663953314ab18bc3cac6b18cdc47acfb8718465005520068d9cdac90f317b",
+    "content/maps/SeafoamIslands_B1F.json": "e1d2dd3208e6e5f4bc7b0f4e27ce567caf150df8b6e3766f531e74cb990296e9",
+    "content/maps/SeafoamIslands_B2F.json": "dacebd93395dcb50a7d3d5734b90a35407bb4c941c6086ea4a7bc338d91b5849",
+    "content/maps/SeafoamIslands_B3F.json": "5826acc69f3fc05c6efe2733e362d6fbae69d6ef3bfae57ace2ab7eeb48efbff",
+    "content/maps/SeafoamIslands_B4F.json": "5763b99f93a9f5788b8ce120fc5f85385a82b99d5320060812c13a8e8cde7e96",
+    "content/maps/SilphCo_10F.json": "1758c848c7221d4496f1d701b24888106e5d10186211ddc68fa7416f76ff29ab",
+    "content/maps/SilphCo_11F.json": "c4e5cd25a427cf1dd1b1276b7749889c50b4a5d42e535f96aa0f8041a1ff79ee",
+    "content/maps/SilphCo_1F.json": "a06682536b6b54693220bcb89f05d2d3d23dcbbb205353425515b159b8d19c77",
+    "content/maps/SilphCo_2F.json": "94e444c8ef9b9111610e5bbe2607ce96061383a8cfcab689085c173bf15e2541",
+    "content/maps/SilphCo_3F.json": "f49d54291a3af8467096d28506647de424da401badc8e258442ed3cd2cf81e37",
+    "content/maps/SilphCo_4F.json": "d9ddd8a57b75fa0e4ed860f79c04c7179c0ba0f731187f84b7710c9142544931",
+    "content/maps/SilphCo_5F.json": "c8a817476140d5457bfa45e5e49d03286a822e44110d7fb9351a4a23681ba2d7",
+    "content/maps/SilphCo_6F.json": "e39551cb4512ebd9b38ef3c253e5ad89de4edf6f7e5d35196c619b68a3a7410e",
+    "content/maps/SilphCo_7F.json": "6fe16debfa2c1cffc92587f2cf465fa7e9044be14771adbf78282192d24840b0",
+    "content/maps/SilphCo_8F.json": "dd4c7bd30f314b6b67d404196ed76c3e019adb718be1fa52a8374d6ea41f206e",
+    "content/maps/SilphCo_9F.json": "ce20cfe89274a5d7d46836b291e7c5c006d1b589ba8bb4bbb53eaebc5d6d0dc6",
+    "content/maps/SilphCo_Elevator.json": "984064e372fc448b1fd0445c66a38488c359ef224d623a2c46c94180c56af086",
+    "content/maps/UndergroundPath_EastEntrance.json": "793822c33821a9e815d680f9b3eb61c47f9ecfafcc6c61957b9cf840855c2d71",
+    "content/maps/UndergroundPath_EastWestTunnel.json": "44562f61539d850dfdb46755dfaf756df9166a9662b3a8a96abf2a1af4adafac",
+    "content/maps/UndergroundPath_NorthEntrance.json": "f42f922b3c668106224589ba503e1783d50afa6f2e64f21c9cfff0937b9d80fb",
+    "content/maps/UndergroundPath_NorthSouthTunnel.json": "10ccb40dee0061db53f33ab0248bcf4c5f3d3b9f6e09cb0afeff75271bffb782",
+    "content/maps/UndergroundPath_SouthEntrance.json": "9bf41f219df19e4f79a1b87ac746210c5253a05d656572529a3ec60140b4c552",
+    "content/maps/UndergroundPath_WestEntrance.json": "c44babf293a07d39055a8b71bdf028f8df21633a7608abc437cb893513274232",
+    "content/maps/VermilionCity.json": "ee624249b43df71246eda481f782ff3ef55e0b94c30396a9d4ce808ed4a01348",
+    "content/maps/VermilionCity_Gym.json": "2996d785b41f7d5935ddffbe7930ed53db60cc02b086ff5120b4065b9a5f6586",
+    "content/maps/VermilionCity_House1.json": "f24bdf496ab4af9063096e5eae4d1035d0d8c58503e9a95627d9f7be5e704bb8",
+    "content/maps/VermilionCity_House2.json": "3e9ca71eba15512d68748b14a9f4caf15abe263561a04edb5cce91586f35190d",
+    "content/maps/VermilionCity_House3.json": "88a531b9497431493995fd800ff39b52609cdd6498c485103d18b36a96a0cbba",
+    "content/maps/VermilionCity_Mart.json": "25599f5ea99331fa12e663ef8c621dc33dcf5c8f2907cc4fdc51b828866ba221",
+    "content/maps/VermilionCity_PokemonCenter_1F.json": "3393b6f524ae961ce11fdb8e2f0f24ad98347b1f54ef371c96df2d4b956f6958",
+    "content/maps/VermilionCity_PokemonCenter_2F.json": "1a366feba8399a3db02e5e16c53af58a35bc955f57a2911a4afd8a198b588ee1",
+    "content/maps/VermilionCity_PokemonFanClub.json": "0f1cdbb2a7f73f3f5d81e059ab5a9dbdf5ec9c8ba498e983c2906fbb0e372a9d",
+    "content/maps/VictoryRoad_1F.json": "206521772b9ead97f24eda4abf43956face180b3461ca8f70627b8cb8b69fc5a",
+    "content/maps/VictoryRoad_2F.json": "c1f93d0e7281840bf2844d857328315dec42ee5667b03292dfeba6c030e0e755",
+    "content/maps/VictoryRoad_3F.json": "00a64fc2e0c51664a7d8c1a7ed461d45e8045c2e37acf77bbf68a2a400cde5fa",
+    "content/maps/ViridianCity.json": "77b95a63d5d2e56e6b53ebe94d33c874329e87707afd182b894176f42b977c07",
+    "content/maps/ViridianCity_Gym.json": "c2edecb44e6feabbb6d99b7decaca1c97bfa9e80d46ce2b5528d9bdef22ce116",
+    "content/maps/ViridianCity_House.json": "31ac60e66cde5aa17d62faba7155199a9da5729687093f8a929cfa2b292dad20",
+    "content/maps/ViridianCity_Mart.json": "44f9414e8864409d859ea571468747668495ba3a7dfc6529d04239ae1f6b9bed",
+    "content/maps/ViridianCity_PokemonCenter_1F.json": "887058812254e2a23a866796ba51c56d720c8efdefda1a63f2c1baf80753ed42",
+    "content/maps/ViridianCity_PokemonCenter_2F.json": "eb5dd765ff24a33b81e52ff81352ac0b0760a0d28a60ffb0eb46498d19afb58e",
+    "content/maps/ViridianCity_School.json": "78c7498b4db7058e2bdede8ec2aa1dee890c876d0899e9c70219a468c8a95688",
+    "content/maps/ViridianForest.json": "719d5924df97f07ae8fd1016e2e903ae4932c4583cb3a6b1675aab834163da0a"
+  },
+  "loaded_maps": 256,
+  "required_inventory_maps": 256,
+  "maps": [
+    {
+      "map_id": "CeladonCity",
+      "source_exits": 20,
+      "resolvable_exits": 20,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_1F",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_2F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_3F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_Roof",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_RoofRoom",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_1F",
+      "source_exits": 8,
+      "resolvable_exits": 8,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_2F",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_3F",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_4F",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_5F",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_Elevator",
+      "source_exits": 2,
+      "resolvable_exits": 0,
+      "rejected_exits": [
+        {
+          "position": [
+            2,
+            5
+          ],
+          "target": "MAP_DYNAMIC",
+          "reason": "destination map unavailable: MAP_DYNAMIC",
+          "classification": "elevator_script_action"
+        },
+        {
+          "position": [
+            2,
+            6
+          ],
+          "target": "MAP_DYNAMIC",
+          "reason": "destination map unavailable: MAP_DYNAMIC",
+          "classification": "elevator_script_action"
+        }
+      ]
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_Roof",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_GameCorner",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_GameCorner_PrizeRoom",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_Gym",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_Hotel",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_House1",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeladonCity_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "CeladonCity_Restaurant",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCave_1F",
+      "source_exits": 8,
+      "resolvable_exits": 8,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCave_2F",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCave_B1F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity",
+      "source_exits": 75,
+      "resolvable_exits": 59,
+      "rejected_exits": [
+        {
+          "position": [
+            0,
+            15
+          ],
+          "target": "Route4",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            36,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            37,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            38,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            39,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            40,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            41,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            42,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            43,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            44,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            45,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            46,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            0
+          ],
+          "target": "Route24",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            1
+          ],
+          "target": "Route9",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            2
+          ],
+          "target": "Route9",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            3
+          ],
+          "target": "Route9",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "CeruleanCity_BikeShop",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_Gym",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_House1",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_House2",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_House3",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_House4",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_House5",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_Mart",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CeruleanCity_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "CinnabarIsland",
+      "source_exits": 33,
+      "resolvable_exits": 33,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CinnabarIsland_Gym",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CinnabarIsland_Mart",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonLab_Entrance",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonLab_ExperimentRoom",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonLab_Lounge",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonLab_ResearchRoom",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "DiglettsCave_B1F",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "DiglettsCave_NorthEntrance",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "DiglettsCave_SouthEntrance",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity",
+      "source_exits": 28,
+      "resolvable_exits": 27,
+      "rejected_exits": [
+        {
+          "position": [
+            47,
+            23
+          ],
+          "target": "Route15",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "FuchsiaCity_Gym",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity_House1",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity_House2",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity_House3",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity_Mart",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "FuchsiaCity_SafariZone_Entrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity_SafariZone_Office",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "FuchsiaCity_WardensHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "IndigoPlateau_Exterior",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "IndigoPlateau_PokemonCenter_1F",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "IndigoPlateau_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "LavenderTown",
+      "source_exits": 16,
+      "resolvable_exits": 16,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "LavenderTown_House1",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "LavenderTown_House2",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "LavenderTown_Mart",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "LavenderTown_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "LavenderTown_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "LavenderTown_VolunteerPokemonHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "MtMoon_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "MtMoon_B1F",
+      "source_exits": 8,
+      "resolvable_exits": 8,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "MtMoon_B2F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PalletTown",
+      "source_exits": 25,
+      "resolvable_exits": 9,
+      "rejected_exits": [
+        {
+          "position": [
+            2,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            3,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            4,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            5,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            6,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            11,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            12,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            13,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            14,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            15,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            16,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            17,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            18,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            19,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            20,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            21,
+            19
+          ],
+          "target": "Route21_North",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "PalletTown_PlayersHouse_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PalletTown_PlayersHouse_2F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PalletTown_ProfessorOaksLab",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PalletTown_RivalsHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PewterCity",
+      "source_exits": 15,
+      "resolvable_exits": 14,
+      "rejected_exits": [
+        {
+          "position": [
+            47,
+            23
+          ],
+          "target": "Route3",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "PewterCity_Gym",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PewterCity_House1",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PewterCity_House2",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PewterCity_Mart",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PewterCity_Museum_1F",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PewterCity_Museum_2F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PewterCity_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PewterCity_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "PokemonLeague_AgathasRoom",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonLeague_BrunosRoom",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonLeague_ChampionsRoom",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonLeague_HallOfFame",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonLeague_LancesRoom",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonLeague_LoreleisRoom",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonMansion_1F",
+      "source_exits": 10,
+      "resolvable_exits": 10,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonMansion_2F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonMansion_3F",
+      "source_exits": 8,
+      "resolvable_exits": 8,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonMansion_B1F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonTower_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonTower_2F",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonTower_3F",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonTower_4F",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonTower_5F",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonTower_6F",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PokemonTower_7F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "PowerPlant",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "RockTunnel_1F",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "RockTunnel_B1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "RocketHideout_B1F",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "RocketHideout_B2F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "RocketHideout_B3F",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "RocketHideout_B4F",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "RocketHideout_Elevator",
+      "source_exits": 2,
+      "resolvable_exits": 0,
+      "rejected_exits": [
+        {
+          "position": [
+            1,
+            5
+          ],
+          "target": "MAP_DYNAMIC",
+          "reason": "destination map unavailable: MAP_DYNAMIC",
+          "classification": "elevator_script_action"
+        },
+        {
+          "position": [
+            2,
+            5
+          ],
+          "target": "MAP_DYNAMIC",
+          "reason": "destination map unavailable: MAP_DYNAMIC",
+          "classification": "elevator_script_action"
+        }
+      ]
+    },
+    {
+      "map_id": "Route1",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route10",
+      "source_exits": 13,
+      "resolvable_exits": 13,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route10_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route10_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "Route11",
+      "source_exits": 13,
+      "resolvable_exits": 13,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route11_EastEntrance_1F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route11_EastEntrance_2F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route12",
+      "source_exits": 17,
+      "resolvable_exits": 17,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route12_FishingHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route12_NorthEntrance_1F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route12_NorthEntrance_2F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route13",
+      "source_exits": 16,
+      "resolvable_exits": 12,
+      "rejected_exits": [
+        {
+          "position": [
+            0,
+            16
+          ],
+          "target": "Route14",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            17
+          ],
+          "target": "Route14",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            18
+          ],
+          "target": "Route14",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            19
+          ],
+          "target": "Route14",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route14",
+      "source_exits": 50,
+      "resolvable_exits": 12,
+      "rejected_exits": [
+        {
+          "position": [
+            23,
+            13
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            23
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            24
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            25
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            26
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            27
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            28
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            29
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            30
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            31
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            32
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            33
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            34
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            35
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            36
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            37
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            38
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            39
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            40
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            41
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            42
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            43
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            44
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            45
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            46
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            47
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            48
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            49
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            50
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            51
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            52
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            53
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            54
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            55
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            56
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            57
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            58
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            59
+          ],
+          "target": "Route13",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route15",
+      "source_exits": 15,
+      "resolvable_exits": 13,
+      "rejected_exits": [
+        {
+          "position": [
+            71,
+            5
+          ],
+          "target": "Route14",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            71,
+            6
+          ],
+          "target": "Route14",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route15_WestEntrance_1F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route15_WestEntrance_2F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route16",
+      "source_exits": 22,
+      "resolvable_exits": 22,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route16_House",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route16_NorthEntrance_1F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route16_NorthEntrance_2F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route17",
+      "source_exits": 32,
+      "resolvable_exits": 30,
+      "rejected_exits": [
+        {
+          "position": [
+            6,
+            159
+          ],
+          "target": "Route18",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            18,
+            159
+          ],
+          "target": "Route18",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route18",
+      "source_exits": 31,
+      "resolvable_exits": 21,
+      "rejected_exits": [
+        {
+          "position": [
+            4,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            20,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            24,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            25,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            26,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            27,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            28,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            29,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            30,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            31,
+            0
+          ],
+          "target": "Route17",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route18_EastEntrance_1F",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route18_EastEntrance_2F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route19",
+      "source_exits": 49,
+      "resolvable_exits": 25,
+      "rejected_exits": [
+        {
+          "position": [
+            0,
+            9
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            10
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            11
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            12
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            13
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            14
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            15
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            16
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            17
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            18
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            19
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            20
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            21
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            22
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            23
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            24
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            25
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            28
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            29
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            32
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            33
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            34
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            35
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            42
+          ],
+          "target": "Route20",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route19_UnusedHouse",
+      "source_exits": 0,
+      "resolvable_exits": 0,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route2",
+      "source_exits": 19,
+      "resolvable_exits": 19,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route20",
+      "source_exits": 34,
+      "resolvable_exits": 33,
+      "rejected_exits": [
+        {
+          "position": [
+            119,
+            0
+          ],
+          "target": "Route19",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route21_North",
+      "source_exits": 24,
+      "resolvable_exits": 20,
+      "rejected_exits": [
+        {
+          "position": [
+            4,
+            49
+          ],
+          "target": "Route21_South",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            5,
+            49
+          ],
+          "target": "Route21_South",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            18,
+            49
+          ],
+          "target": "Route21_South",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            19,
+            49
+          ],
+          "target": "Route21_South",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route21_South",
+      "source_exits": 36,
+      "resolvable_exits": 29,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            49
+          ],
+          "target": "CinnabarIsland",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            6,
+            49
+          ],
+          "target": "CinnabarIsland",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            7,
+            49
+          ],
+          "target": "CinnabarIsland",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            8,
+            49
+          ],
+          "target": "CinnabarIsland",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            9,
+            49
+          ],
+          "target": "CinnabarIsland",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            10,
+            49
+          ],
+          "target": "CinnabarIsland",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            11,
+            49
+          ],
+          "target": "CinnabarIsland",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route22",
+      "source_exits": 12,
+      "resolvable_exits": 6,
+      "rejected_exits": [
+        {
+          "position": [
+            45,
+            0
+          ],
+          "target": "Route23",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            46,
+            0
+          ],
+          "target": "Route23",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            0
+          ],
+          "target": "Route23",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            1
+          ],
+          "target": "ViridianCity",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            2
+          ],
+          "target": "ViridianCity",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            4
+          ],
+          "target": "ViridianCity",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route22_NorthEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route23",
+      "source_exits": 7,
+      "resolvable_exits": 7,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route23_UnusedHouse",
+      "source_exits": 0,
+      "resolvable_exits": 0,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route24",
+      "source_exits": 36,
+      "resolvable_exits": 24,
+      "rejected_exits": [
+        {
+          "position": [
+            23,
+            27
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            28
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            29
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            30
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            31
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            32
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            33
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            34
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            35
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            36
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            37
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            23,
+            38
+          ],
+          "target": "Route25",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route25",
+      "source_exits": 8,
+      "resolvable_exits": 8,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route25_SeaCottage",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route2_EastBuilding",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route2_House",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route2_ViridianForest_NorthEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route2_ViridianForest_SouthEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route3",
+      "source_exits": 12,
+      "resolvable_exits": 11,
+      "rejected_exits": [
+        {
+          "position": [
+            0,
+            9
+          ],
+          "target": "PewterCity",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route4",
+      "source_exits": 19,
+      "resolvable_exits": 19,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route4_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route4_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "Route5",
+      "source_exits": 24,
+      "resolvable_exits": 24,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route5_PokemonDayCare",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route5_SouthEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route6",
+      "source_exits": 15,
+      "resolvable_exits": 15,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route6_NorthEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route6_UnusedHouse",
+      "source_exits": 0,
+      "resolvable_exits": 0,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route7",
+      "source_exits": 12,
+      "resolvable_exits": 11,
+      "rejected_exits": [
+        {
+          "position": [
+            23,
+            6
+          ],
+          "target": "SaffronCity_Connection",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "Route7_EastEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route8",
+      "source_exits": 11,
+      "resolvable_exits": 11,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route8_WestEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "Route9",
+      "source_exits": 8,
+      "resolvable_exits": 7,
+      "rejected_exits": [
+        {
+          "position": [
+            0,
+            1
+          ],
+          "target": "CeruleanCity",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "SSAnne_1F_Corridor",
+      "source_exits": 13,
+      "resolvable_exits": 13,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_1F_Room1",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_1F_Room2",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_1F_Room3",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_1F_Room4",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_1F_Room5",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_1F_Room6",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_1F_Room7",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_2F_Corridor",
+      "source_exits": 9,
+      "resolvable_exits": 9,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_2F_Room1",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_2F_Room2",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_2F_Room3",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_2F_Room4",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_2F_Room5",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_2F_Room6",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_3F_Corridor",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_B1F_Corridor",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_B1F_Room1",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_B1F_Room2",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_B1F_Room3",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_B1F_Room4",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_B1F_Room5",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_CaptainsOffice",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_Deck",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_Exterior",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SSAnne_Kitchen",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_Center",
+      "source_exits": 13,
+      "resolvable_exits": 13,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_Center_RestHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_East",
+      "source_exits": 7,
+      "resolvable_exits": 7,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_East_RestHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_North",
+      "source_exits": 13,
+      "resolvable_exits": 13,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_North_RestHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_SecretHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_West",
+      "source_exits": 11,
+      "resolvable_exits": 11,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SafariZone_West_RestHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity",
+      "source_exits": 64,
+      "resolvable_exits": 21,
+      "rejected_exits": [
+        {
+          "position": [
+            0,
+            22
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            24
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            25
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            26
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            27
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            28
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            30
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            31
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            32
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            33
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            0,
+            34
+          ],
+          "target": "Route7",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            24,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            25,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            26,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            27,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            27,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            28,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            28,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            29,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            29,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            30,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            30,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            31,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            31,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            33,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            34,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            35,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            36,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            38,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            38,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            39,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            39,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            40,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            40,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            41,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            41,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            42,
+            0
+          ],
+          "target": "Route5",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            42,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            43,
+            54
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            65,
+            25
+          ],
+          "target": "Route8",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            65,
+            26
+          ],
+          "target": "Route8",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            65,
+            27
+          ],
+          "target": "Route8",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            65,
+            28
+          ],
+          "target": "Route8",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "SaffronCity_Connection",
+      "source_exits": 19,
+      "resolvable_exits": 15,
+      "rejected_exits": [
+        {
+          "position": [
+            23,
+            39
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            24,
+            39
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            25,
+            39
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            26,
+            39
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "SaffronCity_CopycatsHouse_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity_CopycatsHouse_2F",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity_Dojo",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity_Gym",
+      "source_exits": 33,
+      "resolvable_exits": 33,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity_House",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity_Mart",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity_MrPsychicsHouse",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SaffronCity_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "SaffronCity_PokemonTrainerFanClub",
+      "source_exits": 1,
+      "resolvable_exits": 1,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SeafoamIslands_1F",
+      "source_exits": 7,
+      "resolvable_exits": 7,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SeafoamIslands_B1F",
+      "source_exits": 11,
+      "resolvable_exits": 11,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SeafoamIslands_B2F",
+      "source_exits": 11,
+      "resolvable_exits": 11,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SeafoamIslands_B3F",
+      "source_exits": 9,
+      "resolvable_exits": 9,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SeafoamIslands_B4F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_10F",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_11F",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_1F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_2F",
+      "source_exits": 7,
+      "resolvable_exits": 7,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_3F",
+      "source_exits": 10,
+      "resolvable_exits": 10,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_4F",
+      "source_exits": 7,
+      "resolvable_exits": 7,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_5F",
+      "source_exits": 7,
+      "resolvable_exits": 7,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_6F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_7F",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_8F",
+      "source_exits": 7,
+      "resolvable_exits": 7,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_9F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "SilphCo_Elevator",
+      "source_exits": 1,
+      "resolvable_exits": 0,
+      "rejected_exits": [
+        {
+          "position": [
+            2,
+            5
+          ],
+          "target": "MAP_DYNAMIC",
+          "reason": "destination map unavailable: MAP_DYNAMIC",
+          "classification": "elevator_script_action"
+        }
+      ]
+    },
+    {
+      "map_id": "UndergroundPath_EastEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "UndergroundPath_EastWestTunnel",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "UndergroundPath_NorthEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "UndergroundPath_NorthSouthTunnel",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "UndergroundPath_SouthEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "UndergroundPath_WestEntrance",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VermilionCity",
+      "source_exits": 52,
+      "resolvable_exits": 29,
+      "rejected_exits": [
+        {
+          "position": [
+            0,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            1,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            2,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            3,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            4,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            5,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            6,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            7,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            8,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            9,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            10,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            11,
+            0
+          ],
+          "target": "Route6",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            29
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            30
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            31
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            32
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            33
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            34
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            35
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            36
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            37
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            38
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        },
+        {
+          "position": [
+            47,
+            39
+          ],
+          "target": "Route11",
+          "reason": "source exit or exact destination tile is blocked",
+          "classification": "blocked_border_candidate"
+        }
+      ]
+    },
+    {
+      "map_id": "VermilionCity_Gym",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VermilionCity_House1",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VermilionCity_House2",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VermilionCity_House3",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VermilionCity_Mart",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VermilionCity_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VermilionCity_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "VermilionCity_PokemonFanClub",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VictoryRoad_1F",
+      "source_exits": 2,
+      "resolvable_exits": 2,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VictoryRoad_2F",
+      "source_exits": 9,
+      "resolvable_exits": 9,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "VictoryRoad_3F",
+      "source_exits": 5,
+      "resolvable_exits": 5,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "ViridianCity",
+      "source_exits": 18,
+      "resolvable_exits": 18,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "ViridianCity_Gym",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "ViridianCity_House",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "ViridianCity_Mart",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "ViridianCity_PokemonCenter_1F",
+      "source_exits": 4,
+      "resolvable_exits": 4,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "ViridianCity_PokemonCenter_2F",
+      "source_exits": 3,
+      "resolvable_exits": 1,
+      "rejected_exits": [
+        {
+          "position": [
+            5,
+            1
+          ],
+          "target": "MAP_UNION_ROOM",
+          "reason": "destination map unavailable: MAP_UNION_ROOM",
+          "classification": "excluded_online"
+        },
+        {
+          "position": [
+            9,
+            1
+          ],
+          "target": "MAP_TRADE_CENTER",
+          "reason": "destination map unavailable: MAP_TRADE_CENTER",
+          "classification": "excluded_online"
+        }
+      ]
+    },
+    {
+      "map_id": "ViridianCity_School",
+      "source_exits": 3,
+      "resolvable_exits": 3,
+      "rejected_exits": []
+    },
+    {
+      "map_id": "ViridianForest",
+      "source_exits": 6,
+      "resolvable_exits": 6,
+      "rejected_exits": []
+    }
+  ],
+  "legal_mainland_journey_verified": false,
+  "notes": [
+    "Surf capability supplied only to audit geometric landing; no badges or items granted.",
+    "Connection border candidates outside destination bounds are correctly rejected.",
+    "Elevators use source-backed ride_elevator actions; Rocket floors additionally require own Lift Key.",
+    "Online Union Room/Trade Center destinations are deliberately excluded, not release blockers.",
+    "All 256 inventory maps are loaded; School tile704 uses source-proven zero-filled VRAM."
+  ]
+}

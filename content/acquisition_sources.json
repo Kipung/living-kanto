@@ -1,0 +1,85 @@
+{
+  "stations": {
+    "helix": {
+      "map_id": "MtMoon_B2F",
+      "x": 14,
+      "y": 7,
+      "script": "MtMoon_B2F_EventScript_HelixFossil"
+    },
+    "dome": {
+      "map_id": "MtMoon_B2F",
+      "x": 13,
+      "y": 7,
+      "script": "MtMoon_B2F_EventScript_DomeFossil"
+    },
+    "old_amber": {
+      "map_id": "PewterCity_Museum_1F",
+      "x": 21,
+      "y": 3,
+      "script": "PewterCity_Museum_1F_EventScript_OldAmberScientist"
+    },
+    "coin_case": {
+      "map_id": "CeladonCity_Restaurant",
+      "x": 1,
+      "y": 2,
+      "script": "CeladonCity_Restaurant_EventScript_CoinCaseMan"
+    },
+    "laboratory": {
+      "map_id": "CinnabarIsland_PokemonLab_ExperimentRoom",
+      "x": 12,
+      "y": 3,
+      "script": "CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist"
+    },
+    "coins": {
+      "map_id": "CeladonCity_GameCorner",
+      "x": 6,
+      "y": 2,
+      "script": "CeladonCity_GameCorner_EventScript_CoinsClerk"
+    },
+    "prizes": {
+      "map_id": "CeladonCity_GameCorner_PrizeRoom",
+      "x": 4,
+      "y": 2,
+      "script": "CeladonCity_GameCorner_PrizeRoom_EventScript_PrizeClerkMons"
+    }
+  },
+  "prizes": {
+    "ABRA": {
+      "coins": 180,
+      "level": 9
+    },
+    "CLEFAIRY": {
+      "coins": 500,
+      "level": 8
+    },
+    "DRATINI": {
+      "coins": 2800,
+      "level": 18
+    },
+    "SCYTHER": {
+      "coins": 5500,
+      "level": 25
+    },
+    "PORYGON": {
+      "coins": 9999,
+      "level": 26
+    }
+  },
+  "source_sha256": {
+    "data/maps/MtMoon_B2F/map.json": "451a05df92c5df570c121affa75c846996d3561c12e7e5d67d91814482a37ff3",
+    "data/maps/MtMoon_B2F/scripts.inc": "4d53d179f893c9c6d6af6c5b10e2a005ce83315484636a57df36d56bcc7f7898",
+    "data/maps/PewterCity_Museum_1F/map.json": "be894d7df93066fd64dbdb847a32d1597c39cfe77294552b49250211747c4335",
+    "data/maps/PewterCity_Museum_1F/scripts.inc": "199f9436d64f20419ab16a49bd582dccd14996c870bfbf4cf3bd61e2f7274135",
+    "data/maps/CeladonCity_Restaurant/map.json": "3225c94c15eed674b645d98bea3a3c9d55ac93f79f7141fde0ef1867995f9163",
+    "data/maps/CeladonCity_Restaurant/scripts.inc": "c550a75439d24dc9b2d62087f232cfba03448d392cd8a893466957fdd9f7f037",
+    "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom/map.json": "48e37fff68f138a144c1927c419df128a90ceaa37aac63a822ebf481b8c08729",
+    "data/maps/CinnabarIsland_PokemonLab_ExperimentRoom/scripts.inc": "8afc38f502fd909a1bb220a919ac107ce8b39e98e29731d654f6edef749828ce",
+    "data/maps/CeladonCity_GameCorner/map.json": "e0924467ae57d2fce051f3959bf1526bcb0befce6a6c39a51162aa2089f555ee",
+    "data/maps/CeladonCity_GameCorner/scripts.inc": "1e05d3520f34fa7a6bad3542e0f99b205d0308cdb9d9e812c33a8f0b71498da5",
+    "data/maps/CeladonCity_GameCorner_PrizeRoom/map.json": "25e77fea57602b0854b90d035fbce58ed5c9914a3a9b95a595a2ded93feb69a9",
+    "data/maps/CeladonCity_GameCorner_PrizeRoom/scripts.inc": "d323f49a9bc5cb3487a7ad80124e4d2ffaf8a69625dcf489c804dbe5956a9e28",
+    "data/maps/CinnabarIsland_PokemonLab_Entrance/scripts.inc": "be8aaf400ee541df99fb2ec26b82df24e1e879273d53a41068e15f5f65b5e274"
+  },
+  "source_revision": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "adaptation": "Source NPC gifts, laboratory and coin clerks are mechanical stations; per-trainer claims replace global flags. Fossil revival requires actual departure and return, not elapsed time. Game Corner gambling is not simulated; original paid bundles remain available. Because all source non-gambling awards are multiples of ten and original Porygon costs9999coins, the counter also sells only the final sub-50 cap remainder at the source exchange rate20money per coin. This declared mechanical adaptation supplies no gambling win."
+}

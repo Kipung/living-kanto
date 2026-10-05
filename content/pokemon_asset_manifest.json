@@ -1,0 +1,1818 @@
+{
+  "source_revision": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "usage": "Original Nintendo/Game Freak pixels; no open license claimed. Palette application only; no generated artwork.",
+  "assets": [
+    {
+      "path": "content/pokemon/abra_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/abra/front.png",
+      "source_sha256": "b4a72562bd1ecb892f620cc180f9bd2da4d3d6a8ee75ddda8bb6196c5e77f4d3",
+      "palette": "reference/pokefirered/graphics/pokemon/abra/normal.pal"
+    },
+    {
+      "path": "content/pokemon/abra_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/abra/back.png",
+      "source_sha256": "f35e34c2758b22cf4158b23d71838fcd8b38a8276cdf290cfd8832043b5fdc8d",
+      "palette": "reference/pokefirered/graphics/pokemon/abra/normal.pal"
+    },
+    {
+      "path": "content/pokemon/aerodactyl_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/aerodactyl/front.png",
+      "source_sha256": "931cfc4f2ab6e874ccee2d7bef2257578c86881c66a8adc08a792e1a7066b418",
+      "palette": "reference/pokefirered/graphics/pokemon/aerodactyl/normal.pal"
+    },
+    {
+      "path": "content/pokemon/aerodactyl_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/aerodactyl/back.png",
+      "source_sha256": "a4a6225ddf5bbae27600640f46f0f7ec2b2db5349a5b6c8597e03442f0689ad3",
+      "palette": "reference/pokefirered/graphics/pokemon/aerodactyl/normal.pal"
+    },
+    {
+      "path": "content/pokemon/alakazam_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/alakazam/front.png",
+      "source_sha256": "2158d2e2818ad618b14d677beaf9e0c59c5bb19b7945096ec0c69cf79b8b9831",
+      "palette": "reference/pokefirered/graphics/pokemon/alakazam/normal.pal"
+    },
+    {
+      "path": "content/pokemon/alakazam_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/alakazam/back.png",
+      "source_sha256": "5f0618e8dd4b63f26719e86fc5b5e69646d6235ffb31f8ae95cc150d4933cdf8",
+      "palette": "reference/pokefirered/graphics/pokemon/alakazam/normal.pal"
+    },
+    {
+      "path": "content/pokemon/arbok_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/arbok/front.png",
+      "source_sha256": "bf295cb2c77f0cb96e6b1fc772165cc90f7b8b90b4463862e569a11c1a4ed326",
+      "palette": "reference/pokefirered/graphics/pokemon/arbok/normal.pal"
+    },
+    {
+      "path": "content/pokemon/arbok_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/arbok/back.png",
+      "source_sha256": "2905cb1a5fb62f6a3b04d6d6264e90ace147ca3379af5dd6ceeaf81a54737e33",
+      "palette": "reference/pokefirered/graphics/pokemon/arbok/normal.pal"
+    },
+    {
+      "path": "content/pokemon/arcanine_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/arcanine/front.png",
+      "source_sha256": "23b096f8dc0b66b09a848fdd7058682747a2fbbd842fde97e791aced3815a3ab",
+      "palette": "reference/pokefirered/graphics/pokemon/arcanine/normal.pal"
+    },
+    {
+      "path": "content/pokemon/arcanine_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/arcanine/back.png",
+      "source_sha256": "ce3d6d904b8226e43f8588645fc0678927893e7de48273ad23b66224d068d45a",
+      "palette": "reference/pokefirered/graphics/pokemon/arcanine/normal.pal"
+    },
+    {
+      "path": "content/pokemon/articuno_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/articuno/front.png",
+      "source_sha256": "514896da354b744692f43894df3e369cf315f2f1d45c90972ac1a4e302cc9ef8",
+      "palette": "reference/pokefirered/graphics/pokemon/articuno/normal.pal"
+    },
+    {
+      "path": "content/pokemon/articuno_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/articuno/back.png",
+      "source_sha256": "782c226e05c9b4716e0e294c76d5503c7dadb8c503ec8228ec273ba0d3c40214",
+      "palette": "reference/pokefirered/graphics/pokemon/articuno/normal.pal"
+    },
+    {
+      "path": "content/pokemon/beedrill_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/beedrill/front.png",
+      "source_sha256": "86ff4125366e827f8e29011d45a7ccad807c08cc2376570bb8981b9bf4e73c68",
+      "palette": "reference/pokefirered/graphics/pokemon/beedrill/normal.pal"
+    },
+    {
+      "path": "content/pokemon/beedrill_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/beedrill/back.png",
+      "source_sha256": "c480cbd951782f152df6a77041100b28166334ef82c704c2fa8d703ac651783d",
+      "palette": "reference/pokefirered/graphics/pokemon/beedrill/normal.pal"
+    },
+    {
+      "path": "content/pokemon/bellsprout_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/bellsprout/front.png",
+      "source_sha256": "00ea8ace96153ef2c864331d36ef20b24f2df469dca88ee9477f6ae99e271792",
+      "palette": "reference/pokefirered/graphics/pokemon/bellsprout/normal.pal"
+    },
+    {
+      "path": "content/pokemon/bellsprout_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/bellsprout/back.png",
+      "source_sha256": "faad97a068c20e931b728244d8f073f5c879587195e3878e6174f6efeaa18f61",
+      "palette": "reference/pokefirered/graphics/pokemon/bellsprout/normal.pal"
+    },
+    {
+      "path": "content/pokemon/blastoise_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/blastoise/front.png",
+      "source_sha256": "d5a2a13fd2887003a98ed9656927bb7a95b83b9cf1078d68fb4a2b1f5b8fcc77",
+      "palette": "reference/pokefirered/graphics/pokemon/blastoise/normal.pal"
+    },
+    {
+      "path": "content/pokemon/blastoise_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/blastoise/back.png",
+      "source_sha256": "732e95e17378f25e3a9f301f193b9ec9df44187a116c92b1c36728cb7a60782b",
+      "palette": "reference/pokefirered/graphics/pokemon/blastoise/normal.pal"
+    },
+    {
+      "path": "content/pokemon/bulbasaur_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/bulbasaur/front.png",
+      "source_sha256": "523c5d50a673c3a46a68a96bd32a63fcfae9192637fb6407198a43746c38f7e3",
+      "palette": "reference/pokefirered/graphics/pokemon/bulbasaur/normal.pal"
+    },
+    {
+      "path": "content/pokemon/bulbasaur_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/bulbasaur/back.png",
+      "source_sha256": "86c9f369b71e831de04ce6964bc9b62a6b8a82cad5309c0fa0fdbd96c3acb805",
+      "palette": "reference/pokefirered/graphics/pokemon/bulbasaur/normal.pal"
+    },
+    {
+      "path": "content/pokemon/butterfree_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/butterfree/front.png",
+      "source_sha256": "8c585036c073df2fd4c51a9c1384b0af4b8a855e80f293b1eb374ffd612c8471",
+      "palette": "reference/pokefirered/graphics/pokemon/butterfree/normal.pal"
+    },
+    {
+      "path": "content/pokemon/butterfree_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/butterfree/back.png",
+      "source_sha256": "6f54ba8ca6bfacea143a230572021588072a2747f3d4d23bccf42471a698dedd",
+      "palette": "reference/pokefirered/graphics/pokemon/butterfree/normal.pal"
+    },
+    {
+      "path": "content/pokemon/caterpie_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/caterpie/front.png",
+      "source_sha256": "b744770221a976558e56677c6d37577d3a74e8fca40fcf1f4710070c2750dd4a",
+      "palette": "reference/pokefirered/graphics/pokemon/caterpie/normal.pal"
+    },
+    {
+      "path": "content/pokemon/caterpie_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/caterpie/back.png",
+      "source_sha256": "0d8623a251019e770aae343fa19038618a599bb9c33e1931ca8684fb41e360c0",
+      "palette": "reference/pokefirered/graphics/pokemon/caterpie/normal.pal"
+    },
+    {
+      "path": "content/pokemon/chansey_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/chansey/front.png",
+      "source_sha256": "3526cf80a37cd841385a7ea8392ea44ee9433199c9b4d7884eefc39862c20f84",
+      "palette": "reference/pokefirered/graphics/pokemon/chansey/normal.pal"
+    },
+    {
+      "path": "content/pokemon/chansey_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/chansey/back.png",
+      "source_sha256": "69d612c00990ff0bd91910c317703d0c6c6e807e76c8a37541e592c30542803b",
+      "palette": "reference/pokefirered/graphics/pokemon/chansey/normal.pal"
+    },
+    {
+      "path": "content/pokemon/charizard_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/charizard/front.png",
+      "source_sha256": "2896ad7b2231bb914ad5109a24b6d25443af738cb48ab232d8feb1a5d35882d2",
+      "palette": "reference/pokefirered/graphics/pokemon/charizard/normal.pal"
+    },
+    {
+      "path": "content/pokemon/charizard_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/charizard/back.png",
+      "source_sha256": "dc97e1d1ec1e10e41945656c8fcfd316fc4c1f2ed67e8231c407b5859427d516",
+      "palette": "reference/pokefirered/graphics/pokemon/charizard/normal.pal"
+    },
+    {
+      "path": "content/pokemon/charmander_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/charmander/front.png",
+      "source_sha256": "0235fcad1ca309f303947ae1688d7564636971c30a0c707b6ee123e697f76022",
+      "palette": "reference/pokefirered/graphics/pokemon/charmander/normal.pal"
+    },
+    {
+      "path": "content/pokemon/charmander_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/charmander/back.png",
+      "source_sha256": "e5753a2daeb132a71971b93b1abf4efd653816825138b53fb866ec05fabfcaa1",
+      "palette": "reference/pokefirered/graphics/pokemon/charmander/normal.pal"
+    },
+    {
+      "path": "content/pokemon/charmeleon_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/charmeleon/front.png",
+      "source_sha256": "d4fcc3d239674c98e8db95643d8e02f4a4817c61f87ac8405d476dece000ecab",
+      "palette": "reference/pokefirered/graphics/pokemon/charmeleon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/charmeleon_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/charmeleon/back.png",
+      "source_sha256": "b710f3f5b37c7e9fb9fe4acfad5478ea1d45637727909fcd74cc3a7b62ee1d40",
+      "palette": "reference/pokefirered/graphics/pokemon/charmeleon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/clefable_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/clefable/front.png",
+      "source_sha256": "e71329b76f2eefb453917eb72b82a1e41437c933447778d960a0404880130198",
+      "palette": "reference/pokefirered/graphics/pokemon/clefable/normal.pal"
+    },
+    {
+      "path": "content/pokemon/clefable_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/clefable/back.png",
+      "source_sha256": "c0dc8169db24a10e89ff21d5b042e9e608a3bac728aeea63660d052f96f13fbb",
+      "palette": "reference/pokefirered/graphics/pokemon/clefable/normal.pal"
+    },
+    {
+      "path": "content/pokemon/clefairy_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/clefairy/front.png",
+      "source_sha256": "cbc6812a0213613fbbbe255320ac9829e8bfccd20bdfcf2ef1cdff8d78d1694f",
+      "palette": "reference/pokefirered/graphics/pokemon/clefairy/normal.pal"
+    },
+    {
+      "path": "content/pokemon/clefairy_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/clefairy/back.png",
+      "source_sha256": "e075589777d5730fedeb51fdaec8be76ef95d66b24347925e2078235479b2b21",
+      "palette": "reference/pokefirered/graphics/pokemon/clefairy/normal.pal"
+    },
+    {
+      "path": "content/pokemon/cloyster_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/cloyster/front.png",
+      "source_sha256": "953ccafb36c9f62682e1c1b7662150516bc649625983536e71b8ab7638fc9bd9",
+      "palette": "reference/pokefirered/graphics/pokemon/cloyster/normal.pal"
+    },
+    {
+      "path": "content/pokemon/cloyster_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/cloyster/back.png",
+      "source_sha256": "a7abaf54fb6586a90102b00a7530253507403a4935c44708582fd1b1abeab2f3",
+      "palette": "reference/pokefirered/graphics/pokemon/cloyster/normal.pal"
+    },
+    {
+      "path": "content/pokemon/cubone_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/cubone/front.png",
+      "source_sha256": "f8479997c8aa5b9f2d64f423524de4a2276c292e7e53ecb661ccaef61368be72",
+      "palette": "reference/pokefirered/graphics/pokemon/cubone/normal.pal"
+    },
+    {
+      "path": "content/pokemon/cubone_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/cubone/back.png",
+      "source_sha256": "05c50e7c9285953cfc1c06dca820aa027a385e231fca11ea1f1124b9fb1a1a7a",
+      "palette": "reference/pokefirered/graphics/pokemon/cubone/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dewgong_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/dewgong/front.png",
+      "source_sha256": "f906985daa21b77ce441e1b3930f8b65d29e5dd57538ea31020dde52e51d228e",
+      "palette": "reference/pokefirered/graphics/pokemon/dewgong/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dewgong_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/dewgong/back.png",
+      "source_sha256": "c728d17d7f4a7d78544b3c441fab7bfecc38da059455be18d03f83997f4a40f0",
+      "palette": "reference/pokefirered/graphics/pokemon/dewgong/normal.pal"
+    },
+    {
+      "path": "content/pokemon/diglett_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/diglett/front.png",
+      "source_sha256": "e97aa686e573a270817e348f6022e8ad59396fdde976b4001815229a28aaef62",
+      "palette": "reference/pokefirered/graphics/pokemon/diglett/normal.pal"
+    },
+    {
+      "path": "content/pokemon/diglett_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/diglett/back.png",
+      "source_sha256": "6f4b563b62c0079d52ab0f8d7f4ab8a0b19f668a63934d599d18a62768332d86",
+      "palette": "reference/pokefirered/graphics/pokemon/diglett/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ditto_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/ditto/front.png",
+      "source_sha256": "d85901c8fbdc2304d73b5bb349f9c0ca2b58bb9b2a0425f4dd179e2512856c6c",
+      "palette": "reference/pokefirered/graphics/pokemon/ditto/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ditto_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/ditto/back.png",
+      "source_sha256": "d315d53f34583a2efd8c4d6ed58513869178ba330441b90504480cfd95b38535",
+      "palette": "reference/pokefirered/graphics/pokemon/ditto/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dodrio_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/dodrio/front.png",
+      "source_sha256": "8c7fd6755829ef083cea59f4287e13f4869358e362e17e9dc46e560e04eda8b9",
+      "palette": "reference/pokefirered/graphics/pokemon/dodrio/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dodrio_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/dodrio/back.png",
+      "source_sha256": "e372950c69b5c2f51f9b75301f98a799ac48e4bfe42fe09a17586f28d862c972",
+      "palette": "reference/pokefirered/graphics/pokemon/dodrio/normal.pal"
+    },
+    {
+      "path": "content/pokemon/doduo_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/doduo/front.png",
+      "source_sha256": "1fe4a895af2364ed210842da8636665feca14da020667b23d38a6ebdc33f0f37",
+      "palette": "reference/pokefirered/graphics/pokemon/doduo/normal.pal"
+    },
+    {
+      "path": "content/pokemon/doduo_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/doduo/back.png",
+      "source_sha256": "3959c27810128b321207f9058ee55cd9e2dafcda1ac519e0d6d66b26d8d201dc",
+      "palette": "reference/pokefirered/graphics/pokemon/doduo/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dragonair_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/dragonair/front.png",
+      "source_sha256": "497526749152d62fca20f819e5ea198e3b5f456ed1ef81bf776df0199d12ec71",
+      "palette": "reference/pokefirered/graphics/pokemon/dragonair/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dragonair_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/dragonair/back.png",
+      "source_sha256": "679bce5d1c78f6ff771aead14cd0cf8accc360e8716682215a6eeec7ddbd4027",
+      "palette": "reference/pokefirered/graphics/pokemon/dragonair/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dragonite_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/dragonite/front.png",
+      "source_sha256": "b91d92fd4a7e2291552d6e4e9e45c4f1d4cc6aec513aee78ec5a457dc0e1f4d6",
+      "palette": "reference/pokefirered/graphics/pokemon/dragonite/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dragonite_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/dragonite/back.png",
+      "source_sha256": "c4bf3694c671105312da860b38fe0ebd799d0492d6af55da122b9e469a0f6013",
+      "palette": "reference/pokefirered/graphics/pokemon/dragonite/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dratini_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/dratini/front.png",
+      "source_sha256": "103a2f15df984d92aa75cc76e494b8804e71f84f9ebc43c15c190f0b0a4f6786",
+      "palette": "reference/pokefirered/graphics/pokemon/dratini/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dratini_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/dratini/back.png",
+      "source_sha256": "57d723c305ffadb28dc0529e94a66714c5a87da78eded5a1b71b673577336cf3",
+      "palette": "reference/pokefirered/graphics/pokemon/dratini/normal.pal"
+    },
+    {
+      "path": "content/pokemon/drowzee_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/drowzee/front.png",
+      "source_sha256": "583ed929104dff5876235178934550cda4ba4063a6f5bf86883cc2f21e17e498",
+      "palette": "reference/pokefirered/graphics/pokemon/drowzee/normal.pal"
+    },
+    {
+      "path": "content/pokemon/drowzee_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/drowzee/back.png",
+      "source_sha256": "81158838e88e93928c4080d4517be40e11e36c43968cb9e75aed13f6448f66fa",
+      "palette": "reference/pokefirered/graphics/pokemon/drowzee/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dugtrio_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/dugtrio/front.png",
+      "source_sha256": "b50e38a76a00e487d74f8a5f690a2e6116ae04b10104833577af8e7e35635482",
+      "palette": "reference/pokefirered/graphics/pokemon/dugtrio/normal.pal"
+    },
+    {
+      "path": "content/pokemon/dugtrio_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/dugtrio/back.png",
+      "source_sha256": "addc7de5a33646bf2c52df328d078f5dd3f3dcf04b18935a1e0aa9a0a7c56374",
+      "palette": "reference/pokefirered/graphics/pokemon/dugtrio/normal.pal"
+    },
+    {
+      "path": "content/pokemon/eevee_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/eevee/front.png",
+      "source_sha256": "e570cccf3ae4be311cf9ba3abba731a2b579a71b1c837bc642d4e6cc9a20ed0f",
+      "palette": "reference/pokefirered/graphics/pokemon/eevee/normal.pal"
+    },
+    {
+      "path": "content/pokemon/eevee_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/eevee/back.png",
+      "source_sha256": "b61e8bab52dab2c7bafc34ab7dc73bcb64d5667cc3fe75c1c123bc3e2d39b94b",
+      "palette": "reference/pokefirered/graphics/pokemon/eevee/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ekans_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/ekans/front.png",
+      "source_sha256": "eb86c0898709489fb7739d5681d0ab3a450e9b2f576dcc5c3a9c97d46091c4d5",
+      "palette": "reference/pokefirered/graphics/pokemon/ekans/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ekans_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/ekans/back.png",
+      "source_sha256": "1a6a057ad5b1ed50675711492e4cac7524f89b783d65d63fdb7a3edde7ba5cf4",
+      "palette": "reference/pokefirered/graphics/pokemon/ekans/normal.pal"
+    },
+    {
+      "path": "content/pokemon/electabuzz_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/electabuzz/front.png",
+      "source_sha256": "bcb9e4790b4bdd2cfbcae4dfead5ccb44160646c1eac741d6b4c8fdd6c26f241",
+      "palette": "reference/pokefirered/graphics/pokemon/electabuzz/normal.pal"
+    },
+    {
+      "path": "content/pokemon/electabuzz_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/electabuzz/back.png",
+      "source_sha256": "cd330920c554b454bc2f22d5f945165dfb98792fa2ba2c534a4306c376d6dce1",
+      "palette": "reference/pokefirered/graphics/pokemon/electabuzz/normal.pal"
+    },
+    {
+      "path": "content/pokemon/electrode_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/electrode/front.png",
+      "source_sha256": "a3b3d1caf5ba2dc0cf6ae77636ef47ec7cc9661772dde25bb9e72e25299d7d5a",
+      "palette": "reference/pokefirered/graphics/pokemon/electrode/normal.pal"
+    },
+    {
+      "path": "content/pokemon/electrode_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/electrode/back.png",
+      "source_sha256": "29e154909d0b7b0fca8093f6c0ffc0902eeb9b7b006b9831c587c4ec72044a0d",
+      "palette": "reference/pokefirered/graphics/pokemon/electrode/normal.pal"
+    },
+    {
+      "path": "content/pokemon/exeggcute_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/exeggcute/front.png",
+      "source_sha256": "e5ed8a4899fe20710031eb0a6efc108330c7622a59e4ee70d40ede4db7aff2fa",
+      "palette": "reference/pokefirered/graphics/pokemon/exeggcute/normal.pal"
+    },
+    {
+      "path": "content/pokemon/exeggcute_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/exeggcute/back.png",
+      "source_sha256": "ce09bc549867d62ee03f5beb243adf70fc90ace128957edcbe6b288c7ad01359",
+      "palette": "reference/pokefirered/graphics/pokemon/exeggcute/normal.pal"
+    },
+    {
+      "path": "content/pokemon/exeggutor_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/exeggutor/front.png",
+      "source_sha256": "55bbbacfdef887569dcf6ba37152a35495580a1b4b46e9c4197439e7f236f769",
+      "palette": "reference/pokefirered/graphics/pokemon/exeggutor/normal.pal"
+    },
+    {
+      "path": "content/pokemon/exeggutor_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/exeggutor/back.png",
+      "source_sha256": "1d807f73383ab5e373d203603cefd2b8d5f55092399aa98a8d502415fce88281",
+      "palette": "reference/pokefirered/graphics/pokemon/exeggutor/normal.pal"
+    },
+    {
+      "path": "content/pokemon/farfetchd_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/farfetchd/front.png",
+      "source_sha256": "2d12000866b9a53d7b165d39cf2e588cba22cebd0941198bbdfc302d4bed9c0b",
+      "palette": "reference/pokefirered/graphics/pokemon/farfetchd/normal.pal"
+    },
+    {
+      "path": "content/pokemon/farfetchd_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/farfetchd/back.png",
+      "source_sha256": "37bf41dbfba2e94e0a50460941752b079d5cb98fae0c70922eeb763368e2a79f",
+      "palette": "reference/pokefirered/graphics/pokemon/farfetchd/normal.pal"
+    },
+    {
+      "path": "content/pokemon/fearow_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/fearow/front.png",
+      "source_sha256": "29cd362bb3a5cf5f01e2bfddf5dedbaeffa6312a39fdaa83d4d8e1b475ba4a1c",
+      "palette": "reference/pokefirered/graphics/pokemon/fearow/normal.pal"
+    },
+    {
+      "path": "content/pokemon/fearow_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/fearow/back.png",
+      "source_sha256": "4989dd55b7ec2874867e278f00b72e35a4693c676462a222ad6b11054986a173",
+      "palette": "reference/pokefirered/graphics/pokemon/fearow/normal.pal"
+    },
+    {
+      "path": "content/pokemon/flareon_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/flareon/front.png",
+      "source_sha256": "69e7a1faf82f500e2eeec03341822d468e6e662c208119e77dc332a90eedc88e",
+      "palette": "reference/pokefirered/graphics/pokemon/flareon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/flareon_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/flareon/back.png",
+      "source_sha256": "6cd336eaa29b2d1a42611980b695d1818390faeff402c4428e6ae41414c1ea11",
+      "palette": "reference/pokefirered/graphics/pokemon/flareon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/gastly_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/gastly/front.png",
+      "source_sha256": "2ba311e52f218c49733642e8aaed45d240a1597f59f09f04b4231f6f47c10e03",
+      "palette": "reference/pokefirered/graphics/pokemon/gastly/normal.pal"
+    },
+    {
+      "path": "content/pokemon/gastly_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/gastly/back.png",
+      "source_sha256": "9e2f46ef5b32d9acb8ec9fbfbec8a11ba60762f962e9fb7e6a44e2ddf750daed",
+      "palette": "reference/pokefirered/graphics/pokemon/gastly/normal.pal"
+    },
+    {
+      "path": "content/pokemon/gengar_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/gengar/front.png",
+      "source_sha256": "516cf00380dcd1da7e2a300849e124fddbef5cf868d8e3075678635b8410fc84",
+      "palette": "reference/pokefirered/graphics/pokemon/gengar/normal.pal"
+    },
+    {
+      "path": "content/pokemon/gengar_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/gengar/back.png",
+      "source_sha256": "9ac14961ad7d537177f249e24c3c6d1d04ab0cbf8e9181e0af656ae0fe803eb7",
+      "palette": "reference/pokefirered/graphics/pokemon/gengar/normal.pal"
+    },
+    {
+      "path": "content/pokemon/geodude_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/geodude/front.png",
+      "source_sha256": "58fd3d3a5a480c0f813ef116381681753d85e8f90224ee02fb16740deac34d19",
+      "palette": "reference/pokefirered/graphics/pokemon/geodude/normal.pal"
+    },
+    {
+      "path": "content/pokemon/geodude_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/geodude/back.png",
+      "source_sha256": "9a3647f2039fc0987aeabbf3b3e0d33839747cb9faba56b5eeb16fbcab73b0be",
+      "palette": "reference/pokefirered/graphics/pokemon/geodude/normal.pal"
+    },
+    {
+      "path": "content/pokemon/gloom_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/gloom/front.png",
+      "source_sha256": "f7c44ea822e5d351f59c9ed914a157cb5e3bb7b4728196ebe0d8b66b6e1827b8",
+      "palette": "reference/pokefirered/graphics/pokemon/gloom/normal.pal"
+    },
+    {
+      "path": "content/pokemon/gloom_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/gloom/back.png",
+      "source_sha256": "58e4dcdb5d8746463f199191a8d2f3b13cb876b9b544334a3b4003a446ae73f0",
+      "palette": "reference/pokefirered/graphics/pokemon/gloom/normal.pal"
+    },
+    {
+      "path": "content/pokemon/golbat_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/golbat/front.png",
+      "source_sha256": "ece5bd941920e24a39de25d6cb8ce9e4023b9aeaf499a736d194f9d59181e4c1",
+      "palette": "reference/pokefirered/graphics/pokemon/golbat/normal.pal"
+    },
+    {
+      "path": "content/pokemon/golbat_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/golbat/back.png",
+      "source_sha256": "c0e1eddb8413d7e1c76ceb8200f4af6af339eff9533e859fd254cddb6f383a67",
+      "palette": "reference/pokefirered/graphics/pokemon/golbat/normal.pal"
+    },
+    {
+      "path": "content/pokemon/goldeen_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/goldeen/front.png",
+      "source_sha256": "b2ee0e08857195d9822449a197aff9a2eccb703a88278e0bfae430cec5f448e5",
+      "palette": "reference/pokefirered/graphics/pokemon/goldeen/normal.pal"
+    },
+    {
+      "path": "content/pokemon/goldeen_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/goldeen/back.png",
+      "source_sha256": "23c28a5564656f4eb5f53feb673e15a34bd9d9ca13bee51a6aa01f825e644b9e",
+      "palette": "reference/pokefirered/graphics/pokemon/goldeen/normal.pal"
+    },
+    {
+      "path": "content/pokemon/golduck_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/golduck/front.png",
+      "source_sha256": "45fc4e244fb9bd05ca95e7f90624266b2f88981332cf062cfbb53c8eee10fd0f",
+      "palette": "reference/pokefirered/graphics/pokemon/golduck/normal.pal"
+    },
+    {
+      "path": "content/pokemon/golduck_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/golduck/back.png",
+      "source_sha256": "33a0465a129bb2b8f7857708cddd8e98c00da882f2f383d0464af2a1a04e8efb",
+      "palette": "reference/pokefirered/graphics/pokemon/golduck/normal.pal"
+    },
+    {
+      "path": "content/pokemon/golem_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/golem/front.png",
+      "source_sha256": "3fbd93054e52166ab3d8347750ad6c37523e8498fd0c161cdc4273fc46b01ccb",
+      "palette": "reference/pokefirered/graphics/pokemon/golem/normal.pal"
+    },
+    {
+      "path": "content/pokemon/golem_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/golem/back.png",
+      "source_sha256": "8475c9b48dc98464d5facb6174381091cc3b4eb1303948bd4503c010c16b46ea",
+      "palette": "reference/pokefirered/graphics/pokemon/golem/normal.pal"
+    },
+    {
+      "path": "content/pokemon/graveler_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/graveler/front.png",
+      "source_sha256": "8ba45c4022c0db399fe4aa82faab4be560e6d028bc5fddaa066afc3e453b384c",
+      "palette": "reference/pokefirered/graphics/pokemon/graveler/normal.pal"
+    },
+    {
+      "path": "content/pokemon/graveler_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/graveler/back.png",
+      "source_sha256": "1bc84bdc3723200cdb052f3cc2787c4e67a6b77a5700a5c5746d8997da94ed5b",
+      "palette": "reference/pokefirered/graphics/pokemon/graveler/normal.pal"
+    },
+    {
+      "path": "content/pokemon/grimer_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/grimer/front.png",
+      "source_sha256": "0ed6417c5107daa8b27853b71300d8562201a0a7daad8ccb6b35b60226c6e932",
+      "palette": "reference/pokefirered/graphics/pokemon/grimer/normal.pal"
+    },
+    {
+      "path": "content/pokemon/grimer_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/grimer/back.png",
+      "source_sha256": "c0f992df82f9c791c1eba264472a59bb63506a1c94d202430b949e8493cc6d8c",
+      "palette": "reference/pokefirered/graphics/pokemon/grimer/normal.pal"
+    },
+    {
+      "path": "content/pokemon/growlithe_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/growlithe/front.png",
+      "source_sha256": "1af43df18840da7033fd6b31b5017df0ea48e11281eaa9c543c80218a6bac0dc",
+      "palette": "reference/pokefirered/graphics/pokemon/growlithe/normal.pal"
+    },
+    {
+      "path": "content/pokemon/growlithe_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/growlithe/back.png",
+      "source_sha256": "62a94e310d619add8ca8303a278d951c39c0a216223a0a996704d961956518f7",
+      "palette": "reference/pokefirered/graphics/pokemon/growlithe/normal.pal"
+    },
+    {
+      "path": "content/pokemon/gyarados_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/gyarados/front.png",
+      "source_sha256": "33b7f64d4098f8d91ec176332d414b981a6e6cc68b2b44665d80353851d47a76",
+      "palette": "reference/pokefirered/graphics/pokemon/gyarados/normal.pal"
+    },
+    {
+      "path": "content/pokemon/gyarados_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/gyarados/back.png",
+      "source_sha256": "581c344548fd28376001ec62d138a42ed92c81407fab77904b2c8ab83c22ccfa",
+      "palette": "reference/pokefirered/graphics/pokemon/gyarados/normal.pal"
+    },
+    {
+      "path": "content/pokemon/haunter_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/haunter/front.png",
+      "source_sha256": "f671f2cf9b8b4f918da115aaaf3e0e09ef66f02387c9e9b554661ae21e20e350",
+      "palette": "reference/pokefirered/graphics/pokemon/haunter/normal.pal"
+    },
+    {
+      "path": "content/pokemon/haunter_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/haunter/back.png",
+      "source_sha256": "baf9418cfd4bbc3845413ab73b3beedcbd34a96042ba0d8d771cb07bec824666",
+      "palette": "reference/pokefirered/graphics/pokemon/haunter/normal.pal"
+    },
+    {
+      "path": "content/pokemon/hitmonchan_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/hitmonchan/front.png",
+      "source_sha256": "f1b661b4a27b79c419d32921ed37f5d8a7a086b92c49e9dc28137d7a4127dcdc",
+      "palette": "reference/pokefirered/graphics/pokemon/hitmonchan/normal.pal"
+    },
+    {
+      "path": "content/pokemon/hitmonchan_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/hitmonchan/back.png",
+      "source_sha256": "506b52f281d36838a23552ea384ba8921cec65dc16b958dd68cdaabbf81a0378",
+      "palette": "reference/pokefirered/graphics/pokemon/hitmonchan/normal.pal"
+    },
+    {
+      "path": "content/pokemon/hitmonlee_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/hitmonlee/front.png",
+      "source_sha256": "5630e8dae1fa64576d01cd2cc8fa0ff6c8b3a8d30c0df88bf8fd174f626051df",
+      "palette": "reference/pokefirered/graphics/pokemon/hitmonlee/normal.pal"
+    },
+    {
+      "path": "content/pokemon/hitmonlee_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/hitmonlee/back.png",
+      "source_sha256": "a6f4994bfc6af472dcc36611aabc2cc9f2934f60ce34047f87af6592e4022254",
+      "palette": "reference/pokefirered/graphics/pokemon/hitmonlee/normal.pal"
+    },
+    {
+      "path": "content/pokemon/horsea_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/horsea/front.png",
+      "source_sha256": "45caef351524c56b97e0f8f887cf41ec00f1be2f57a4a0eb877129e0e229066f",
+      "palette": "reference/pokefirered/graphics/pokemon/horsea/normal.pal"
+    },
+    {
+      "path": "content/pokemon/horsea_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/horsea/back.png",
+      "source_sha256": "42ab95da1d90fed25c9796608db8b14cd5cf6d52545953c189add517f8174dc6",
+      "palette": "reference/pokefirered/graphics/pokemon/horsea/normal.pal"
+    },
+    {
+      "path": "content/pokemon/hypno_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/hypno/front.png",
+      "source_sha256": "96ed3b57428d6bb33cee45d2d5ff663f160f069e0e9e5ea7ecdff42bcdca482d",
+      "palette": "reference/pokefirered/graphics/pokemon/hypno/normal.pal"
+    },
+    {
+      "path": "content/pokemon/hypno_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/hypno/back.png",
+      "source_sha256": "3504e68a57af0eeae4dd0b7fdcaea6edda23c0aa3986c754c48bb102c388ad13",
+      "palette": "reference/pokefirered/graphics/pokemon/hypno/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ivysaur_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/ivysaur/front.png",
+      "source_sha256": "8805361d6c2f5d46890d18a16c9e3f9d638ccc7ae26e7b68dedf1d6258bb32f5",
+      "palette": "reference/pokefirered/graphics/pokemon/ivysaur/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ivysaur_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/ivysaur/back.png",
+      "source_sha256": "1e87d4889d0da8c4dc2c12d50335e0b2831cfa04bc914846205f3217008a2510",
+      "palette": "reference/pokefirered/graphics/pokemon/ivysaur/normal.pal"
+    },
+    {
+      "path": "content/pokemon/jigglypuff_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/jigglypuff/front.png",
+      "source_sha256": "8f9189b80976246f8e62d22969b963d96ae2a3f7e1476ed8a979b569e722a758",
+      "palette": "reference/pokefirered/graphics/pokemon/jigglypuff/normal.pal"
+    },
+    {
+      "path": "content/pokemon/jigglypuff_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/jigglypuff/back.png",
+      "source_sha256": "342a8910ae0d969f774f2ceee840b081de8b607dd8183788056a846298ac0e64",
+      "palette": "reference/pokefirered/graphics/pokemon/jigglypuff/normal.pal"
+    },
+    {
+      "path": "content/pokemon/jolteon_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/jolteon/front.png",
+      "source_sha256": "7a795f6e21a720bf8a29a3fca909659708b843c02ea80372a25018a7cf311e2e",
+      "palette": "reference/pokefirered/graphics/pokemon/jolteon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/jolteon_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/jolteon/back.png",
+      "source_sha256": "8d100871bb0e76541b2e6b6b49ce4df6842f336f7f102a1d98645bc110e79a4d",
+      "palette": "reference/pokefirered/graphics/pokemon/jolteon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/jynx_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/jynx/front.png",
+      "source_sha256": "68fa0b6c507a35ab24bb4d118740130c368edcd61398e444523c2f88030023cd",
+      "palette": "reference/pokefirered/graphics/pokemon/jynx/normal.pal"
+    },
+    {
+      "path": "content/pokemon/jynx_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/jynx/back.png",
+      "source_sha256": "86914bf90d6c1aa578461eeb960eb4975b75432f77a84da8d735eb29df8b7a05",
+      "palette": "reference/pokefirered/graphics/pokemon/jynx/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kabuto_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/kabuto/front.png",
+      "source_sha256": "d9e8a4521a05958671d61166207ee58439f921ade0c56e8b418ec988cbb69e30",
+      "palette": "reference/pokefirered/graphics/pokemon/kabuto/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kabuto_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/kabuto/back.png",
+      "source_sha256": "384fcd7792ceb16babcc51a77bfd7146a01be1ad9e2c74171058416ca40afa27",
+      "palette": "reference/pokefirered/graphics/pokemon/kabuto/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kabutops_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/kabutops/front.png",
+      "source_sha256": "3847b892fc4c58c766660c02e10bd525c192a673db8418271d486a2b72084d72",
+      "palette": "reference/pokefirered/graphics/pokemon/kabutops/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kabutops_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/kabutops/back.png",
+      "source_sha256": "048c38950b23471c227847f42ac31e7b918f84f9dd7e542de61e83b06f50d167",
+      "palette": "reference/pokefirered/graphics/pokemon/kabutops/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kadabra_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/kadabra/front.png",
+      "source_sha256": "03cb7b93219852d42c5a6cc6637e8e6aa56bf7dede1560a6bb56bc0795f6ad76",
+      "palette": "reference/pokefirered/graphics/pokemon/kadabra/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kadabra_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/kadabra/back.png",
+      "source_sha256": "a6677a78bb4bbb2c9cbb3e516e62e894b76b16e1eca3cbdde73cc08ecce37efc",
+      "palette": "reference/pokefirered/graphics/pokemon/kadabra/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kakuna_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/kakuna/front.png",
+      "source_sha256": "c4b35f0538d9cb18ae20d32ddfa8d0e778638ab96a1bbeed89a70339f1b17a9f",
+      "palette": "reference/pokefirered/graphics/pokemon/kakuna/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kakuna_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/kakuna/back.png",
+      "source_sha256": "494b7b37bf89766510fa42af727c470ddbad5c45b876c7cba739b02b6379f1d2",
+      "palette": "reference/pokefirered/graphics/pokemon/kakuna/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kangaskhan_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/kangaskhan/front.png",
+      "source_sha256": "c65892cf4f9b054b4888c9669b1b0055a7a00639f3836ae8926a15ff60ad3717",
+      "palette": "reference/pokefirered/graphics/pokemon/kangaskhan/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kangaskhan_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/kangaskhan/back.png",
+      "source_sha256": "21a33ca7fbb29262faf5f0fc729cc76e95ab4d8248b8b7b8d435b6743c83fbc1",
+      "palette": "reference/pokefirered/graphics/pokemon/kangaskhan/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kingler_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/kingler/front.png",
+      "source_sha256": "246dae1a3ccc9161603e7ba0e4c288cdc98ef402b16b503eb01419e39d902a91",
+      "palette": "reference/pokefirered/graphics/pokemon/kingler/normal.pal"
+    },
+    {
+      "path": "content/pokemon/kingler_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/kingler/back.png",
+      "source_sha256": "7b4aa59c0eefb43e059507690bb4f39b1154b31408ce9db6bb38eb8c12da606a",
+      "palette": "reference/pokefirered/graphics/pokemon/kingler/normal.pal"
+    },
+    {
+      "path": "content/pokemon/koffing_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/koffing/front.png",
+      "source_sha256": "93fa37fb3845de613da3aa5d45ad71ae46e0aea612280032edf74d31d765888b",
+      "palette": "reference/pokefirered/graphics/pokemon/koffing/normal.pal"
+    },
+    {
+      "path": "content/pokemon/koffing_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/koffing/back.png",
+      "source_sha256": "a2c4e495194d01113feac3793a3ba19641da9a64b1c5e140fc52ad9078b47a76",
+      "palette": "reference/pokefirered/graphics/pokemon/koffing/normal.pal"
+    },
+    {
+      "path": "content/pokemon/krabby_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/krabby/front.png",
+      "source_sha256": "dce337819a912ee8cd5d8586b9956009aeccd85304b3b5ef75f4a1c29939ac7e",
+      "palette": "reference/pokefirered/graphics/pokemon/krabby/normal.pal"
+    },
+    {
+      "path": "content/pokemon/krabby_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/krabby/back.png",
+      "source_sha256": "5f50a1390a3787ebfe10f6273417d83320a05b1cca2d183f76f67ec94bbe90e1",
+      "palette": "reference/pokefirered/graphics/pokemon/krabby/normal.pal"
+    },
+    {
+      "path": "content/pokemon/lapras_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/lapras/front.png",
+      "source_sha256": "fb001b05934f9a8181fd2bba9a9f5e195ef4a28d94f39dfc6f0260c86cd8ae2f",
+      "palette": "reference/pokefirered/graphics/pokemon/lapras/normal.pal"
+    },
+    {
+      "path": "content/pokemon/lapras_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/lapras/back.png",
+      "source_sha256": "a1fe6dbf4284104790fc297e87d33fa87bd742b9052b03b9327089713637cbe0",
+      "palette": "reference/pokefirered/graphics/pokemon/lapras/normal.pal"
+    },
+    {
+      "path": "content/pokemon/lickitung_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/lickitung/front.png",
+      "source_sha256": "b499b17048bf7941bd6efe6c794fd05ff078cf2ffa1d6ccb41a9c406a7eb3361",
+      "palette": "reference/pokefirered/graphics/pokemon/lickitung/normal.pal"
+    },
+    {
+      "path": "content/pokemon/lickitung_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/lickitung/back.png",
+      "source_sha256": "c89941a442f43cb55cbdb9afdcd0ee3a921049e6644766336c3fd191771debf6",
+      "palette": "reference/pokefirered/graphics/pokemon/lickitung/normal.pal"
+    },
+    {
+      "path": "content/pokemon/machamp_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/machamp/front.png",
+      "source_sha256": "eba22204b29744e92d98248c6e37f5f13339017aa80df19d32dff914f28ad0a9",
+      "palette": "reference/pokefirered/graphics/pokemon/machamp/normal.pal"
+    },
+    {
+      "path": "content/pokemon/machamp_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/machamp/back.png",
+      "source_sha256": "2809b96b375cfc13c17cea7c0df56e747b42cf39d127f438305302831e83d028",
+      "palette": "reference/pokefirered/graphics/pokemon/machamp/normal.pal"
+    },
+    {
+      "path": "content/pokemon/machoke_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/machoke/front.png",
+      "source_sha256": "32feca433b6b53edc1ae6e5053b446636fc25c4158f9cc992f21be9a0f227914",
+      "palette": "reference/pokefirered/graphics/pokemon/machoke/normal.pal"
+    },
+    {
+      "path": "content/pokemon/machoke_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/machoke/back.png",
+      "source_sha256": "28972c0493e4e374f31e67a90c7d6be2948687eeea6e1b03cf9e6a40983a441f",
+      "palette": "reference/pokefirered/graphics/pokemon/machoke/normal.pal"
+    },
+    {
+      "path": "content/pokemon/machop_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/machop/front.png",
+      "source_sha256": "1bba54a7cb2d169a9b23a6810d7f0760cf348629ee02a724542e369a06f5d0ed",
+      "palette": "reference/pokefirered/graphics/pokemon/machop/normal.pal"
+    },
+    {
+      "path": "content/pokemon/machop_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/machop/back.png",
+      "source_sha256": "8b1d9838caa6747746c9eb1164edbf5a21d252141b54fa00e99437b3ada11324",
+      "palette": "reference/pokefirered/graphics/pokemon/machop/normal.pal"
+    },
+    {
+      "path": "content/pokemon/magikarp_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/magikarp/front.png",
+      "source_sha256": "5cb91302b551316fa84974ae40823f6951476c2b59ecfb0ac162c464c0be428a",
+      "palette": "reference/pokefirered/graphics/pokemon/magikarp/normal.pal"
+    },
+    {
+      "path": "content/pokemon/magikarp_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/magikarp/back.png",
+      "source_sha256": "85bf3408fe2c700b76b52618a5c58ad9aac2cf8a154dcbe337852f85faf5b924",
+      "palette": "reference/pokefirered/graphics/pokemon/magikarp/normal.pal"
+    },
+    {
+      "path": "content/pokemon/magmar_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/magmar/front.png",
+      "source_sha256": "8ad1697a01394dbd99e03262b5f208a43461999a75ac0c63879489dce3fb3e63",
+      "palette": "reference/pokefirered/graphics/pokemon/magmar/normal.pal"
+    },
+    {
+      "path": "content/pokemon/magmar_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/magmar/back.png",
+      "source_sha256": "b2cd607ecb15b1782ca297a0d63f17f97119e8fa6e6017ba07131030da96474c",
+      "palette": "reference/pokefirered/graphics/pokemon/magmar/normal.pal"
+    },
+    {
+      "path": "content/pokemon/magnemite_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/magnemite/front.png",
+      "source_sha256": "d6f750cdb4513a6d19a0aec9335f55442a7bfa7b62f320ae6dc4242a030c295b",
+      "palette": "reference/pokefirered/graphics/pokemon/magnemite/normal.pal"
+    },
+    {
+      "path": "content/pokemon/magnemite_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/magnemite/back.png",
+      "source_sha256": "7a2be8ee5694517e7bd5a3444fbc6c76e5920b9ec3a3a37b9a97f538c2db973d",
+      "palette": "reference/pokefirered/graphics/pokemon/magnemite/normal.pal"
+    },
+    {
+      "path": "content/pokemon/magneton_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/magneton/front.png",
+      "source_sha256": "982e9f8e39117fc511e7c96235b316dc02c4ef25ab46f4cf633cc7981acdff61",
+      "palette": "reference/pokefirered/graphics/pokemon/magneton/normal.pal"
+    },
+    {
+      "path": "content/pokemon/magneton_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/magneton/back.png",
+      "source_sha256": "e99f2adeb20e13e5228a9e34ebbd22549812e59d07b4b1017cedf1cd2e4c96ec",
+      "palette": "reference/pokefirered/graphics/pokemon/magneton/normal.pal"
+    },
+    {
+      "path": "content/pokemon/mankey_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/mankey/front.png",
+      "source_sha256": "da03832c776ed4302f452ec49a6d60720d06c238fee294a95bc441e33d5128ef",
+      "palette": "reference/pokefirered/graphics/pokemon/mankey/normal.pal"
+    },
+    {
+      "path": "content/pokemon/mankey_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/mankey/back.png",
+      "source_sha256": "4bab91dc36e31ab46017a10c664f25e28f7e4faaf77ff69a3f50b36c8d025b03",
+      "palette": "reference/pokefirered/graphics/pokemon/mankey/normal.pal"
+    },
+    {
+      "path": "content/pokemon/marowak_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/marowak/front.png",
+      "source_sha256": "99119499c81ec25a35ef9503b2170a80a9473e423facd352a4356eaabac23f39",
+      "palette": "reference/pokefirered/graphics/pokemon/marowak/normal.pal"
+    },
+    {
+      "path": "content/pokemon/marowak_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/marowak/back.png",
+      "source_sha256": "ca42b2e4e4faf511b4ca53417620b148fc509c0f97d2d55485cd8325a591bafa",
+      "palette": "reference/pokefirered/graphics/pokemon/marowak/normal.pal"
+    },
+    {
+      "path": "content/pokemon/meowth_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/meowth/front.png",
+      "source_sha256": "0a7f87b804c27cbad10b56ec98a976df9b7a713709cfe7416b9636c4186b363b",
+      "palette": "reference/pokefirered/graphics/pokemon/meowth/normal.pal"
+    },
+    {
+      "path": "content/pokemon/meowth_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/meowth/back.png",
+      "source_sha256": "d7422f72e3d6b2dd289d2636600b96cb2d83dc9b5ad352c4973fa6e2f980fb26",
+      "palette": "reference/pokefirered/graphics/pokemon/meowth/normal.pal"
+    },
+    {
+      "path": "content/pokemon/metapod_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/metapod/front.png",
+      "source_sha256": "6a5490ff9c8396102ed8f53fe0b13a44fdec31c7fb9e7c0a7c4b8470255f8b42",
+      "palette": "reference/pokefirered/graphics/pokemon/metapod/normal.pal"
+    },
+    {
+      "path": "content/pokemon/metapod_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/metapod/back.png",
+      "source_sha256": "cd77b69c2162823a26eea3a6f10210aa1ee73078fa113efeba6d51e60cb3d2ba",
+      "palette": "reference/pokefirered/graphics/pokemon/metapod/normal.pal"
+    },
+    {
+      "path": "content/pokemon/mew_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/mew/front.png",
+      "source_sha256": "3d254c06b4ce84173e818cea810f1545b8799bbd581b39a3d739e8ac0abf3926",
+      "palette": "reference/pokefirered/graphics/pokemon/mew/normal.pal"
+    },
+    {
+      "path": "content/pokemon/mew_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/mew/back.png",
+      "source_sha256": "e3d34ed7511b8019824e7511d523dea3bf2a2bceed18094698c9809a27234b73",
+      "palette": "reference/pokefirered/graphics/pokemon/mew/normal.pal"
+    },
+    {
+      "path": "content/pokemon/mewtwo_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/mewtwo/front.png",
+      "source_sha256": "2aca8417e5a999beb9b0ad53b6528f9bfd78ff268fc7aa44034a8d6561ae15b7",
+      "palette": "reference/pokefirered/graphics/pokemon/mewtwo/normal.pal"
+    },
+    {
+      "path": "content/pokemon/mewtwo_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/mewtwo/back.png",
+      "source_sha256": "26813bc96d10be4e1a4fbbf279937982edb2433a86a100b66c0997def38d3135",
+      "palette": "reference/pokefirered/graphics/pokemon/mewtwo/normal.pal"
+    },
+    {
+      "path": "content/pokemon/moltres_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/moltres/front.png",
+      "source_sha256": "baf8fdfcfe8ab9e9ae67de83f847edd1c4f519cea329ef859c55816729c75db0",
+      "palette": "reference/pokefirered/graphics/pokemon/moltres/normal.pal"
+    },
+    {
+      "path": "content/pokemon/moltres_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/moltres/back.png",
+      "source_sha256": "ae32457c718db91d171d152a74c6dd83ab3f7ccb4a147495d51d77768dbece07",
+      "palette": "reference/pokefirered/graphics/pokemon/moltres/normal.pal"
+    },
+    {
+      "path": "content/pokemon/mr_mime_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/mr_mime/front.png",
+      "source_sha256": "b75554898d2fc401cdcd2165a3dd2bafe62a11e473654a3a5eb7bdf346120a64",
+      "palette": "reference/pokefirered/graphics/pokemon/mr_mime/normal.pal"
+    },
+    {
+      "path": "content/pokemon/mr_mime_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/mr_mime/back.png",
+      "source_sha256": "40555530b2eee457fbde332edd5c98b3bc80f5a1498b9dbf754b5d8d9c04cea3",
+      "palette": "reference/pokefirered/graphics/pokemon/mr_mime/normal.pal"
+    },
+    {
+      "path": "content/pokemon/muk_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/muk/front.png",
+      "source_sha256": "dc5fd46472fa92d8d2d054a8a079b0465a234ee3e6fef036d1064a03f7eecc48",
+      "palette": "reference/pokefirered/graphics/pokemon/muk/normal.pal"
+    },
+    {
+      "path": "content/pokemon/muk_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/muk/back.png",
+      "source_sha256": "7122cf69d3d1c9d9ebec3fb65cf2cbdb5da9ed2319762968f503b5aeef55386b",
+      "palette": "reference/pokefirered/graphics/pokemon/muk/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidoking_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidoking/front.png",
+      "source_sha256": "6fb59244a962d9ecbd9e6ea47972ebe2b9509848b3697ae47e85839e1ecaa8e4",
+      "palette": "reference/pokefirered/graphics/pokemon/nidoking/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidoking_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidoking/back.png",
+      "source_sha256": "7a25a5e08cdf2b35eca9122ed46b9f46ec22763656b0a1fae065a9ad6af4e856",
+      "palette": "reference/pokefirered/graphics/pokemon/nidoking/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidoqueen_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidoqueen/front.png",
+      "source_sha256": "a7e4a0752da32d42b8c9f3996f5b48c24152c49d204decd44989b98f38d23be6",
+      "palette": "reference/pokefirered/graphics/pokemon/nidoqueen/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidoqueen_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidoqueen/back.png",
+      "source_sha256": "64d03f4852abe6f004f38ec33f24924f941aceed2fe9b5d9d3bc00d2f4cba9ba",
+      "palette": "reference/pokefirered/graphics/pokemon/nidoqueen/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidoran_f_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidoran_f/front.png",
+      "source_sha256": "5d95155bf6cd1dbc700458ccd6411ef3d4cb90f7e11b1925ce5b07b2188a3746",
+      "palette": "reference/pokefirered/graphics/pokemon/nidoran_f/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidoran_f_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidoran_f/back.png",
+      "source_sha256": "877a96d757ccf23f318cf0ecb87215c84fe2510ba9e79c1fc4f4409f5b268e2a",
+      "palette": "reference/pokefirered/graphics/pokemon/nidoran_f/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidoran_m_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidoran_m/front.png",
+      "source_sha256": "2852bbb4baa49ea46e9b4e0a29aeb6be4bc0b8e473feb3dae6b2ebf2060a49b7",
+      "palette": "reference/pokefirered/graphics/pokemon/nidoran_m/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidoran_m_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidoran_m/back.png",
+      "source_sha256": "814d2a2e3a4e2f4f55dcaf2b749b7f26a6cf95e29c295b09621f8ad085b2cb29",
+      "palette": "reference/pokefirered/graphics/pokemon/nidoran_m/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidorina_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidorina/front.png",
+      "source_sha256": "c720069bd795b768c99479a082330196032fa922719e6f77f279144a07a23632",
+      "palette": "reference/pokefirered/graphics/pokemon/nidorina/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidorina_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidorina/back.png",
+      "source_sha256": "235f31df6c879126d82c942a31aa3e68e7a8d9b7908999243664753ecb94ed8d",
+      "palette": "reference/pokefirered/graphics/pokemon/nidorina/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidorino_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidorino/front.png",
+      "source_sha256": "8c0529387e81788a062deb78fda647e7a474a1789e653f4d42d0b4deae79bcb9",
+      "palette": "reference/pokefirered/graphics/pokemon/nidorino/normal.pal"
+    },
+    {
+      "path": "content/pokemon/nidorino_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/nidorino/back.png",
+      "source_sha256": "93f772970d3f8c739462fc405e7bb96359a1b450476fb33aa4446f8408c87f28",
+      "palette": "reference/pokefirered/graphics/pokemon/nidorino/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ninetales_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/ninetales/front.png",
+      "source_sha256": "1dee112ffcfe6c1239c9247cab74973f5651b8d6394ad6eb2a5cd517cd899953",
+      "palette": "reference/pokefirered/graphics/pokemon/ninetales/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ninetales_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/ninetales/back.png",
+      "source_sha256": "54d97fb39bcd54f7a77e8651e337d46af8e0ce4cfdab8789dd28b8a8e9fb7ef7",
+      "palette": "reference/pokefirered/graphics/pokemon/ninetales/normal.pal"
+    },
+    {
+      "path": "content/pokemon/oddish_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/oddish/front.png",
+      "source_sha256": "715312c9b27426ec2b6399661ae57155b989c4c05deb82799ab3d87e6429edd2",
+      "palette": "reference/pokefirered/graphics/pokemon/oddish/normal.pal"
+    },
+    {
+      "path": "content/pokemon/oddish_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/oddish/back.png",
+      "source_sha256": "5729b51805600bd0907d37ae8f8c132b9de932ac49429a6d6a72a73d31a82c92",
+      "palette": "reference/pokefirered/graphics/pokemon/oddish/normal.pal"
+    },
+    {
+      "path": "content/pokemon/omanyte_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/omanyte/front.png",
+      "source_sha256": "eff118dbed4c20526705f224444b5b36980408bdeed49c3b09638d28e452807a",
+      "palette": "reference/pokefirered/graphics/pokemon/omanyte/normal.pal"
+    },
+    {
+      "path": "content/pokemon/omanyte_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/omanyte/back.png",
+      "source_sha256": "c5454749ba33b249f6ad322f7d3557d2cce0fe44ba570aa730247f7b9a16f9e3",
+      "palette": "reference/pokefirered/graphics/pokemon/omanyte/normal.pal"
+    },
+    {
+      "path": "content/pokemon/omastar_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/omastar/front.png",
+      "source_sha256": "8fcd0b8d93dc221063535072353d72c4a2261f507ecc59215c839914e531f107",
+      "palette": "reference/pokefirered/graphics/pokemon/omastar/normal.pal"
+    },
+    {
+      "path": "content/pokemon/omastar_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/omastar/back.png",
+      "source_sha256": "ad9a9e4b4d4334acf809b292c4f3b567358b08b29ff9e2ff2b09517958176a8b",
+      "palette": "reference/pokefirered/graphics/pokemon/omastar/normal.pal"
+    },
+    {
+      "path": "content/pokemon/onix_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/onix/front.png",
+      "source_sha256": "e8928f6143a9c839c43bd505e574ebf19d4365610f18caaa6e3eab33bb1d7ac7",
+      "palette": "reference/pokefirered/graphics/pokemon/onix/normal.pal"
+    },
+    {
+      "path": "content/pokemon/onix_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/onix/back.png",
+      "source_sha256": "de9a8c4d80799714a1a7ef0659ee2179fae489d87129744bca343039efe7ad49",
+      "palette": "reference/pokefirered/graphics/pokemon/onix/normal.pal"
+    },
+    {
+      "path": "content/pokemon/paras_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/paras/front.png",
+      "source_sha256": "d76b3d616d9562072e7a6af3eb6c0eed0dae72896283f2801b192271c4244621",
+      "palette": "reference/pokefirered/graphics/pokemon/paras/normal.pal"
+    },
+    {
+      "path": "content/pokemon/paras_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/paras/back.png",
+      "source_sha256": "fde12a5acd50f82661de5e689fecb4af64ac484111464fc3df63aa0fe20fe289",
+      "palette": "reference/pokefirered/graphics/pokemon/paras/normal.pal"
+    },
+    {
+      "path": "content/pokemon/parasect_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/parasect/front.png",
+      "source_sha256": "676927540ed34862840f600ba71b2e50ad1a415ab8b9d8bdf57382489d06e7e5",
+      "palette": "reference/pokefirered/graphics/pokemon/parasect/normal.pal"
+    },
+    {
+      "path": "content/pokemon/parasect_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/parasect/back.png",
+      "source_sha256": "c039d3dbc4755e858dc9a1c0ad0209895e4cad2bbda26695eb241a9137f093b2",
+      "palette": "reference/pokefirered/graphics/pokemon/parasect/normal.pal"
+    },
+    {
+      "path": "content/pokemon/persian_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/persian/front.png",
+      "source_sha256": "8b8286b0ec59f14937ca8c1005a7961e3a3559a4f80a9d55f6a5355d3617d0f3",
+      "palette": "reference/pokefirered/graphics/pokemon/persian/normal.pal"
+    },
+    {
+      "path": "content/pokemon/persian_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/persian/back.png",
+      "source_sha256": "9fd75a52e8bb4a40df4e971c5bea1b76ecbf59496e037cded4479dd6a32c4d3d",
+      "palette": "reference/pokefirered/graphics/pokemon/persian/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pidgeot_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/pidgeot/front.png",
+      "source_sha256": "fc23443ebfb3847fae9c009e6eb7955b3aa8191c7c25d6d775e34f88f0ff3daa",
+      "palette": "reference/pokefirered/graphics/pokemon/pidgeot/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pidgeot_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/pidgeot/back.png",
+      "source_sha256": "9be05e2cb8804420f83944f02314095c485e8d44c0a00713c87c12fb756bc004",
+      "palette": "reference/pokefirered/graphics/pokemon/pidgeot/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pidgeotto_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/pidgeotto/front.png",
+      "source_sha256": "8d58b7cae35d662640bff82415833f6a3de23f378ed6ed24344da382ea6213c6",
+      "palette": "reference/pokefirered/graphics/pokemon/pidgeotto/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pidgeotto_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/pidgeotto/back.png",
+      "source_sha256": "a71865ae0ac3fc06ab1f5754b039aeec619fa4ad8defac2acb1ba5d371788aa4",
+      "palette": "reference/pokefirered/graphics/pokemon/pidgeotto/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pidgey_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/pidgey/front.png",
+      "source_sha256": "14508ecd9bba58857442c7cfb8dd7ce322489f06c7618d92b72b5eb6a95b8da4",
+      "palette": "reference/pokefirered/graphics/pokemon/pidgey/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pidgey_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/pidgey/back.png",
+      "source_sha256": "a1e32daefe49a980119ee20af55965998013e80f686be5717864fd0fdb6cdf59",
+      "palette": "reference/pokefirered/graphics/pokemon/pidgey/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pikachu_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/pikachu/front.png",
+      "source_sha256": "49e9816a16c0c886233e25d9b91f7ee86ac5083c93aa973a9b210528555f72ec",
+      "palette": "reference/pokefirered/graphics/pokemon/pikachu/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pikachu_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/pikachu/back.png",
+      "source_sha256": "0c0f50a5be4074b7fffbc04359449a264b4700f27160db8a013dd6153a22cecc",
+      "palette": "reference/pokefirered/graphics/pokemon/pikachu/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pinsir_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/pinsir/front.png",
+      "source_sha256": "50f6f0d08560ebbe2f12ca697a717371e56c90e51eaa1e98b8f5aa21a788f4d3",
+      "palette": "reference/pokefirered/graphics/pokemon/pinsir/normal.pal"
+    },
+    {
+      "path": "content/pokemon/pinsir_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/pinsir/back.png",
+      "source_sha256": "00b854fe83dc749fa2ff9ca01aebf4171335a064d0095c8df7b01681880f30b6",
+      "palette": "reference/pokefirered/graphics/pokemon/pinsir/normal.pal"
+    },
+    {
+      "path": "content/pokemon/poliwag_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/poliwag/front.png",
+      "source_sha256": "234f76b5fb2bf7610973a2177727dd660ee7b93b927933f1781f272a7d163531",
+      "palette": "reference/pokefirered/graphics/pokemon/poliwag/normal.pal"
+    },
+    {
+      "path": "content/pokemon/poliwag_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/poliwag/back.png",
+      "source_sha256": "d9c53cbd7c157963918a873d54c44be185ced199e87c2c68e001980414f7cd0f",
+      "palette": "reference/pokefirered/graphics/pokemon/poliwag/normal.pal"
+    },
+    {
+      "path": "content/pokemon/poliwhirl_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/poliwhirl/front.png",
+      "source_sha256": "5f90a1ba5bb199d76f478264b64ffc08185a0820321e5aee1819ab024eff6e7f",
+      "palette": "reference/pokefirered/graphics/pokemon/poliwhirl/normal.pal"
+    },
+    {
+      "path": "content/pokemon/poliwhirl_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/poliwhirl/back.png",
+      "source_sha256": "faae11ecdc0ee32c69896c52b3e1aad9e24cc78a2e5aa112d19e2b0d094e41a0",
+      "palette": "reference/pokefirered/graphics/pokemon/poliwhirl/normal.pal"
+    },
+    {
+      "path": "content/pokemon/poliwrath_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/poliwrath/front.png",
+      "source_sha256": "f55344f9c4c9fa44885420015b066dee9ed9694705e867f2175fd5207d850ecd",
+      "palette": "reference/pokefirered/graphics/pokemon/poliwrath/normal.pal"
+    },
+    {
+      "path": "content/pokemon/poliwrath_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/poliwrath/back.png",
+      "source_sha256": "181c82dea8a767f376dcadf68b522fa5e316b35846e9784bd9aaa300b111d4da",
+      "palette": "reference/pokefirered/graphics/pokemon/poliwrath/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ponyta_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/ponyta/front.png",
+      "source_sha256": "0f05da39a3c90a880631adf1f48c57469ee17f1da0edb715b3143d4369726870",
+      "palette": "reference/pokefirered/graphics/pokemon/ponyta/normal.pal"
+    },
+    {
+      "path": "content/pokemon/ponyta_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/ponyta/back.png",
+      "source_sha256": "189800ee68b59579e42bbd04b69bfc3cccc216cd788534befada35cc99b777aa",
+      "palette": "reference/pokefirered/graphics/pokemon/ponyta/normal.pal"
+    },
+    {
+      "path": "content/pokemon/porygon_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/porygon/front.png",
+      "source_sha256": "3af512cc369a06b7942e2b38c15dcba19c20fb8119846e5665137c4d5b6bb2c7",
+      "palette": "reference/pokefirered/graphics/pokemon/porygon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/porygon_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/porygon/back.png",
+      "source_sha256": "922bd271a9cb435ddbcbc4f0519291252d3c2111da64db7b3d1ce04ff888c41e",
+      "palette": "reference/pokefirered/graphics/pokemon/porygon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/primeape_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/primeape/front.png",
+      "source_sha256": "8f8b46cb7793c6af3bcb2c77fee52725c9438ae91fd3ceacf9f0434cbf3bf0da",
+      "palette": "reference/pokefirered/graphics/pokemon/primeape/normal.pal"
+    },
+    {
+      "path": "content/pokemon/primeape_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/primeape/back.png",
+      "source_sha256": "5cff074844f277d266d498e4e5c704aaba8e3d480d20ed65a4b0af3c112f4331",
+      "palette": "reference/pokefirered/graphics/pokemon/primeape/normal.pal"
+    },
+    {
+      "path": "content/pokemon/psyduck_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/psyduck/front.png",
+      "source_sha256": "924ec9da2611ee500ac5af290e5276f4fa7dae8b3af4190a48f6136fdbf30eaf",
+      "palette": "reference/pokefirered/graphics/pokemon/psyduck/normal.pal"
+    },
+    {
+      "path": "content/pokemon/psyduck_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/psyduck/back.png",
+      "source_sha256": "b23a9b1b6d442d9c3434ccb3fdf69169ec5556d5f6f845aa1c941244a38dcaf1",
+      "palette": "reference/pokefirered/graphics/pokemon/psyduck/normal.pal"
+    },
+    {
+      "path": "content/pokemon/raichu_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/raichu/front.png",
+      "source_sha256": "af6a86a41a69993fc3fad0e60d6c3b4d3281d9267c3e7029b69e7420100ac2cd",
+      "palette": "reference/pokefirered/graphics/pokemon/raichu/normal.pal"
+    },
+    {
+      "path": "content/pokemon/raichu_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/raichu/back.png",
+      "source_sha256": "25315fde913cb3e35e981d2651ca8fe9b86fcebae2b911d028b70c82569c2161",
+      "palette": "reference/pokefirered/graphics/pokemon/raichu/normal.pal"
+    },
+    {
+      "path": "content/pokemon/rapidash_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/rapidash/front.png",
+      "source_sha256": "7eab5524ba5af5be8df1e9f5c041b247a8a6afa47b109d3b88794c5b42695c85",
+      "palette": "reference/pokefirered/graphics/pokemon/rapidash/normal.pal"
+    },
+    {
+      "path": "content/pokemon/rapidash_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/rapidash/back.png",
+      "source_sha256": "ecca2c49c2a24ed668594deb22df6af1df81d6739eec796da803f2eb3864abc6",
+      "palette": "reference/pokefirered/graphics/pokemon/rapidash/normal.pal"
+    },
+    {
+      "path": "content/pokemon/raticate_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/raticate/front.png",
+      "source_sha256": "84b8ef2d8328751521a4812a067e83c7c9be275ce36b157e863e8bf45e8d5955",
+      "palette": "reference/pokefirered/graphics/pokemon/raticate/normal.pal"
+    },
+    {
+      "path": "content/pokemon/raticate_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/raticate/back.png",
+      "source_sha256": "272a13e8d0dd985fb1a3f66100e9d84b1775cd9ba6e339e61f02879322b4d46d",
+      "palette": "reference/pokefirered/graphics/pokemon/raticate/normal.pal"
+    },
+    {
+      "path": "content/pokemon/rattata_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/rattata/front.png",
+      "source_sha256": "5c2d6f950e1bc082fb9915d1cbdf87a83ee2d996873fdb27526a08fe3680b6de",
+      "palette": "reference/pokefirered/graphics/pokemon/rattata/normal.pal"
+    },
+    {
+      "path": "content/pokemon/rattata_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/rattata/back.png",
+      "source_sha256": "7b954b8373e6a042c23674550ce640c325b563f65794f285b799369639cd390a",
+      "palette": "reference/pokefirered/graphics/pokemon/rattata/normal.pal"
+    },
+    {
+      "path": "content/pokemon/rhydon_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/rhydon/front.png",
+      "source_sha256": "2046240a62bb6e04d8f3003aaa39270da450d3b08c2eef83d52145af72973488",
+      "palette": "reference/pokefirered/graphics/pokemon/rhydon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/rhydon_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/rhydon/back.png",
+      "source_sha256": "8af73038fec5599e65f57e5071acdea20c94117404bc8e1837179fcd3d321cbf",
+      "palette": "reference/pokefirered/graphics/pokemon/rhydon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/rhyhorn_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/rhyhorn/front.png",
+      "source_sha256": "e5869dc77d5517c399738cefafde1d5c6aaca48e8a7c43f4f3a7bfc24f95474b",
+      "palette": "reference/pokefirered/graphics/pokemon/rhyhorn/normal.pal"
+    },
+    {
+      "path": "content/pokemon/rhyhorn_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/rhyhorn/back.png",
+      "source_sha256": "e7255685e433af464d84f6238a54f74114700829304f12aae13d76c356862ead",
+      "palette": "reference/pokefirered/graphics/pokemon/rhyhorn/normal.pal"
+    },
+    {
+      "path": "content/pokemon/sandshrew_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/sandshrew/front.png",
+      "source_sha256": "8c96ee76ce61a52e9bff9765e1dad952e3bc4bf09932e88aa87496d49a9e4dfe",
+      "palette": "reference/pokefirered/graphics/pokemon/sandshrew/normal.pal"
+    },
+    {
+      "path": "content/pokemon/sandshrew_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/sandshrew/back.png",
+      "source_sha256": "027be41c192c1f27509b2bd247221296c26a8699ad002d7378d00ca76884e9fb",
+      "palette": "reference/pokefirered/graphics/pokemon/sandshrew/normal.pal"
+    },
+    {
+      "path": "content/pokemon/sandslash_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/sandslash/front.png",
+      "source_sha256": "7d04e663db25d0d021839f443728738735f1c709c6127049fd3255ef2a791f1b",
+      "palette": "reference/pokefirered/graphics/pokemon/sandslash/normal.pal"
+    },
+    {
+      "path": "content/pokemon/sandslash_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/sandslash/back.png",
+      "source_sha256": "612610055bfe283d1d896af6f531a8b6e8bf907609dfabb6bbb9db5d8873c4dd",
+      "palette": "reference/pokefirered/graphics/pokemon/sandslash/normal.pal"
+    },
+    {
+      "path": "content/pokemon/scyther_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/scyther/front.png",
+      "source_sha256": "7eb4fef999bd1cc867e6f54858957c738a52b431cc8457a5dbfa195872ba29a8",
+      "palette": "reference/pokefirered/graphics/pokemon/scyther/normal.pal"
+    },
+    {
+      "path": "content/pokemon/scyther_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/scyther/back.png",
+      "source_sha256": "0bca1031651883a6f3ac3091b1807c79a5a42d6a6a341ab9695950e6f9ea5b1f",
+      "palette": "reference/pokefirered/graphics/pokemon/scyther/normal.pal"
+    },
+    {
+      "path": "content/pokemon/seadra_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/seadra/front.png",
+      "source_sha256": "1e5649f3fa89d1efe4df087a59b9160d1bae2ddb61d7a7f9cd4571e46a6578d8",
+      "palette": "reference/pokefirered/graphics/pokemon/seadra/normal.pal"
+    },
+    {
+      "path": "content/pokemon/seadra_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/seadra/back.png",
+      "source_sha256": "e40005aecb49b9bba3a87cbc54bff0ffa5d37ef8d737b7474b73f9661e4b6024",
+      "palette": "reference/pokefirered/graphics/pokemon/seadra/normal.pal"
+    },
+    {
+      "path": "content/pokemon/seaking_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/seaking/front.png",
+      "source_sha256": "de03fe27bd09420f3a1035f475f884115faafe25c97dd3edd7a0cc559889d168",
+      "palette": "reference/pokefirered/graphics/pokemon/seaking/normal.pal"
+    },
+    {
+      "path": "content/pokemon/seaking_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/seaking/back.png",
+      "source_sha256": "0d55af5f78b3324403bb3778e156d7a70248eb638211e9810f10d67ea28330bb",
+      "palette": "reference/pokefirered/graphics/pokemon/seaking/normal.pal"
+    },
+    {
+      "path": "content/pokemon/seel_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/seel/front.png",
+      "source_sha256": "71808d9a9d5481b70c139c8463736fdde7bd05c2a9e4179c68a412dc98e77f35",
+      "palette": "reference/pokefirered/graphics/pokemon/seel/normal.pal"
+    },
+    {
+      "path": "content/pokemon/seel_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/seel/back.png",
+      "source_sha256": "b12723e18a4b447e1890e84e3fdc2cf0c1088d08d8c6edbda1ab94a5dceed54f",
+      "palette": "reference/pokefirered/graphics/pokemon/seel/normal.pal"
+    },
+    {
+      "path": "content/pokemon/shellder_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/shellder/front.png",
+      "source_sha256": "172341310bf58bd0aae57932c5b46fff11498851f8de4c54851b95ffe3a018d7",
+      "palette": "reference/pokefirered/graphics/pokemon/shellder/normal.pal"
+    },
+    {
+      "path": "content/pokemon/shellder_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/shellder/back.png",
+      "source_sha256": "93c79b2bbca1760addb6c3c3285bd510e16d718dbe61feb053dc683ad5436692",
+      "palette": "reference/pokefirered/graphics/pokemon/shellder/normal.pal"
+    },
+    {
+      "path": "content/pokemon/slowbro_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/slowbro/front.png",
+      "source_sha256": "b5322c2fd9351a022703034e20d73cc38c440e1e54d8ec29a1bd465ec930d128",
+      "palette": "reference/pokefirered/graphics/pokemon/slowbro/normal.pal"
+    },
+    {
+      "path": "content/pokemon/slowbro_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/slowbro/back.png",
+      "source_sha256": "46676964409d8535552b888f3bb0a9032b81346b209a2bf028ea922b3ef1dc36",
+      "palette": "reference/pokefirered/graphics/pokemon/slowbro/normal.pal"
+    },
+    {
+      "path": "content/pokemon/slowpoke_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/slowpoke/front.png",
+      "source_sha256": "25ef8b0709c042419a235f8f07d98e6a7c0fd8decdbb5878897b6bfd86082808",
+      "palette": "reference/pokefirered/graphics/pokemon/slowpoke/normal.pal"
+    },
+    {
+      "path": "content/pokemon/slowpoke_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/slowpoke/back.png",
+      "source_sha256": "2a8a7af2ac514e64196ed3ff5203b3116f620d893ed0c55f10c162058e7af1c0",
+      "palette": "reference/pokefirered/graphics/pokemon/slowpoke/normal.pal"
+    },
+    {
+      "path": "content/pokemon/snorlax_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/snorlax/front.png",
+      "source_sha256": "0c1363928fa3fb3bda43956c99da3aa5d21e04573e7e4bec2c0cd6670f7076b7",
+      "palette": "reference/pokefirered/graphics/pokemon/snorlax/normal.pal"
+    },
+    {
+      "path": "content/pokemon/snorlax_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/snorlax/back.png",
+      "source_sha256": "5f713201d0922a99d00cd7260625f8a6348369579ed642fd3ea432dde6379fda",
+      "palette": "reference/pokefirered/graphics/pokemon/snorlax/normal.pal"
+    },
+    {
+      "path": "content/pokemon/spearow_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/spearow/front.png",
+      "source_sha256": "1e276b5104fe736f8261e21ede30aafc522182425e5518914f6ddff5f8d76ce4",
+      "palette": "reference/pokefirered/graphics/pokemon/spearow/normal.pal"
+    },
+    {
+      "path": "content/pokemon/spearow_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/spearow/back.png",
+      "source_sha256": "499e42b85a80e2df4b56908dd9a3ef0aceb63e0ffe6f4a1f12325e34b91d3393",
+      "palette": "reference/pokefirered/graphics/pokemon/spearow/normal.pal"
+    },
+    {
+      "path": "content/pokemon/squirtle_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/squirtle/front.png",
+      "source_sha256": "30d6413a70495a23d4af23a941bae57f5373f7b6fec1e05eb8ef78a0636898bc",
+      "palette": "reference/pokefirered/graphics/pokemon/squirtle/normal.pal"
+    },
+    {
+      "path": "content/pokemon/squirtle_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/squirtle/back.png",
+      "source_sha256": "97d8ea70ffad0a9d189388c600f1c3f979cc6733ee5d03672b95f860c2976d1b",
+      "palette": "reference/pokefirered/graphics/pokemon/squirtle/normal.pal"
+    },
+    {
+      "path": "content/pokemon/starmie_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/starmie/front.png",
+      "source_sha256": "8c02a25f227c71f9c2063dda7011fc4d5cc6764417a4525915b46a2a55d99938",
+      "palette": "reference/pokefirered/graphics/pokemon/starmie/normal.pal"
+    },
+    {
+      "path": "content/pokemon/starmie_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/starmie/back.png",
+      "source_sha256": "224c796859f3f1f3c5e5d2a46d7ec30cf1418ffe17dd5735dd2941712fe5b95e",
+      "palette": "reference/pokefirered/graphics/pokemon/starmie/normal.pal"
+    },
+    {
+      "path": "content/pokemon/staryu_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/staryu/front.png",
+      "source_sha256": "f86303fca52fed61d3073d4713d12b141c05b9c3d82c7e8433b7492382fdef7c",
+      "palette": "reference/pokefirered/graphics/pokemon/staryu/normal.pal"
+    },
+    {
+      "path": "content/pokemon/staryu_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/staryu/back.png",
+      "source_sha256": "bf1c5fee9aac4ea7f54fe9572152fbeb6cd5d8e0fd4025257adbbe00dffbeee9",
+      "palette": "reference/pokefirered/graphics/pokemon/staryu/normal.pal"
+    },
+    {
+      "path": "content/pokemon/tangela_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/tangela/front.png",
+      "source_sha256": "6643c8425e2c73a6b18692273cf92e3c04f94acb5b3c98c1575cf7590a22457b",
+      "palette": "reference/pokefirered/graphics/pokemon/tangela/normal.pal"
+    },
+    {
+      "path": "content/pokemon/tangela_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/tangela/back.png",
+      "source_sha256": "cc4fd167f26affdb5f6945a07536b8a6d9f9f65215a13eb9680a35b1c7825c62",
+      "palette": "reference/pokefirered/graphics/pokemon/tangela/normal.pal"
+    },
+    {
+      "path": "content/pokemon/tauros_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/tauros/front.png",
+      "source_sha256": "92dc05a6fb21673a4eda0d7ba704764a2a895c2047f404e504b35ba899d93aa1",
+      "palette": "reference/pokefirered/graphics/pokemon/tauros/normal.pal"
+    },
+    {
+      "path": "content/pokemon/tauros_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/tauros/back.png",
+      "source_sha256": "f9fef0482ba359b3510733c864e3689e34ee0690ce10af4eaaf62b2c0572bc92",
+      "palette": "reference/pokefirered/graphics/pokemon/tauros/normal.pal"
+    },
+    {
+      "path": "content/pokemon/tentacool_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/tentacool/front.png",
+      "source_sha256": "da79a852531f7e09bff4f61ea81d43961bd7ef16c698ecc2131f1418515c1d62",
+      "palette": "reference/pokefirered/graphics/pokemon/tentacool/normal.pal"
+    },
+    {
+      "path": "content/pokemon/tentacool_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/tentacool/back.png",
+      "source_sha256": "721b9ec3f982fcb506e26f7c4f5b6448d23f939a5695e6776d2fc18e451c29dd",
+      "palette": "reference/pokefirered/graphics/pokemon/tentacool/normal.pal"
+    },
+    {
+      "path": "content/pokemon/tentacruel_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/tentacruel/front.png",
+      "source_sha256": "7d63b1c53364c82b71aad1a0c272336d91237ae01720f3803a9bd887e6b52779",
+      "palette": "reference/pokefirered/graphics/pokemon/tentacruel/normal.pal"
+    },
+    {
+      "path": "content/pokemon/tentacruel_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/tentacruel/back.png",
+      "source_sha256": "105ae045f4038f5438e8f3ff07f8983426dfb2f3bc2b83a142844402c2aef48e",
+      "palette": "reference/pokefirered/graphics/pokemon/tentacruel/normal.pal"
+    },
+    {
+      "path": "content/pokemon/vaporeon_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/vaporeon/front.png",
+      "source_sha256": "8ee93ba0bf97942fcdfc0a2d32da8bcd1b41cc9b5026ddcd03cd5707ebdc5896",
+      "palette": "reference/pokefirered/graphics/pokemon/vaporeon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/vaporeon_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/vaporeon/back.png",
+      "source_sha256": "41d98e175d5d3e29fe69094ae39f7c42cdae07d38118b12438e42b0585d4a2c5",
+      "palette": "reference/pokefirered/graphics/pokemon/vaporeon/normal.pal"
+    },
+    {
+      "path": "content/pokemon/venomoth_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/venomoth/front.png",
+      "source_sha256": "b1b4b9cebea058c30fac72f6f7f14fb04b7300cfeaee0510c0497bb2b38059bb",
+      "palette": "reference/pokefirered/graphics/pokemon/venomoth/normal.pal"
+    },
+    {
+      "path": "content/pokemon/venomoth_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/venomoth/back.png",
+      "source_sha256": "cb1886b2ac307f2ca70850b134b460727fc7452a75cbd4bf7f9aa009e7a0437d",
+      "palette": "reference/pokefirered/graphics/pokemon/venomoth/normal.pal"
+    },
+    {
+      "path": "content/pokemon/venonat_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/venonat/front.png",
+      "source_sha256": "189f733da03ee3f59e77be057f0d3de8b35c570ca321239d51e05c302c13d565",
+      "palette": "reference/pokefirered/graphics/pokemon/venonat/normal.pal"
+    },
+    {
+      "path": "content/pokemon/venonat_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/venonat/back.png",
+      "source_sha256": "517c8e768e00af88abb412596db3c1717147ba34d2a9d44ae9c778c47d56f474",
+      "palette": "reference/pokefirered/graphics/pokemon/venonat/normal.pal"
+    },
+    {
+      "path": "content/pokemon/venusaur_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/venusaur/front.png",
+      "source_sha256": "bfc3f6ba4c13b211f9f91942c0d252be67cb04390967eb17193e9ab9ff24467b",
+      "palette": "reference/pokefirered/graphics/pokemon/venusaur/normal.pal"
+    },
+    {
+      "path": "content/pokemon/venusaur_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/venusaur/back.png",
+      "source_sha256": "9f9d24f450871168912d56d4c10ebda586df29ec6cf1a0fcddd5b85f8bb909f2",
+      "palette": "reference/pokefirered/graphics/pokemon/venusaur/normal.pal"
+    },
+    {
+      "path": "content/pokemon/victreebel_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/victreebel/front.png",
+      "source_sha256": "22401b25207cb1ef368f2e6316bec8e0c2d724ddba8612c7b2a80fbc29cf73d4",
+      "palette": "reference/pokefirered/graphics/pokemon/victreebel/normal.pal"
+    },
+    {
+      "path": "content/pokemon/victreebel_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/victreebel/back.png",
+      "source_sha256": "6b3a439589d4a1ee9a32987f3ac09ea7ecbb9d0aaea9a0312a6d3d6eab10622b",
+      "palette": "reference/pokefirered/graphics/pokemon/victreebel/normal.pal"
+    },
+    {
+      "path": "content/pokemon/vileplume_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/vileplume/front.png",
+      "source_sha256": "242ef44251829f0ea6ab979e8472d9e9a3755f6bf19ea6f2bfa9a08f98fed117",
+      "palette": "reference/pokefirered/graphics/pokemon/vileplume/normal.pal"
+    },
+    {
+      "path": "content/pokemon/vileplume_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/vileplume/back.png",
+      "source_sha256": "8f71b6f0f0255b34e807c4e1904f4c357daf0920622bcad16a989836b0fc562b",
+      "palette": "reference/pokefirered/graphics/pokemon/vileplume/normal.pal"
+    },
+    {
+      "path": "content/pokemon/voltorb_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/voltorb/front.png",
+      "source_sha256": "1aa37472be37e84778ac71e075015a2c2fa2814da76ff94be7aefa2f497dbc3e",
+      "palette": "reference/pokefirered/graphics/pokemon/voltorb/normal.pal"
+    },
+    {
+      "path": "content/pokemon/voltorb_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/voltorb/back.png",
+      "source_sha256": "19c39d2fba977b029d2b567d853943514034e07c513a426326ba5eb8e48dbb9e",
+      "palette": "reference/pokefirered/graphics/pokemon/voltorb/normal.pal"
+    },
+    {
+      "path": "content/pokemon/vulpix_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/vulpix/front.png",
+      "source_sha256": "41ea68136056ebec56142b9c2f2fe8c8c70558d2f0f358dadf8d31f4a598d48f",
+      "palette": "reference/pokefirered/graphics/pokemon/vulpix/normal.pal"
+    },
+    {
+      "path": "content/pokemon/vulpix_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/vulpix/back.png",
+      "source_sha256": "afaf7e3c561de9cf6b58f5eb1aa36b11470d1493939152def7aca4018f432643",
+      "palette": "reference/pokefirered/graphics/pokemon/vulpix/normal.pal"
+    },
+    {
+      "path": "content/pokemon/wartortle_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/wartortle/front.png",
+      "source_sha256": "a01c0d8bdcdaa5b0c8e3c4f82b3284a29642196a24e1a1d37ef23b622aa452b6",
+      "palette": "reference/pokefirered/graphics/pokemon/wartortle/normal.pal"
+    },
+    {
+      "path": "content/pokemon/wartortle_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/wartortle/back.png",
+      "source_sha256": "0f5e7c9581f2374602c2ef56a9917a3b65b88550a7e477cb3c875350f289b254",
+      "palette": "reference/pokefirered/graphics/pokemon/wartortle/normal.pal"
+    },
+    {
+      "path": "content/pokemon/weedle_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/weedle/front.png",
+      "source_sha256": "9ee9225c4b1bba90d4aa78b33f8757fa4282a6ad7b81df62fa371f570176a9bd",
+      "palette": "reference/pokefirered/graphics/pokemon/weedle/normal.pal"
+    },
+    {
+      "path": "content/pokemon/weedle_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/weedle/back.png",
+      "source_sha256": "8d50dbe8b44165219278bce83d684868de605968a9b8ec0172261e302dc46cd5",
+      "palette": "reference/pokefirered/graphics/pokemon/weedle/normal.pal"
+    },
+    {
+      "path": "content/pokemon/weepinbell_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/weepinbell/front.png",
+      "source_sha256": "6682125708ac9238abb9526f1d3ac2de044f8df323c470014a82f19ae3b8a85d",
+      "palette": "reference/pokefirered/graphics/pokemon/weepinbell/normal.pal"
+    },
+    {
+      "path": "content/pokemon/weepinbell_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/weepinbell/back.png",
+      "source_sha256": "0d608bb2aa793d3993885afe0b425cbeb76a281434c4dee27d72daf2fc34adcc",
+      "palette": "reference/pokefirered/graphics/pokemon/weepinbell/normal.pal"
+    },
+    {
+      "path": "content/pokemon/weezing_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/weezing/front.png",
+      "source_sha256": "f7450bf6af898e75c2d74a7ce48bb5e225c03d2d988f9e57a79d035926f08a69",
+      "palette": "reference/pokefirered/graphics/pokemon/weezing/normal.pal"
+    },
+    {
+      "path": "content/pokemon/weezing_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/weezing/back.png",
+      "source_sha256": "c6d087f3a374ca3b361d1c814bddb04cf1607650bee65cde5cd3a4ee51746525",
+      "palette": "reference/pokefirered/graphics/pokemon/weezing/normal.pal"
+    },
+    {
+      "path": "content/pokemon/wigglytuff_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/wigglytuff/front.png",
+      "source_sha256": "ffa81342af0ff60f4eb9670962a2e26c002d9d19cfa1fca1713730ae9d72ef77",
+      "palette": "reference/pokefirered/graphics/pokemon/wigglytuff/normal.pal"
+    },
+    {
+      "path": "content/pokemon/wigglytuff_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/wigglytuff/back.png",
+      "source_sha256": "1bcab8aab027122525a6656eb352d3675db3ea5cd4af3b7e1c519a1e87c8a88f",
+      "palette": "reference/pokefirered/graphics/pokemon/wigglytuff/normal.pal"
+    },
+    {
+      "path": "content/pokemon/zapdos_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/zapdos/front.png",
+      "source_sha256": "1eafdea0501cb6cad51f65af39f329f8052c07957f7eb227b48fc60cdd13ba3d",
+      "palette": "reference/pokefirered/graphics/pokemon/zapdos/normal.pal"
+    },
+    {
+      "path": "content/pokemon/zapdos_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/zapdos/back.png",
+      "source_sha256": "0375518a53994ee499ccdd9c51f48cf0ea66140471d408fd35cd2c8d642e9817",
+      "palette": "reference/pokefirered/graphics/pokemon/zapdos/normal.pal"
+    },
+    {
+      "path": "content/pokemon/zubat_front.png",
+      "source": "reference/pokefirered/graphics/pokemon/zubat/front.png",
+      "source_sha256": "4cd2c5803d87cc7b7a1e870038aa3d95d59596fa2fe782dbbe289490b263e510",
+      "palette": "reference/pokefirered/graphics/pokemon/zubat/normal.pal"
+    },
+    {
+      "path": "content/pokemon/zubat_back.png",
+      "source": "reference/pokefirered/graphics/pokemon/zubat/back.png",
+      "source_sha256": "35a036858427b97a0ebe65a4f8c1f4eb51c15fc5ce3aea2ad4e6cd974aced6e1",
+      "palette": "reference/pokefirered/graphics/pokemon/zubat/normal.pal"
+    }
+  ]
+}

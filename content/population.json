@@ -1,0 +1,7216 @@
+{
+  "schema_version": 1,
+  "setup_note": "Biographies and incumbent titles are declared initial conditions, not achievements. Aspiring trainers have zero badges.",
+  "humans": [
+    {
+      "human_id": "human-001",
+      "name": "Ari",
+      "role": "aspiring_trainer",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Ari grew up near CeruleanCity and now lives in PalletTown. Their early experience with field sketching shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "grass"
+      },
+      "money": 1500,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-1",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-1",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-018": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 70,
+        "rest": 0,
+        "social": 20
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-002",
+      "name": "Bea",
+      "role": "aspiring_trainer",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Bea grew up near VermilionCity and now lives in SaffronCity. Their early experience with bug ecology shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "water"
+      },
+      "money": 1625,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-2",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-2",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-019": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 71,
+        "rest": 1,
+        "social": 21
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-003",
+      "name": "Cleo",
+      "role": "aspiring_trainer",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Cleo grew up near LavenderTown and now lives in CeladonCity. Their early experience with fishing shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "fire"
+      },
+      "money": 1750,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-3",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-3",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-020": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 72,
+        "rest": 2,
+        "social": 22
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-004",
+      "name": "Dax",
+      "role": "aspiring_trainer",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Dax grew up near CeladonCity and now lives in VermilionCity. Their early experience with music shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "electric"
+      },
+      "money": 1875,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-4",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-4",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-021": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 73,
+        "rest": 3,
+        "social": 23
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-005",
+      "name": "Emi",
+      "role": "aspiring_trainer",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Emi grew up near FuchsiaCity and now lives in PewterCity. Their early experience with hiking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "bug"
+      },
+      "money": 2000,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-5",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-5",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-022": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 74,
+        "rest": 4,
+        "social": 24
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-006",
+      "name": "Finn",
+      "role": "aspiring_trainer",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Finn grew up near SaffronCity and now lives in PalletTown. Their early experience with cooking shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "rock"
+      },
+      "money": 2125,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-6",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-6",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-023": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 75,
+        "rest": 5,
+        "social": 25
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-007",
+      "name": "Gia",
+      "role": "aspiring_trainer",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Gia grew up near CinnabarIsland and now lives in SaffronCity. Their early experience with history shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "psychic"
+      },
+      "money": 2250,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-7",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-7",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-024": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 76,
+        "rest": 6,
+        "social": 26
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-008",
+      "name": "Hugo",
+      "role": "aspiring_trainer",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Hugo grew up near PalletTown and now lives in CeladonCity. Their early experience with photography shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "normal"
+      },
+      "money": 2375,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-8",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-8",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-025": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 77,
+        "rest": 7,
+        "social": 27
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-009",
+      "name": "Iris",
+      "role": "aspiring_trainer",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Iris grew up near ViridianCity and now lives in VermilionCity. Their early experience with gardening shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "flying"
+      },
+      "money": 2500,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-9",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-9",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-026": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 78,
+        "rest": 8,
+        "social": 28
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-010",
+      "name": "Jules",
+      "role": "aspiring_trainer",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Jules grew up near PewterCity and now lives in PewterCity. Their early experience with mechanical repair shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "poison"
+      },
+      "money": 2625,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-10",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-10",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-027": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 79,
+        "rest": 9,
+        "social": 29
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-011",
+      "name": "Kai",
+      "role": "aspiring_trainer",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Kai grew up near CeruleanCity and now lives in PalletTown. Their early experience with field sketching shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "grass"
+      },
+      "money": 2750,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-11",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-11",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-028": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 80,
+        "rest": 10,
+        "social": 30
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-012",
+      "name": "Lena",
+      "role": "aspiring_trainer",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Lena grew up near VermilionCity and now lives in SaffronCity. Their early experience with bug ecology shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "water"
+      },
+      "money": 2875,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-12",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-12",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-029": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 81,
+        "rest": 11,
+        "social": 31
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-013",
+      "name": "Milo",
+      "role": "aspiring_trainer",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Milo grew up near LavenderTown and now lives in CeladonCity. Their early experience with fishing shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "fire"
+      },
+      "money": 3000,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-13",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-13",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-030": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 82,
+        "rest": 12,
+        "social": 32
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-014",
+      "name": "Nia",
+      "role": "aspiring_trainer",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Nia grew up near CeladonCity and now lives in VermilionCity. Their early experience with music shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "electric"
+      },
+      "money": 1500,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-14",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-14",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-031": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 83,
+        "rest": 13,
+        "social": 33
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-015",
+      "name": "Oren",
+      "role": "aspiring_trainer",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Oren grew up near FuchsiaCity and now lives in PewterCity. Their early experience with hiking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "bug"
+      },
+      "money": 1625,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-15",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-15",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-032": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 84,
+        "rest": 14,
+        "social": 34
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-016",
+      "name": "Pia",
+      "role": "aspiring_trainer",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Pia grew up near SaffronCity and now lives in PalletTown. Their early experience with cooking shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "rock"
+      },
+      "money": 1750,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-16",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-16",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-033": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 85,
+        "rest": 0,
+        "social": 35
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-017",
+      "name": "Quinn",
+      "role": "aspiring_trainer",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Quinn grew up near CinnabarIsland and now lives in SaffronCity. Their early experience with history shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "psychic"
+      },
+      "money": 1875,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-17",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-17",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-034": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 86,
+        "rest": 1,
+        "social": 36
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-018",
+      "name": "Rhea",
+      "role": "aspiring_trainer",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Rhea grew up near PalletTown and now lives in CeladonCity. Their early experience with photography shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "normal"
+      },
+      "money": 2000,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-18",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-18",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-035": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 87,
+        "rest": 2,
+        "social": 37
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-019",
+      "name": "Soren",
+      "role": "aspiring_trainer",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Soren grew up near ViridianCity and now lives in VermilionCity. Their early experience with gardening shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "flying"
+      },
+      "money": 2125,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-19",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-19",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-036": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 88,
+        "rest": 3,
+        "social": 38
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-020",
+      "name": "Tess",
+      "role": "aspiring_trainer",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Tess grew up near PewterCity and now lives in PewterCity. Their early experience with mechanical repair shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "poison"
+      },
+      "money": 2250,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-20",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-20",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-037": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 89,
+        "rest": 4,
+        "social": 39
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-021",
+      "name": "Uma",
+      "role": "aspiring_trainer",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Uma grew up near CeruleanCity and now lives in PalletTown. Their early experience with field sketching shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "grass"
+      },
+      "money": 2375,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-21",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-21",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-038": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 90,
+        "rest": 5,
+        "social": 40
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-022",
+      "name": "Vera",
+      "role": "aspiring_trainer",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Vera grew up near VermilionCity and now lives in SaffronCity. Their early experience with bug ecology shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "water"
+      },
+      "money": 2500,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-22",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-22",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-039": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 91,
+        "rest": 6,
+        "social": 41
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-023",
+      "name": "Wren",
+      "role": "aspiring_trainer",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Wren grew up near LavenderTown and now lives in CeladonCity. Their early experience with fishing shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "fire"
+      },
+      "money": 2625,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-23",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-23",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-040": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 92,
+        "rest": 7,
+        "social": 42
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-024",
+      "name": "Xavi",
+      "role": "aspiring_trainer",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Xavi grew up near CeladonCity and now lives in VermilionCity. Their early experience with music shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "electric"
+      },
+      "money": 2750,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-24",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-24",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-041": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 93,
+        "rest": 8,
+        "social": 43
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-025",
+      "name": "Yara",
+      "role": "aspiring_trainer",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Yara grew up near FuchsiaCity and now lives in PewterCity. Their early experience with hiking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "bug"
+      },
+      "money": 2875,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-25",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-25",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-042": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 94,
+        "rest": 9,
+        "social": 44
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-026",
+      "name": "Zane",
+      "role": "aspiring_trainer",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Zane grew up near SaffronCity and now lives in PalletTown. Their early experience with cooking shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "rock"
+      },
+      "money": 3000,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-26",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-26",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-043": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 95,
+        "rest": 10,
+        "social": 45
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-027",
+      "name": "Ada",
+      "role": "aspiring_trainer",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Ada grew up near CinnabarIsland and now lives in SaffronCity. Their early experience with history shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "psychic"
+      },
+      "money": 1500,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-27",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-27",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-044": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 96,
+        "rest": 11,
+        "social": 46
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-028",
+      "name": "Bram",
+      "role": "aspiring_trainer",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Bram grew up near PalletTown and now lives in CeladonCity. Their early experience with photography shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "normal"
+      },
+      "money": 1625,
+      "inventory": {
+        "POTION": 1,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-28",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-28",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-045": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 97,
+        "rest": 12,
+        "social": 47
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-029",
+      "name": "Cora",
+      "role": "aspiring_trainer",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Cora grew up near ViridianCity and now lives in VermilionCity. Their early experience with gardening shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "flying"
+      },
+      "money": 1750,
+      "inventory": {
+        "POTION": 2,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-29",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-29",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-046": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 98,
+        "rest": 13,
+        "social": 48
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-030",
+      "name": "Dev",
+      "role": "aspiring_trainer",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Dev grew up near PewterCity and now lives in PewterCity. Their early experience with mechanical repair shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "poison"
+      },
+      "money": 1875,
+      "inventory": {
+        "POTION": 3,
+        "POKE_BALL": 5
+      },
+      "responsibilities": [],
+      "goals": [
+        {
+          "id": "initial-30",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-30",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-047": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 99,
+        "rest": 14,
+        "social": 49
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-031",
+      "name": "Brock",
+      "role": "gym_leader",
+      "map_id": "PewterCity_Gym",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Brock grew up near CeruleanCity and now lives in PewterCity. Their early experience with field sketching shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "grass"
+      },
+      "money": 2000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "gym_leader",
+          "workplace": "PewterCity_Gym",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-31",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-31",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-048": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 100,
+        "rest": 0,
+        "social": 50
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "gym_leader"
+    },
+    {
+      "human_id": "human-032",
+      "name": "Misty",
+      "role": "gym_leader",
+      "map_id": "CeruleanCity_Gym",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Misty grew up near VermilionCity and now lives in CeruleanCity. Their early experience with bug ecology shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "water"
+      },
+      "money": 2125,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "gym_leader",
+          "workplace": "CeruleanCity_Gym",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-32",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-32",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-049": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 70,
+        "rest": 1,
+        "social": 51
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "gym_leader"
+    },
+    {
+      "human_id": "human-033",
+      "name": "Lt. Surge",
+      "role": "gym_leader",
+      "map_id": "VermilionCity_Gym",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Lt. Surge grew up near LavenderTown and now lives in VermilionCity. Their early experience with fishing shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "fire"
+      },
+      "money": 2250,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "gym_leader",
+          "workplace": "VermilionCity_Gym",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-33",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-33",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-050": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 71,
+        "rest": 2,
+        "social": 52
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "gym_leader"
+    },
+    {
+      "human_id": "human-034",
+      "name": "Erika",
+      "role": "gym_leader",
+      "map_id": "CeladonCity_Gym",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Erika grew up near CeladonCity and now lives in CeladonCity. Their early experience with music shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "electric"
+      },
+      "money": 2375,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "gym_leader",
+          "workplace": "CeladonCity_Gym",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-34",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-34",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-051": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 72,
+        "rest": 3,
+        "social": 53
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "gym_leader"
+    },
+    {
+      "human_id": "human-035",
+      "name": "Koga",
+      "role": "gym_leader",
+      "map_id": "FuchsiaCity_Gym",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Koga grew up near FuchsiaCity and now lives in FuchsiaCity. Their early experience with hiking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "bug"
+      },
+      "money": 2500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "gym_leader",
+          "workplace": "FuchsiaCity_Gym",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-35",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-35",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-052": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 73,
+        "rest": 4,
+        "social": 54
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "gym_leader"
+    },
+    {
+      "human_id": "human-036",
+      "name": "Sabrina",
+      "role": "gym_leader",
+      "map_id": "SaffronCity_Gym",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Sabrina grew up near SaffronCity and now lives in SaffronCity. Their early experience with cooking shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "rock"
+      },
+      "money": 2625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "gym_leader",
+          "workplace": "SaffronCity_Gym",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-36",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-36",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-053": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 74,
+        "rest": 5,
+        "social": 55
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "gym_leader"
+    },
+    {
+      "human_id": "human-037",
+      "name": "Blaine",
+      "role": "gym_leader",
+      "map_id": "CinnabarIsland_Gym",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Blaine grew up near CinnabarIsland and now lives in CinnabarIsland. Their early experience with history shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "psychic"
+      },
+      "money": 2750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "gym_leader",
+          "workplace": "CinnabarIsland_Gym",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-37",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-37",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-054": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 75,
+        "rest": 6,
+        "social": 56
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "gym_leader"
+    },
+    {
+      "human_id": "human-038",
+      "name": "Giovanni",
+      "role": "gym_leader",
+      "map_id": "ViridianCity_Gym",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Giovanni grew up near PalletTown and now lives in ViridianCity. Their early experience with photography shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "normal"
+      },
+      "money": 2875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "gym_leader",
+          "workplace": "ViridianCity_Gym",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-38",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-38",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-055": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 76,
+        "rest": 7,
+        "social": 57
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "gym_leader"
+    },
+    {
+      "human_id": "human-039",
+      "name": "Lorelei",
+      "role": "elite_four",
+      "map_id": "PokemonLeague_LoreleisRoom",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Lorelei grew up near ViridianCity and now lives in PokemonLeague. Their early experience with gardening shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "flying"
+      },
+      "money": 3000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "elite_four",
+          "workplace": "PokemonLeague_LoreleisRoom",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-39",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-39",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-056": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 77,
+        "rest": 8,
+        "social": 58
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "elite_four"
+    },
+    {
+      "human_id": "human-040",
+      "name": "Bruno",
+      "role": "elite_four",
+      "map_id": "PokemonLeague_BrunosRoom",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Bruno grew up near PewterCity and now lives in PokemonLeague. Their early experience with mechanical repair shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "poison"
+      },
+      "money": 1500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "elite_four",
+          "workplace": "PokemonLeague_BrunosRoom",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-40",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-40",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-057": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 78,
+        "rest": 9,
+        "social": 59
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "elite_four"
+    },
+    {
+      "human_id": "human-041",
+      "name": "Agatha",
+      "role": "elite_four",
+      "map_id": "PokemonLeague_AgathasRoom",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Agatha grew up near CeruleanCity and now lives in PokemonLeague. Their early experience with field sketching shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "grass"
+      },
+      "money": 1625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "elite_four",
+          "workplace": "PokemonLeague_AgathasRoom",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-41",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-41",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-058": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 79,
+        "rest": 10,
+        "social": 60
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "elite_four"
+    },
+    {
+      "human_id": "human-042",
+      "name": "Lance",
+      "role": "elite_four",
+      "map_id": "PokemonLeague_LancesRoom",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Lance grew up near VermilionCity and now lives in PokemonLeague. Their early experience with bug ecology shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "water"
+      },
+      "money": 1750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "elite_four",
+          "workplace": "PokemonLeague_LancesRoom",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-42",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-42",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-059": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 80,
+        "rest": 11,
+        "social": 61
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "elite_four"
+    },
+    {
+      "human_id": "human-043",
+      "name": "Blue",
+      "role": "initial_champion",
+      "map_id": "PokemonLeague_ChampionsRoom",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Blue grew up near LavenderTown and now lives in PokemonLeague. Their early experience with fishing shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "fire"
+      },
+      "money": 1875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "initial_champion",
+          "workplace": "PokemonLeague_ChampionsRoom",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-43",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-43",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-060": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 81,
+        "rest": 12,
+        "social": 62
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "initial_champion"
+    },
+    {
+      "human_id": "human-044",
+      "name": "Professor Oak",
+      "role": "professor",
+      "map_id": "PalletTown_ProfessorOaksLab",
+      "appearance": {
+        "sprite": "prof_oak",
+        "palette": 3
+      },
+      "biography": "Professor Oak grew up near CeladonCity and now lives in PalletTown. Their early experience with music shapes how they notice the world. They want to become a reliable mentor.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "become a reliable mentor"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "electric"
+      },
+      "money": 2000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "professor",
+          "workplace": "PalletTown_ProfessorOaksLab",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-44",
+          "text": "become a reliable mentor",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-44",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-061": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 82,
+        "rest": 13,
+        "social": 63
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": "professor"
+    },
+    {
+      "human_id": "human-045",
+      "name": "Oren Vale",
+      "role": "service_staff",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 0
+      },
+      "biography": "Oren Vale grew up near FuchsiaCity and now lives in SaffronCity. Their early experience with hiking shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "bug"
+      },
+      "money": 2125,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "SaffronCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-45",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-45",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-062": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 83,
+        "rest": 14,
+        "social": 64
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-046",
+      "name": "Pia Reed",
+      "role": "service_staff",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 1
+      },
+      "biography": "Pia Reed grew up near SaffronCity and now lives in CeladonCity. Their early experience with cooking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "rock"
+      },
+      "money": 2250,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "CeladonCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-46",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-46",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-063": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 84,
+        "rest": 0,
+        "social": 65
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-047",
+      "name": "Quinn Stone",
+      "role": "service_staff",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 2
+      },
+      "biography": "Quinn Stone grew up near CinnabarIsland and now lives in VermilionCity. Their early experience with history shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "psychic"
+      },
+      "money": 2375,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "VermilionCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-47",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-47",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-064": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 85,
+        "rest": 1,
+        "social": 66
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-048",
+      "name": "Rhea Moss",
+      "role": "service_staff",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 3
+      },
+      "biography": "Rhea Moss grew up near PalletTown and now lives in PewterCity. Their early experience with photography shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "normal"
+      },
+      "money": 2500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "PewterCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-48",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-48",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-065": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 86,
+        "rest": 2,
+        "social": 67
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-049",
+      "name": "Soren Vale",
+      "role": "service_staff",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 0
+      },
+      "biography": "Soren Vale grew up near ViridianCity and now lives in PalletTown. Their early experience with gardening shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "flying"
+      },
+      "money": 2625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "PalletTown",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-49",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-49",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-066": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 87,
+        "rest": 3,
+        "social": 68
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-050",
+      "name": "Tess Reed",
+      "role": "service_staff",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 1
+      },
+      "biography": "Tess Reed grew up near PewterCity and now lives in SaffronCity. Their early experience with mechanical repair shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "poison"
+      },
+      "money": 2750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "SaffronCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-50",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-50",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-067": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 88,
+        "rest": 4,
+        "social": 69
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-051",
+      "name": "Uma Stone",
+      "role": "service_staff",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 2
+      },
+      "biography": "Uma Stone grew up near CeruleanCity and now lives in CeladonCity. Their early experience with field sketching shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "grass"
+      },
+      "money": 2875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "CeladonCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-51",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-51",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-068": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 89,
+        "rest": 5,
+        "social": 20
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-052",
+      "name": "Vera Moss",
+      "role": "service_staff",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 3
+      },
+      "biography": "Vera Moss grew up near VermilionCity and now lives in VermilionCity. Their early experience with bug ecology shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "water"
+      },
+      "money": 3000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "VermilionCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-52",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-52",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-069": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 90,
+        "rest": 6,
+        "social": 21
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-053",
+      "name": "Wren Vale",
+      "role": "service_staff",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 0
+      },
+      "biography": "Wren Vale grew up near LavenderTown and now lives in PewterCity. Their early experience with fishing shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "fire"
+      },
+      "money": 1500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "PewterCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-53",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-53",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-070": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 91,
+        "rest": 7,
+        "social": 22
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-054",
+      "name": "Xavi Reed",
+      "role": "service_staff",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 1
+      },
+      "biography": "Xavi Reed grew up near CeladonCity and now lives in PalletTown. Their early experience with music shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "electric"
+      },
+      "money": 1625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "PalletTown",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-54",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-54",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-071": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 92,
+        "rest": 8,
+        "social": 23
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-055",
+      "name": "Yara Stone",
+      "role": "service_staff",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 2
+      },
+      "biography": "Yara Stone grew up near FuchsiaCity and now lives in SaffronCity. Their early experience with hiking shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "bug"
+      },
+      "money": 1750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "SaffronCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-55",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-55",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-072": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 93,
+        "rest": 9,
+        "social": 24
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-056",
+      "name": "Zane Moss",
+      "role": "service_staff",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 3
+      },
+      "biography": "Zane Moss grew up near SaffronCity and now lives in CeladonCity. Their early experience with cooking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "rock"
+      },
+      "money": 1875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "CeladonCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-56",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-56",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-073": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 94,
+        "rest": 10,
+        "social": 25
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-057",
+      "name": "Ada Vale",
+      "role": "service_staff",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 0
+      },
+      "biography": "Ada Vale grew up near CinnabarIsland and now lives in VermilionCity. Their early experience with history shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "psychic"
+      },
+      "money": 2000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "VermilionCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-57",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-57",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-074": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 95,
+        "rest": 11,
+        "social": 26
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-058",
+      "name": "Bram Reed",
+      "role": "service_staff",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 1
+      },
+      "biography": "Bram Reed grew up near PalletTown and now lives in PewterCity. Their early experience with photography shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "normal"
+      },
+      "money": 2125,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "PewterCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-58",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-58",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-075": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 96,
+        "rest": 12,
+        "social": 27
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-059",
+      "name": "Cora Stone",
+      "role": "service_staff",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 2
+      },
+      "biography": "Cora Stone grew up near ViridianCity and now lives in PalletTown. Their early experience with gardening shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "flying"
+      },
+      "money": 2250,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "PalletTown",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-59",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-59",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-076": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 97,
+        "rest": 13,
+        "social": 28
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-060",
+      "name": "Dev Moss",
+      "role": "service_staff",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 3
+      },
+      "biography": "Dev Moss grew up near PewterCity and now lives in SaffronCity. Their early experience with mechanical repair shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "poison"
+      },
+      "money": 2375,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "SaffronCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-60",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-60",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-077": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 98,
+        "rest": 14,
+        "social": 29
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-061",
+      "name": "Ari Vale",
+      "role": "service_staff",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 0
+      },
+      "biography": "Ari Vale grew up near CeruleanCity and now lives in CeladonCity. Their early experience with field sketching shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "grass"
+      },
+      "money": 2500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "CeladonCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-61",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-61",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-078": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 99,
+        "rest": 0,
+        "social": 30
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-062",
+      "name": "Bea Reed",
+      "role": "service_staff",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 1
+      },
+      "biography": "Bea Reed grew up near VermilionCity and now lives in VermilionCity. Their early experience with bug ecology shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "water"
+      },
+      "money": 2625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "VermilionCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-62",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-62",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-079": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 100,
+        "rest": 1,
+        "social": 31
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-063",
+      "name": "Cleo Stone",
+      "role": "service_staff",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 2
+      },
+      "biography": "Cleo Stone grew up near LavenderTown and now lives in PewterCity. Their early experience with fishing shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "fire"
+      },
+      "money": 2750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "PewterCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-63",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-63",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-080": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 70,
+        "rest": 2,
+        "social": 32
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-064",
+      "name": "Dax Moss",
+      "role": "service_staff",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "nurse",
+        "palette": 3
+      },
+      "biography": "Dax Moss grew up near CeladonCity and now lives in PalletTown. Their early experience with music shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "electric"
+      },
+      "money": 2875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "service_staff",
+          "workplace": "PalletTown",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-64",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-64",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-081": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 71,
+        "rest": 3,
+        "social": 33
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-065",
+      "name": "Emi Vale",
+      "role": "shop_staff",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Emi Vale grew up near FuchsiaCity and now lives in SaffronCity. Their early experience with hiking shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "bug"
+      },
+      "money": 3000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "SaffronCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-65",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-65",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-082": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 72,
+        "rest": 4,
+        "social": 34
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-066",
+      "name": "Finn Reed",
+      "role": "shop_staff",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Finn Reed grew up near SaffronCity and now lives in CeladonCity. Their early experience with cooking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "rock"
+      },
+      "money": 1500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "CeladonCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-66",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-66",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-083": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 73,
+        "rest": 5,
+        "social": 35
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-067",
+      "name": "Gia Stone",
+      "role": "shop_staff",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Gia Stone grew up near CinnabarIsland and now lives in VermilionCity. Their early experience with history shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "psychic"
+      },
+      "money": 1625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "VermilionCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-67",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-67",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-084": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 74,
+        "rest": 6,
+        "social": 36
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-068",
+      "name": "Hugo Moss",
+      "role": "shop_staff",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Hugo Moss grew up near PalletTown and now lives in PewterCity. Their early experience with photography shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "normal"
+      },
+      "money": 1750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "PewterCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-68",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-68",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-085": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 75,
+        "rest": 7,
+        "social": 37
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-069",
+      "name": "Iris Vale",
+      "role": "shop_staff",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Iris Vale grew up near ViridianCity and now lives in PalletTown. Their early experience with gardening shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "flying"
+      },
+      "money": 1875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "PalletTown",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-69",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-69",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-086": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 76,
+        "rest": 8,
+        "social": 38
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-070",
+      "name": "Jules Reed",
+      "role": "shop_staff",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Jules Reed grew up near PewterCity and now lives in SaffronCity. Their early experience with mechanical repair shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "poison"
+      },
+      "money": 2000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "SaffronCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-70",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-70",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-087": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 77,
+        "rest": 9,
+        "social": 39
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-071",
+      "name": "Kai Stone",
+      "role": "shop_staff",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Kai Stone grew up near CeruleanCity and now lives in CeladonCity. Their early experience with field sketching shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "grass"
+      },
+      "money": 2125,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "CeladonCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-71",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-71",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-088": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 78,
+        "rest": 10,
+        "social": 40
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-072",
+      "name": "Lena Moss",
+      "role": "shop_staff",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Lena Moss grew up near VermilionCity and now lives in VermilionCity. Their early experience with bug ecology shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "water"
+      },
+      "money": 2250,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "VermilionCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-72",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-72",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-089": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 79,
+        "rest": 11,
+        "social": 41
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-073",
+      "name": "Milo Vale",
+      "role": "shop_staff",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Milo Vale grew up near LavenderTown and now lives in PewterCity. Their early experience with fishing shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "fire"
+      },
+      "money": 2375,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "PewterCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-73",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-73",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-090": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 80,
+        "rest": 12,
+        "social": 42
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-074",
+      "name": "Nia Reed",
+      "role": "shop_staff",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Nia Reed grew up near CeladonCity and now lives in PalletTown. Their early experience with music shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "electric"
+      },
+      "money": 2500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "shop_staff",
+          "workplace": "PalletTown",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-74",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-74",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-091": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 81,
+        "rest": 13,
+        "social": 43
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-075",
+      "name": "Oren Stone",
+      "role": "worker",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Oren Stone grew up near FuchsiaCity and now lives in SaffronCity. Their early experience with hiking shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "bug"
+      },
+      "money": 2625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "SaffronCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-75",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-75",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-092": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 82,
+        "rest": 14,
+        "social": 44
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-076",
+      "name": "Pia Moss",
+      "role": "worker",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Pia Moss grew up near SaffronCity and now lives in CeladonCity. Their early experience with cooking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "rock"
+      },
+      "money": 2750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "CeladonCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-76",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-76",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-093": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 83,
+        "rest": 0,
+        "social": 45
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-077",
+      "name": "Quinn Vale",
+      "role": "worker",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Quinn Vale grew up near CinnabarIsland and now lives in VermilionCity. Their early experience with history shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "psychic"
+      },
+      "money": 2875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "VermilionCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-77",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-77",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-094": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 84,
+        "rest": 1,
+        "social": 46
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-078",
+      "name": "Rhea Reed",
+      "role": "worker",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Rhea Reed grew up near PalletTown and now lives in PewterCity. Their early experience with photography shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "normal"
+      },
+      "money": 3000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "PewterCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-78",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-78",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-095": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 85,
+        "rest": 2,
+        "social": 47
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-079",
+      "name": "Soren Stone",
+      "role": "worker",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Soren Stone grew up near ViridianCity and now lives in PalletTown. Their early experience with gardening shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "flying"
+      },
+      "money": 1500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "PalletTown",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-79",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-79",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-096": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 86,
+        "rest": 3,
+        "social": 48
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-080",
+      "name": "Tess Moss",
+      "role": "worker",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Tess Moss grew up near PewterCity and now lives in SaffronCity. Their early experience with mechanical repair shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "poison"
+      },
+      "money": 1625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "SaffronCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-80",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-80",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-097": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 87,
+        "rest": 4,
+        "social": 49
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-081",
+      "name": "Uma Vale",
+      "role": "worker",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Uma Vale grew up near CeruleanCity and now lives in CeladonCity. Their early experience with field sketching shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "grass"
+      },
+      "money": 1750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "CeladonCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-81",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-81",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-098": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 88,
+        "rest": 5,
+        "social": 50
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-082",
+      "name": "Vera Reed",
+      "role": "worker",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Vera Reed grew up near VermilionCity and now lives in VermilionCity. Their early experience with bug ecology shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "water"
+      },
+      "money": 1875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "VermilionCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-82",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-82",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-099": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 89,
+        "rest": 6,
+        "social": 51
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-083",
+      "name": "Wren Stone",
+      "role": "worker",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Wren Stone grew up near LavenderTown and now lives in PewterCity. Their early experience with fishing shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "fire"
+      },
+      "money": 2000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "PewterCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-83",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-83",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-100": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 90,
+        "rest": 7,
+        "social": 52
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-084",
+      "name": "Xavi Moss",
+      "role": "worker",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Xavi Moss grew up near CeladonCity and now lives in PalletTown. Their early experience with music shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "electric"
+      },
+      "money": 2125,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "worker",
+          "workplace": "PalletTown",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-84",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-84",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-001": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 91,
+        "rest": 8,
+        "social": 53
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-085",
+      "name": "Yara Vale",
+      "role": "resident",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Yara Vale grew up near FuchsiaCity and now lives in SaffronCity. Their early experience with hiking shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "bug"
+      },
+      "money": 2250,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "SaffronCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-85",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-85",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-002": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 92,
+        "rest": 9,
+        "social": 54
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-086",
+      "name": "Zane Reed",
+      "role": "resident",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Zane Reed grew up near SaffronCity and now lives in CeladonCity. Their early experience with cooking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "rock"
+      },
+      "money": 2375,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "CeladonCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-86",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-86",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-003": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 93,
+        "rest": 10,
+        "social": 55
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-087",
+      "name": "Ada Stone",
+      "role": "resident",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Ada Stone grew up near CinnabarIsland and now lives in VermilionCity. Their early experience with history shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "psychic"
+      },
+      "money": 2500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "VermilionCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-87",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-87",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-004": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 94,
+        "rest": 11,
+        "social": 56
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-088",
+      "name": "Bram Moss",
+      "role": "resident",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Bram Moss grew up near PalletTown and now lives in PewterCity. Their early experience with photography shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "normal"
+      },
+      "money": 2625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "PewterCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-88",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-88",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-005": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 95,
+        "rest": 12,
+        "social": 57
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-089",
+      "name": "Cora Vale",
+      "role": "resident",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Cora Vale grew up near ViridianCity and now lives in PalletTown. Their early experience with gardening shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "flying"
+      },
+      "money": 2750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "PalletTown",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-89",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-89",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-006": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 96,
+        "rest": 13,
+        "social": 58
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-090",
+      "name": "Dev Reed",
+      "role": "resident",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Dev Reed grew up near PewterCity and now lives in SaffronCity. Their early experience with mechanical repair shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "poison"
+      },
+      "money": 2875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "SaffronCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-90",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-90",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-007": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 97,
+        "rest": 14,
+        "social": 59
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-091",
+      "name": "Ari Stone",
+      "role": "resident",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Ari Stone grew up near CeruleanCity and now lives in CeladonCity. Their early experience with field sketching shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.1
+      },
+      "interests": [
+        "field sketching",
+        "hiking"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "grass"
+      },
+      "money": 3000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "CeladonCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-91",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-91",
+          "text": "I remember learning field sketching near CeruleanCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-008": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 98,
+        "rest": 0,
+        "social": 60
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-092",
+      "name": "Bea Moss",
+      "role": "resident",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Bea Moss grew up near VermilionCity and now lives in VermilionCity. Their early experience with bug ecology shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.28,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.695
+      },
+      "interests": [
+        "bug ecology",
+        "cooking"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "water"
+      },
+      "money": 1500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "VermilionCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-92",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-92",
+          "text": "I remember learning bug ecology near VermilionCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-009": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 99,
+        "rest": 1,
+        "social": 61
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-093",
+      "name": "Cleo Vale",
+      "role": "resident",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Cleo Vale grew up near LavenderTown and now lives in PewterCity. Their early experience with fishing shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.36,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.44
+      },
+      "interests": [
+        "fishing",
+        "history"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "fire"
+      },
+      "money": 1625,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "PewterCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-93",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-93",
+          "text": "I remember learning fishing near LavenderTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-010": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 100,
+        "rest": 2,
+        "social": 62
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-094",
+      "name": "Dax Reed",
+      "role": "resident",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Dax Reed grew up near CeladonCity and now lives in PalletTown. Their early experience with music shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.44,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.185
+      },
+      "interests": [
+        "music",
+        "photography"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "electric"
+      },
+      "money": 1750,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "PalletTown",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-94",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-94",
+          "text": "I remember learning music near CeladonCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-011": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 70,
+        "rest": 3,
+        "social": 63
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-095",
+      "name": "Emi Stone",
+      "role": "resident",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Emi Stone grew up near FuchsiaCity and now lives in SaffronCity. Their early experience with hiking shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.52,
+        "sociability": 0.15,
+        "patience": 0.44,
+        "risk_tolerance": 0.78
+      },
+      "interests": [
+        "hiking",
+        "gardening"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "bug"
+      },
+      "money": 1875,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "SaffronCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-95",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-95",
+          "text": "I remember learning hiking near FuchsiaCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-012": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 71,
+        "rest": 4,
+        "social": 64
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-096",
+      "name": "Finn Moss",
+      "role": "resident",
+      "map_id": "CeladonCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Finn Moss grew up near SaffronCity and now lives in CeladonCity. Their early experience with cooking shapes how they notice the world. They want to challenge the gyms through careful preparation.",
+      "personality": {
+        "curiosity": 0.6,
+        "sociability": 0.55,
+        "patience": 0.68,
+        "risk_tolerance": 0.525
+      },
+      "interests": [
+        "cooking",
+        "mechanical repair"
+      ],
+      "ambitions": [
+        "challenge the gyms through careful preparation"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "rock"
+      },
+      "money": 2000,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "CeladonCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-96",
+          "text": "challenge the gyms through careful preparation",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-96",
+          "text": "I remember learning cooking near SaffronCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-013": {
+          "familiarity": 0.2,
+          "trust": 0.1,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 72,
+        "rest": 5,
+        "social": 65
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-097",
+      "name": "Gia Vale",
+      "role": "resident",
+      "map_id": "VermilionCity",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 0
+      },
+      "biography": "Gia Vale grew up near CinnabarIsland and now lives in VermilionCity. Their early experience with history shapes how they notice the world. They want to complete a regional field journal.",
+      "personality": {
+        "curiosity": 0.68,
+        "sociability": 0.15,
+        "patience": 0.2,
+        "risk_tolerance": 0.27
+      },
+      "interests": [
+        "history",
+        "field sketching"
+      ],
+      "ambitions": [
+        "complete a regional field journal"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "psychic"
+      },
+      "money": 2125,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "VermilionCity",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-97",
+          "text": "complete a regional field journal",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-97",
+          "text": "I remember learning history near CinnabarIsland.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-014": {
+          "familiarity": 0.2,
+          "trust": 0.2,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 73,
+        "rest": 6,
+        "social": 66
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-098",
+      "name": "Hugo Reed",
+      "role": "resident",
+      "map_id": "PewterCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 1
+      },
+      "biography": "Hugo Reed grew up near PalletTown and now lives in PewterCity. Their early experience with photography shapes how they notice the world. They want to improve patient handling.",
+      "personality": {
+        "curiosity": 0.76,
+        "sociability": 0.55,
+        "patience": 0.44,
+        "risk_tolerance": 0.865
+      },
+      "interests": [
+        "photography",
+        "bug ecology"
+      ],
+      "ambitions": [
+        "improve patient handling"
+      ],
+      "preferences": {
+        "activity_time": "evening",
+        "favorite_type": "normal"
+      },
+      "money": 2250,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "PewterCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-98",
+          "text": "improve patient handling",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-98",
+          "text": "I remember learning photography near PalletTown.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-015": {
+          "familiarity": 0.2,
+          "trust": 0.3,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 74,
+        "rest": 7,
+        "social": 67
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-099",
+      "name": "Iris Stone",
+      "role": "resident",
+      "map_id": "PalletTown",
+      "appearance": {
+        "sprite": "green_normal",
+        "palette": 2
+      },
+      "biography": "Iris Stone grew up near ViridianCity and now lives in PalletTown. Their early experience with gardening shapes how they notice the world. They want to master a balanced battle style.",
+      "personality": {
+        "curiosity": 0.84,
+        "sociability": 0.15,
+        "patience": 0.68,
+        "risk_tolerance": 0.61
+      },
+      "interests": [
+        "gardening",
+        "fishing"
+      ],
+      "ambitions": [
+        "master a balanced battle style"
+      ],
+      "preferences": {
+        "activity_time": "afternoon",
+        "favorite_type": "flying"
+      },
+      "money": 2375,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "PalletTown",
+          "shift": "late"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-99",
+          "text": "master a balanced battle style",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-99",
+          "text": "I remember learning gardening near ViridianCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-016": {
+          "familiarity": 0.2,
+          "trust": 0.4,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 75,
+        "rest": 8,
+        "social": 68
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    },
+    {
+      "human_id": "human-100",
+      "name": "Jules Moss",
+      "role": "resident",
+      "map_id": "SaffronCity",
+      "appearance": {
+        "sprite": "red_normal",
+        "palette": 3
+      },
+      "biography": "Jules Moss grew up near PewterCity and now lives in SaffronCity. Their early experience with mechanical repair shapes how they notice the world. They want to earn enough to support family.",
+      "personality": {
+        "curiosity": 0.2,
+        "sociability": 0.55,
+        "patience": 0.2,
+        "risk_tolerance": 0.355
+      },
+      "interests": [
+        "mechanical repair",
+        "music"
+      ],
+      "ambitions": [
+        "earn enough to support family"
+      ],
+      "preferences": {
+        "activity_time": "morning",
+        "favorite_type": "poison"
+      },
+      "money": 2500,
+      "inventory": {},
+      "responsibilities": [
+        {
+          "role": "resident",
+          "workplace": "SaffronCity",
+          "shift": "day"
+        }
+      ],
+      "goals": [
+        {
+          "id": "initial-100",
+          "text": "earn enough to support family",
+          "source": "declared_setup"
+        }
+      ],
+      "active_plan": null,
+      "party": [],
+      "box": [],
+      "badges": [],
+      "pokedex": [],
+      "memories": [
+        {
+          "id": "background-100",
+          "text": "I remember learning mechanical repair near PewterCity.",
+          "source": "declared_setup",
+          "subjective": true
+        }
+      ],
+      "memory_summary": "",
+      "relationships": {
+        "human-017": {
+          "familiarity": 0.2,
+          "trust": 0.5,
+          "belief": "An acquaintance from earlier travels; I should learn more."
+        }
+      },
+      "needs": {
+        "energy": 76,
+        "rest": 9,
+        "social": 69
+      },
+      "decision_history": [],
+      "model_provenance": [],
+      "setup_status": null
+    }
+  ]
+}

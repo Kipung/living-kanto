@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+
+# Reference checkouts (pinned upstream sources live outside git; see content/asset_manifest.json)
+reference/
+
+# Runtime data (runs, databases, evidence artifacts stay in evidence/)
+var/
+*.sqlite3
+*.db
+
+# Node
+node_modules/
+
+# Local editor state
+.idea/
+.vscode/
+
+# Intermediate local trial artifacts
+work/
+*.db-wal
+*.db-shm
+
+# Private per-world local runtime configuration and saves
+data/local/
+*.runtime-settings.json

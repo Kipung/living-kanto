@@ -1,0 +1,2707 @@
+{
+  "schema_version": 1,
+  "width": 22,
+  "height": 15,
+  "layers": {
+    "LAYER_MAP": [
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_24",
+        "MAPSEC_ROUTE_25",
+        "MAPSEC_ROUTE_25",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_24",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_INDIGO_PLATEAU",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_4_POKECENTER",
+        "MAPSEC_ROUTE_4",
+        "MAPSEC_ROUTE_4",
+        "MAPSEC_ROUTE_4",
+        "MAPSEC_ROUTE_4",
+        "MAPSEC_ROUTE_4",
+        "MAPSEC_CERULEAN_CITY",
+        "MAPSEC_ROUTE_9",
+        "MAPSEC_ROUTE_9",
+        "MAPSEC_ROUTE_9",
+        "MAPSEC_ROUTE_10_POKECENTER",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_23",
+        "MAPSEC_NONE",
+        "MAPSEC_PEWTER_CITY",
+        "MAPSEC_ROUTE_3",
+        "MAPSEC_ROUTE_3",
+        "MAPSEC_ROUTE_3",
+        "MAPSEC_ROUTE_3",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_5",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_10",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_23",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_2",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_5",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_10",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_23",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_2",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_16",
+        "MAPSEC_ROUTE_16",
+        "MAPSEC_ROUTE_16",
+        "MAPSEC_ROUTE_16",
+        "MAPSEC_CELADON_CITY",
+        "MAPSEC_ROUTE_7",
+        "MAPSEC_ROUTE_7",
+        "MAPSEC_SAFFRON_CITY",
+        "MAPSEC_ROUTE_8",
+        "MAPSEC_ROUTE_8",
+        "MAPSEC_ROUTE_8",
+        "MAPSEC_LAVENDER_TOWN",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_23",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_2",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_17",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_6",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_12",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_22",
+        "MAPSEC_ROUTE_22",
+        "MAPSEC_VIRIDIAN_CITY",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_17",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_6",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_12",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_1",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_17",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_VERMILION_CITY",
+        "MAPSEC_ROUTE_11",
+        "MAPSEC_ROUTE_11",
+        "MAPSEC_ROUTE_11",
+        "MAPSEC_ROUTE_12",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_1",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_17",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_12",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_PALLET_TOWN",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_17",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_14",
+        "MAPSEC_ROUTE_13",
+        "MAPSEC_ROUTE_13",
+        "MAPSEC_ROUTE_12",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_21",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_18",
+        "MAPSEC_ROUTE_18",
+        "MAPSEC_ROUTE_18",
+        "MAPSEC_ROUTE_18",
+        "MAPSEC_ROUTE_18",
+        "MAPSEC_FUCHSIA_CITY",
+        "MAPSEC_ROUTE_15",
+        "MAPSEC_ROUTE_15",
+        "MAPSEC_ROUTE_14",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_21",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROUTE_19",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_CINNABAR_ISLAND",
+        "MAPSEC_ROUTE_20",
+        "MAPSEC_ROUTE_20",
+        "MAPSEC_ROUTE_20",
+        "MAPSEC_ROUTE_20",
+        "MAPSEC_ROUTE_20",
+        "MAPSEC_ROUTE_20",
+        "MAPSEC_ROUTE_20",
+        "MAPSEC_ROUTE_19",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ]
+    ],
+    "LAYER_DUNGEON": [
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_MT_MOON",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_CERULEAN_CAVE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_ROCK_TUNNEL",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_KANTO_VICTORY_ROAD",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_POWER_PLANT",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_DIGLETTS_CAVE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_VIRIDIAN_FOREST",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_POKEMON_TOWER",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_DIGLETTS_CAVE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_KANTO_SAFARI_ZONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ],
+      [
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_POKEMON_MANSION",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_SEAFOAM_ISLANDS",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE",
+        "MAPSEC_NONE"
+      ]
+    ]
+  },
+  "sections": [
+    {
+      "id": "MAPSEC_CELADON_CITY",
+      "name": "CELADON CITY",
+      "x": 11,
+      "y": 6,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_CERULEAN_CAVE",
+      "name": "CERULEAN CAVE",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_CERULEAN_CITY",
+      "name": "CERULEAN CITY",
+      "x": 14,
+      "y": 3,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_CINNABAR_ISLAND",
+      "name": "CINNABAR ISLAND",
+      "x": 4,
+      "y": 14,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_DIGLETTS_CAVE",
+      "name": "DIGLETT'S CAVE",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_FUCHSIA_CITY",
+      "name": "FUCHSIA CITY",
+      "x": 12,
+      "y": 12,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_INDIGO_PLATEAU",
+      "name": "INDIGO PLATEAU",
+      "x": 2,
+      "y": 3,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "name": "SAFARI ZONE",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_KANTO_VICTORY_ROAD",
+      "name": "VICTORY ROAD",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_LAVENDER_TOWN",
+      "name": "LAVENDER TOWN",
+      "x": 18,
+      "y": 6,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_MT_MOON",
+      "name": "MT. MOON",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_PALLET_TOWN",
+      "name": "PALLET TOWN",
+      "x": 4,
+      "y": 11,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_PEWTER_CITY",
+      "name": "PEWTER CITY",
+      "x": 4,
+      "y": 4,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_POKEMON_LEAGUE",
+      "name": "POK\u00e9MON LEAGUE",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_POKEMON_MANSION",
+      "name": "POK\u00e9MON MANSION",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_POKEMON_TOWER",
+      "name": "POK\u00e9MON TOWER",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_POWER_PLANT",
+      "name": "POWER PLANT",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROCKET_HIDEOUT",
+      "name": "ROCKET HIDEOUT",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROCK_TUNNEL",
+      "name": "ROCK TUNNEL",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_1",
+      "name": "ROUTE 1",
+      "x": 4,
+      "y": 9,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_ROUTE_10",
+      "name": "ROUTE 10",
+      "x": 18,
+      "y": 3,
+      "width": 1,
+      "height": 3
+    },
+    {
+      "id": "MAPSEC_ROUTE_11",
+      "name": "ROUTE 11",
+      "x": 15,
+      "y": 9,
+      "width": 3,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_12",
+      "name": "ROUTE 12",
+      "x": 18,
+      "y": 7,
+      "width": 1,
+      "height": 5
+    },
+    {
+      "id": "MAPSEC_ROUTE_13",
+      "name": "ROUTE 13",
+      "x": 16,
+      "y": 11,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_14",
+      "name": "ROUTE 14",
+      "x": 15,
+      "y": 11,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_ROUTE_15",
+      "name": "ROUTE 15",
+      "x": 13,
+      "y": 12,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_16",
+      "name": "ROUTE 16",
+      "x": 7,
+      "y": 6,
+      "width": 4,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_17",
+      "name": "ROUTE 17",
+      "x": 7,
+      "y": 7,
+      "width": 1,
+      "height": 5
+    },
+    {
+      "id": "MAPSEC_ROUTE_18",
+      "name": "ROUTE 18",
+      "x": 7,
+      "y": 12,
+      "width": 5,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_19",
+      "name": "ROUTE 19",
+      "x": 12,
+      "y": 13,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_ROUTE_2",
+      "name": "ROUTE 2",
+      "x": 4,
+      "y": 5,
+      "width": 1,
+      "height": 3
+    },
+    {
+      "id": "MAPSEC_ROUTE_20",
+      "name": "ROUTE 20",
+      "x": 5,
+      "y": 14,
+      "width": 7,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_21",
+      "name": "ROUTE 21",
+      "x": 4,
+      "y": 12,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_ROUTE_22",
+      "name": "ROUTE 22",
+      "x": 2,
+      "y": 8,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_23",
+      "name": "ROUTE 23",
+      "x": 2,
+      "y": 4,
+      "width": 1,
+      "height": 4
+    },
+    {
+      "id": "MAPSEC_ROUTE_24",
+      "name": "ROUTE 24",
+      "x": 14,
+      "y": 1,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_ROUTE_25",
+      "name": "ROUTE 25",
+      "x": 15,
+      "y": 1,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_3",
+      "name": "ROUTE 3",
+      "x": 5,
+      "y": 4,
+      "width": 4,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_4",
+      "name": "ROUTE 4",
+      "x": 8,
+      "y": 3,
+      "width": 6,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_5",
+      "name": "ROUTE 5",
+      "x": 14,
+      "y": 4,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_ROUTE_6",
+      "name": "ROUTE 6",
+      "x": 14,
+      "y": 7,
+      "width": 1,
+      "height": 2
+    },
+    {
+      "id": "MAPSEC_ROUTE_7",
+      "name": "ROUTE 7",
+      "x": 12,
+      "y": 6,
+      "width": 2,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_8",
+      "name": "ROUTE 8",
+      "x": 15,
+      "y": 6,
+      "width": 3,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_ROUTE_9",
+      "name": "ROUTE 9",
+      "x": 15,
+      "y": 3,
+      "width": 3,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_SAFFRON_CITY",
+      "name": "SAFFRON CITY",
+      "x": 14,
+      "y": 6,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_SEAFOAM_ISLANDS",
+      "name": "SEAFOAM ISLANDS",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_SILPH_CO",
+      "name": "SILPH CO.",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_S_S_ANNE",
+      "name": "S.S. ANNE",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_UNDERGROUND_PATH",
+      "name": "UNDERGROUND PATH",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_UNDERGROUND_PATH_2",
+      "name": "UNDERGROUND PATH",
+      "name_clone": true,
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_VERMILION_CITY",
+      "name": "VERMILION CITY",
+      "x": 14,
+      "y": 9,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_VIRIDIAN_CITY",
+      "name": "VIRIDIAN CITY",
+      "x": 4,
+      "y": 8,
+      "width": 1,
+      "height": 1
+    },
+    {
+      "id": "MAPSEC_VIRIDIAN_FOREST",
+      "name": "VIRIDIAN FOREST",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    }
+  ],
+  "maps": [
+    {
+      "map_id": "CeladonCity",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_1F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_2F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_3F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_Roof",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_Condominiums_RoofRoom",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_1F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 1
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_2F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 2
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_3F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 3
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_4F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 4
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_5F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 5
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_Elevator",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_DepartmentStore_Roof",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 127
+    },
+    {
+      "map_id": "CeladonCity_GameCorner",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_GameCorner_PrizeRoom",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_Gym",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_Hotel",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_House1",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_PokemonCenter_1F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_PokemonCenter_2F",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeladonCity_Restaurant",
+      "section_id": "MAPSEC_CELADON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCave_1F",
+      "section_id": "MAPSEC_CERULEAN_CAVE",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCave_2F",
+      "section_id": "MAPSEC_CERULEAN_CAVE",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCave_B1F",
+      "section_id": "MAPSEC_CERULEAN_CAVE",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_BikeShop",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_Gym",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_House1",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_House2",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_House3",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_House4",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_House5",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_Mart",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_PokemonCenter_1F",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CeruleanCity_PokemonCenter_2F",
+      "section_id": "MAPSEC_CERULEAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland_Gym",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland_Mart",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonCenter_1F",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonCenter_2F",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonLab_Entrance",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonLab_ExperimentRoom",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonLab_Lounge",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "CinnabarIsland_PokemonLab_ResearchRoom",
+      "section_id": "MAPSEC_CINNABAR_ISLAND",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "DiglettsCave_B1F",
+      "section_id": "MAPSEC_DIGLETTS_CAVE",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "DiglettsCave_NorthEntrance",
+      "section_id": "MAPSEC_DIGLETTS_CAVE",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "DiglettsCave_SouthEntrance",
+      "section_id": "MAPSEC_DIGLETTS_CAVE",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_Gym",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_House1",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_House2",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_House3",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_Mart",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_PokemonCenter_1F",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_PokemonCenter_2F",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_SafariZone_Entrance",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_SafariZone_Office",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "FuchsiaCity_WardensHouse",
+      "section_id": "MAPSEC_FUCHSIA_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "IndigoPlateau_Exterior",
+      "section_id": "MAPSEC_INDIGO_PLATEAU",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "IndigoPlateau_PokemonCenter_1F",
+      "section_id": "MAPSEC_INDIGO_PLATEAU",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "IndigoPlateau_PokemonCenter_2F",
+      "section_id": "MAPSEC_INDIGO_PLATEAU",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "LavenderTown",
+      "section_id": "MAPSEC_LAVENDER_TOWN",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "LavenderTown_House1",
+      "section_id": "MAPSEC_LAVENDER_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "LavenderTown_House2",
+      "section_id": "MAPSEC_LAVENDER_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "LavenderTown_Mart",
+      "section_id": "MAPSEC_LAVENDER_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "LavenderTown_PokemonCenter_1F",
+      "section_id": "MAPSEC_LAVENDER_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "LavenderTown_PokemonCenter_2F",
+      "section_id": "MAPSEC_LAVENDER_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "LavenderTown_VolunteerPokemonHouse",
+      "section_id": "MAPSEC_LAVENDER_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "MtMoon_1F",
+      "section_id": "MAPSEC_MT_MOON",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "MtMoon_B1F",
+      "section_id": "MAPSEC_MT_MOON",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "MtMoon_B2F",
+      "section_id": "MAPSEC_MT_MOON",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "PalletTown",
+      "section_id": "MAPSEC_PALLET_TOWN",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "PalletTown_PlayersHouse_1F",
+      "section_id": "MAPSEC_PALLET_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PalletTown_PlayersHouse_2F",
+      "section_id": "MAPSEC_PALLET_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PalletTown_ProfessorOaksLab",
+      "section_id": "MAPSEC_PALLET_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PalletTown_RivalsHouse",
+      "section_id": "MAPSEC_PALLET_TOWN",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity_Gym",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity_House1",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity_House2",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity_Mart",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity_Museum_1F",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity_Museum_2F",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity_PokemonCenter_1F",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PewterCity_PokemonCenter_2F",
+      "section_id": "MAPSEC_PEWTER_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonLeague_AgathasRoom",
+      "section_id": "MAPSEC_POKEMON_LEAGUE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonLeague_BrunosRoom",
+      "section_id": "MAPSEC_POKEMON_LEAGUE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonLeague_ChampionsRoom",
+      "section_id": "MAPSEC_POKEMON_LEAGUE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonLeague_HallOfFame",
+      "section_id": "MAPSEC_POKEMON_LEAGUE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonLeague_LancesRoom",
+      "section_id": "MAPSEC_POKEMON_LEAGUE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonLeague_LoreleisRoom",
+      "section_id": "MAPSEC_POKEMON_LEAGUE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonMansion_1F",
+      "section_id": "MAPSEC_POKEMON_MANSION",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonMansion_2F",
+      "section_id": "MAPSEC_POKEMON_MANSION",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonMansion_3F",
+      "section_id": "MAPSEC_POKEMON_MANSION",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonMansion_B1F",
+      "section_id": "MAPSEC_POKEMON_MANSION",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonTower_1F",
+      "section_id": "MAPSEC_POKEMON_TOWER",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonTower_2F",
+      "section_id": "MAPSEC_POKEMON_TOWER",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonTower_3F",
+      "section_id": "MAPSEC_POKEMON_TOWER",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonTower_4F",
+      "section_id": "MAPSEC_POKEMON_TOWER",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonTower_5F",
+      "section_id": "MAPSEC_POKEMON_TOWER",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonTower_6F",
+      "section_id": "MAPSEC_POKEMON_TOWER",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PokemonTower_7F",
+      "section_id": "MAPSEC_POKEMON_TOWER",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "PowerPlant",
+      "section_id": "MAPSEC_POWER_PLANT",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "RockTunnel_1F",
+      "section_id": "MAPSEC_ROCK_TUNNEL",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "RockTunnel_B1F",
+      "section_id": "MAPSEC_ROCK_TUNNEL",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "RocketHideout_B1F",
+      "section_id": "MAPSEC_ROCKET_HIDEOUT",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": -1
+    },
+    {
+      "map_id": "RocketHideout_B2F",
+      "section_id": "MAPSEC_ROCKET_HIDEOUT",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": -2
+    },
+    {
+      "map_id": "RocketHideout_B3F",
+      "section_id": "MAPSEC_ROCKET_HIDEOUT",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": -3
+    },
+    {
+      "map_id": "RocketHideout_B4F",
+      "section_id": "MAPSEC_ROCKET_HIDEOUT",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": -4
+    },
+    {
+      "map_id": "RocketHideout_Elevator",
+      "section_id": "MAPSEC_ROCKET_HIDEOUT",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route1",
+      "section_id": "MAPSEC_ROUTE_1",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route10",
+      "section_id": "MAPSEC_ROUTE_10",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route10_PokemonCenter_1F",
+      "section_id": "MAPSEC_ROUTE_10",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route10_PokemonCenter_2F",
+      "section_id": "MAPSEC_ROUTE_10",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route11",
+      "section_id": "MAPSEC_ROUTE_11",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route11_EastEntrance_1F",
+      "section_id": "MAPSEC_ROUTE_11",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route11_EastEntrance_2F",
+      "section_id": "MAPSEC_ROUTE_11",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route12",
+      "section_id": "MAPSEC_ROUTE_12",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route12_FishingHouse",
+      "section_id": "MAPSEC_ROUTE_12",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route12_NorthEntrance_1F",
+      "section_id": "MAPSEC_ROUTE_12",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route12_NorthEntrance_2F",
+      "section_id": "MAPSEC_ROUTE_12",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route13",
+      "section_id": "MAPSEC_ROUTE_13",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route14",
+      "section_id": "MAPSEC_ROUTE_14",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route15",
+      "section_id": "MAPSEC_ROUTE_15",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route15_WestEntrance_1F",
+      "section_id": "MAPSEC_ROUTE_15",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route15_WestEntrance_2F",
+      "section_id": "MAPSEC_ROUTE_15",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route16",
+      "section_id": "MAPSEC_ROUTE_16",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route16_House",
+      "section_id": "MAPSEC_ROUTE_16",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route16_NorthEntrance_1F",
+      "section_id": "MAPSEC_ROUTE_16",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route16_NorthEntrance_2F",
+      "section_id": "MAPSEC_ROUTE_16",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route17",
+      "section_id": "MAPSEC_ROUTE_17",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route18",
+      "section_id": "MAPSEC_ROUTE_18",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route18_EastEntrance_1F",
+      "section_id": "MAPSEC_ROUTE_18",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route18_EastEntrance_2F",
+      "section_id": "MAPSEC_ROUTE_18",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route19",
+      "section_id": "MAPSEC_ROUTE_19",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route19_UnusedHouse",
+      "section_id": "MAPSEC_ROUTE_19",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route2",
+      "section_id": "MAPSEC_ROUTE_2",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route20",
+      "section_id": "MAPSEC_ROUTE_20",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route21_North",
+      "section_id": "MAPSEC_ROUTE_21",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route21_South",
+      "section_id": "MAPSEC_ROUTE_21",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route22",
+      "section_id": "MAPSEC_ROUTE_22",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route22_NorthEntrance",
+      "section_id": "MAPSEC_ROUTE_22",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route23",
+      "section_id": "MAPSEC_ROUTE_23",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route23_UnusedHouse",
+      "section_id": "MAPSEC_ROUTE_23",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route24",
+      "section_id": "MAPSEC_ROUTE_24",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route25",
+      "section_id": "MAPSEC_ROUTE_25",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route25_SeaCottage",
+      "section_id": "MAPSEC_ROUTE_25",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route2_EastBuilding",
+      "section_id": "MAPSEC_ROUTE_2",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route2_House",
+      "section_id": "MAPSEC_ROUTE_2",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route2_ViridianForest_NorthEntrance",
+      "section_id": "MAPSEC_ROUTE_2",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route2_ViridianForest_SouthEntrance",
+      "section_id": "MAPSEC_ROUTE_2",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route3",
+      "section_id": "MAPSEC_ROUTE_3",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route4",
+      "section_id": "MAPSEC_ROUTE_4",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route4_PokemonCenter_1F",
+      "section_id": "MAPSEC_ROUTE_4",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route4_PokemonCenter_2F",
+      "section_id": "MAPSEC_ROUTE_4",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route5",
+      "section_id": "MAPSEC_ROUTE_5",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route5_PokemonDayCare",
+      "section_id": "MAPSEC_ROUTE_5",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route5_SouthEntrance",
+      "section_id": "MAPSEC_ROUTE_5",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route6",
+      "section_id": "MAPSEC_ROUTE_6",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route6_NorthEntrance",
+      "section_id": "MAPSEC_ROUTE_6",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route6_UnusedHouse",
+      "section_id": "MAPSEC_ROUTE_6",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route7",
+      "section_id": "MAPSEC_ROUTE_7",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route7_EastEntrance",
+      "section_id": "MAPSEC_ROUTE_7",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route8",
+      "section_id": "MAPSEC_ROUTE_8",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "Route8_WestEntrance",
+      "section_id": "MAPSEC_ROUTE_8",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "Route9",
+      "section_id": "MAPSEC_ROUTE_9",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_1F_Corridor",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_1F_Room1",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_1F_Room2",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_1F_Room3",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_1F_Room4",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_1F_Room5",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_1F_Room6",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_1F_Room7",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_2F_Corridor",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_2F_Room1",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_2F_Room2",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_2F_Room3",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_2F_Room4",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_2F_Room5",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_2F_Room6",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_3F_Corridor",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_B1F_Corridor",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_B1F_Room1",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_B1F_Room2",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_B1F_Room3",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_B1F_Room4",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_B1F_Room5",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_CaptainsOffice",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_Deck",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_Exterior",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SSAnne_Kitchen",
+      "section_id": "MAPSEC_S_S_ANNE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_Center",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_Center_RestHouse",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_East",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_East_RestHouse",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_North",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_North_RestHouse",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_SecretHouse",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_West",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    },
+    {
+      "map_id": "SafariZone_West_RestHouse",
+      "section_id": "MAPSEC_KANTO_SAFARI_ZONE",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_Connection",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_CopycatsHouse_1F",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_CopycatsHouse_2F",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_Dojo",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_Gym",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_House",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_Mart",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_MrPsychicsHouse",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_PokemonCenter_1F",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_PokemonCenter_2F",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SaffronCity_PokemonTrainerFanClub",
+      "section_id": "MAPSEC_SAFFRON_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "SeafoamIslands_1F",
+      "section_id": "MAPSEC_SEAFOAM_ISLANDS",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "SeafoamIslands_B1F",
+      "section_id": "MAPSEC_SEAFOAM_ISLANDS",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "SeafoamIslands_B2F",
+      "section_id": "MAPSEC_SEAFOAM_ISLANDS",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "SeafoamIslands_B3F",
+      "section_id": "MAPSEC_SEAFOAM_ISLANDS",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "SeafoamIslands_B4F",
+      "section_id": "MAPSEC_SEAFOAM_ISLANDS",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "SilphCo_10F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 10
+    },
+    {
+      "map_id": "SilphCo_11F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 11
+    },
+    {
+      "map_id": "SilphCo_1F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 1
+    },
+    {
+      "map_id": "SilphCo_2F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 2
+    },
+    {
+      "map_id": "SilphCo_3F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 3
+    },
+    {
+      "map_id": "SilphCo_4F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 4
+    },
+    {
+      "map_id": "SilphCo_5F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 5
+    },
+    {
+      "map_id": "SilphCo_6F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 6
+    },
+    {
+      "map_id": "SilphCo_7F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 7
+    },
+    {
+      "map_id": "SilphCo_8F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 8
+    },
+    {
+      "map_id": "SilphCo_9F",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 9
+    },
+    {
+      "map_id": "SilphCo_Elevator",
+      "section_id": "MAPSEC_SILPH_CO",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "UndergroundPath_EastEntrance",
+      "section_id": "MAPSEC_UNDERGROUND_PATH_2",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "UndergroundPath_EastWestTunnel",
+      "section_id": "MAPSEC_UNDERGROUND_PATH_2",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "UndergroundPath_NorthEntrance",
+      "section_id": "MAPSEC_UNDERGROUND_PATH",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "UndergroundPath_NorthSouthTunnel",
+      "section_id": "MAPSEC_UNDERGROUND_PATH",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "UndergroundPath_SouthEntrance",
+      "section_id": "MAPSEC_UNDERGROUND_PATH",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "UndergroundPath_WestEntrance",
+      "section_id": "MAPSEC_UNDERGROUND_PATH_2",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity_Gym",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity_House1",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity_House2",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity_House3",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity_Mart",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity_PokemonCenter_1F",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity_PokemonCenter_2F",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VermilionCity_PokemonFanClub",
+      "section_id": "MAPSEC_VERMILION_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "VictoryRoad_1F",
+      "section_id": "MAPSEC_KANTO_VICTORY_ROAD",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "VictoryRoad_2F",
+      "section_id": "MAPSEC_KANTO_VICTORY_ROAD",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "VictoryRoad_3F",
+      "section_id": "MAPSEC_KANTO_VICTORY_ROAD",
+      "type": "MAP_TYPE_UNDERGROUND",
+      "floor": 0
+    },
+    {
+      "map_id": "ViridianCity",
+      "section_id": "MAPSEC_VIRIDIAN_CITY",
+      "type": "MAP_TYPE_TOWN",
+      "floor": 0
+    },
+    {
+      "map_id": "ViridianCity_Gym",
+      "section_id": "MAPSEC_VIRIDIAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "ViridianCity_House",
+      "section_id": "MAPSEC_VIRIDIAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "ViridianCity_Mart",
+      "section_id": "MAPSEC_VIRIDIAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "ViridianCity_PokemonCenter_1F",
+      "section_id": "MAPSEC_VIRIDIAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "ViridianCity_PokemonCenter_2F",
+      "section_id": "MAPSEC_VIRIDIAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "ViridianCity_School",
+      "section_id": "MAPSEC_VIRIDIAN_CITY",
+      "type": "MAP_TYPE_INDOOR",
+      "floor": 0
+    },
+    {
+      "map_id": "ViridianForest",
+      "section_id": "MAPSEC_VIRIDIAN_FOREST",
+      "type": "MAP_TYPE_ROUTE",
+      "floor": 0
+    }
+  ],
+  "source": [
+    {
+      "path": "src/data/region_map/region_map_sections.json",
+      "sha256": "82e456cbe86a57ebc4bd0d88d6e000e83e28340895ac038079c38d415bc6de5f"
+    },
+    {
+      "path": "src/data/region_map/region_map_layout_kanto.h",
+      "sha256": "62b8f2e60891a97cb44bb16f52c2a1fb45be5f2caff5f0db86dd36dbe3b5c194"
+    }
+  ],
+  "display_note": "Schematic cells and positions extracted from the original Kanto region map; viewing a map does not move a person."
+}

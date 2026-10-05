@@ -1,0 +1,127 @@
+{
+  "actor": "item_ball",
+  "anim_table_symbol": "sAnimTable_Inanimate",
+  "anims": {
+    "ANIM_STAY_STILL": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 8,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_StayStill"
+    }
+  },
+  "availability_note": "INCBIN paths name .4bpp/.gbapal assets that are absent from this checkout; the byte-identical converted forms actually shipped (.png sheets, .pal palettes) are what get copied. No pixels were redrawn or fabricated.",
+  "descriptor_source_sha256": {
+    "src/data/object_events/object_event_anims.h": "a484f38af198398f763c1d5f239dddd4397bb4cc7eab48c2b2e992552d767b0e",
+    "src/data/object_events/object_event_graphics.h": "0ab0217ef739fe47c2cc703c863f5a4b8a4bf9b9312dc2bebb880fe0bce97cec",
+    "src/data/object_events/object_event_graphics_info.h": "fc19a22d4471e83653e80257145f08c3b6d0b59868974399541a8bc3119ef512",
+    "src/data/object_events/object_event_graphics_info_pointers.h": "a5e006f4855f19bf42c27e78f5c1866fdecccb687d228fbe608376f09ee7547c",
+    "src/data/object_events/object_event_pic_tables.h": "7210ac3a847600c1e2778d6dcd5896e641e3b19f1d203841c4911bfe50769995",
+    "src/event_object_movement.c": "920f96b45569e702dd00997e7984effb3a7677ba2b68512b939eda69c2294254"
+  },
+  "descriptor_sources": [
+    "src/data/object_events/object_event_graphics_info.h",
+    "src/data/object_events/object_event_graphics_info_pointers.h",
+    "src/data/object_events/object_event_pic_tables.h",
+    "src/data/object_events/object_event_graphics.h",
+    "src/data/object_events/object_event_anims.h",
+    "src/event_object_movement.c"
+  ],
+  "gfx_constant": "OBJ_EVENT_GFX_ITEM_BALL",
+  "graphics_info": {
+    "affineAnims": "gDummySpriteAffineAnimTable",
+    "anims": "sAnimTable_Inanimate",
+    "disableReflectionPaletteLoad": "FALSE",
+    "height": "16",
+    "images": "sPicTable_ItemBall",
+    "inanimate": "TRUE",
+    "oam": "&gObjectEventBaseOam_16x16",
+    "paletteSlot": "PALSLOT_NPC_4",
+    "paletteTag": "OBJ_EVENT_PAL_TAG_NPC_WHITE",
+    "reflectionPaletteTag": "OBJ_EVENT_PAL_TAG_NONE",
+    "shadowSize": "SHADOW_SIZE_S",
+    "size": "128",
+    "subspriteTables": "gObjectEventSpriteOamTables_16x16",
+    "tileTag": "TAG_NONE",
+    "tracks": "TRACKS_NONE",
+    "width": "16"
+  },
+  "graphics_info_symbol": "gObjectEventGraphicsInfo_ItemBall",
+  "palette_binding": {
+    "binding_chain": [
+      "src/data/object_events/object_event_graphics_info.h:.paletteTag",
+      "src/event_object_movement.c:sObjectEventSpritePalettes",
+      "src/data/object_events/object_event_graphics.h:INCBIN_U16",
+      "graphics/object_events/palettes/npc_white.pal"
+    ],
+    "copied_pal": "content/actors/palettes/gObjectEventPal_NpcWhite.pal",
+    "copied_pal_sha256": "364226740461c8f31a71727ed46fd5e3d743582c9e37015f916a216742a61e1f",
+    "incbin_path_in_source": "graphics/object_events/palettes/npc_white.gbapal",
+    "incbin_present_in_checkout": false,
+    "pal_path_in_checkout": "graphics/object_events/palettes/npc_white.pal",
+    "pal_sha256": "364226740461c8f31a71727ed46fd5e3d743582c9e37015f916a216742a61e1f",
+    "paletteTag": "OBJ_EVENT_PAL_TAG_NPC_WHITE",
+    "palette_symbol": "gObjectEventPal_NpcWhite",
+    "resolved": true
+  },
+  "pic_frames": [
+    {
+      "byte_offset": 0,
+      "bytes": 128,
+      "frame": 0,
+      "grid_height": 2,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_ItemBall"
+    }
+  ],
+  "pic_table_symbol": "sPicTable_ItemBall",
+  "sheets": [
+    {
+      "copied_png": "content/actors/item_ball__gobjecteventpic_itemball.png",
+      "copied_png_pixels": [
+        16,
+        16
+      ],
+      "copied_png_sha256": "175afd1c4a7c0d9df6fca9e46386408a621384c7dda9a553830e309545549ba7",
+      "fourbpp_path_in_source": "graphics/object_events/pics/misc/item_ball.4bpp",
+      "fourbpp_present_in_checkout": false,
+      "frames": 1,
+      "grid_height": 2,
+      "grid_width": 2,
+      "is_primary": true,
+      "source_png": "graphics/object_events/pics/misc/item_ball.png",
+      "source_png_pixels": [
+        16,
+        16
+      ],
+      "source_png_sha256": "175afd1c4a7c0d9df6fca9e46386408a621384c7dda9a553830e309545549ba7",
+      "symbol": "gObjectEventPic_ItemBall"
+    }
+  ],
+  "source_revision": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "total_pic_frames": 1
+}
