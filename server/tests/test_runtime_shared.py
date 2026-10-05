@@ -220,3 +220,44 @@ def test_slow_observation_preparation_yields_to_clock_and_completed_minds(tmp_pa
         final=store.load_run('slow-preparation')[1]
         assert store.replay('slow-preparation').state_hash==final.state_hash
     finally:controller.close();store.close()
+
+
+def test_idle_quantum_never_delays_an_accepted_deadline(shared_world):
+    engine,store=shared_world;controller=RuntimeController(engine,store,'shared',ConcurrentProvider())
+    try:
+        controller._clock_anchor_time=100;controller._last_parallel_time=100
+        controller._clock_anchor_wall=time.monotonic();controller._speed='5';controller._last_shared_due=None
+        assert 1.9<controller._parallel_wait_delay()<=2
+        controller._last_shared_due=101
+        assert 0.1<controller._parallel_wait_delay()<=0.2
+        controller._last_shared_due=104
+        assert 0.7<controller._parallel_wait_delay()<=0.8
+        controller._speed='1';controller._last_shared_due=None
+        assert 1.9<controller._parallel_wait_delay()<=2
+    finally:controller.close()
+
+
+def test_model_response_wakes_idle_clock_before_coalesced_deadline(shared_world):
+    class HeldProvider(ConcurrentProvider):
+        def complete(self,observation,correction=None):
+            with self.lock:
+                self.calls.append((observation,correction));self.active+=1
+                self.maximum_active=max(self.maximum_active,self.active)
+            try:
+                assert self.release.wait(10)
+                return response()
+            finally:
+                with self.lock:self.active-=1
+    engine,store=shared_world;provider=HeldProvider()
+    controller=RuntimeController(engine,store,'shared',provider,concurrency=2)
+    try:
+        controller.resume('1')
+        wait_until(lambda:provider.maximum_active>=2)
+        assert controller._last_shared_due is None
+        # Both minds are pending and no accepted activity has a deadline. The
+        # callbacks must wake the two-second idle wait rather than await it.
+        provider.release.set()
+        wait_until(lambda:controller.status()['accepted_decisions']>=2,seconds=1)
+        assert store.load_run('shared')[1].simulated_time<2
+        assert controller.status()['failure'] is None
+    finally:provider.release.set();controller.close()

@@ -154,8 +154,14 @@ class AsyncHumanQueue:
 
     def _parallel_wait_delay(self):
         if self._speed=='fastest':return 0.001 if self._last_shared_due is not None else 0.5
-        next_wall=self._clock_anchor_wall+(self._last_parallel_time+1-self._clock_anchor_time)/int(self._speed)
-        return min(0.5,max(0.001,next_wall-time.monotonic()))
+        speed=int(self._speed)
+        next_time=self._last_parallel_time+min(10,2*speed)
+        if self._last_shared_due is not None:next_time=min(next_time,self._last_shared_due)
+        next_wall=self._clock_anchor_wall+(next_time-self._clock_anchor_time)/speed
+        # Idle needs/time can coalesce for at most two wall seconds. Accepted
+        # movement/readiness deadlines remain exact; request callbacks and
+        # explicit interaction wakes interrupt this wait and tick actual time.
+        return max(0.001,next_wall-time.monotonic())
 
     def _tick_parallel_clock(self, state):
         fastest=self._speed=='fastest'
