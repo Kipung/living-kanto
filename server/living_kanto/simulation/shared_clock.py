@@ -264,7 +264,7 @@ class SharedClockMixin:
                 evidence={'map_id':h['map_id'],'start':[h['x'],h['y']],'steps':[list(p)],'duration_seconds':1}
                 cell=m.cells.get(p,{})
                 forced_context=self._forced_context(h,intent,m,p)
-                ordinary=self._ordinary_tile_effects(working,hid,intent,cell,evidence,extra,rng,forced_context=forced_context) if int(cell.get('encounter_type',0))==0 else None
+                ordinary=self._ordinary_tile_effects(working,hid,intent,cell,evidence,extra,rng,forced_context=forced_context) if cell.get('encounter_type',0)==0 else None
                 if ordinary is not None:extra,evidence=ordinary
                 else:
                     source_state=working
