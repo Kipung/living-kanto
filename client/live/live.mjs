@@ -1,7 +1,7 @@
 import {loadActorFrames,drawActorFrame} from '/client/js/actor-frames.js';
 import {createFieldObjectRenderer} from '/client/js/field-objects.js';
 import {createTerrainOverlayRenderer} from '/client/js/terrain-overlays.js';
-import {place,actorId,eventActors,routeSegments,clockOnly,sharedClockLabel,activity,eventText,battleMessages,groupByMap,walkingDuration} from './model.mjs?v=shared-clock-1';
+import {place,actorId,eventActors,routeSegments,clockOnly,sharedClockLabel,worldProgress,activity,eventText,battleMessages,groupByMap,walkingDuration} from './model.mjs?v=world-progress-1';
 const $=id=>document.getElementById(id),M=window.Maps,canvas=$('scene');
 const actors=new Map(),pendingActors=new Set(),motions=new Map(),effects=new Map(),battleVersions=new Map();
 const field=createFieldObjectRenderer({onReady:draw}),terrain=createTerrainOverlayRenderer({onReady:draw});
@@ -41,6 +41,7 @@ function ingest(incoming,{initial=false}={}){
 }
 function accept(d){if(!d.state||d.state.state_version<(state?.state_version??-1))return;state=d.state;status=d.status||status;updateStatus();renderPeople();renderPerson();renderBattles();renderOverview();draw();}
 function updateStatus(){
+ const progress=worldProgress(state,runtimeInfo,status);for(const [id,value] of Object.entries({worldtime:progress.time,worldupdates:progress.updates,worlddecisions:progress.decisions,worldspeed:progress.clock,worldthinking:progress.thinking}))$(id).textContent=value;
  $('controls').href='/?world='+encodeURIComponent(world);
  if(!state){$('connection').textContent=world?'Reading saved world…':'Choose a saved world';$('notice').textContent=world?'Loading saved facts. Longer histories can take a moment to verify.':'';$('population').textContent='';$('replaywalk').disabled=true;return;}
  $('connection').textContent=world?(socket?.readyState===1?'Connected · ':'')+status+' · '+(runtimeInfo?.clock_mode==='shared'?'shared time ':'world time ')+(state?.simulated_time||0)+'s'+(state?.world_facts?.creative_modified?' · Creative history':''):'Choose a saved world';

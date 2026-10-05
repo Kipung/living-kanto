@@ -33,6 +33,18 @@ export function activity(human, state, runtime) {
   if (human.active_plan) return {label:'Travelling to '+place(human.active_plan.destination_map),icon:'➜',kind:'journey'};
   return {label:'Ready',icon:'·',kind:'ready'};
 }
+export function elapsedWorldTime(seconds){
+ if(!Number.isFinite(seconds)||seconds<0)return '—';
+ let rest=Math.floor(seconds);const days=Math.floor(rest/86400);rest%=86400;const hours=Math.floor(rest/3600);rest%=3600;const minutes=Math.floor(rest/60);rest%=60;
+ return days+'d '+String(hours).padStart(2,'0')+'h '+String(minutes).padStart(2,'0')+'m '+String(rest).padStart(2,'0')+'s';
+}
+export function worldProgress(state,runtime,status){
+ const paused=status==='paused',speed=runtime?.speed,rate=runtime?.actual_simulated_seconds_per_wall_second;
+ const request=speed===undefined?'—':speed==='fastest'?'fastest':speed+'×';
+ const clock=paused?'Paused · requested '+request:'Requested '+request+' · measured '+(Number.isFinite(rate)?rate.toFixed(2)+'×':'—')+(runtime?.clock_processing_limited?' · processing limited':'');
+ const active=paused?0:runtime?.queue_depth,pending=runtime?.pending_requests;const retiring=Number.isFinite(pending)&&Number.isFinite(active)?Math.max(0,pending-active):0;
+ return {time:elapsedWorldTime(state?.simulated_time),updates:Number.isFinite(state?.state_version)?String(state.state_version):'—',decisions:Number.isFinite(runtime?.accepted_decisions)?String(runtime.accepted_decisions):'—',clock,thinking:(Number.isFinite(active)?active:'—')+' / '+(runtime?.concurrency??'—')+(retiring?' · '+retiring+' retiring':'')};
+}
 export function sharedClockLabel(runtime){if(runtime?.clock_mode!=='shared')return '';const requested=runtime.speed==='fastest'?'fastest':(runtime.speed||1)+'×',rate=runtime.actual_simulated_seconds_per_wall_second;return 'Requested '+requested+(Number.isFinite(rate)?' · actual '+rate.toFixed(2)+'×':'')+(runtime.clock_processing_limited?' · processing limits the clock':'');}
 export function clockOnly(event){return event.event_kind==='world.shared_tick'&&!event.deterministic_inputs?.activity_completions?.length&&(event.deterministic_inputs?.routes||[]).every(row=>!row.event_kind||['human.moved','human.entered_map'].includes(row.event_kind));}
 export function eventText(event, humans) {
