@@ -373,3 +373,17 @@ def test_status_change_does_not_rekey_a_tampered_cache(store, external):
     store.set_status(run_id, 'paused')
     with pytest.raises(StoreError):
         store.load_run(run_id)
+
+
+@pytest.mark.parametrize('mutation', ["UPDATE runs SET state_hash='bad'", "UPDATE events SET event_hash='bad'"])
+def test_status_trigger_mutation_cannot_refresh_verified_cache(store, mutation):
+    run_id = _create(store)
+    prior = store.load_run(run_id)[1]
+    event = make_event(run_id, tick=1, prior_state=prior)
+    store.append_event(event, event.transaction['state_hash'])
+    store.load_run(run_id)
+    # DDL through this handle changes neither row bindings nor total_changes.
+    store._conn.execute('CREATE TRIGGER corrupt_status AFTER UPDATE OF status ON runs BEGIN '+mutation+'; END')
+    store.set_status(run_id, 'paused')
+    with pytest.raises(StoreError):
+        store.load_run(run_id)

@@ -234,7 +234,9 @@ class RunStore:
                 if not self._conn.in_transaction:self._conn.execute("BEGIN IMMEDIATE")
                 row=self._get_run_row(run_id)  # raises if unknown
                 cached=self._verified_cache.get(run_id)
-                verified=cached is not None and cached[0]==self._cache_key(row)
+                before_key=self._cache_key(row)
+                verified=cached is not None and cached[0]==before_key
+                changed=row["status"]!=status
                 if row["status"]!=status:
                     self._conn.execute(
                         "UPDATE runs SET status = ? WHERE run_id = ?", (status, run_id)
@@ -242,9 +244,14 @@ class RunStore:
                 # A status-only write cannot change verified canonical content.
                 # Rekey only a matching prior cache, under the SQLite writer
                 # lock; unknown/raw/external writes still require full replay.
-                prepared=(self._cache_key(self._get_run_row(run_id)),cached[1]) if verified else None
+                after=self._get_run_row(run_id);after_key=self._cache_key(after)
+                status_only=(before_key[0]==after_key[0] and
+                    after_key[1]-before_key[1]==int(changed) and
+                    all(row[key]==after[key] for key in row.keys() if key!='status'))
+                prepared=(after_key,cached[1]) if verified and status_only else None
                 self._conn.commit()
                 if prepared is not None:self._verified_cache[run_id]=prepared
+                else:self._verified_cache.pop(run_id,None)
             except Exception:
                 self._conn.rollback()
                 raise
