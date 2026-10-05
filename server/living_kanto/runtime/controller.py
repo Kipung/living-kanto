@@ -1,4 +1,4 @@
-"""Bounded serial inference and deterministic rotating human decision boundaries."""
+"""Private human decisions, legacy manual steps and an asynchronous shared clock."""
 from __future__ import annotations
 
 import json
@@ -10,9 +10,10 @@ from typing import Any
 
 from ..simulation.engine import EngineError, StaleActionError
 from .providers import ProviderError
+from .async_queue import AsyncHumanQueue
 
 
-class RuntimeController:
+class RuntimeController(AsyncHumanQueue):
     def __init__(self, engine, store, run_id: str, provider=None, actor_ids=None, concurrency=1):
         if type(concurrency) is not int or not 1<=concurrency<=8:raise ValueError("Runtime concurrency must be 1 through 8")
         self.concurrency=concurrency
@@ -53,6 +54,8 @@ class RuntimeController:
                 self._cursor = (self.actor_ids.index(actor) + 1) % len(self.actor_ids)
                 break
         store.set_status(run_id, "paused")
+        self._shared_runtime = False
+        self._init_async_queue()
 
     def status(self):
         with self.shared_lock:
@@ -61,6 +64,16 @@ class RuntimeController:
                     "speed": self._speed, "failure": dict(self._failure) if self._failure else None,
                     "inflight_actor": self._inflight, "accepted_decisions": self._accepted, "engine_continuations": self._continued,
                     "corrective_retries": self._retries, "queue_depth": len(self._inflight_actors), "concurrency":self.concurrency, "discarded_uncommitted_responses":self._discarded,
+                    "clock_mode": "shared" if self._shared_enabled(state) else "legacy",
+                    "inflight_actors": list(self._inflight_actors),
+                    "pending_requests": sum(not job['future'].done() for job in self._async_jobs.values()),
+                    "ready_queue_depth": self._ready_queue_depth,
+                    "stale_local_decisions": self._stale_local_decisions,
+                    "cancelled_requests": self._cancelled_requests,
+                    "clock_lag_seconds": self._clock_lag_seconds,
+                    "clock_processing_limited": self._clock_processing_limited,
+                    "clock_reanchors": self._clock_reanchors,
+                    "actual_simulated_seconds_per_wall_second": self._actual_clock_speed(state),
                     "state_version": state.state_version,
                     "simulated_time": state.simulated_time,
                     "last_decision_seconds": self._latencies[-1] if self._latencies else None,
@@ -79,6 +92,11 @@ class RuntimeController:
                 raise ValueError("Speed must be 1, 5, 20 or fastest")
             if speed is not None:
                 self._speed = str(speed)
+            if self._shared_supported():
+                if speed is None and not self._shared_runtime:
+                    self._speed = "1"
+                self._start_shared_queue()
+                self._shared_runtime = True
             self._failure = None
             self._running = True
             self.store.set_status(self.run_id, "running")
@@ -92,6 +110,7 @@ class RuntimeController:
         with self.shared_lock:
             self._generation += 1
             self._running = False
+            self._cancel_shared_queue()
             self.store.set_status(self.run_id, "paused")
             self._wake.set()
         return self.status()
@@ -102,6 +121,7 @@ class RuntimeController:
             self._generation += 1
             self._running = False
             self._closed = True
+            self._close_shared_queue()
             try:
                 self.store.set_status(self.run_id, "paused")
             except (RuntimeError, sqlite3.Error):
@@ -112,6 +132,8 @@ class RuntimeController:
 
     def step(self, human_id=None):
         """One accepted action atomically, or pause without changing committed state."""
+        if self._shared_runtime and self._running:
+            self.pause()
         if not self._decision_lock.acquire(blocking=False):
             raise RuntimeError("A human decision is already in flight")
         try:
@@ -120,6 +142,8 @@ class RuntimeController:
             self._decision_lock.release()
 
     def _step(self, human_id):
+        if self._shared_enabled(self.store.load_run(self.run_id)[1]):
+            return self._manual_shared_step(human_id)
         with self.shared_lock:
             if self._closed:
                 raise RuntimeError("Runtime controller is closed")
@@ -289,6 +313,11 @@ class RuntimeController:
                 self._wake.clear()
                 continue
             started = time.monotonic()
+            if self._shared_runtime:
+                self._parallel_iteration()
+                self._wake.wait(timeout=self._parallel_wait_delay())
+                self._wake.clear()
+                continue
             try:
                 self.step()
             except RuntimeError:
