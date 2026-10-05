@@ -11,12 +11,13 @@ from .engine import SimulationEngine, EngineError, StaleActionError, GENESIS_HEA
 from .maps import GameMap
 from .gameplay import GameplayMixin
 from .services import ServiceMixin
+from .shared_clock import SharedClockMixin
 from . import pickups,scenarios,scheduling
 from ..mechanics import BattleSession
 
 ROLE_COUNTS = {'aspiring_trainer':30,'gym_leader':8,'elite_four':4,'initial_champion':1,'professor':1,'service_staff':20,'shop_staff':10,'worker':10,'resident':16}
 
-class WorldEngine(ServiceMixin,GameplayMixin,SimulationEngine):
+class WorldEngine(SharedClockMixin,ServiceMixin,GameplayMixin,SimulationEngine):
     def __init__(self, content_root):
         self.content_root = Path(content_root)
         maps = {}
@@ -177,7 +178,7 @@ class WorldEngine(ServiceMixin,GameplayMixin,SimulationEngine):
         return self.commit_changes(store,run_id,[{'op':'set','path':'humans.player','value':h}],kind='human.created',actor='user',explanation='Create optional user trainer',provenance={'kind':'user'},expected_version=expected_version)[1]
 
     def runtime_blocker(self,state):
-        if 'player' in state.humans and self.active_battle(state,'player') and self.battle_actions(state,'player'):
+        if 'player' in state.humans and self.active_battle(state,'player') and (self.legal_actions(state,'player') if self.shared_clock_enabled(state) else self.battle_actions(state,'player')):
             return {'human_id':'player','reason':'Player battle input required'}
         return None
 
@@ -218,6 +219,9 @@ class WorldEngine(ServiceMixin,GameplayMixin,SimulationEngine):
         return obs
 
     def legal_actions(self,state,human_id):
+        if self.shared_clock_enabled(state):
+            shared=self.shared_legal_override(state,human_id)
+            if shared is not None:return shared
         battle=self.battle_actions(state,human_id)
         if battle is not None:return battle
         h=self._require_human(state,human_id)
@@ -253,9 +257,9 @@ class WorldEngine(ServiceMixin,GameplayMixin,SimulationEngine):
         acts.extend(self.gameplay_actions(state,human_id))
         return tuple(acts[:128])
 
-    def build_action_event(self,store,run_id,human_id,*,action,arguments,observation_version,expected_state_version,decision_explanation,decision_provenance,scripted_test_mind=False):
+    def build_action_event(self,store,run_id,human_id,*,action,arguments,observation_version,expected_state_version,decision_explanation,decision_provenance,scripted_test_mind=False,defer_time=False):
         if action in {'walk_to','travel_to','enter_map','wait','set_goal','remember','surf','stop_surf','cut','push_boulder','ride_elevator','open_card_door','journey_to','fly_to','flash','ride_bicycle','dismount_bicycle','toggle_mansion_switch','turn_to'}:
-            return super().build_action_event(store,run_id,human_id,action=action,arguments=arguments,observation_version=observation_version,expected_state_version=expected_state_version,decision_explanation=decision_explanation,decision_provenance=decision_provenance,scripted_test_mind=scripted_test_mind)
+            return super().build_action_event(store,run_id,human_id,action=action,arguments=arguments,observation_version=observation_version,expected_state_version=expected_state_version,decision_explanation=decision_explanation,decision_provenance=decision_provenance,scripted_test_mind=scripted_test_mind,defer_time=defer_time)
         _,state,head=store.load_run(run_id)
         if scripted_test_mind:raise EngineError('scripted production minds are forbidden')
         prov=dict(decision_provenance)
@@ -315,12 +319,12 @@ class WorldEngine(ServiceMixin,GameplayMixin,SimulationEngine):
             try:extra,kind,duration=self.gameplay_changes(state,human_id,action,args);changes.extend(extra)
             except (ValueError,KeyError) as exc:raise EngineError(str(exc)) from exc
         # Build without committing; RuntimeController owns the one commit boundary.
-        changes,completions=self.resolve_time_effects(state,changes,duration)
-        changes.append({'op':'advance_clock','seconds':duration});seth('last_decision',{'action':action,'arguments':args,'explanation':decision_explanation,'provenance':prov,'observation_version':observation_version})
+        changes,completions=self.resolve_time_effects(state,changes,duration) if not defer_time else (changes,[])
+        changes.append({'op':'advance_clock','seconds':0 if defer_time else duration});seth('last_decision',{'action':action,'arguments':args,'explanation':decision_explanation,'provenance':prov,'observation_version':observation_version})
         changes=expand_entity_sets(changes)
         new=state.with_advanced_version(changes);idx=state.state_version;eid=f'evt-{idx}-{content_hash(changes)[:24]}'
         update=StateUpdate(run_id=run_id,event_id=eid,event_index=idx,prior_state_version=idx,prior_state_hash=state.state_hash,previous_head=head,state_version=new.state_version,state_hash=new.state_hash,changes=changes).validate()
-        event=CanonicalEvent(run_id=run_id,event_id=eid,event_index=idx,state_version=new.state_version,previous_head=head,event_kind=kind,tick=new.tick,simulated_time=new.simulated_time,real_wall_time=self._wall_time(),causation={'human_id':human_id,'action':action,'action_arguments':args,'decision_explanation':decision_explanation,'provenance':prov},affected=[{'human_id':human_id}],before={},after={},deterministic_inputs={'activity_completions':completions} if completions else {},transaction={'kind':'state_update',**update.to_dict()},visibility={'public':True}).validate()
+        event=CanonicalEvent(run_id=run_id,event_id=eid,event_index=idx,state_version=new.state_version,previous_head=head,event_kind=kind,tick=new.tick,simulated_time=new.simulated_time,real_wall_time=self._wall_time(),causation={'human_id':human_id,'action':action,'action_arguments':args,'decision_explanation':decision_explanation,'provenance':prov},affected=[{'human_id':human_id}],before={},after={},deterministic_inputs={'duration_seconds':duration,**({'activity_completions':completions} if completions else {})},transaction={'kind':'state_update',**update.to_dict()},visibility={'public':True}).validate()
         return event,new
 
 

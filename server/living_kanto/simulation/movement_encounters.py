@@ -4,10 +4,10 @@ from ..mechanics.encounters import walking_encounter
 from ..mechanics.field_steps import field_steps
 from .field import actor_map
 
-def intercept(engine,state,hid,action,args,provenance,explanation,evidence,changes,duration):
+def intercept(engine,state,hid,action,args,provenance,explanation,evidence,changes,duration,*,rng=None):
  if action not in ('walk_to','travel_to','journey_to') or not evidence or not hasattr(engine,'start_walking_encounter'):return changes,duration,evidence,None
- h=state.humans[hid];actor=copy.deepcopy(h);rng=random.Random(state.world_facts.get('seed',1)+state.state_version*1009);party=[state.pokemon[p] for p in h.get('party',[]) if p in state.pokemon]
- segments=evidence.get('journey') or [{'map_id':h['map_id'],'start':[h['x'],h['y']],'steps':evidence.get('steps',[]),'transfer_completed':False}];walked=[];elapsed=0;hit=None;blackout=False;forced=False
+ h=state.humans[hid];actor=copy.deepcopy(h);rng=rng if rng is not None else random.Random(state.world_facts.get('seed',1)+state.state_version*1009);party=[state.pokemon[p] for p in h.get('party',[]) if p in state.pokemon]
+ segments=evidence.get('journey') or [{'map_id':h['map_id'],'start':[h['x'],h['y']],'steps':evidence.get('steps',[]),'transfer_completed':False}];walked=[];elapsed=0;hit=None;blackout=False;forced=bool((h.get('movement_intent') or {}).get('forced_movement',False))
  for segment in segments:
   actor.update(map_id=segment['map_id'],x=segment['start'][0],y=segment['start'][1]);actual=[];m=actor_map(engine.maps[actor['map_id']],actor)
   for p in segment['steps']:
@@ -30,6 +30,7 @@ def intercept(engine,state,hid,action,args,provenance,explanation,evidence,chang
   original=state.pokemon[mon['pokemon_id']]
   for key,value in mon.items():
    if original.get(key)!=value:changes.append({'op':'set','path':f'pokemon.{mon["pokemon_id"]}.{key}','value':value})
+ evidence={**evidence,'forced_movement':forced}
  if not hit and not blackout:
   changes.append({'op':'set','path':f'humans.{hid}.field_steps','value':actor.get('field_steps',{})})
   changes.append({'op':'set','path':f'humans.{hid}.field_encounter','value':actor.get('field_encounter',{})});return changes,duration,evidence,None

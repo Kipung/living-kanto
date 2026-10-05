@@ -243,6 +243,7 @@ class SimulationEngine:
         decision_explanation: str,
         decision_provenance: Mapping[str, Any],
         scripted_test_mind: bool = False,
+        defer_time: bool = False,
     ) -> tuple[CanonicalEvent, WorldState]:
         """Validate a choice against CURRENT state; return (event, new_state).
 
@@ -467,8 +468,8 @@ class SimulationEngine:
             if self.maps[final_map].events.get("map_type") in {"MAP_TYPE_ROUTE","MAP_TYPE_TOWN","MAP_TYPE_OCEAN_ROUTE","MAP_TYPE_CITY"}:changes.append({"op":"set","path":f"humans.{human_id}.field.flash_active","value":False})
             if not self.maps[final_map].events.get("allow_cycling",False):changes.append({"op":"set","path":f"humans.{human_id}.status.bicycle","value":False})
         time_hook=getattr(self,"resolve_time_effects",None)
-        if time_hook:changes,activity_completions=time_hook(state,changes,duration)
-        changes.append({"op": "advance_clock", "seconds": duration})
+        if time_hook and not defer_time:changes,activity_completions=time_hook(state,changes,duration)
+        changes.append({"op": "advance_clock", "seconds": 0 if defer_time else duration})
         changes.append({"op": "set", "path": f"humans.{human_id}.last_decision", "value": {"action": action, "arguments": args, "explanation": decision_explanation, "provenance": prov, "observation_version": observation_version}})
         new_state = state.with_advanced_version(changes)
 
@@ -507,7 +508,7 @@ class SimulationEngine:
             after={"position": {"map_id": new_state.humans[human_id]["map_id"],
                                 "x": int(new_state.humans[human_id]["x"]),
                                 "y": int(new_state.humans[human_id]["y"])}},
-            deterministic_inputs={"action_hash": action_hash, **({"route": route_evidence} if route_evidence is not None else {}),**({"activity_completions":activity_completions} if activity_completions else {})},
+            deterministic_inputs={"duration_seconds": duration, "action_hash": action_hash, **({"route": route_evidence} if route_evidence is not None else {}),**({"activity_completions":activity_completions} if activity_completions else {})},
             transaction={"kind": "state_update", **update.to_dict()},
             visibility={"private_to": [human_id]},
         )

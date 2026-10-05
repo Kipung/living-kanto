@@ -65,6 +65,7 @@ LEGAL_HUMAN_ACTIONS = frozenset(
         "cancel_service",
         "wait_until_ready",
         "cancel_activity",
+        "cancel_movement",
         "shop_buy",
         "shop_sell",
         "store_withdraw",
