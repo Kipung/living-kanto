@@ -52,7 +52,7 @@ function updateStatus(){
 async function loadWorld(id){
  const g=++generation;world=id;socket?.close();socket=null;clearTimeout(reconnect);state=null;runtimeInfo=null;selected=null;cursor=-1;events=[];motions.clear();effects.clear();replaying=false;battleVersions.clear();$('error').textContent='';for(const id of ['people','feed','battles','persondetail'])$(id).replaceChildren();$('now').textContent='Reading saved facts…';canvas.getContext('2d').clearRect(0,0,canvas.width,canvas.height);overviewCards.clear();areaPanels.clear();$('everyone').replaceChildren();$('areas').replaceChildren();
  const url=new URL(location.href);url.searchParams.set('world',id);history.replaceState(null,'',url);updateStatus();if(!id)return;
- try{const d=await get('/runs/'+encodeURIComponent(id));if(g!==generation)return;accept(d);const historyData=await get('/runs/'+encodeURIComponent(id)+'/events?after='+Math.max(-1,state.state_version-61));if(g!==generation)return;
+ try{const d=await get('/runs/'+encodeURIComponent(id));if(g!==generation)return;accept(d);const historyData=await get('/runs/'+encodeURIComponent(id)+'/events?after='+Math.max(-1,state.state_version-401));if(g!==generation)return;
   ingest(Array.isArray(historyData)?historyData:historyData.events,{initial:true});cursor=state.state_version-1;
   select(state.humans.player?'player':actorId([...events].reverse().find(e=>state.humans[actorId(e)])||{})||humans()[0]?.human_id,false);connect(g);updateStatus();
  }catch(error){if(g===generation){fail(error);reconnect=setTimeout(()=>loadWorld(id),4000);}}
