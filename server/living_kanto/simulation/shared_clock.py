@@ -172,7 +172,34 @@ class SharedClockMixin:
             steps.append({'kind':'transfer','map_id':segment['map_id'],'source':segment['source_exit'],'destination_map':segment['destination_map']})
         return steps
 
-    def _ordinary_tile_effects(self,state,hid,intent,cell,evidence,changes,rng):
+    def _forced_context(self,h,intent,game_map,point):
+        """Persist cartridge lastSpinTile momentum until STOP or collision.
+
+        Reference: field_player_avatar.c TryUpdatePlayerSpinDirection and
+        DoForcedMovement. Currents instead end when leaving a current tile.
+        Older saves infer missing typed metadata once from accepted past steps.
+        """
+        spin={0x54:'east',0x55:'west',0x56:'north',0x57:'south'}
+        current={0x50:'east',0x51:'west',0x52:'north',0x53:'south'}
+        mode=intent.get('forced_mode');direction=intent.get('forced_direction')
+        if 'forced_mode' not in intent:
+            last=None
+            for past in intent['steps'][:intent.get('cursor',0)] if 'steps' in intent else []:
+                if past['kind']!='tile':mode=direction=None;last=None;continue
+                source=self.maps[past['map_id']];position=tuple(past['position']);behavior=int(source.cells.get(position,{}).get('behavior',0));last=(source,position)
+                if behavior in spin:mode,direction='spin',spin[behavior]
+                elif behavior in current:mode,direction='current',current[behavior]
+                elif behavior==0x58 or mode=='current':mode=direction=None
+            if last and mode and direction and last[0]._step_basic(last[1],direction,surfing=bool(h.get('status',{}).get('surfing')) or bool(h.get('status',{}).get('source_forced_surfing'))) is None:mode=direction=None
+        behavior=int(game_map.cells.get(tuple(point),{}).get('behavior',0))
+        before=mode is not None or behavior in spin or behavior in current
+        if behavior in spin:mode,direction='spin',spin[behavior]
+        elif behavior in current:mode,direction='current',current[behavior]
+        elif behavior==0x58 or mode=='current':mode=direction=None
+        if mode and direction and game_map._step_basic(tuple(point),direction,surfing=bool(h.get('status',{}).get('surfing')) or bool(h.get('status',{}).get('source_forced_surfing'))) is None:mode=direction=None
+        return before,mode,direction
+
+    def _ordinary_tile_effects(self,state,hid,intent,cell,evidence,changes,rng,forced_context=None):
         """Reuse pure source counters without copying immutable route/history.
 
         Encounter terrain stays on the existing interceptor. Poison whiteout
@@ -184,13 +211,12 @@ class SharedClockMixin:
         compact={key:h[key] for key in ('human_id','map_id','field_steps','field_encounter','battle_id','safari') if key in h}
         compact.update(x=evidence['steps'][0][0],y=evidence['steps'][0][1])
         party=[state.pokemon[pid] for pid in h.get('party',[]) if pid in state.pokemon]
-        before_rng=rng.getstate();behavior=int(cell.get('behavior',0))
-        forced=bool(intent.get('forced_movement')) or behavior in range(0x50,0x58)
-        actor,party,blackout=field_steps(compact,party,rng,forced=forced)
+        before_rng=rng.getstate()
+        before,mode,direction=forced_context if forced_context is not None else self._forced_context(h,intent,actor_map(self.maps[h['map_id']],h),evidence['steps'][0])
+        actor,party,blackout=field_steps(compact,party,rng,forced=before)
         if blackout:
             rng.setstate(before_rng)
             return None
-        if behavior==0x58 or behavior not in range(0x50,0x54) and behavior not in range(0x54,0x58):forced=False
         actor,hit=walking_encounter(actor,cell,self.encounter_table(h['map_id']),party,rng,surfing=h.get('status',{}).get('surfing',False),bicycle=h.get('status',{}).get('bicycle',False))
         if hit:
             rng.setstate(before_rng)
@@ -200,7 +226,7 @@ class SharedClockMixin:
             for key,value in mon.items():
                 if original.get(key)!=value:changes.append({'op':'set','path':f"pokemon.{mon['pokemon_id']}.{key}",'value':value})
         changes.extend([{'op':'set','path':f'humans.{hid}.field_steps','value':actor.get('field_steps',{})},{'op':'set','path':f'humans.{hid}.field_encounter','value':actor.get('field_encounter',{})}])
-        return changes,{**evidence,'forced_movement':forced}
+        return changes,{**evidence,'forced_movement':mode is not None,'forced_mode':mode,'forced_direction':direction}
 
     def next_shared_due(self,state):
         times=[]
@@ -237,9 +263,17 @@ class SharedClockMixin:
                 if h.get('status',{}).get('surfing') and int(m.cells.get(p,{}).get('behavior',0)) not in WATER:extra.append({'op':'set','path':prefix+'status.surfing','value':False})
                 evidence={'map_id':h['map_id'],'start':[h['x'],h['y']],'steps':[list(p)],'duration_seconds':1}
                 cell=m.cells.get(p,{})
-                ordinary=self._ordinary_tile_effects(working,hid,intent,cell,evidence,extra,rng) if int(cell.get('encounter_type',0))==0 else None
+                forced_context=self._forced_context(h,intent,m,p)
+                ordinary=self._ordinary_tile_effects(working,hid,intent,cell,evidence,extra,rng,forced_context=forced_context) if int(cell.get('encounter_type',0))==0 else None
                 if ordinary is not None:extra,evidence=ordinary
-                else:extra,_,evidence,kind=intercept(self,working,hid,'travel_to',{'x':p[0],'y':p[1]},intent['provenance'],intent['explanation'],evidence,extra,1,rng=rng)
+                else:
+                    source_state=working
+                    if forced_context[0] and not h['movement_intent'].get('forced_movement') and int(cell.get('behavior',0)) not in range(0x50,0x58):
+                        # Rare legacy recovery on encounter terrain: the old
+                        # interceptor needs the recovered pre-step forced flag.
+                        source_state=working.apply_changes([{'op':'set','path':prefix+'movement_intent.forced_movement','value':True}]);source_state.state_hash=source_state.compute_state_hash()
+                    extra,_,evidence,kind=intercept(self,source_state,hid,'travel_to',{'x':p[0],'y':p[1]},intent['provenance'],intent['explanation'],evidence,extra,1,rng=rng)
+                    evidence.update(forced_movement=forced_context[1] is not None,forced_mode=forced_context[1],forced_direction=forced_context[2])
                 if not kind and int(m.cells.get(p,{}).get('behavior',0))==0x66:
                     dst,nx,ny=resolve_transfer(self.maps,m,*p,m.exit_target(*p),surfing=True);actor,scripts=transition_effects(self.maps,h,m,p,dst,(nx,ny))
                     for key in ('map_id','x','y','field','status','facing'):extra.append({'op':'set','path':prefix+key,'value':actor[key]})
@@ -270,7 +304,9 @@ class SharedClockMixin:
                 if h['map_id']==LAB and final_map=='CinnabarIsland_PokemonLab_Entrance' and h.get('acquisition',{}).get('reviving'):extra.append({'op':'set','path':prefix+'acquisition','value':transition_acquisition(h,LAB,final_map)})
                 if self.maps[final_map].events.get('map_type') in {'MAP_TYPE_ROUTE','MAP_TYPE_TOWN','MAP_TYPE_OCEAN_ROUTE','MAP_TYPE_CITY'}:extra.append({'op':'set','path':prefix+'field.flash_active','value':False})
                 if not self.maps[final_map].events.get('allow_cycling',False):extra.append({'op':'set','path':prefix+'status.bicycle','value':False})
-            if evidence and 'forced_movement' in evidence:intent['forced_movement']=evidence['forced_movement']
+            if evidence and 'forced_movement' in evidence:
+                for key in ('forced_movement','forced_mode','forced_direction'):
+                    if key in evidence:intent[key]=evidence[key]
             intent['cursor']+=1
             if kind=='human.fainted':intent=None
             elif kind:intent.update(paused_for_battle=True,next_due_at=target+1)
@@ -280,7 +316,7 @@ class SharedClockMixin:
             if intent is None:changes.append({'op':'set','path':prefix+'movement_intent','value':None})
             else:
                 for key,value in intent.items():
-                    if h['movement_intent'].get(key)!=value:changes.append({'op':'set','path':prefix+'movement_intent.'+key,'value':value})
+                    if key not in h['movement_intent'] or h['movement_intent'].get(key)!=value:changes.append({'op':'set','path':prefix+'movement_intent.'+key,'value':value})
             # Own position/owned-party deltas cannot affect another actor's next
             # accepted tile. Refresh the verified working world only when an
             # earlier actor mutated shared facts (e.g. another wild battle).

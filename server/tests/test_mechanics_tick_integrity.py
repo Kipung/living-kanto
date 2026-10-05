@@ -25,7 +25,8 @@ def test_compact_source_steps_match_existing_friendship_poison_repel_rng(game):
  s=state(game);intent={'forced_movement':False};cell=e.maps['PalletTown'].cells[(10,11)];evidence={'map_id':'PalletTown','start':[10,10],'steps':[[10,11]],'duration_seconds':1};base=[{'op':'set','path':f'humans.{hid}.y','value':11}];fast_rng=random.Random(17);old_rng=random.Random(17)
  fast_changes,fast_evidence=e._ordinary_tile_effects(s,hid,intent,cell,copy.deepcopy(evidence),copy.deepcopy(base),fast_rng)
  old_changes,_,old_evidence,kind=intercept(e,s,hid,'travel_to',{'x':10,'y':11},{'kind':'user'},'Declared source equivalence',copy.deepcopy(evidence),copy.deepcopy(base),1,rng=old_rng)
- assert kind is None and fast_evidence==old_evidence and fast_rng.getstate()==old_rng.getstate()
+ assert kind is None and {k:fast_evidence[k] for k in old_evidence}==old_evidence and fast_rng.getstate()==old_rng.getstate()
+ assert fast_evidence['forced_mode'] is None and fast_evidence['forced_direction'] is None
  assert s.apply_changes(fast_changes).to_dict()==s.apply_changes(old_changes).to_dict()
  assert s.pokemon[mon['pokemon_id']]['hp']==10
  assert s.apply_changes(fast_changes).pokemon[mon['pokemon_id']]['hp']==9
