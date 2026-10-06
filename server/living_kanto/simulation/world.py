@@ -65,7 +65,7 @@ class WorldEngine(SharedClockMixin,ServiceMixin,GameplayMixin,SimulationEngine):
     def build_activity_batch_event(self,store,run_id,choices):
         _,state,head=store.load_run(run_id)
         for choice in choices:
-            if choice['action'] not in {a.action for a in self.legal_actions(state,choice['human_id'])}:raise EngineError('Batch actor is not ready for this activity')
+            if choice['action'] not in {a.action for a in self.legal_actions_for_validation(state,choice['human_id'],choice['action'])}:raise EngineError('Batch actor is not ready for this activity')
         event,new=scheduling.build_batch_event(state,head,choices,self._wall_time())
         event.causation['runtime_order']=[c['human_id'] for c in choices]
         event.validate()
@@ -218,7 +218,7 @@ class WorldEngine(SharedClockMixin,ServiceMixin,GameplayMixin,SimulationEngine):
             obs.self_state['challenge_team_active']=human_id==record['opponent'] and not record['wild']
         return obs
 
-    def legal_actions(self,state,human_id):
+    def legal_actions(self,state,human_id,*,include_routes=True):
         if self.shared_clock_enabled(state):
             shared=self.shared_legal_override(state,human_id)
             if shared is not None:return shared
@@ -232,7 +232,7 @@ class WorldEngine(SharedClockMixin,ServiceMixin,GameplayMixin,SimulationEngine):
         if h.get('service_request'):
             # Every human may withdraw their own queued intention, including legacy self-requests.
             return (LegalAction(action='cancel_service',arguments={},known_consequences={'refund':h['service_request']['reserved_payment']}),)
-        acts=list(super().legal_actions(state,human_id))
+        acts=list(super().legal_actions(state,human_id,include_routes=include_routes))
         acts.extend(pickups.actions(h,self.maps[h['map_id']]))
         acts.extend(scenarios.scenario_actions(state,h,self.maps))
         from ..mechanics.acquisition import acquisition_actions
@@ -257,6 +257,24 @@ class WorldEngine(SharedClockMixin,ServiceMixin,GameplayMixin,SimulationEngine):
         acts.extend(self.gameplay_actions(state,human_id))
         return tuple(acts[:128])
 
+    def legal_actions_for_validation(self,state,human_id,action):
+        from inspect import signature
+        if 'include_routes' not in signature(self.legal_actions).parameters:
+            return self.legal_actions(state,human_id)
+        if action in {'travel_to','journey_to'}:
+            return self.legal_actions(state,human_id)
+        actions=self.legal_actions(state,human_id,include_routes=False)
+        # Full observations cap the menu at 128 entries. Omitting route entries
+        # must not expose an action that the full current menu would have hidden.
+        # At most 16 exits, 8 people, mansion statues, 4 local targets and 6
+        # public/active journey destinations can contribute route entries.
+        h=state.humans[human_id];gm=self.maps[h['map_id']]
+        omitted_upper_bound=34+len(gm.events.get('mansion_switch',{}).get('statues',[])) if gm.source_revision else 0
+        cutoff=max(0,128-omitted_upper_bound)
+        if any(a.action==action for a in actions[cutoff:]):
+            return self.legal_actions(state,human_id)
+        return actions
+
     def build_action_event(self,store,run_id,human_id,*,action,arguments,observation_version,expected_state_version,decision_explanation,decision_provenance,scripted_test_mind=False,defer_time=False):
         if action in {'walk_to','travel_to','enter_map','wait','set_goal','remember','surf','stop_surf','cut','push_boulder','ride_elevator','open_card_door','journey_to','fly_to','flash','ride_bicycle','dismount_bicycle','toggle_mansion_switch','turn_to'}:
             return super().build_action_event(store,run_id,human_id,action=action,arguments=arguments,observation_version=observation_version,expected_state_version=expected_state_version,decision_explanation=decision_explanation,decision_provenance=decision_provenance,scripted_test_mind=scripted_test_mind,defer_time=defer_time)
@@ -267,7 +285,7 @@ class WorldEngine(SharedClockMixin,ServiceMixin,GameplayMixin,SimulationEngine):
         if not decision_explanation.strip():raise EngineError('explanation required')
         if observation_version!=state.state_version or expected_state_version!=state.state_version:raise StaleActionError('stale action')
         h=self._require_human(state,human_id);args=dict(arguments)
-        legal=[a for a in self.legal_actions(state,human_id) if a.action==action]
+        legal=[a for a in self.legal_actions_for_validation(state,human_id,action) if a.action==action]
         if not legal:raise EngineError('action unavailable in this location')
         changes=[];duration=1;prefix=f'humans.{human_id}';kind='world.public_event'
         def seth(key,value):changes.append({'op':'set','path':f'{prefix}.{key}','value':value})

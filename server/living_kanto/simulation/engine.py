@@ -165,7 +165,7 @@ class SimulationEngine:
             revealed_battle_info={},
         )
 
-    def legal_actions(self, state: WorldState, human_id: str) -> tuple[LegalAction, ...]:
+    def legal_actions(self, state: WorldState, human_id: str, *, include_routes: bool = True) -> tuple[LegalAction, ...]:
         h = self._require_human(state, human_id)
         game_map = self._require_map(state, str(h["map_id"]))
         original_map = game_map
@@ -198,7 +198,7 @@ class SimulationEngine:
                 action="enter_map", arguments={"map_id": target},
                 known_consequences={"duration_seconds": ACTION_SECONDS},
             ))
-        if game_map.source_revision:
+        if game_map.source_revision and include_routes:
             candidates = sorted(game_map.exits, key=lambda p:(abs(p[0]-x)+abs(p[1]-y),p))[:16]
             candidates += [(int(o["x"]),int(o["y"])) for hid,o in sorted(state.humans.items()) if hid != human_id and o.get("map_id")==h["map_id"]][:8]
             candidates += [(int(bg["x"]),int(bg["y"])+1) for bg in original_map.events.get("mansion_switch",{}).get("statues",[])]
@@ -208,7 +208,7 @@ class SimulationEngine:
                 try: route = shortest_path(game_map,(x,y),dest,surfing=surfing)
                 except PathNotFound: continue
                 acts.append(LegalAction(action="travel_to",arguments={"x":dest[0],"y":dest[1]},known_consequences={"map_id":h["map_id"],"duration_seconds":len(route)*ACTION_SECONDS,"route_length":len(route),"destination_kind":"exit" if dest in game_map.exits else "local"}))
-        if game_map.source_revision:
+        if game_map.source_revision and include_routes:
             destinations=public_destinations(self.maps,h["map_id"])
             active=h.get("active_plan") or {}
             if active.get("kind")=="journey" and active.get("destination_map") not in destinations:destinations.append(active["destination_map"])
@@ -231,6 +231,12 @@ class SimulationEngine:
             action="remember", arguments={"text": "<non-empty text, <=200 chars>"},
             known_consequences={"duration_seconds": ACTION_SECONDS}))
         return tuple(acts)
+
+    def legal_actions_for_validation(self, state, human_id, action):
+        from inspect import signature
+        if 'include_routes' not in signature(self.legal_actions).parameters:
+            return self.legal_actions(state,human_id)
+        return self.legal_actions(state, human_id, include_routes=action in {'travel_to','journey_to'})
 
     # ------------------------------------------------------------- actions
 
@@ -267,7 +273,7 @@ class SimulationEngine:
                 f"{state.state_version}")
         h = self._require_human(state, human_id)
         args = dict(arguments)
-        legal = {la.action: la for la in self.legal_actions(state, human_id)}
+        legal = {la.action: la for la in self.legal_actions_for_validation(state, human_id, action)}
         if action not in legal:
             raise EngineError(f"action {action!r} is not legal for {human_id} right now")
         game_map = self._require_map(state, str(h["map_id"]))

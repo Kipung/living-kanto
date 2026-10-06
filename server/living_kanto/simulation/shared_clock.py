@@ -112,7 +112,7 @@ class SharedClockMixin:
             changes=[{'op':'set','path':f'humans.{hid}.movement_intent','value':None}];kind='human.movement_cancelled';details={}
         elif action in ('walk_to','travel_to','journey_to','enter_map'):
             if not self.shared_actor_ready(s,hid):raise EngineError('actor already executing an accepted intention')
-            if action not in {a.action for a in self.legal_actions(s,hid)}:raise EngineError('movement action unavailable')
+            if action not in {a.action for a in self.legal_actions_for_validation(s,hid,action)}:raise EngineError('movement action unavailable')
             steps=self._plan_movement(s,hid,action,args)
             intent={'kind':'scheduled_movement','intent_id':f'movement-{s.state_version}-{hid}','action':action,'arguments':copy.deepcopy(args),'explanation':explanation,'provenance':prov,'accepted_at':s.simulated_time,'accepted_state_version':s.state_version,'next_due_at':s.simulated_time+ACTION_SECONDS,'cursor':0,'steps':steps,'paused_for_battle':False}
             changes=[{'op':'set','path':f'humans.{hid}.movement_intent','value':intent}];kind='human.movement_started';details={'accepted_movement':{'human_id':hid,'intent_id':intent['intent_id'],'step_count':len(steps)}}
