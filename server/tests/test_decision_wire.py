@@ -75,3 +75,25 @@ def test_schema_option_enum_bounds_and_text_reason_contract():
 @pytest.mark.parametrize('obs',[{}, {'legal_actions':[]},{'legal_actions':[{'action':'x','arguments':{}}]}])
 def test_missing_menu_or_consequences_rejected(obs):
  with pytest.raises(Error):build(obs)
+
+def test_mixed_schema_branches_cover_all_options_with_exact_text_guards():
+ schema=build(observation()).response_schema;branches=schema['anyOf']
+ assert len(branches)==2
+ nontext,textual=(branch['properties'] for branch in branches)
+ assert nontext['option']['enum']==[1,4] and nontext['text']=={'const':''}
+ assert textual['option']['enum']==[2,3] and textual['text']=={'minLength':1}
+ assert sorted(nontext['option']['enum']+textual['option']['enum'])==schema['properties']['option']['enum']
+ assert not set(nontext['option']['enum']) & set(textual['option']['enum'])
+ assert set(schema['required'])=={'option','text','decision_explanation'} and schema['additionalProperties'] is False
+ assert 'if' not in schema and 'then' not in schema
+
+def test_all_nontext_schema_requires_empty_text():
+ obs=observation();obs['legal_actions']=[obs['legal_actions'][0],obs['legal_actions'][3]];schema=build(obs).response_schema
+ assert schema['properties']['text']['const']=='' and 'anyOf' not in schema
+ assert schema['properties']['option']['enum']==[1,2]
+
+def test_all_placeholder_schema_requires_nonempty_text():
+ obs=observation();obs['legal_actions']=[obs['legal_actions'][1],obs['legal_actions'][2]];schema=build(obs).response_schema
+ assert schema['properties']['text']['minLength']==1 and schema['properties']['text']['maxLength']==200
+ assert 'const' not in schema['properties']['text'] and 'anyOf' not in schema
+ assert schema['properties']['option']['enum']==[1,2]

@@ -63,7 +63,19 @@ class DecisionWire:
 
     @property
     def response_schema(self):
-        return {'type':'object','properties':{'option':{'type':'integer','enum':list(range(1,len(self._offered)+1)),'minimum':1,'maximum':len(self._offered)},'text':{'type':'string','minLength':0,'maxLength':200},'decision_explanation':{'type':'string','minLength':1,'maxLength':2000}},'required':['option','text','decision_explanation'],'additionalProperties':False}
+        schema={'type':'object','properties':{'option':{'type':'integer','enum':list(range(1,len(self._offered)+1)),'minimum':1,'maximum':len(self._offered)},'text':{'type':'string','minLength':0,'maxLength':200},'decision_explanation':{'type':'string','minLength':1,'maxLength':2000}},'required':['option','text','decision_explanation'],'additionalProperties':False}
+        text_options=[];nontext_options=[]
+        for number,offered in enumerate(self._offered,1):
+            text=offered['arguments'].get('text')
+            (text_options if isinstance(text,str) and text in TEXT_PLACEHOLDERS else nontext_options).append(number)
+        if not text_options:schema['properties']['text']['const']=''
+        elif not nontext_options:schema['properties']['text']['minLength']=1
+        else:
+            # anyOf is supported by the pilot's constrained-generation grammar;
+            # if/then is deliberately unnecessary. These branches cover the
+            # complete menu without constraining which intention is chosen.
+            schema['anyOf']=[{'properties':{'option':{'enum':nontext_options},'text':{'const':''}}},{'properties':{'option':{'enum':text_options},'text':{'minLength':1}}}]
+        return schema
 
     def decode(self,response):
         if isinstance(response,str):
