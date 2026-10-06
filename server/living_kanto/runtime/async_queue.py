@@ -1,7 +1,8 @@
 """Independent private human requests with one engine-owned shared clock.
 
-Workers perform inference only. A single pump records completed proposals and
-ticks deterministically; no worker reads or changes the canonical store.
+Workers prepare observations from detached read-only snapshots and perform
+inference. A single pump records completed proposals and ticks deterministically;
+no worker reads or changes the canonical store.
 """
 from __future__ import annotations
 
@@ -13,11 +14,14 @@ from .providers import ProviderError, NumberedDecisionError
 
 
 MAX_RUNTIME_CONCURRENCY = 32
+MAX_PREPARATION_WORKERS = 4
 
 
 class AsyncHumanQueue:
     def _init_async_queue(self):
         self._async_pool = None
+        self._preparation_pool = None
+        self._preparation_latencies = []
         self._async_jobs = {}
         self._async_sequence = 0
         self._dispatch_cursor = self._cursor
@@ -54,6 +58,8 @@ class AsyncHumanQueue:
             # The hard worker cap remains bounded across pause/resume. Old HTTP
             # calls retire in the same pool and still occupy dispatch capacity.
             self._async_pool = ThreadPoolExecutor(max_workers=MAX_RUNTIME_CONCURRENCY, thread_name_prefix='kanto-human')
+        if self._preparation_pool is None:
+            self._preparation_pool = ThreadPoolExecutor(max_workers=MAX_PREPARATION_WORKERS, thread_name_prefix='kanto-observation')
 
     def _cancel_shared_queue(self):
         for job in self._async_jobs.values():
@@ -65,6 +71,8 @@ class AsyncHumanQueue:
         self._cancel_shared_queue()
         if self._async_pool is not None:
             self._async_pool.shutdown(wait=False, cancel_futures=True)
+        if self._preparation_pool is not None:
+            self._preparation_pool.shutdown(wait=False, cancel_futures=True)
 
     def _request_human(self, observation, correction):
         # The worker has a private observation, never a world state or store.
@@ -75,6 +83,7 @@ class AsyncHumanQueue:
         if prior is None:
             self._async_sequence += 1
             job = {'sequence': self._async_sequence, 'generation': self._generation,
+                   'actor': observation.human_id, 'phase': 'inference',
                    'observation': observation, 'token': token,
                    'attempt': 0, 'started': time.monotonic()}
         else:
@@ -87,7 +96,7 @@ class AsyncHumanQueue:
     def _update_async_status(self):
         active = sorted((job for job in self._async_jobs.values()
                          if job['generation'] == self._generation), key=lambda job: job['sequence'])
-        self._inflight_actors = tuple(job['observation'].human_id for job in active)
+        self._inflight_actors = tuple(job['actor'] for job in active)
         self._inflight = self._inflight_actors[0] if self._inflight_actors else None
 
     def _shared_failure(self, actor, reason, observation_version=None, details=None):
@@ -101,7 +110,7 @@ class AsyncHumanQueue:
         self._wake.set()
 
     def _complete_human_requests(self):
-        completed = sorted((job for job in self._async_jobs.values() if job['future'].done()),
+        completed = sorted((job for job in self._async_jobs.values() if job['phase'] == 'inference' and job['future'].done()),
                            key=lambda job: job['sequence'])
         for job in completed:
             obs = job['observation']
@@ -201,8 +210,48 @@ class AsyncHumanQueue:
             self._clock_anchor_time=state.simulated_time;self._clock_anchor_wall=time.monotonic()
             self._clock_reanchors+=1
 
+    def _preparing_request_count(self):
+        return sum(job['phase'] == 'preparation' and not job['future'].done()
+                   for job in self._async_jobs.values())
+
+    def _prepare_human(self, snapshot, actor):
+        # load_run returns an independent verified state. Neither this worker
+        # nor inference receives the store; the snapshot is read-only and is
+        # never returned to the canonical pump as a replacement world state.
+        return self.engine.capture_decision_boundary(snapshot, actor)
+
+    def _complete_preparations(self):
+        completed = sorted((job for job in self._async_jobs.values()
+                            if job['phase'] == 'preparation' and job['future'].done()),
+                           key=lambda job: job['sequence'])
+        for job in completed:
+            actor = job['actor']
+            if job['generation'] != self._generation or self._closed:
+                self._async_jobs.pop(actor, None)
+                self._cancelled_requests += 1
+                continue
+            try:
+                observation, token = job['future'].result()
+                self._preparation_latencies.append(time.monotonic() - job['prepared_at'])
+                self._preparation_latencies = self._preparation_latencies[-100:]
+                if not observation.legal_actions:
+                    self._async_jobs.pop(actor, None)
+                    continue
+                job.update(phase='inference', observation=observation, token=token)
+                job['future'] = self._async_pool.submit(self._request_human, observation, None)
+                job['future'].add_done_callback(lambda future: self._wake.set())
+            except Exception as exc:
+                self._async_jobs.pop(actor, None)
+                self._shared_failure(actor, exc)
+                break
+        self._update_async_status()
+
     def _dispatch_ready_humans(self, state):
         capacity = max(0, self.concurrency - len(self._async_jobs))
+        # Retiring generations count toward both bounds. Do not enqueue an
+        # entire world behind slow preparation workers or duplicate an actor.
+        preparing = sum(job['phase'] == 'preparation' for job in self._async_jobs.values())
+        capacity = min(capacity, max(0, MAX_PREPARATION_WORKERS - preparing))
         waiting = []
         for offset in range(len(self.actor_ids)):
             index = (self._dispatch_cursor + offset) % len(self.actor_ids)
@@ -210,26 +259,18 @@ class AsyncHumanQueue:
             if actor not in self._async_jobs and self.engine.shared_actor_ready(state, actor):
                 waiting.append((index, actor))
         self._ready_queue_depth = len(waiting)
-        dispatched = 0
-        # Route/legal-action preparation can take hundreds of milliseconds.
-        # Prepare at most one observation before yielding to the clock and
-        # completed responses; an entire concurrent fill must not monopolize
-        # the canonical commit pump for several seconds.
-        for index, actor in waiting[:1]:
-            if dispatched >= capacity:
-                break
-            observation, token = self.engine.capture_decision_boundary(state, actor)
+        for index, actor in waiting[:capacity]:
+            self._async_sequence += 1
+            started = time.monotonic()
+            job = {'sequence': self._async_sequence, 'generation': self._generation,
+                   'actor': actor, 'phase': 'preparation', 'attempt': 0,
+                   'started': started, 'prepared_at': started}
+            job['future'] = self._preparation_pool.submit(self._prepare_human, state, actor)
+            job['future'].add_done_callback(lambda future: self._wake.set())
+            self._async_jobs[actor] = job
             self._dispatch_cursor = (index + 1) % len(self.actor_ids)
-            if not observation.legal_actions:
-                continue
-            self._submit_human(observation, token)
-            dispatched += 1
-        self._ready_queue_depth = max(0, self._ready_queue_depth - dispatched)
+        self._ready_queue_depth = max(0, len(waiting) - capacity)
         self._update_async_status()
-        if dispatched and len(waiting)>dispatched and len(self._async_jobs)<self.concurrency:
-            # Fill remaining slots promptly, but through another complete pump
-            # pass with refreshed state, ticks and accepted responses first.
-            self._wake.set()
 
     def _manual_shared_step(self, human_id):
         """A paused shared save accepts one intention or advances one due tick."""
@@ -319,6 +360,8 @@ class AsyncHumanQueue:
                         self._cancelled_requests += 1
                 self._tick_parallel_clock(state)
                 self._complete_human_requests()
+                if self._running:
+                    self._complete_preparations()
                 if self._running:
                     current=self.store.load_run(self.run_id)[1]
                     self._dispatch_ready_humans(current)

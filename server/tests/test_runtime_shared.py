@@ -210,12 +210,14 @@ def test_slow_observation_preparation_yields_to_clock_and_completed_minds(tmp_pa
     controller=RuntimeController(engine,store,'slow-preparation',provider,concurrency=4)
     try:
         controller.resume('20')
-        wait_until(lambda:len(captures)>=4)
+        wait_until(lambda:controller.status()['accepted_decisions']>=4)
+        wait_until(lambda:store.load_run('slow-preparation')[1].simulated_time>=1)
         controller.pause()
-        assert [row['actor'] for row in captures[:4]]==actors
-        assert captures[1]['simulated_time']>captures[0]['simulated_time']
-        assert captures[1]['accepted_before']>=1
-        assert captures[3]['accepted_before']>=2
+        assert {row['actor'] for row in captures[:4]}==set(actors)
+        # A bounded batch now prepares concurrently from one detached boundary.
+        assert len({row['simulated_time'] for row in captures[:4]})==1
+        assert all(row['accepted_before']==0 for row in captures[:4])
+        assert controller.status()['failure'] is None
         assert provider.maximum_active<=4
         final=store.load_run('slow-preparation')[1]
         assert store.replay('slow-preparation').state_hash==final.state_hash
