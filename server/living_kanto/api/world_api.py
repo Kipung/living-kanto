@@ -28,6 +28,7 @@ class Intervention(BaseModel):
     arguments:dict=Field(default_factory=dict)
 class Endpoint(BaseModel):
     base_url:str
+    additional_base_urls:list[str]=Field(default_factory=list,max_length=1)
     model_id:str
     kind:str='openai'
     timeout_seconds:float=60
@@ -62,7 +63,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
                 try:
                     if settings_path.exists():
                         settings=Endpoint.model_validate_json(settings_path.read_text());concurrency=settings.concurrency
-                        provider=LocalModelProvider(LocalModelConfig(settings.base_url,settings.model_id,settings.kind,settings.timeout_seconds,max_tokens=settings.max_tokens,response_protocol=settings.response_protocol))
+                        provider=LocalModelProvider(LocalModelConfig(settings.base_url,settings.model_id,settings.kind,settings.timeout_seconds,max_tokens=settings.max_tokens,response_protocol=settings.response_protocol,additional_endpoints=tuple(settings.additional_base_urls)))
                     else:provider=LocalModelProvider(LocalModelConfig.from_env())
                 except (ProviderError,ValueError):pass
                 controllers[run_id]=RuntimeController(engine(),store,run_id,provider,actor_ids=[h for h in s.humans if h!='player'],concurrency=concurrency)
@@ -113,7 +114,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
 
     @app.post('/runs/{run_id}/runtime')
     def configure(run_id:str,req:Endpoint):
-        try:provider=LocalModelProvider(LocalModelConfig(req.base_url,req.model_id,req.kind,req.timeout_seconds,max_tokens=req.max_tokens,response_protocol=req.response_protocol))
+        try:provider=LocalModelProvider(LocalModelConfig(req.base_url,req.model_id,req.kind,req.timeout_seconds,max_tokens=req.max_tokens,response_protocol=req.response_protocol,additional_endpoints=tuple(req.additional_base_urls)))
         except (ValueError,ProviderError) as exc:fail(exc)
         c=controller(run_id);c.pause()
         with c.shared_lock:
@@ -275,7 +276,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
         """
         if set(bundle)!={'format','metadata','genesis','events','inference_settings_included','state_hash','head_hash'} or bundle.get('format')!='living-kanto-run-v1' or bundle.get('inference_settings_included') is not False:
             raise HTTPException(400,detail='Unsupported portable run bundle')
-        forbidden={'api_key','authorization','password','credentials','base_url','endpoint','endpoint_url','model_endpoint'}
+        forbidden={'api_key','authorization','password','credentials','base_url','endpoint','endpoint_url','model_endpoint','additional_base_urls','additional_endpoints'}
         def reject_settings(value):
             if isinstance(value,dict):
                 for key,item in value.items():

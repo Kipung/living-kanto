@@ -15,7 +15,7 @@ from .providers import ProviderError, NumberedDecisionError
 from .preparation import preparation_mode, process_preparation_pool, prepare_in_process
 
 
-MAX_RUNTIME_CONCURRENCY = 32
+MAX_RUNTIME_CONCURRENCY = 64
 MAX_PREPARATION_WORKERS = 4
 
 

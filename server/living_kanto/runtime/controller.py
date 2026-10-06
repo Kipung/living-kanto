@@ -69,6 +69,7 @@ class RuntimeController(AsyncHumanQueue):
                     "pending_requests": sum(job.get('phase') == 'inference' and not job['future'].done() for job in self._async_jobs.values()),
                     "preparing_requests": self._preparing_request_count(),
                     "preparation_mode": self._preparation_mode,
+                    "model_lanes": getattr(self.provider, "lane_status", lambda: [])(),
                     "last_preparation_seconds": self._preparation_latencies[-1] if self._preparation_latencies else None,
                     "ready_queue_depth": self._ready_queue_depth,
                     "stale_local_decisions": self._stale_local_decisions,

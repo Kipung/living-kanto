@@ -236,6 +236,8 @@ def test_portable_import_preserves_history_and_rejects_tampering(world_client,tm
         assert invalid.post('/runs/import',json=damaged_receipt).status_code==400
         credentials=copy.deepcopy(bundle);credentials['metadata']['api_key']='secret-test'
         assert invalid.post('/runs/import',json=credentials).status_code==400
+        pooled_settings=copy.deepcopy(bundle);pooled_settings['metadata']['additional_base_urls']=['http://127.0.0.1:18888/v1']
+        assert invalid.post('/runs/import',json=pooled_settings).status_code==400
         assert not (tmp_path/'invalid'/f'{run}.db').exists()
 
 
@@ -331,16 +333,18 @@ def test_runtime_concurrency_local_settings_restart_and_export_exclusion(tmp_pat
     app=create_app(root,content_root=ROOT/'content',client_root=ROOT/'client')
     with TestClient(app) as client:
         run=create(client)
-        settings={'base_url':'http://127.0.0.1:18880/v1','model_id':'local-test-no-request','concurrency':32,'response_protocol':'numbered','max_tokens':384}
+        settings={'base_url':'http://127.0.0.1:18880/v1','model_id':'local-test-no-request','concurrency':64,'additional_base_urls':['http://127.0.0.1:18886/v1'],'response_protocol':'numbered','max_tokens':384}
         configured=client.post(f'/runs/{run}/runtime',json=settings)
-        assert configured.status_code==200 and configured.json()['concurrency']==32
+        assert configured.status_code==200 and configured.json()['concurrency']==64
         assert client.post(f'/runs/{run}/runtime',json={**settings,'concurrency':True}).status_code==422
-        assert client.post(f'/runs/{run}/runtime',json={**settings,'concurrency':33}).status_code==422
+        assert client.post(f'/runs/{run}/runtime',json={**settings,'concurrency':65}).status_code==422
         exported=client.get(f'/runs/{run}/export')
-        assert '18880' not in exported.text and 'local-test-no-request' not in exported.text
+        assert '18880' not in exported.text and '18886' not in exported.text and 'additional_base_urls' not in exported.text and 'local-test-no-request' not in exported.text
     restarted=create_app(root,content_root=ROOT/'content',client_root=ROOT/'client')
     with TestClient(restarted) as client:
         restored=client.get(f'/runs/{run}/runtime').json()
-        assert restored['concurrency']==32 and restored['model']=='local-test-no-request'
+        assert restored['concurrency']==64 and restored['model']=='local-test-no-request'
         config=restarted.state.get_runtime_controller(run).provider.config
         assert config.response_protocol=='numbered' and config.max_tokens==384
+        assert config.additional_endpoints==('http://127.0.0.1:18886/v1',)
+        assert len(restored['model_lanes'])==2

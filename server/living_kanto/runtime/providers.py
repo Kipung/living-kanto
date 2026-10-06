@@ -5,10 +5,11 @@ import ipaddress
 import json
 import os
 import socket
+import threading
 import urllib.error
 import urllib.parse
 import urllib.request
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from .decision_wire import build_decision_wire, DecisionWireError, TEXT_PLACEHOLDERS, _strict_object
 
 
@@ -31,6 +32,7 @@ class LocalModelConfig:
     api_key: str = ""
     enable_thinking: bool = False
     response_protocol: str = "canonical"
+    additional_endpoints: tuple[str, ...] = ()
 
     @classmethod
     def from_env(cls):
@@ -46,6 +48,12 @@ class LocalModelConfig:
                    os.environ.get("LIVING_KANTO_RESPONSE_PROTOCOL", "canonical"))
 
     def validate(self):
+        if not isinstance(self.additional_endpoints, (tuple, list)) or len(self.additional_endpoints) > 1 or any(not isinstance(endpoint, str) for endpoint in self.additional_endpoints):
+            raise ProviderError("Configure at most one additional local model endpoint")
+        if any(endpoint.rstrip('/') == self.endpoint.rstrip('/') for endpoint in self.additional_endpoints):
+            raise ProviderError("Additional local model endpoint must be distinct")
+        for endpoint in self.additional_endpoints:
+            replace(self, endpoint=endpoint, additional_endpoints=()).validate()
         url = urllib.parse.urlsplit(self.endpoint)
         if url.scheme not in {"http", "https"} or not url.hostname or url.username or url.password or url.query or url.fragment:
             raise ProviderError("Model endpoint must be a local HTTP(S) base URL")
@@ -78,8 +86,49 @@ class LocalModelProvider:
         self.model_id = config.model
         self.protocol = config.protocol if config.response_protocol == "canonical" else config.protocol + ":numbered-staged"
         self._opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), _NoRedirect())
+        self._lanes = ()
+        if config.additional_endpoints:
+            self._lanes = tuple(LocalModelProvider(replace(config, endpoint=endpoint, additional_endpoints=()))
+                                for endpoint in (config.endpoint, *config.additional_endpoints))
+            self.protocol += ':pool'
+            self._lane_lock = threading.Lock()
+            self._lane_cursor = 0
+            self._lane_active = [0] * len(self._lanes)
+            self._lane_completed = [0] * len(self._lanes)
+            self._lane_failed = [0] * len(self._lanes)
+
+    def lane_status(self):
+        if not self._lanes:
+            return []
+        with self._lane_lock:
+            return [{'lane': index + 1, 'active': self._lane_active[index],
+                     'completed': self._lane_completed[index], 'failed': self._lane_failed[index]}
+                    for index in range(len(self._lanes))]
+
+    def _pooled_complete(self, observation, correction):
+        with self._lane_lock:
+            order = [(self._lane_cursor + offset) % len(self._lanes) for offset in range(len(self._lanes))]
+            lane = min(order, key=lambda index: self._lane_active[index])
+            self._lane_active[lane] += 1
+            self._lane_cursor = (lane + 1) % len(self._lanes)
+        succeeded = False
+        try:
+            # One member owns the entire staged decision. Endpoint errors
+            # propagate directly; no failover or hidden replacement request.
+            result = self._lanes[lane].complete(observation, correction)
+            succeeded = True
+            return result
+        finally:
+            with self._lane_lock:
+                self._lane_active[lane] -= 1
+                if succeeded:
+                    self._lane_completed[lane] += 1
+                else:
+                    self._lane_failed[lane] += 1
 
     def complete(self, observation: dict, correction: str | None = None) -> str:
+        if self._lanes:
+            return self._pooled_complete(observation, correction)
         self.config.validate()
         wire = None
         if self.config.response_protocol == 'numbered':
