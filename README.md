@@ -1,23 +1,56 @@
 # Living Kanto
 
-Primary development now lives on Jetson (`/home/jetson/projects/living-kanto`); Spark worker1 runs the live simulation and local inference. The Mac copy in `Desktop/Project/living-kanto` is a preserved mirror. Read [development locations and workflow](docs/DEVELOPMENT_HOME.md) before making changes. The local startup below is for isolated development worlds, not the existing production save.
+A persistent Pokémon world where 100 AI-driven people live their own lives: travelling, working, talking, caring for Pokémon, and pursuing ambitions in a shared Kanto.
 
-This is the direct-build working application for the Pokémon FireRed world described in [the project guide](docs/PROJECT_GUIDE.md). OpenRig is stopped and is not required to launch this build. Human decisions use an explicitly configured local model. Without one, worlds remain paused and can be inspected; there is no scripted or cloud fallback.
+Living Kanto explores what happens when local language models make individual decisions inside a world with consistent rules and lasting consequences. Trainers can pursue badges, residents can build relationships, and everyday routines continue alongside battles and journeys. The long-term goal is to observe distinct lives and trainer careers emerge through the agents' own choices.
 
-## Run locally
+## From Bob's World to Living Kanto
 
-Python 3.10+ and Node.js/npm are required. This build was exercised with Python 3.14 on macOS. From this directory:
+Living Kanto grew out of my earlier work on Bob's World, a world simulator where a creator defines the environment and its laws, introduces living individuals, and observes what follows. Each creature makes decisions from its own private observations, while the simulation engine handles time, needs, and consequences.
+
+Living Kanto brings that experiment into Pokémon's Kanto region. Its familiar geography, towns, services, battles, and trainer progression give the agents a concrete world to inhabit. A journey toward the Pokémon League is one possible life; working in a shop, helping others, exploring, or changing direction can be part of the same simulation.
+
+This is a separate project that carries forward Bob's World's ideas about individual agency, private memories, validated actions, and persistent history, with systems built around Pokémon gameplay and a shared human society.
+
+## What is in the simulation?
+
+- **Kanto and the original 151 Pokémon:** FireRed-based maps and Generation III mechanics, with LeafGreen encounter availability included.
+- **Individual people:** 100 persistent AI humans with roles, goals, needs, relationships, inventories, and owned Pokémon.
+- **Everyday life:** work, rest, conversations, service queues, commitments, and concrete next steps.
+- **Trainer systems:** exploration, encounters, catching, battles, training, healing, items, PC storage, trading, gyms, and League challenges.
+- **Inspectable history:** person profiles show Pokémon, possessions, memories, plans, and searchable event history.
+- **Persistent worlds:** atomic saves, compressed event history, recovery checkpoints, portable exports, and replay without additional inference.
+
+## How it works
+
+Each person receives a private observation containing what they can perceive, their own relevant memories, and the actions currently available to them. A local model proposes an intention. The simulation engine validates it, resolves movement or gameplay, and records the resulting changes.
+
+Models choose actions; the engine owns the rules and outcomes. Accepted decisions have recorded provenance, and Creative interventions are recorded in the history. Shared world time supports ongoing activities alongside asynchronous decisions and background deliberation.
+
+The application uses a **Python/FastAPI backend**, **SQLite persistence**, and a **JavaScript/Canvas browser interface**. Inference connects to a separately running local model server through an OpenAI-compatible API or Ollama.
+
+## Ways to experience the world
+
+- **Observer:** watch the simulation and inspect people's lives.
+- **Survival:** enter the world as a player trainer.
+- **Creative:** make explicit, recorded changes to the world.
+
+## Getting started
+
+You will need Python 3.10 or newer, Node.js/npm, and a local model server for autonomous decisions.
 
 ```sh
+git clone https://github.com/Kipung/living-kanto.git
+cd living-kanto
 bash tools/setup_local.sh
 bash tools/run_local.sh
 ```
 
-Open http://localhost:8877. Create a world, choose Observer, Survival, or Creative, and inspect the population. Each new world starts paused with exactly 100 AI humans. Survival adds one separately identified player. Configure the local endpoint and model in the viewer before stepping or resuming AI. Start with one mind at a time: the small live-worker benchmark selected 1, while the earlier read-only endpoint benchmark selected 2. These measurements cover different workloads. You can reopen a saved world directly with `/?world=its-world-name`. Endpoint settings are not included in exported saves.
+Open [http://localhost:8877](http://localhost:8877). Create a world, choose a mode, and configure your local model connection in the interface. New worlds start paused. Without a configured model, you can inspect a world; autonomous decisions require local inference.
 
-The existing development environment is already installed in `.venv`. Data lives in `data/local`; each world has its own SQLite database. Pause a world before copying its database. Canonical event replay reconstructs state without inference.
+Setup installs Python and battle-simulator dependencies and fetches the pinned FireRed reference sources. Saves and machine-specific runtime settings are kept outside Git.
 
-For an OpenAI-compatible local server, a launch configuration can also use:
+For an OpenAI-compatible local server, you can also supply the connection before launch:
 
 ```sh
 export LIVING_KANTO_MODEL_ENDPOINT=http://127.0.0.1:18080/v1
@@ -25,28 +58,26 @@ export LIVING_KANTO_MODEL=your-local-model
 bash tools/run_local.sh
 ```
 
-Ollama is supported through `LIVING_KANTO_MODEL_PROTOCOL=ollama`. The application accepts local/private network endpoints and rejects public model hosts. It does not start or restart a model server automatically.
+The endpoint above is an example; use the address of your own local server. Ollama connections use `LIVING_KANTO_MODEL_PROTOCOL=ollama`.
 
-## Verification
+## Current stage
+
+Living Kanto is an experimental development build. The world, local-model decisions, gameplay systems, and persistence are implemented and have test evidence. Continued work focuses on reliable long-running behavior, meaningful social interactions, distinct goals, and autonomous trainer progression.
+
+An autonomous badge journey or championship remains a milestone to demonstrate. Implemented mechanics and passing tests alone do not establish that agents can complete those journeys independently.
+
+For more detail, see the [project guide](docs/PROJECT_GUIDE.md), [fidelity matrix](docs/FIDELITY_MATRIX.md), [entity systems](docs/ENTITY_SYSTEMS.md), and [storage architecture](docs/STORAGE_ARCHITECTURE.md).
+
+To run backend checks:
 
 ```sh
 .venv/bin/python -m pytest -q server/tests
 ```
 
-The reference data is derived from the pinned `pret/pokefirered` source revision `037335f4c725d7c9aecdac87066f2002b4bd7e14`. Setup fetches that reference if it is missing; mechanics currently read its source tables at runtime. The current workspace already contains it. Content receipts, imported assets, and tests record their source. Gen III battles run through the locally installed, pinned Pokémon Showdown simulator, with serialized decisions and deterministic seeds.
+## Acknowledgements
 
-Actual local inference and capacity reports are in `evidence/direct-build`. The capacity experiment exercised concurrency 1, 2, 4, and 8 using everyday and battle observations. It was read-only and recommends 2 for that endpoint. A separate small live-worker benchmark recommends 1, the lowest setting within 10% of its best accepted throughput. Higher settings discarded more freely chosen responses after world changes. Both reports record their scopes; the live test shared resources with the soak and legal trial. The viewer supports 1–8 concurrent local requests. Only disjoint work/rest intentions from the identical baseline commit as a batch; general actions commit serially, and uncommitted responses are discarded for a fresh observation.
+- Bob's World, the earlier simulation experiment behind this project.
+- [pret/pokefirered](https://github.com/pret/pokefirered), the reference for FireRed/LeafGreen mechanics, maps, and source content.
+- [Pokémon Showdown](https://github.com/smogon/pokemon-showdown), used for Generation III battle simulation.
 
-## Release status
-
-This is a working development build, with the full guide's release gate open. Imported map inventory, population, battle/lifecycle mechanics, private local inference, atomic saves, and replay have implementation and test evidence. Source field puzzles, progression stations, items, individual ownership, activity timing and source graphics are implemented with focused verification. The complete legal mainland/league journey, exhaustive required-effect fidelity, a two-hour soak after the final service repair, and an autonomous zero-badge championship still have open acceptance gates. The earlier two-hour integrity soak and real-model repair recovery are preserved separately in the direct-build report. A configured model making one decision or a test trainer winning Brock is not proof of autonomous completion.
-
-Use `tools/soak_runtime.py` for a bounded, auditable actual-model world run. It creates a fresh zero-event Observer world, records failures, separate model/engine counts, actor coverage and frozen runtime source fingerprints, checks replay, and stops after the requested duration. It never awards achievements or substitutes decisions. Its report explicitly distinguishes a soak from championship proof.
-
-## Demonstration saves
-
-The local `viewer-current-review` world is a clean Survival demonstration: a source starter, keyboard movement and an actual wild-battle victory, with no Creative changes. Its portable bundle is `evidence/direct-build/survival-demonstration-save.json`. Select the existing world in this workspace, or import the bundle in a fresh installation; importing never overwrites an existing world name.
-
-The final real-model Observer world is `final-world-soak`. Its frozen-soak snapshot, focused continuation and repaired continuation are exported separately as `observer-soak-demonstration-save.json`, `observer-focused-demonstration-save.json` and `observer-repaired-demonstration-save.json` under `evidence/direct-build`. The existing local world includes the repaired continuation; it and the clean player demo are paused with the local Qwen38 connection configured. Creative Mansion, Seafoam and doubles worlds are explicitly marked UI fixtures. They are separate from legal progression and autonomous evidence.
-
-For an offline save export, `tools/export_run.py --database PATH --run-id NAME --output FILE` uses a coherent read-only backup, checks replay and omits inference connection settings.
+This is an unofficial fan and research project, with no affiliation to the Pokémon rights holders. Pokémon names, characters, and original game assets belong to their respective owners.
