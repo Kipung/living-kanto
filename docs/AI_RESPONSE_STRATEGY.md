@@ -32,3 +32,19 @@ Diagnose raw schema/response failures locally and test a less complex constraine
 Temporary pilot containers and its two SSH forwards were removed. Existing Qwen service and live world remain active at 1×, concurrency 8. Latest check: 325 accepted decisions, 8 pending, 51 ready, no runtime failure, measured clock 0.958×. This is a point-in-time status, not a new soak.
 
 References: [Gemma4 model card](https://ai.google.dev/gemma/docs/core/model_card_4), [vLLM attention backends](https://github.com/vllm-project/vllm/blob/main/docs/design/attention_backends.md), [SGLang structured outputs](https://docs.sglang.io/docs/advanced_features/structured_outputs). Model support and constrained syntax do not prove game decision quality.
+
+## Follow-up: successful E4B throughput experiment
+
+The next cached local model, Gemma4 E4B revision fee6332c1abaafb77f6f9624236c63aa2f1d0187, booted on spare Spark-worker1 using the same pinned vLLM image/native FlashInfer workaround. A flat JSON schema and 384-token ceiling retained exact decoder checks. These changes were tested together; the experiment does not isolate whether model size, grammar simplification or token budget explains improved reliability.
+
+Five representative warmups and 64 subsequent proposals all decoded successfully without retries. With 16 requests per level, 1/2/4/8 concurrency delivered approximately35/67/131/238 valid proposals/minute. Repeated five-case prefix caching limits that sample's generality.
+
+A stronger follow-up captured all100 people's private observations at identical paused world version6341.56 had legal choices, including13 battle cases; the other44 were in states without an offered new decision. All56 warmups passed with two corrective retries. A100-request load sample across the56 eligible cases at concurrency8 completed in23.84seconds:100 valid proposals,251.69/minute, median1.46seconds, p95 3.145seconds, three corrective retries (unused text). All raw private observations stayed in ignored work files; receipts contain safe metadata only.
+
+This exceeds the100 decisions/minute target for **read-only offered proposals**, not engine-accepted actions. Frozen observations, prefix reuse and no world mutations mean queue fairness, stale-world handling, independent behavioral quality and full100-person response times remain unverified. Observed actions included battle moves, walking, conversations, journeys and services; action variety alone does not establish quality. The adapter's battle option coverage caveat remains.
+
+Next implementation step: put this validated wire protocol behind a configurable local provider adapter, finish battle option coverage, preserve one corrective retry then pause, and test in an isolated100-person actual-model world at1×. Measure canonical accepted throughput, per-person decision waits and behavior before changing the user's provider. Multi-worker routing and larger-model planning tiers remain proposals.
+
+Temporary E4B container and pilot-only forwards were removed after the test. The live Qwen world remains at1×/8,488 accepted decisions and no failure at final check. Its unrelated battle pause was repaired by hydrating467 cloud-evicted Showdown dependency files; readonly battle probes and copied turn resolution passed before resume. No engine timeout increase or backend restart was used. See battle-timeout-diagnosis.json.
+
+Receipts: evidence/ai-strategy/e4b-flat-384.json, e4b-diverse-100.json,100-case-preparation.json,e4b-launch.json. Benchmark diagnostics/tool compile and31 wire tests passed. This is not a full release capacity gate or a sustained live-world soak.
