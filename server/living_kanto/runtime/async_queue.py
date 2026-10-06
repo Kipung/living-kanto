@@ -7,10 +7,12 @@ no worker reads or changes the canonical store.
 from __future__ import annotations
 
 from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures.process import BrokenProcessPool
 import time
 
 from ..simulation.engine import EngineError, StaleActionError
 from .providers import ProviderError, NumberedDecisionError
+from .preparation import preparation_mode, process_preparation_pool, prepare_in_process
 
 
 MAX_RUNTIME_CONCURRENCY = 32
@@ -21,6 +23,7 @@ class AsyncHumanQueue:
     def _init_async_queue(self):
         self._async_pool = None
         self._preparation_pool = None
+        self._preparation_mode = preparation_mode()
         self._preparation_latencies = []
         self._async_jobs = {}
         self._async_sequence = 0
@@ -59,7 +62,13 @@ class AsyncHumanQueue:
             # calls retire in the same pool and still occupy dispatch capacity.
             self._async_pool = ThreadPoolExecutor(max_workers=MAX_RUNTIME_CONCURRENCY, thread_name_prefix='kanto-human')
         if self._preparation_pool is None:
-            self._preparation_pool = ThreadPoolExecutor(max_workers=MAX_PREPARATION_WORKERS, thread_name_prefix='kanto-observation')
+            if self._preparation_mode == 'process':
+                content_root = getattr(self.engine, 'content_root', None)
+                if content_root is None:
+                    raise ValueError('Process observation preparation requires WorldEngine content_root')
+                self._preparation_pool = process_preparation_pool(content_root, MAX_PREPARATION_WORKERS)
+            else:
+                self._preparation_pool = ThreadPoolExecutor(max_workers=MAX_PREPARATION_WORKERS, thread_name_prefix='kanto-observation')
 
     def _cancel_shared_queue(self):
         for job in self._async_jobs.values():
@@ -240,6 +249,10 @@ class AsyncHumanQueue:
                 job.update(phase='inference', observation=observation, token=token)
                 job['future'] = self._async_pool.submit(self._request_human, observation, None)
                 job['future'].add_done_callback(lambda future: self._wake.set())
+            except BrokenProcessPool:
+                self._async_jobs.pop(actor, None)
+                self._shared_failure(actor, 'Observation worker process failed; restart the runtime controller or server to recover')
+                break
             except Exception as exc:
                 self._async_jobs.pop(actor, None)
                 self._shared_failure(actor, exc)
@@ -265,7 +278,11 @@ class AsyncHumanQueue:
             job = {'sequence': self._async_sequence, 'generation': self._generation,
                    'actor': actor, 'phase': 'preparation', 'attempt': 0,
                    'started': started, 'prepared_at': started}
-            job['future'] = self._preparation_pool.submit(self._prepare_human, state, actor)
+            prepare = prepare_in_process if self._preparation_mode == 'process' else self._prepare_human
+            try:
+                job['future'] = self._preparation_pool.submit(prepare, state, actor)
+            except BrokenProcessPool as exc:
+                raise RuntimeError('Observation worker process failed; restart the runtime controller or server to recover') from exc
             job['future'].add_done_callback(lambda future: self._wake.set())
             self._async_jobs[actor] = job
             self._dispatch_cursor = (index + 1) % len(self.actor_ids)
