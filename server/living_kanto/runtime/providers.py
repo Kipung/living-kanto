@@ -16,6 +16,11 @@ class ProviderError(RuntimeError):
     pass
 
 
+class NumberedDecisionError(ProviderError):
+    """Safe fixed decoder reason, eligible for the single corrective retry."""
+    pass
+
+
 @dataclass(frozen=True)
 class LocalModelConfig:
     endpoint: str
@@ -135,9 +140,6 @@ class LocalModelProvider:
 
         if wire:
             try:return json.dumps(wire.decode(text), ensure_ascii=False)
-            except DecisionWireError:
-                # Both synchronous and asynchronous controllers retry parser
-                # errors. An error envelope cannot become an engine action,
-                # including when a model ignores the numbered protocol entirely.
-                return json.dumps({'numbered_response_error':'Response must match the offered numbered menu and text requirements'})
+            except DecisionWireError as exc:
+                raise NumberedDecisionError(str(exc)) from exc
         return text

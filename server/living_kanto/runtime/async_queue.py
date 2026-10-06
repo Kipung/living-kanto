@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 import time
 
 from ..simulation.engine import EngineError, StaleActionError
-from .providers import ProviderError
+from .providers import ProviderError, NumberedDecisionError
 
 
 class AsyncHumanQueue:
@@ -132,6 +132,13 @@ class AsyncHumanQueue:
                 # queue with a fresh observation, without rejecting other minds.
                 self._stale_local_decisions += 1
                 self._discarded += 1
+            except NumberedDecisionError as exc:
+                if job['attempt'] == 0:
+                    self._retries += 1
+                    self._submit_human(obs, job['token'], prior=job, correction=str(exc))
+                else:
+                    self._shared_failure(actor, 'Local model action rejected after one corrective retry: '+str(exc), obs.observation_version)
+                    break
             except ProviderError as exc:
                 self._shared_failure(actor, exc, obs.observation_version)
                 break
@@ -258,8 +265,8 @@ class AsyncHumanQueue:
         try:
             if self.provider is None:raise ProviderError('No local human model configured')
             for attempt in range(2):
-                raw=self.provider.complete(observation.to_dict(),correction=error)
                 try:
+                    raw=self.provider.complete(observation.to_dict(),correction=error)
                     choice=self._parse(raw,observation)
                     provenance={'kind':'model','model_id':self.provider.model_id,'protocol':getattr(self.provider,'protocol','test'),
                         'observation_hash':observation.observation_hash(),'original_observation_version':observation.observation_version,
@@ -274,7 +281,7 @@ class AsyncHumanQueue:
                         self._accepted+=1;self._cursor=(self.actor_ids.index(observation.human_id)+1)%len(self.actor_ids);self._failure=None
                     return {'accepted':True,'event_id':event.event_id,'state_version':event.state_version}
                 except StaleActionError:raise
-                except (ValueError,EngineError) as exc:
+                except (ValueError,EngineError,NumberedDecisionError) as exc:
                     error=str(exc)
                     if attempt==0:self._retries+=1
             raise ProviderError('Local model action rejected after one corrective retry: '+str(error))

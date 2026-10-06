@@ -4,7 +4,7 @@ import json
 import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import pytest
-from living_kanto.runtime.providers import LocalModelConfig, LocalModelProvider, ProviderError
+from living_kanto.runtime.providers import LocalModelConfig, LocalModelProvider, ProviderError, NumberedDecisionError
 from living_kanto.runtime.decision_wire import build_decision_wire
 from living_kanto.runtime.controller import RuntimeController
 
@@ -52,8 +52,8 @@ def test_invalid_numbered_or_canonical_response_cannot_escape_decoder():
     class Opener:
         def open(self,*args,**kwargs):return Response()
     provider._opener=Opener()
-    result=json.loads(provider.complete(observation()))
-    assert set(result)=={'numbered_response_error'}
+    with pytest.raises(NumberedDecisionError,match='exactly option'):
+        provider.complete(observation())
 
 
 def test_double_menu_enumerates_both_slots_and_excludes_duplicate_switch():
@@ -73,3 +73,54 @@ def test_double_menu_enumerates_both_slots_and_excludes_duplicate_switch():
 def test_invalid_response_protocol_rejected():
     with pytest.raises(ProviderError,match='response protocol'):
         LocalModelConfig('http://127.0.0.1:1','test',response_protocol='unknown').validate()
+
+# Explicit test providers verify recovery only; never runtime-human fallback.
+from test_runtime import runtime, TestProvider, action
+
+def test_numbered_decoder_failure_gets_exactly_one_retry(runtime):
+    provider=TestProvider([NumberedDecisionError('This option does not offer a text placeholder'), action()])
+    runtime.provider=provider
+    assert runtime.step('alice')['accepted']
+    assert len(provider.calls)==2
+    assert provider.calls[1][1]=='This option does not offer a text placeholder'
+
+
+def test_numbered_decoder_second_failure_pauses_without_replacement(runtime):
+    provider=TestProvider([NumberedDecisionError('Option is outside the offered menu'),NumberedDecisionError('Option is outside the offered menu')])
+    runtime.provider=provider
+    assert not runtime.step('alice')['accepted']
+    assert len(provider.calls)==2
+    assert 'one corrective retry' in runtime.status()['failure']['reason']
+    assert not runtime.store.iter_events(runtime.run_id)
+
+from test_runtime_shared import shared_world, wait_until, response
+
+def test_shared_sync_numbered_failure_retries_with_decoder_reason(shared_world):
+    engine,store=shared_world
+    engine.activate_shared_clock(store,'shared')
+    provider=TestProvider([NumberedDecisionError('This option does not offer a text placeholder'),response()])
+    controller=RuntimeController(engine,store,'shared',provider,actor_ids=['alice'])
+    try:
+        assert controller.step('alice')['accepted']
+        assert len(provider.calls)==2
+        assert provider.calls[1][1]=='This option does not offer a text placeholder'
+    finally:controller.close()
+
+def test_async_numbered_failure_retries_with_decoder_reason(shared_world):
+    engine,store=shared_world
+    class Mind:
+        model_id='scripted-retry-test-only';protocol='test';test_provider=True
+        def __init__(self):self.calls=[]
+        def complete(self,obs,correction=None):
+            self.calls.append(correction)
+            if len(self.calls)==1:raise NumberedDecisionError('This option does not offer a text placeholder')
+            return response()
+    provider=Mind()
+    controller=RuntimeController(engine,store,'shared',provider,actor_ids=['alice'])
+    try:
+        controller.resume(speed=1)
+        wait_until(lambda:controller.status()['accepted_decisions']>=1)
+        controller.pause()
+        assert provider.calls[:2]==[None,'This option does not offer a text placeholder']
+        assert controller.status()['corrective_retries']==1
+    finally:controller.close()

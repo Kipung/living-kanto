@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor
 from typing import Any
 
 from ..simulation.engine import EngineError, StaleActionError
-from .providers import ProviderError
+from .providers import ProviderError, NumberedDecisionError
 from .async_queue import AsyncHumanQueue
 
 
@@ -199,8 +199,8 @@ class RuntimeController(AsyncHumanQueue):
                 raise ProviderError("No local human model configured")
             if len(batch_observations)>1:return self._batch_step(batch_observations,generation)
             for attempt in range(1 if continuation else 2):
-                raw = None if continuation else self.provider.complete(observation.to_dict(), correction=error)
                 try:
+                    raw = None if continuation else self.provider.complete(observation.to_dict(), correction=error)
                     choice = {"action": "journey_to", "arguments": {"map_id": continuation["destination_map"]}, "decision_explanation": continuation["explanation"]} if continuation else self._parse(raw, observation)
                     provenance = {**continuation["provenance"], "engine_continuation": True, "continuation_of_state_version": continuation["accepted_state_version"]} if continuation else {"kind": "model", "model_id": self.provider.model_id, "protocol": getattr(self.provider, "protocol", "test"), "observation_hash": observation.observation_hash(), "corrective_retry": attempt == 1, "test_provider": bool(getattr(self.provider, "test_provider", False))}
                     with self.shared_lock:
@@ -224,7 +224,7 @@ class RuntimeController(AsyncHumanQueue):
                     return {"accepted": True, "engine_continuation": bool(continuation), "event_id": event.event_id, "state_version": event.state_version}
                 except StaleActionError:
                     raise
-                except (ValueError, EngineError) as exc:
+                except (ValueError, EngineError, NumberedDecisionError) as exc:
                     error = str(exc)
                     if continuation:
                         raise EngineError("Accepted journey blocked: " + error) from exc
@@ -253,8 +253,8 @@ class RuntimeController(AsyncHumanQueue):
         def request(obs):
             error=None
             for attempt in range(2):
-                raw=self.provider.complete(obs.to_dict(),correction=error)
                 try:
+                    raw=self.provider.complete(obs.to_dict(),correction=error)
                     choice=self._parse(raw,obs)
                     provenance={'kind':'model','model_id':self.provider.model_id,'protocol':getattr(self.provider,'protocol','test'),'observation_hash':obs.observation_hash(),'corrective_retry':attempt==1,'test_provider':bool(getattr(self.provider,'test_provider',False))}
                     with self.shared_lock:
@@ -262,7 +262,7 @@ class RuntimeController(AsyncHumanQueue):
                         event,_=self.engine.build_action_event(self.store,self.run_id,obs.human_id,**choice,observation_version=obs.observation_version,expected_state_version=obs.state_version,decision_provenance=provenance)
                     return {'human_id':obs.human_id,**choice,'provenance':provenance,'observation_version':obs.observation_version,'expected_state_version':obs.state_version},event
                 except StaleActionError:raise
-                except (ValueError,EngineError) as exc:
+                except (ValueError,EngineError,NumberedDecisionError) as exc:
                     error=str(exc)
                     if attempt==0:
                         with self.shared_lock:self._retries+=1
