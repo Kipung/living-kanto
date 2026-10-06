@@ -261,3 +261,48 @@ def test_model_response_wakes_idle_clock_before_coalesced_deadline(shared_world)
         assert store.load_run('shared')[1].simulated_time<2
         assert controller.status()['failure'] is None
     finally:provider.release.set();controller.close()
+
+
+def test_thirty_two_private_requests_are_simultaneous_and_bounded(tmp_path):
+    write_fixture_map(tmp_path,width=14,height=14)
+    engine=WorldEngine(tmp_path);store=RunStore(tmp_path/'capacity32.db')
+    actors=[f'human-{i:03}' for i in range(40)]
+    create_fixture_run(engine,store,'capacity32',actors)
+
+    class BlockedProvider(ConcurrentProvider):
+        def complete(self,observation,correction=None):
+            with self.lock:
+                self.calls.append((observation,correction))
+                self.active+=1;self.maximum_active=max(self.maximum_active,self.active)
+            try:
+                if not self.release.wait(30):raise RuntimeError('TEST barrier timed out')
+                return response()
+            finally:
+                with self.lock:self.active-=1
+
+    provider=BlockedProvider()
+    controller=RuntimeController(engine,store,'capacity32',provider,concurrency=32)
+    try:
+        controller.resume('1')
+        wait_until(lambda:provider.active==32,seconds=25)
+        assert controller.status()['queue_depth']==32
+        assert len({obs['human_id'] for obs,_ in provider.calls})==32
+        assert provider.maximum_active==32
+        # Paused old-generation HTTP jobs continue occupying the same slots.
+        controller.pause();controller.resume('1')
+        time.sleep(0.1)
+        assert len(provider.calls)==32 and provider.active==32
+        provider.release.set()
+        wait_until(lambda:controller.status()['accepted_decisions']>=8,seconds=15)
+        controller.pause()
+        assert provider.maximum_active<=32
+        assert controller.status()['failure'] is None
+    finally:
+        provider.release.set();controller.close();store.close()
+
+
+@pytest.mark.parametrize('capacity',[0,33,True,1.5])
+def test_runtime_rejects_invalid_capacity(shared_world,capacity):
+    engine,store=shared_world
+    with pytest.raises(ValueError,match='1 through 32'):
+        RuntimeController(engine,store,'shared',ConcurrentProvider(),concurrency=capacity)

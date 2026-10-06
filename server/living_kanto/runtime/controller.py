@@ -10,12 +10,12 @@ from typing import Any
 
 from ..simulation.engine import EngineError, StaleActionError
 from .providers import ProviderError, NumberedDecisionError
-from .async_queue import AsyncHumanQueue
+from .async_queue import AsyncHumanQueue, MAX_RUNTIME_CONCURRENCY
 
 
 class RuntimeController(AsyncHumanQueue):
     def __init__(self, engine, store, run_id: str, provider=None, actor_ids=None, concurrency=1):
-        if type(concurrency) is not int or not 1<=concurrency<=8:raise ValueError("Runtime concurrency must be 1 through 8")
+        if type(concurrency) is not int or not 1<=concurrency<=MAX_RUNTIME_CONCURRENCY:raise ValueError(f"Runtime concurrency must be 1 through {MAX_RUNTIME_CONCURRENCY}")
         self.concurrency=concurrency
         self._discarded=0
         self._inflight_actors=()

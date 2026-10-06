@@ -9,6 +9,7 @@ from ..simulation.world import WorldEngine
 from ..simulation.engine import EngineError,StaleActionError
 from ..runtime import RuntimeController,LocalModelConfig,LocalModelProvider,ProviderError
 from ..store import RunStore,StoreError
+from ..runtime.async_queue import MAX_RUNTIME_CONCURRENCY
 
 class WorldRequest(BaseModel):
     run_id:str
@@ -32,7 +33,7 @@ class Endpoint(BaseModel):
     timeout_seconds:float=60
     max_tokens:int=Field(default=512,ge=1,le=8192,strict=True)
     response_protocol:str='canonical'
-    concurrency:int=Field(default=1,ge=1,le=8,strict=True)
+    concurrency:int=Field(default=1,ge=1,le=MAX_RUNTIME_CONCURRENCY,strict=True)
 class Step(BaseModel):
     human_id:str|None=None
 class PlayerRequest(BaseModel):

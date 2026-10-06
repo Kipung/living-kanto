@@ -12,6 +12,9 @@ from ..simulation.engine import EngineError, StaleActionError
 from .providers import ProviderError, NumberedDecisionError
 
 
+MAX_RUNTIME_CONCURRENCY = 32
+
+
 class AsyncHumanQueue:
     def _init_async_queue(self):
         self._async_pool = None
@@ -50,7 +53,7 @@ class AsyncHumanQueue:
         if self._async_pool is None:
             # The hard worker cap remains bounded across pause/resume. Old HTTP
             # calls retire in the same pool and still occupy dispatch capacity.
-            self._async_pool = ThreadPoolExecutor(max_workers=8, thread_name_prefix='kanto-human')
+            self._async_pool = ThreadPoolExecutor(max_workers=MAX_RUNTIME_CONCURRENCY, thread_name_prefix='kanto-human')
 
     def _cancel_shared_queue(self):
         for job in self._async_jobs.values():
@@ -210,7 +213,7 @@ class AsyncHumanQueue:
         dispatched = 0
         # Route/legal-action preparation can take hundreds of milliseconds.
         # Prepare at most one observation before yielding to the clock and
-        # completed responses; an entire 4/8-person fill must not monopolize
+        # completed responses; an entire concurrent fill must not monopolize
         # the canonical commit pump for several seconds.
         for index, actor in waiting[:1]:
             if dispatched >= capacity:
