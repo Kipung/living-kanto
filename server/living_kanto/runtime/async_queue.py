@@ -119,6 +119,7 @@ class AsyncHumanQueue:
         self._wake.set()
 
     def _complete_human_requests(self):
+        drain_started = time.monotonic()
         completed = sorted((job for job in self._async_jobs.values() if job['phase'] == 'inference' and job['future'].done()),
                            key=lambda job: job['sequence'])
         for job in completed:
@@ -172,6 +173,12 @@ class AsyncHumanQueue:
                     break
             except Exception as exc:
                 self._shared_failure(actor, exc, obs.observation_version)
+                break
+            # An individual canonical commit is atomic. Yield after at least
+            # one completion when validation/commit exceeds the drain budget;
+            # remaining finished jobs retain their slots and sequence order.
+            if time.monotonic() - drain_started >= 0.1:
+                self._wake.set()
                 break
         self._update_async_status()
 
