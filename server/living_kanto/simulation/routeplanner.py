@@ -14,6 +14,19 @@ from ..contracts.base import content_hash
 from .access import transfer_gate,AccessDenied
 class JourneyUnavailable(ValueError):pass
 
+# Route simulation never consults identity, social history, or past decisions.
+# Exclude only known irrelevant fields; retain unknown future mechanical fields.
+_ROUTING_IRRELEVANT=frozenset({
+ 'ambitions','appearance','biography','decision_history','goal','goals',
+ 'interests','last_decision','memories','memory_summary','model_provenance',
+ 'name','personality','preferences','relationships','responsibilities',
+ 'role','setup_role','setup_status',
+})
+
+def _routing_actor(h):
+ return {key:value for key,value in h.items() if key not in _ROUTING_IRRELEVANT}
+
+
 def _apply(h,changes):
  for c in changes:
   parts=c['path'].split('.')[2:];obj=h
@@ -24,7 +37,7 @@ def plan_journey(maps,h,destination_map,*,state=None,max_nodes=256,max_tiles=100
  if path_cache is None:path_cache={}
  if destination_map not in maps:raise JourneyUnavailable('destination is not a known available map')
  if h['map_id']==destination_map:raise JourneyUnavailable('already in destination map')
- sequence=count();start=(h['map_id'],int(h['x']),int(h['y']),bool(h.get('status',{}).get('surfing')),bool(h.get('access',{}).get('saffron_tea')));queue=[(0,next(sequence),start,copy.deepcopy(h),[])];best={start:0};expanded=0
+ sequence=count();start=(h['map_id'],int(h['x']),int(h['y']),bool(h.get('status',{}).get('surfing')),bool(h.get('access',{}).get('saffron_tea')));queue=[(0,next(sequence),start,copy.deepcopy(_routing_actor(h)),[])];best={start:0};expanded=0
  while queue and expanded<max_nodes:
   distance,_,node,actor,route=heapq.heappop(queue)
   if best.get(node)!=distance:continue
@@ -36,10 +49,12 @@ def plan_journey(maps,h,destination_map,*,state=None,max_nodes=256,max_tiles=100
   grouped={}
   for point,target in game_map.exits.items():
    if target in maps:grouped.setdefault(target,[]).append(point)
+  # The actor is unchanged while examining this node's outgoing edges.
+  # Hash it once, rather than repeatedly serializing its private history.
+  cache_key=(mid,x,y,surfing,content_hash(actor))
   for target,points in sorted(grouped.items()):
    for point in sorted(points,key=lambda p:(abs(p[0]-x)+abs(p[1]-y),p))[:4]:
     try:
-     cache_key=(mid,x,y,surfing,content_hash(actor))
      tree=path_cache.get(cache_key)
      if tree is None:
       tree=ReachabilityTree(game_map,(x,y),surfing=surfing);path_cache[cache_key]=tree
