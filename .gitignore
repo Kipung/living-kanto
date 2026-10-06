@@ -43,3 +43,9 @@ evidence/
 !.env.example
 *.pem
 *.key
+
+# Private operator context and live-run handoffs
+OPERATOR_CONTEXT.md
+docs/SESSION_HANDOFF.md
+docs/DEVELOPMENT_HOME.md
+FACTORY_STATUS.md
