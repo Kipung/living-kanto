@@ -300,12 +300,13 @@ class WorldState(Contract):
         """
         self.verify()
         candidate = self.apply_changes(changes)
-        payload = as_plain_dict(candidate)
-        payload["state_hash"] = ""
-        payload["state_version"] = self.state_version + 1
-        advanced = WorldState.from_dict(payload)
-        advanced.state_hash = advanced.compute_state_hash()
-        return advanced
+        # apply_changes already returns an independent validated world. Advance
+        # that copy directly instead of encoding/decoding the full world again.
+        candidate.state_hash = ""
+        candidate.state_version = self.state_version + 1
+        candidate.validate()
+        candidate.state_hash = candidate.compute_state_hash()
+        return candidate
 
 
 def _deep(value: Any) -> Any:
