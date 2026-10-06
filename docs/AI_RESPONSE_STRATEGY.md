@@ -1,0 +1,34 @@
+# Concurrent AI response strategy
+
+The goal is 100 independent people acting at normal speed under one authoritative world clock. Inference runs asynchronously; movement continues from each person's accepted intention while another decision is pending. Each person retains private observations, memory and goals. Shared model weights do not imply a shared mind.
+
+## Capacity and current evidence
+
+The existing Qwen38 27B service delivered approximately 11 accepted decisions/minute in the earlier bounded real-world study. Increasing concurrency from 4 to 8 did not improve throughput and roughly doubled median response latency. Those samples used a changing live world and are development evidence, not a complete capacity gate.
+
+100 people deciding once per minute require 100 decisions/minute; once every two minutes requires 50. At 11/minute, equal allocation gives each person a new decision about once every nine minutes. Long walking intentions help, but cannot solve fresh battle-turn decisions or responsive conversations alone.
+
+## Proposed architecture
+
+1. Keep one shared 1× simulation clock and independent private minds. Never make movement wait for all 100 models to finish a round.
+2. Pool fast local inference on spare workers for frequent individual actions and battle turns. Use the larger model for less frequent personal planning or complex reasoning, passing only that person's authorized context.
+3. Use short, strictly validated decisions selecting numbered legal options. Preserve private facts and exact canonical arguments. Validate again against current engine state before committing.
+4. Let AI choose longer journeys and bounded intentions; the engine advances their physical effects. Reconsider when interrupted or when important private events arrive.
+5. Schedule urgent battle/social decisions with bounded deadlines and fair aging. Allow at most one outstanding request per person. Limit GPU concurrency using measured throughput and latency, not population size.
+6. Move expensive observation preparation off the clock's critical path with immutable snapshots and safe geography caching; retain canonical commit and freshness checks.
+
+## Isolated fast-model pilot
+
+An offline cached Gemma4 E2B model was launched on spare Spark-worker1 using a pinned existing vLLM image. The first GPU backend failed; native FlashInfer with TRTLLM attention disabled booted successfully. No live world provider was changed.
+
+Five frozen private observation cases included a battle. Initial protocol warmup decoded 4/5 cases successfully, with three corrective retries. Tightening conditional text constraints yielded only 1/5 successful cases, including failures after the permitted corrective retry. Some responses reached the 128-token cap. One successful battle proposal took approximately 1.06 seconds, but this does not establish reliable throughput or behavior quality. Neither run advanced to the 1/2/4/8 load sweep. Preserve both outcomes; do not select this candidate for production.
+
+The numbered-menu adapter passes 31 tests. Wire character counts fell about 8–11%; token savings and inference speed gains have not been demonstrated. The adapter is an experimental tool, not connected to live runtime. Battle option coverage requires further work before promotion.
+
+## Next acceptance steps
+
+Diagnose raw schema/response failures locally and test a less complex constrained format or a stronger small model. Require valid outputs across representative travel, dialogue, service and battle cases before load testing. Benchmark 1/2/4/8 with accepted decisions/minute, p95 queue/response latency, per-person coverage, invalid/stale decisions, memory and shared-clock pace. Then run an isolated 100-person actual-model world at 1× and check independent behavior, privacy, replay and sustained responsiveness. Only that evidence can justify a claim that all 100 have responsive AI.
+
+Temporary pilot containers and its two SSH forwards were removed. Existing Qwen service and live world remain active at 1×, concurrency 8. Latest check: 325 accepted decisions, 8 pending, 51 ready, no runtime failure, measured clock 0.958×. This is a point-in-time status, not a new soak.
+
+References: [Gemma4 model card](https://ai.google.dev/gemma/docs/core/model_card_4), [vLLM attention backends](https://github.com/vllm-project/vllm/blob/main/docs/design/attention_backends.md), [SGLang structured outputs](https://docs.sglang.io/docs/advanced_features/structured_outputs). Model support and constrained syntax do not prove game decision quality.
