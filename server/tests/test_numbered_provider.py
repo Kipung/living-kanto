@@ -155,3 +155,34 @@ def test_fixed_action_needs_one_request_and_keeps_arguments():
     assert result=={'action':'wait','arguments':{'seconds':30},'decision_explanation':'Rest briefly'}
     assert len(calls)==1
     assert 'text' not in calls[0]['properties']
+
+
+def test_selected_box_name_uses_actual_eight_character_text_schema():
+    provider=LocalModelProvider(LocalModelConfig('http://127.0.0.1:1','test',response_protocol='numbered'))
+    obs=observation();obs['legal_actions']=[{'action':'store_rename_box','arguments':{'box':1,'text':'<message, <=200 chars>'},'known_consequences':{'max_name_characters':8}}]
+    schemas=[]
+    def infer(messages,schema):
+        schemas.append(schema)
+        return '{"option":1,"decision_explanation":"Name my box"}' if len(schemas)==1 else '{"text":"Friends"}'
+    provider._infer=infer
+    result=json.loads(provider.complete(obs))
+    assert result['arguments']=={'box':1,'text':'Friends'}
+    assert schemas[1]['properties']['text']['maxLength']==8
+
+
+@pytest.mark.parametrize('response_protocol',['canonical','numbered'])
+def test_care_context_does_not_override_the_chosen_conversation(response_protocol,monkeypatch):
+    provider=LocalModelProvider(LocalModelConfig('http://127.0.0.1:12345','identified-care-choice-test',response_protocol=response_protocol))
+    obs={'human_id':'alice','state_version':1,'self_state':{'care_summary':{'needs_care':True,'fainted_count':1}},
+         'legal_actions':[{'action':'heal_party','arguments':{},'known_consequences':{'price':0}},
+                          {'action':'talk_to','arguments':{'human_id':'bob','text':'<message, <=200 chars>'},'known_consequences':{}}]}
+    before=copy.deepcopy(obs);captured=[]
+    def inference(messages,schema=None):
+        captured.append(messages)
+        if schema and schema.get('required')==['text']:return json.dumps({'text':'I need a moment to talk.'})
+        if response_protocol=='numbered':return json.dumps({'option':2,'decision_explanation':'Speak before deciding about care'})
+        return json.dumps({'action':'talk_to','arguments':{'human_id':'bob','text':'I need a moment to talk.'},'decision_explanation':'Speak before deciding about care'})
+    monkeypatch.setattr(provider,'_infer',inference)
+    result=json.loads(provider.complete(obs))
+    assert result['action']=='talk_to' and result['arguments']['human_id']=='bob'
+    assert obs==before and 'care_summary' in captured[0][1]['content']

@@ -16,7 +16,12 @@ import itertools
 import json
 from typing import Any
 
-TEXT_PLACEHOLDERS=frozenset({'<non-empty text, <=200 chars>','<message, <=200 chars>'})
+TEXT_PLACEHOLDERS=frozenset({'<non-empty text, <=200 chars>','<message, <=200 chars>','<letter text: 1–200 characters>'})
+
+def option_text_limit(option):
+    limit=option.get('known_consequences',{}).get('max_name_characters',200)
+    if type(limit) is not int or not 1<=limit<=200:raise DecisionWireError('Invalid offered text limit')
+    return limit
 BOUNDARY_KEYS=frozenset({'state_version','observation_version','simulated_time','tick'})
 
 class DecisionWireError(ValueError):pass
@@ -91,6 +96,7 @@ class DecisionWire:
         offered_text=arguments.get('text')
         if isinstance(offered_text,str) and offered_text in TEXT_PLACEHOLDERS:
             if not text.strip():raise DecisionWireError('The offered text placeholder requires non-empty text')
+            if len(text)>option_text_limit(selected):raise DecisionWireError('Text exceeds this option’s character limit')
             arguments['text']=text
         elif text:raise DecisionWireError('This option does not offer a text placeholder')
         return {'action':selected['action'],'arguments':arguments,'decision_explanation':reason}
@@ -105,10 +111,20 @@ def build_decision_wire(observation, *, expand_battle_pairs=False):
     original=copy.deepcopy(observation)
     try:_compact(original)
     except (TypeError,ValueError) as error:raise DecisionWireError('Observation facts must be finite JSON data') from error
-    expanded=copy.deepcopy(offered)
+    expanded=[]
+    for action in offered:
+        choices=action['known_consequences'].get('available_items')
+        if action['action']=='give_held_item' and action['known_consequences'].get('validated_item_selection') and choices:
+            if not isinstance(choices,list) or len(choices)>512 or any(not isinstance(item,str) for item in choices):
+                raise DecisionWireError('Invalid offered held-item choices')
+            for item in choices:
+                option=copy.deepcopy(action);option['arguments']['item']=item
+                option['known_consequences'].pop('available_items',None)
+                expanded.append(option)
+        else:expanded.append(copy.deepcopy(action))
     if expand_battle_pairs:
-        expanded=[]
-        for action in offered:
+        base=expanded;expanded=[]
+        for action in base:
             slots=action['known_consequences'].get('active_slot_options')
             if action['action']!='battle_turn' or slots is None:
                 expanded.append(copy.deepcopy(action));continue

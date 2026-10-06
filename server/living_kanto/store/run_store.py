@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import json
+import copy
+import hashlib
 import sqlite3
 import threading
 from contextlib import contextmanager
@@ -11,6 +13,7 @@ from typing import Any
 
 from living_kanto.contracts import CanonicalEvent, RunMetadata, StateUpdate, WorldState
 from living_kanto.contracts.base import canonical_json, ContractError
+from . import storage_layout as layout
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS runs (
@@ -69,7 +72,7 @@ class RunStore:
         self._conn.row_factory = sqlite3.Row
         self._conn.execute("PRAGMA journal_mode=WAL")
         self._conn.execute("PRAGMA foreign_keys=ON")
-        self._conn.executescript(_SCHEMA)
+        self._conn.executescript(_SCHEMA + layout.SCHEMA)
         # Lightweight migration: pre-genesis-persistence databases lack the
         # immutable genesis columns; add them without touching existing runs.
         cols = {r[1] for r in self._conn.execute("PRAGMA table_info(runs)")}
@@ -77,8 +80,14 @@ class RunStore:
             self._conn.execute("ALTER TABLE runs ADD COLUMN genesis_json TEXT")
         if "genesis_hash" not in cols:
             self._conn.execute("ALTER TABLE runs ADD COLUMN genesis_hash TEXT")
+        for name, definition in [('storage_version', 'INTEGER NOT NULL DEFAULT 1'),
+                                 ('checkpoint_interval', 'INTEGER NOT NULL DEFAULT 256'),
+                                 ('prefix_digest', "TEXT NOT NULL DEFAULT ''")]:
+            if name not in cols:
+                self._conn.execute(f'ALTER TABLE runs ADD COLUMN {name} {definition}')
         self._conn.commit()
         self._verified_cache = {}
+        self.last_recovery = {}
 
     @property
     def path(self) -> str:
@@ -191,6 +200,144 @@ class RunStore:
         data_version=self._conn.execute("PRAGMA data_version").fetchone()[0]
         return (data_version,self._conn.total_changes,tuple(row[key] for key in row.keys()))
 
+    @staticmethod
+    def _cached_copy(value):
+        return copy.deepcopy(value) if isinstance(value, WorldState) else WorldState.from_dict(json.loads(value))
+
+    def _read_current(self, row):
+        try:
+            return WorldState.from_dict(layout.read_state(self._conn,row))
+        except (ValueError, KeyError, TypeError, layout.zlib.error) as exc:
+            raise StoreError(f'Invalid stored world: {exc}') from exc
+
+    @staticmethod
+    def _decode_event(value):
+        try:
+            return CanonicalEvent.from_dict(layout.unpack(value))
+        except (ValueError, TypeError, layout.zlib.error) as exc:
+            raise StoreError(f'Invalid stored event: {exc}') from exc
+
+    @staticmethod
+    def _next_digest(prefix, event_hash):
+        return hashlib.sha256((prefix + event_hash).encode('ascii')).hexdigest()
+
+    def _write_checkpoint(self, state, head, prefix):
+        self._conn.execute('INSERT OR REPLACE INTO storage_checkpoints VALUES (?,?,?,?,?,?)',
+                           (state.run_id,state.state_version,head,state.state_hash,prefix,layout.pack(state.to_dict())))
+        # Checkpoints are derived acceleration data; retain two, never remove events.
+        self._conn.execute('DELETE FROM storage_checkpoints WHERE run_id=? AND state_version NOT IN '
+                           '(SELECT state_version FROM storage_checkpoints WHERE run_id=? ORDER BY state_version DESC LIMIT 2)',
+                           (state.run_id,state.run_id))
+
+    def _reject_write_triggers(self):
+        # Store-owned schema has no triggers. Unknown triggers could change
+        # archive/history rows while a trusted append is preparing its cache.
+        trigger=self._conn.execute("SELECT name FROM (SELECT name,type,tbl_name FROM sqlite_master UNION ALL "
+                                   "SELECT name,type,tbl_name FROM sqlite_temp_master) WHERE type='trigger' AND tbl_name IN "
+                                   "('runs','events','storage_records','storage_archive','storage_checkpoints') LIMIT 1").fetchone()
+        if trigger is not None:
+            raise StoreError('Unsupported trigger on canonical storage: '+trigger[0])
+
+    def optimize_storage(self, run_id, checkpoint_interval=256):
+        """Full-audit legacy data, then atomically upgrade its physical representation.
+
+        Canonical event bytes, hashes, identities and world contents do not change.
+        Use on a consistent backup or with the simulation paused. Older binaries
+        cannot read v2; rollback uses the preserved v1 database and source together.
+        """
+        if type(checkpoint_interval) is not int or not 1 <= checkpoint_interval <= 10000:
+            raise ValueError('Checkpoint interval must be 1 through 10000')
+        with self._lock:
+            try:
+                self._conn.execute('BEGIN IMMEDIATE')
+                row=self._get_run_row(run_id)
+                self._reject_write_triggers()
+                if row['storage_version'] == 2:
+                    self._conn.rollback()
+                    return self.storage_status(run_id)
+                state=self.replay(run_id)
+                prefix=row['genesis_hash']
+                for event in self.iter_events(run_id):
+                    prefix=self._next_digest(prefix,event.event_hash)
+                    self._conn.execute('UPDATE events SET event_json=? WHERE run_id=? AND event_index=?',
+                                       (layout.pack(event.to_dict()),run_id,event.event_index))
+                layout.write_records(self._conn,state)
+                self._conn.execute('UPDATE runs SET storage_version=2,checkpoint_interval=?,prefix_digest=?,state_json=? WHERE run_id=?',
+                                   (checkpoint_interval,prefix,canonical_json(layout.header(state)),run_id))
+                self._write_checkpoint(state,row['head_hash'],prefix)
+                if self._read_current(self._get_run_row(run_id)).to_dict() != state.to_dict():
+                    raise StoreError('Storage migration changed world contents')
+                self._conn.commit()
+                self._verified_cache.pop(run_id,None)
+            except Exception:
+                self._conn.rollback()
+                raise
+        return self.storage_status(run_id)
+
+    def storage_status(self, run_id):
+        with self._read_snapshot():
+            row=self._get_run_row(run_id)
+            checkpoint=self._conn.execute('SELECT MAX(state_version) FROM storage_checkpoints WHERE run_id=?',(run_id,)).fetchone()[0]
+            return {'storage_version':row['storage_version'],'state_version':row['state_version'],
+                    'checkpoint_version':checkpoint,'checkpoint_interval':row['checkpoint_interval'],
+                    'event_payload_bytes':self._conn.execute('SELECT COALESCE(SUM(length(event_json)),0) FROM events WHERE run_id=?',(run_id,)).fetchone()[0],
+                    'recovery':dict(self.last_recovery)}
+
+    def _recover_checkpoint(self, run_id):
+        """Validate EVERY event's content/chain, replay only the checkpoint tail.
+
+        Prefix digest anchors a checkpoint to the exact fully verified history
+        that produced it. Corruption fails closed; explicit replay stays genesis
+        based. An external write invalidates the warm cache and repeats this audit.
+        """
+        with self._read_snapshot():
+            row=self._get_run_row(run_id)
+            meta=RunMetadata.from_dict(json.loads(row['metadata_json']))
+            if meta.run_id != run_id or meta.mode != row['mode']:
+                raise StoreError('Loaded metadata identity does not match runs row')
+            genesis=self.load_genesis(run_id)
+            cp=self._conn.execute('SELECT * FROM storage_checkpoints WHERE run_id=? ORDER BY state_version DESC LIMIT 1',(run_id,)).fetchone()
+            if cp is None:
+                raise StoreError('Version 2 save has no verified checkpoint; full audit required')
+            try:
+                state=WorldState.from_dict(layout.unpack(cp['state_blob'])).verify()
+            except (ValueError, TypeError, layout.zlib.error) as exc:
+                raise StoreError(f'Invalid checkpoint: {exc}') from exc
+            if state.run_id != run_id or state.state_version != cp['state_version'] or state.state_hash != cp['state_hash']:
+                raise StoreError('Checkpoint identity/hash does not match its binding')
+            if not 0 <= cp['state_version'] <= row['state_version']:
+                raise StoreError('Checkpoint version outside committed history')
+            prefix=row['genesis_hash'];head='0'*64;previous_hash=genesis.state_hash;count=0;applied=0
+            if cp['state_version'] == 0 and (state.to_dict()!=genesis.to_dict() or cp['head_hash']!=head or cp['prefix_digest']!=prefix):
+                raise StoreError('Genesis checkpoint does not match verified genesis')
+            for r in self._conn.execute('SELECT * FROM events WHERE run_id=? ORDER BY event_index',(run_id,)):
+                event=self._decode_event(r['event_json']);tx=_state_update_from_event(event)
+                eh=event.event_hash
+                if (r['event_index'] != count or event.event_index != count or event.run_id != run_id
+                    or tx.run_id != run_id or r['event_id'] != event.event_id
+                    or r['event_hash'] != eh or r['previous_head'] != head or event.previous_head != head
+                    or r['state_after_hash'] != tx.state_hash or tx.prior_state_hash != previous_hash
+                    or tx.prior_state_version != count or event.state_version != count+1):
+                    raise StoreError(f'History content/chain mismatch at event {count}')
+                head=eh;previous_hash=tx.state_hash;prefix=self._next_digest(prefix,eh);count+=1
+                if count == cp['state_version']:
+                    if head != cp['head_hash'] or previous_hash != cp['state_hash'] or prefix != cp['prefix_digest']:
+                        raise StoreError('Checkpoint prefix does not match verified history')
+                    if state.tick != event.tick or state.simulated_time != event.simulated_time:
+                        raise StoreError('Checkpoint clock does not match its anchor event')
+                elif count > cp['state_version']:
+                    state=tx.apply_to(state);applied+=1
+                    if state.tick != event.tick or state.simulated_time != event.simulated_time:
+                        raise StoreError('Checkpoint tail event counters disagree')
+            current=self._read_current(row)
+            current.verify()
+            if (count != row['state_version'] or head != row['head_hash'] or prefix != row['prefix_digest']
+                or state.to_dict() != current.to_dict() or state.state_hash != row['state_hash']
+                or state.tick != row['tick'] or state.simulated_time != row['simulated_time']):
+                raise StoreError('Recovered history does not match stored current world')
+            self.last_recovery={'checked_events':count,'applied_events':applied,'checkpoint_version':cp['state_version']}
+            return state
+
     def load_run(self, run_id: str) -> tuple[RunMetadata, WorldState, str]:
         """Return a copied, integrity-verified snapshot with a strict cache.
 
@@ -201,14 +348,14 @@ class RunStore:
             row=self._get_run_row(run_id);key=self._cache_key(row)
             cached=self._verified_cache.get(run_id)
             if cached is not None and cached[0]==key:
-                verified=WorldState.from_dict(json.loads(cached[1]))
+                verified=self._cached_copy(cached[1])
             else:
-                verified=self.replay(run_id)
+                verified=self._recover_checkpoint(run_id) if row["storage_version"] == 2 else self.replay(run_id)
             metadata=RunMetadata.from_dict(json.loads(row["metadata_json"]))
             if metadata.run_id!=run_id or metadata.mode!=row["mode"]:
                 raise StoreError(f"loaded metadata identity does not match the runs row for {run_id!r}")
             if cached is None or cached[0]!=key:
-                self._verified_cache[run_id]=(key,canonical_json(verified.to_dict()))
+                self._verified_cache[run_id]=(key,copy.deepcopy(verified) if row["storage_version"] == 2 else canonical_json(verified.to_dict()))
             return metadata,verified,row["head_hash"]
 
     def load_head(self, run_id: str) -> str:
@@ -263,13 +410,13 @@ class RunStore:
         with self._lock:
             try:
                 if not self._conn.in_transaction:self._conn.execute("BEGIN IMMEDIATE")
-                self.load_run(event.run_id)
-                return self._append_verified_event(event,state_after_hash)
+                prior=self.load_run(event.run_id)[1]
+                return self._append_verified_event(event,state_after_hash,prior)
             except Exception:
                 self._conn.rollback()
                 raise
 
-    def _append_verified_event(self, event: CanonicalEvent, state_after_hash: str) -> str:
+    def _append_verified_event(self, event: CanonicalEvent, state_after_hash: str, prior=None) -> str:
         """Append one event transactionally. Returns the new head hash.
 
         Verifies: run exists, run is running, event_index == next index,
@@ -282,6 +429,7 @@ class RunStore:
         # here, never silently appended onto.
         with self._lock:
             row = self._get_run_row(event.run_id)
+            self._reject_write_triggers()
             if row["status"] != "running":
                 raise StoreError(f"run {event.run_id!r} is {row['status']}; append rejected")
             # Reject duplicate event_id (same event re-applied at a new index)
@@ -310,10 +458,8 @@ class RunStore:
                 # Apply the event's contract StateUpdate to the stored state and
                 # recompute the hash from actual content (never trust
                 # caller-supplied text).
-                state_row = self._conn.execute(
-                    "SELECT state_json FROM runs WHERE run_id = ?", (event.run_id,)
-                ).fetchone()
-                prior = WorldState.from_dict(json.loads(state_row["state_json"]))
+                if prior is None:
+                    prior = self._read_current(row)
                 if prior.state_hash != row["state_hash"]:
                     raise StoreError(
                         f"stored snapshot at event {event.event_index} does not recompute: "
@@ -344,7 +490,10 @@ class RunStore:
                         f"state_after_hash mismatch: caller supplied {state_after_hash[:12]}… "
                         f"but content recomputes to {new_state.state_hash[:12]}…"
                     )
-                new_state_json = canonical_json(new_state.to_dict())
+                is_v2 = row['storage_version'] == 2
+                new_state_json = canonical_json(layout.header(new_state) if is_v2 else new_state.to_dict())
+                if is_v2:
+                    layout.write_records(self._conn,new_state,prior,update.changes)
 
                 self._conn.execute(
                     "INSERT INTO events (run_id, event_index, event_id, event_hash, "
@@ -356,7 +505,7 @@ class RunStore:
                         event_hash,
                         expected_head,
                         state_after_hash,
-                        canonical_json(event.to_dict()),
+                        layout.pack(event.to_dict()) if is_v2 else canonical_json(event.to_dict()),
                     ),
                 )
                 self._conn.execute(
@@ -372,10 +521,14 @@ class RunStore:
                         event.run_id,
                     ),
                 )
-                # Capture the verified key while other writers are excluded.
-                # External commits after ours change data_version and invalidate
-                # this prepared key on the next read, even if row head is intact.
-                prepared=(self._cache_key(self._get_run_row(event.run_id)),new_state_json)
+                if is_v2:
+                    prefix = self._next_digest(row['prefix_digest'],event_hash)
+                    self._conn.execute('UPDATE runs SET prefix_digest=? WHERE run_id=?',(prefix,event.run_id))
+                    if new_state.state_version % row['checkpoint_interval'] == 0:
+                        self._write_checkpoint(new_state,event_hash,prefix)
+                # Trusted objects are private copies; callers cannot poison this cache.
+                prepared=(self._cache_key(self._get_run_row(event.run_id)),
+                          copy.deepcopy(new_state) if is_v2 else new_state_json)
                 self._conn.commit()
                 self._verified_cache[event.run_id]=prepared
             except Exception:
@@ -457,7 +610,7 @@ class RunStore:
                 "WHERE run_id = ? ORDER BY event_index",
                 (run_id,),
             ).fetchall()
-            current = WorldState.from_dict(json.loads(row["state_json"]))
+            current = self._read_current(row)
 
         if event_rows and event_rows[0]["event_index"] != 0:
             raise StoreError(f"run {run_id!r} event log does not start at index 0")
@@ -465,7 +618,7 @@ class RunStore:
         state = genesis
         head = "0" * 64  # event-chain seed: distinct from any world-state hash
         for r in event_rows:
-            event = CanonicalEvent.from_dict(json.loads(r["event_json"]))
+            event = self._decode_event(r["event_json"])
             if event.run_id != run_id:
                 raise StoreError(
                     f"event {event.event_id} belongs to run {event.run_id!r}, "
@@ -565,7 +718,7 @@ class RunStore:
                 "SELECT event_json FROM events WHERE run_id = ? AND event_index > ? ORDER BY event_index",
                 (run_id, after_index),
             ).fetchall()
-        return [CanonicalEvent.from_dict(json.loads(r["event_json"])) for r in rows]
+        return [self._decode_event(r["event_json"]) for r in rows]
 
     def event_count(self, run_id: str) -> int:
         with self._lock:

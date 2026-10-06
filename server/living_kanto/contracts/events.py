@@ -43,6 +43,7 @@ EVENT_KINDS = frozenset(
         "human.entered_map",
         "human.used_exit",
         "human.talked",
+        "human.deliberated",
         "human.inspected",
         "human.used_item",
         "human.healed",

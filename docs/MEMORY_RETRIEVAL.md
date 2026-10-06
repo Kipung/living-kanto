@@ -1,0 +1,19 @@
+# Bounded private recall
+
+The raw memories in every saved person and the complete event history remain unchanged. Observation preparation builds a separate, derived index of that person's memory slots, timestamps (when recorded), people, lexical topics, and significance markers. A bounded cache reuses indexes when their contents are unchanged; modifying a memory invalidates that cache. The index can be rebuilt from the archive and is not another authoritative database.
+
+Recall selects up to 16 entries within a 7,000-byte memory payload. Ranking combines relevance to the current aspiration/commitment and location, recency measured in simulated time, explicit consequence/obligation markers, recorded trust, and visible people. Promises, debts, agreements, deadlines, failures and initial autobiographical memories receive extra weight. Age reduces retrieval priority; this first version does not erase memories or make them permanently inaccessible.
+
+Repeated identical or closely overlapping statements to the same person may form a group. Explicit consequence markers prevent consolidation with routine statements. The group presents an original representative statement, occurrence count, up to four original memory-slot references, and an explicit warning that repetition is not evidence of an answer, learning, or success. This is conservative, deterministic grouping, not a generated narrative or semantic summary. Differences and all source statements remain in the saved history. Missing timestamps are marked unknown; insertion order is only a recency proxy.
+
+Both stages of the local model request are checked against the model's chat-template tokenizer when LK_TOKENIZER_PREFLIGHT=1. The request uses at most 12,000 input tokens, or a smaller budget if the server reports a smaller context limit, reserving the configured output tokens plus 256 tokens of margin. The Spark service sets LK_CONTEXT_TOKENS=16384. Unsupported tokenizer endpoints use a conservative UTF-8 byte estimate plus template allowance. Lower-ranked recalled memories can be omitted further; current state, commitments and legal choices are retained. If those core facts alone cannot fit, the provider fails before inference with a specific budget error rather than sending an overflowing request. Token counts are cached by message digest in a bounded, thread-protected cache.
+
+Transport provenance is retained in the save but omitted from the person's life-view prompt. It is audit evidence, not autobiographical information.
+
+Checks cover retention of old obligations and relevant experiences, consolidation without invented outcomes, archive immutability, private observation isolation, cache invalidation, tokenizer budgets, preservation of legal choices and commitments, explicit overflow errors, staged providers, and canonical movement/replay behavior.
+
+Four read-only real-model probes used roughly 3,900–5,500 input tokens. Their aggregate recalled memory payload was about 74% smaller than their raw stored memory dictionaries. One person's 105 memories yielded nine recalled entries. These probes establish successful transport and bounded recall, not improved long-term behavior or general speed gains. A small archive can grow slightly in the prompt because recall metadata has a cost.
+
+Deployment and rollback: Spark 1, /home/kip/living-kanto-deploy/living-kanto; backups/memory-retrieval preserves the prior save and source. Source candidates and evidence are in work/memory-runtime. The Mac remains a viewer.
+
+Future work: grounded summaries, improved relevance retrieval beyond lexical overlap, explicit dormant/gist-only states, and evaluations of commitment follow-through and uncertainty. The present policy does not establish biologically realistic forgetting or prevent conversational loops by itself.

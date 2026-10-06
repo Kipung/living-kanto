@@ -1,0 +1,21 @@
+# Project Sid reference and Living Kanto adaptation
+
+Research reference: Altera et al., *Project Sid: Many-agent simulations toward AI civilization* (October 31, 2024), https://arxiv.org/abs/2411.00114. Sections 2–4 describe PIANO, expected-versus-observed action awareness, and social awareness; sections 5 and 8 describe specialization and controlled comparisons. Section 7 identifies limitations, including weak intrinsic drives. Individual progression used GPT-4o; this does not establish equivalent ability for our local Gemma models. Several societal experiments supplied common goals or institutions.
+
+## Applied design
+
+Existing selective recall, model-selected commitments, concrete next steps, private conversation delivery, and engine completion receipts remain the foundations. `simulation/decision_awareness.py` adds a bounded private decision aid without another model request. It combines a concrete expectation/result comparison with evidence about at most four known conversational partners. The owner sees at most two received statements per partner, their own relationship record, unanswered-message counts and the latest explicit linked reply disposition. It never queries another person's private goals, memories, opinions or remote location. Familiarity is not trust. Received claims remain reported speech; a declined reply is not a sentiment classifier. Missing replies do not imply hostility.
+
+The action view distinguishes planning, pending execution, blocked execution, pausing, abandonment and recorded results. Battle resolution does not establish victory. An expected concrete result is an engine contract, not a model prediction of guaranteed success. Whole-commitment completion remains self-assessed. Provider guidance uses this evidence to reconsider methods and generate or revise grounded commitments; no automatic goals, occupations, actions, rewards or extra inference stages are introduced.
+
+The additions are observation-only and prompt-only. Old saves need no migration. Original memories and canonical history remain intact. Independent cognitive concerns share the existing single validated decision boundary; parallel cognitive model calls are deferred pending evidence that their benefit warrants additional inference load.
+
+## Evaluation
+
+`runtime/behavior_evaluation.py` provides detached, frozen-observation conditions: full, without the structured action-awareness aid, without the structured social-awareness aid, and eight recent raw memories instead of selective recall. The recent-memory condition requires the owner's actual archive, not a truncated recalled subset. The social condition preserves delivered speech in memory and legal reply actions; it tests the structured aid, not removal of all social information. The action condition preserves real tasks and legal options. This is a component comparison, not a reproduction of PIANO's full ablations.
+
+`tools/evaluate_behavior.py before.json after.json` reports factual money/ownership/badge/location deltas, retained completed engine steps, sampled action counts and repetition flags. It verifies each snapshot hash and requires ordered snapshots of the same run. Bounded history counts are lower-bound samples, with explicit truncation notices. Repeated actions are candidates for review, not proof of futility. A claim of progress in speech or commitment text never counts as an engine-completed step.
+
+Frozen local-model proposals establish prompt usability and offered-choice validity only. Sustained benefit requires separate test runs from matched starting conditions, repeated seeds, identical model settings and elapsed simulated time, plus complete canonical event analysis. Measure concrete step completion, blocked-step recovery, successful services/trades, legitimate progression, reciprocated linked replies, repetition without factual effects, and inference time per completed step. Do not reset the live world to run experiments or claim improved behavior from passing regressions or one shadow sample.
+
+Verification and deployment evidence: `evidence/project-sid/`. Keep full individual history and any subsequent observer presentation in the existing application person view.

@@ -21,7 +21,8 @@ def change_held_item(trainer,pokemon,item=None):
         if key==old:raise ItemError('Already holding that item')
         _consume(h,key);p['held_item']=key
     if old:
-        row=h['inventory'].setdefault(old.lower(),{'quantity':0});row['quantity']+=1
+        from .inventory import add
+        h['inventory']=add(h['inventory'],old,1)
     return h,p
 
 def assign_wild_held_item(pokemon,rng):

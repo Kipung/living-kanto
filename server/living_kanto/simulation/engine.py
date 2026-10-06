@@ -42,6 +42,11 @@ class StaleActionError(EngineError):
     """Action was built from an observation the world has already moved past."""
 
 
+def first_starter_eligible(state, human):
+    """A recorded starter remains claimed after storage, trade, or release."""
+    return not human.get("party") and f"pokemon-{human['human_id']}-starter" not in state.pokemon
+
+
 def default_map_paths(content_root: str | Path) -> dict[str, Path]:
     root = Path(content_root)
     return {mid: root / "maps" / fn for mid, fn in _CONTENT_MAPS.items()}
@@ -169,26 +174,27 @@ class SimulationEngine:
         h = self._require_human(state, human_id)
         game_map = self._require_map(state, str(h["map_id"]))
         original_map = game_map
-        game_map = actor_map(game_map,h)
+        game_map = actor_map(game_map,h,state)
         surfing = bool(h.get("status",{}).get("surfing")) and (permission(state,h,"SURF") or bool(h.get("status",{}).get("source_forced_surfing")))
         x, y = int(h["x"]), int(h["y"])
         acts: list[LegalAction] = []
         for d, (dx, dy) in sorted(DIR_STEPS.items()):
-            destination = game_map.step_destination((x,y),d,surfing=surfing)
+            walking_path = game_map.step_path((x,y),d,surfing=surfing)
+            destination = walking_path[-1] if walking_path else None
             if destination is not None:
                 nx,ny=destination
                 acts.append(LegalAction(
                     action="walk_to", arguments={"direction": d},
                     known_consequences={"arrives_at": [nx, ny],
-                                        "map_id": h["map_id"],
-                                        "duration_seconds": ACTION_SECONDS},
+                                        "map_id": h["map_id"],"changes_map":False,
+                                        "duration_seconds": len(walking_path)*ACTION_SECONDS},
                 ))
         if game_map.source_revision:
             acts.extend(LegalAction(action="turn_to",arguments={"direction":direction},known_consequences={"facing":direction,"duration_seconds":ACTION_SECONDS}) for direction in sorted(DIR_STEPS) if direction!=h.get("facing"))
         target = game_map.exit_target(x, y)
         transferable = target is not None and target in self.maps
         if transferable and game_map.source_revision:
-            try: resolve_transfer(self.maps, game_map, x, y, target,surfing=surfing or int(game_map.cells.get((x,y),{}).get("behavior",0))==0x66)
+            try: resolve_transfer(self.maps, game_map, x, y, target,surfing=surfing or int(game_map.cells.get((x,y),{}).get("behavior",0))==0x66,actor=h,state=state)
             except MapLoadError: transferable = False
         if transferable:
             try: transfer_gate(h,target,state)
@@ -196,27 +202,32 @@ class SimulationEngine:
         if transferable:
             acts.append(LegalAction(
                 action="enter_map", arguments={"map_id": target},
-                known_consequences={"duration_seconds": ACTION_SECONDS},
+                known_consequences={"duration_seconds": ACTION_SECONDS,"destination_map":target,"changes_map":True},
             ))
         if game_map.source_revision and include_routes:
             candidates = sorted(game_map.exits, key=lambda p:(abs(p[0]-x)+abs(p[1]-y),p))[:16]
-            candidates += [(int(o["x"]),int(o["y"])) for hid,o in sorted(state.humans.items()) if hid != human_id and o.get("map_id")==h["map_id"]][:8]
+            radius=1 if original_map.events.get('requires_flash') and not h.get('field',{}).get('flash_active') else VISION_RADIUS
+            candidates += [(int(o["x"])+dx,int(o["y"])+dy) for hid,o in sorted(state.humans.items()) if hid != human_id and o.get("map_id")==h["map_id"] and abs(int(o['x'])-x)<=radius and abs(int(o['y'])-y)<=radius for dx,dy in DIR_STEPS.values()][:32]
             candidates += [(int(bg["x"]),int(bg["y"])+1) for bg in original_map.events.get("mansion_switch",{}).get("statues",[])]
             candidates += [(x+dx*5,y+dy*5) for dx,dy in DIR_STEPS.values()]
             for dest in dict.fromkeys(candidates):
                 if dest == (x,y): continue
                 try: route = shortest_path(game_map,(x,y),dest,surfing=surfing)
                 except PathNotFound: continue
-                acts.append(LegalAction(action="travel_to",arguments={"x":dest[0],"y":dest[1]},known_consequences={"map_id":h["map_id"],"duration_seconds":len(route)*ACTION_SECONDS,"route_length":len(route),"destination_kind":"exit" if dest in game_map.exits else "local"}))
+                acts.append(LegalAction(action="travel_to",arguments={"x":dest[0],"y":dest[1]},known_consequences={"map_id":h["map_id"],"arrives_at":list(dest),"changes_map":False,"duration_seconds":len(route)*ACTION_SECONDS,"route_length":len(route),"destination_kind":"exit" if dest in game_map.exits else "local",**({"exit_target":game_map.exits[dest],"next_action":"enter_map"} if dest in game_map.exits else {})}))
         if game_map.source_revision and include_routes:
             destinations=public_destinations(self.maps,h["map_id"])
+            starter_lab="PalletTown_ProfessorOaksLab"
+            starter_eligible=first_starter_eligible(state,h)
+            if starter_eligible and h["map_id"]!=starter_lab and starter_lab in self.maps and starter_lab not in destinations:
+                destinations.insert(0,starter_lab)
             active=h.get("active_plan") or {}
             if active.get("kind")=="journey" and active.get("destination_map") not in destinations:destinations.append(active["destination_map"])
             path_cache={}
             for destination in destinations:
-                try: journey=plan_journey(self.maps,h,destination,state=state,max_nodes=48,max_tiles=1000,path_cache=path_cache)
+                try: journey=plan_journey(self.maps,h,destination,state=state,max_nodes=256 if destination==starter_lab and not h.get("party") else 48,max_tiles=1000,path_cache=path_cache)
                 except JourneyUnavailable: continue
-                acts.append(LegalAction(action="journey_to",arguments={"map_id":destination},known_consequences={"engine_owned_route":True,"duration_seconds":sum(len(s["steps"])+1 for s in journey),"maps_crossed":len(journey),"may_interrupt":True}))
+                acts.append(LegalAction(action="journey_to",arguments={"map_id":destination},known_consequences={"engine_owned_route":True,"destination_map":destination,"changes_map":True,"arrives_at":journey[-1]["destination"],"duration_seconds":sum(len(s["steps"])+1 for s in journey),"maps_crossed":len(journey),"may_interrupt":True,**({"destination_kind":"starter","purpose":"Visit Professor Oak for a first starter; choosing a starter is a separate legal action on arrival."} if destination==starter_lab and starter_eligible else {})}))
         from .field_travel import actions as travel_actions
         acts.extend(travel_actions(state,h,self.maps))
         acts.extend(field_actions(state,h,original_map))
@@ -230,6 +241,12 @@ class SimulationEngine:
         acts.append(LegalAction(
             action="remember", arguments={"text": "<non-empty text, <=200 chars>"},
             known_consequences={"duration_seconds": ACTION_SECONDS}))
+        from .individual_life import LIFE_ACTIONS
+        active=(h.get('individual_life') or {}).get('commitment') or {}
+        for life_action in sorted(LIFE_ACTIONS):
+            if life_action=='set_commitment' and active.get('status')=='active':continue
+            if life_action in {'complete_commitment','abandon_commitment'} and active.get('status')!='active':continue
+            acts.append(LegalAction(action=life_action,arguments={'text':'<non-empty text, <=200 chars>'},known_consequences={'private_reflection':True,'does_not_grant_rewards':True}))
         return tuple(acts)
 
     def legal_actions_for_validation(self, state, human_id, action):
@@ -278,7 +295,7 @@ class SimulationEngine:
             raise EngineError(f"action {action!r} is not legal for {human_id} right now")
         game_map = self._require_map(state, str(h["map_id"]))
         original_map = game_map
-        game_map = actor_map(game_map,h)
+        game_map = actor_map(game_map,h,state)
         surfing = bool(h.get("status",{}).get("surfing")) and (permission(state,h,"SURF") or bool(h.get("status",{}).get("source_forced_surfing")))
         x, y = int(h["x"]), int(h["y"])
         changes: list[dict[str, Any]] = []
@@ -327,7 +344,7 @@ class SimulationEngine:
             if set(args) != {"map_id"} or tgt != game_map.exit_target(x, y) or tgt not in self.maps:
                 raise EngineError("enter_map target is not the exit under this human")
             if game_map.source_revision:
-                try: tgt,nx,ny = resolve_transfer(self.maps,game_map,x,y,tgt,surfing=surfing or int(game_map.cells.get((x,y),{}).get("behavior",0))==0x66)
+                try: tgt,nx,ny = resolve_transfer(self.maps,game_map,x,y,tgt,surfing=surfing or int(game_map.cells.get((x,y),{}).get("behavior",0))==0x66,actor=h,state=state)
                 except MapLoadError as exc: raise EngineError(str(exc)) from exc
             else:
                 nx, ny = self.maps[tgt].first_open_cell((x, y))
@@ -418,6 +435,10 @@ class SimulationEngine:
             if args:
                 raise EngineError("wait takes no arguments")
             kind = "time.advanced"
+        elif action in {'set_aspiration','set_commitment','complete_commitment','abandon_commitment'}:
+            from .individual_life import life_action_changes
+            changes += life_action_changes(h,human_id,action,args,decision_explanation,state.simulated_time,prov)
+            kind = 'human.goal_set'
         elif action == "set_goal":
             text = str(args.get("text", "")).strip()
             if set(args) != {"text"} or not text or len(text) > 200:
@@ -430,7 +451,8 @@ class SimulationEngine:
             text = str(args.get("text", "")).strip()
             if set(args) != {"text"} or not text or len(text) > 200:
                 raise EngineError("remember takes {'text': non-empty, <=200 chars}")
-            slot = str(len(dict(h["memories"])))
+            from .conversation import next_memory_slot
+            slot = next_memory_slot(h.get("memories", {}))
             changes += [
                 {"op": "set", "path": f"humans.{human_id}.memories.{slot}.text",
                  "value": text},
@@ -448,7 +470,7 @@ class SimulationEngine:
             if int(game_map.cells.get((fx,fy),{}).get("behavior",0))==0x66:
                 target=game_map.exit_target(fx,fy)
                 try:
-                    target,tx,ty=resolve_transfer(self.maps,game_map,fx,fy,target,surfing=True)
+                    target,tx,ty=resolve_transfer(self.maps,game_map,fx,fy,target,surfing=True,actor=h,state=state)
                     actor,script_steps=transition_effects(self.maps,h,game_map,(fx,fy),target,(tx,ty))
                 except MapLoadError as exc:raise EngineError("source fall warp unresolved") from exc
                 for key in ("map_id","x","y","field","status","facing"):
@@ -475,8 +497,24 @@ class SimulationEngine:
             if not self.maps[final_map].events.get("allow_cycling",False):changes.append({"op":"set","path":f"humans.{human_id}.status.bicycle","value":False})
         time_hook=getattr(self,"resolve_time_effects",None)
         if time_hook and not defer_time:changes,activity_completions=time_hook(state,changes,duration)
+        final_map=h['map_id'];final_x=x;final_y=y
+        for delta in changes:
+            if delta.get('path')==f'humans.{human_id}.map_id':final_map=delta['value']
+            elif delta.get('path')==f'humans.{human_id}.x':final_x=delta['value']
+            elif delta.get('path')==f'humans.{human_id}.y':final_y=delta['value']
+        from .collision import actor_elevation
+        level=int(self.maps[final_map].cells.get((final_x,final_y),{}).get('elevation',0))
+        if level==15:level=actor_elevation(original_map,h)
+        changes.append({'op':'set','path':f'humans.{human_id}.status.collision_elevation','value':level})
         changes.append({"op": "advance_clock", "seconds": 0 if defer_time else duration})
         changes.append({"op": "set", "path": f"humans.{human_id}.last_decision", "value": {"action": action, "arguments": args, "explanation": decision_explanation, "provenance": prov, "observation_version": observation_version}})
+        from .entity_systems import map_visit_changes
+        changes.extend(map_visit_changes(state,changes))
+        if not defer_time:
+            from .individual_life import record_decision
+            record_decision(h,human_id,action,args,decision_explanation,state.simulated_time,changes,source_state_version=state.state_version)
+            from .task_continuity import settle_changes
+            changes += settle_changes(state,changes)
         new_state = state.with_advanced_version(changes)
 
         action_hash = content_hash({

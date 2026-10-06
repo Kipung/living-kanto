@@ -38,7 +38,11 @@ def test_source_field_poison_stops_walk_and_recovers_same_individual_atomically(
  from living_kanto.mechanics import create_pokemon
  import random
  e=WorldEngine(Path(__file__).resolve().parents[2]/'content');store=RunStore(tmp_path/'poison.db');e.initialize(store,'poison',mode='survival');_,state,head=store.load_run('poison')
- hid='human-001';h=state.humans[hid];m=e.maps['PalletTown'];start=m.first_open_cell((10,8));direction=next(d for d in ['north','south','east','west'] if m.step_destination(start,d))
+ hid='human-001';h=state.humans[hid];m=e.maps['PalletTown'];start=m.first_open_cell((10,8))
+ h.update(map_id='PalletTown',x=start[0],y=start[1])
+ from living_kanto.simulation.field import actor_map
+ traversable=actor_map(m,h,state)
+ direction=next(d for d in ['north','south','east','west'] if traversable.step_destination(start,d))
  h.update(map_id='PalletTown',x=start[0],y=start[1],party=['owned'],money=3000,field_steps={'poison':4,'happiness':0},active_plan={'kind':'journey','destination_map':'ViridianCity'})
  mon=create_pokemon('BULBASAUR',5,hid,random.Random(2),identifier='owned');mon.update(hp=1,status='psn');state.pokemon['owned']=mon;state.state_hash=state.compute_state_hash()
  class Fixture:

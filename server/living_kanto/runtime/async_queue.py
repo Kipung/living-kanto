@@ -12,6 +12,7 @@ import time
 
 from ..simulation.engine import EngineError, StaleActionError
 from .providers import ProviderError, NumberedDecisionError
+from .deliberation import DeliberationQueue
 from .preparation import preparation_mode, process_preparation_pool, prepare_in_process
 
 
@@ -19,8 +20,9 @@ MAX_RUNTIME_CONCURRENCY = 64
 MAX_PREPARATION_WORKERS = 4
 
 
-class AsyncHumanQueue:
+class AsyncHumanQueue(DeliberationQueue):
     def _init_async_queue(self):
+        self._init_deliberation()
         self._async_pool = None
         self._preparation_pool = None
         self._preparation_mode = preparation_mode()
@@ -71,22 +73,36 @@ class AsyncHumanQueue:
                 self._preparation_pool = ThreadPoolExecutor(max_workers=MAX_PREPARATION_WORKERS, thread_name_prefix='kanto-observation')
 
     def _cancel_shared_queue(self):
+        self._cancel_deliberation()
         for job in self._async_jobs.values():
             job['future'].cancel()
+            if job['phase'] == 'inference' and job['future'].done():
+                try:
+                    self._trace_outcome(job['observation'], job['future'].result(), 'cancelled', reason='Runtime paused or closed')
+                except Exception:
+                    pass  # Failed/cancelled calls have no accepted proposal.
         self._inflight = None
         self._inflight_actors = ()
 
     def _close_shared_queue(self):
+        self._close_deliberation()
         self._cancel_shared_queue()
         if self._async_pool is not None:
             self._async_pool.shutdown(wait=False, cancel_futures=True)
         if self._preparation_pool is not None:
             self._preparation_pool.shutdown(wait=False, cancel_futures=True)
 
-    def _request_human(self, observation, correction):
+    def _request_human(self, observation, correction, generation=None):
         # The worker has a private observation, never a world state or store.
         raw = self.provider.complete(observation.to_dict(), correction=correction)
-        return self._parse(raw, observation)
+        try:
+            choice = self._parse(raw, observation)
+            if generation is not None and (generation != self._generation or self._closed):
+                self._trace_outcome(observation, choice, 'cancelled', reason='Runtime generation changed')
+            return choice
+        except ValueError as exc:
+            self._trace_outcome(observation, raw, 'engine_rejected', reason=str(exc))
+            raise
 
     def _submit_human(self, observation, token, *, prior=None, correction=None):
         if prior is None:
@@ -98,7 +114,7 @@ class AsyncHumanQueue:
         else:
             job = prior
             job['attempt'] += 1
-        job['future'] = self._async_pool.submit(self._request_human, observation, correction)
+        job['future'] = self._async_pool.submit(self._request_human, observation, correction, job["generation"])
         job['future'].add_done_callback(lambda future: self._wake.set())
         self._async_jobs[observation.human_id] = job
 
@@ -121,14 +137,19 @@ class AsyncHumanQueue:
     def _complete_human_requests(self):
         drain_started = time.monotonic()
         completed = sorted((job for job in self._async_jobs.values() if job['phase'] == 'inference' and job['future'].done()),
-                           key=lambda job: job['sequence'])
+                           key=lambda job: (not job.get('urgent', False), job['sequence']))
         for job in completed:
             obs = job['observation']
             actor = obs.human_id
             self._async_jobs.pop(actor, None)
             if job['generation'] != self._generation or self._closed:
                 self._cancelled_requests += 1
+                try:
+                    self._trace_outcome(obs, job['future'].result(), 'cancelled', reason='Runtime generation changed')
+                except Exception:
+                    pass  # Provider failures have their own trace.
                 continue
+            choice = None
             try:
                 choice = job['future'].result()
                 provenance = {'kind': 'model', 'model_id': self.provider.model_id,
@@ -144,6 +165,7 @@ class AsyncHumanQueue:
                     dependency_token=job['token'], provenance=provenance)
                 # Generation/closed cannot change here: the pump owns shared_lock.
                 self.engine.commit(self.store, event)
+                self._trace_outcome(obs, choice, "accepted", event=event)
                 self._accepted += 1
                 self._cursor = (self.actor_ids.index(actor) + 1) % len(self.actor_ids)
                 self._failure = None
@@ -152,6 +174,7 @@ class AsyncHumanQueue:
             except StaleActionError:
                 # Only this individual's dependency changed. Rejoin the fair
                 # queue with a fresh observation, without rejecting other minds.
+                self._trace_outcome(obs, choice, "stale", reason="Actor decision boundary changed")
                 self._stale_local_decisions += 1
                 self._discarded += 1
             except NumberedDecisionError as exc:
@@ -165,6 +188,7 @@ class AsyncHumanQueue:
                 self._shared_failure(actor, exc, obs.observation_version)
                 break
             except (ValueError, EngineError) as exc:
+                self._trace_outcome(obs, choice, "engine_rejected", reason=str(exc))
                 if job['attempt'] == 0:
                     self._retries += 1
                     self._submit_human(obs, job['token'], prior=job, correction=str(exc))
@@ -254,7 +278,7 @@ class AsyncHumanQueue:
                     self._async_jobs.pop(actor, None)
                     continue
                 job.update(phase='inference', observation=observation, token=token)
-                job['future'] = self._async_pool.submit(self._request_human, observation, None)
+                job['future'] = self._async_pool.submit(self._request_human, observation, None, job["generation"])
                 job['future'].add_done_callback(lambda future: self._wake.set())
             except BrokenProcessPool:
                 self._async_jobs.pop(actor, None)
@@ -266,8 +290,11 @@ class AsyncHumanQueue:
                 break
         self._update_async_status()
 
+    def _urgent_capacity(self):
+        return min(2, (self.concurrency - self._thought_capacity()) // 4)
+
     def _dispatch_ready_humans(self, state):
-        capacity = max(0, self.concurrency - len(self._async_jobs))
+        capacity = max(0, self.concurrency - self._thought_capacity() - len(self._async_jobs))
         # Retiring generations count toward both bounds. Do not enqueue an
         # entire world behind slow preparation workers or duplicate an actor.
         preparing = sum(job['phase'] == 'preparation' for job in self._async_jobs.values())
@@ -278,12 +305,20 @@ class AsyncHumanQueue:
             actor = self.actor_ids[index]
             if actor not in self._async_jobs and self.engine.shared_actor_ready(state, actor):
                 waiting.append((index, actor))
+        # Battle input and delivered speech precede ordinary new intentions.
+        waiting.sort(key=lambda row: 0 if state.humans[row[1]].get("battle_id") else
+                     1 if self.engine.immediate_reply_actions(state, row[1]) else 2)
         self._ready_queue_depth = len(waiting)
-        for index, actor in waiting[:capacity]:
+        dispatched = 0
+        for index, actor in waiting:
+            if dispatched >= capacity: break
+            urgent = bool(state.humans[actor].get('battle_id') or self.engine.immediate_reply_actions(state, actor))
+            if not urgent and len(self._async_jobs) >= self.concurrency - self._thought_capacity() - self._urgent_capacity():
+                continue
             self._async_sequence += 1
             started = time.monotonic()
             job = {'sequence': self._async_sequence, 'generation': self._generation,
-                   'actor': actor, 'phase': 'preparation', 'attempt': 0,
+                   'actor': actor, 'phase': 'preparation', 'attempt': 0, 'urgent': urgent,
                    'started': started, 'prepared_at': started}
             prepare = prepare_in_process if self._preparation_mode == 'process' else self._prepare_human
             try:
@@ -292,8 +327,9 @@ class AsyncHumanQueue:
                 raise RuntimeError('Observation worker process failed; restart the runtime controller or server to recover') from exc
             job['future'].add_done_callback(lambda future: self._wake.set())
             self._async_jobs[actor] = job
+            dispatched += 1
             self._dispatch_cursor = (index + 1) % len(self.actor_ids)
-        self._ready_queue_depth = max(0, len(waiting) - capacity)
+        self._ready_queue_depth = max(0, len(waiting) - dispatched)
         self._update_async_status()
 
     def _manual_shared_step(self, human_id):
@@ -324,7 +360,8 @@ class AsyncHumanQueue:
                         return {'accepted':True,'engine_continuation':True,'event_id':event.event_id,'state_version':event.state_version}
                 return {'accepted':False,'failure':{'human_id':human_id,'reason':'No ready human or accepted shared-clock boundary'}}
             # Cancelled HTTP calls still count against the configured capacity.
-            retiring=sum(not job['future'].done() for job in self._async_jobs.values())
+            retiring=sum(not job['future'].done() for job in self._async_jobs.values()) + sum(
+                not job['future'].done() for job in self._thought_jobs.values())
             if retiring>=self.concurrency:
                 return {'accepted':False,'pending_requests':retiring,'reason':'Paused human requests are still retiring; no replacement choice was requested'}
             generation=self._generation
@@ -333,6 +370,7 @@ class AsyncHumanQueue:
         try:
             if self.provider is None:raise ProviderError('No local human model configured')
             for attempt in range(2):
+                raw=None
                 try:
                     raw=self.provider.complete(observation.to_dict(),correction=error)
                     choice=self._parse(raw,observation)
@@ -340,16 +378,22 @@ class AsyncHumanQueue:
                         'observation_hash':observation.observation_hash(),'original_observation_version':observation.observation_version,
                         'corrective_retry':attempt==1,'test_provider':bool(getattr(self.provider,'test_provider',False))}
                     with self.shared_lock:
-                        if generation!=self._generation or self._closed:return {'accepted':False,'cancelled':True}
+                        if generation!=self._generation or self._closed:
+                            self._trace_outcome(observation, raw, 'cancelled', reason='Runtime generation changed')
+                            return {'accepted':False,'cancelled':True}
                         event,_=self.engine.build_revalidated_action_event(self.store,self.run_id,observation.human_id,choice,
                             original_observation_version=observation.observation_version,dependency_token=token,provenance=provenance)
                         prior=self.store.get_status(self.run_id);self.store.set_status(self.run_id,'running')
                         try:self.engine.commit(self.store,event)
                         finally:self.store.set_status(self.run_id,prior)
+                        self._trace_outcome(observation, raw, "accepted", event=event)
                         self._accepted+=1;self._cursor=(self.actor_ids.index(observation.human_id)+1)%len(self.actor_ids);self._failure=None
                     return {'accepted':True,'event_id':event.event_id,'state_version':event.state_version}
-                except StaleActionError:raise
+                except StaleActionError:
+                    self._trace_outcome(observation, raw, 'stale', reason='Actor decision boundary changed')
+                    raise
                 except (ValueError,EngineError,NumberedDecisionError) as exc:
+                    self._trace_outcome(observation, raw, 'engine_rejected', reason=str(exc))
                     error=str(exc)
                     if attempt==0:self._retries+=1
             raise ProviderError('Local model action rejected after one corrective retry: '+str(error))
@@ -380,6 +424,11 @@ class AsyncHumanQueue:
                 # previous pause. Capacity remains bounded until they retire.
                 for actor, job in list(self._async_jobs.items()):
                     if job['generation'] != self._generation and job['future'].done():
+                        if job['phase'] == 'inference':
+                            try:
+                                self._trace_outcome(job['observation'], job['future'].result(), 'cancelled', reason='Runtime generation changed')
+                            except Exception:
+                                pass
                         self._async_jobs.pop(actor)
                         self._cancelled_requests += 1
                 self._tick_parallel_clock(state)
@@ -389,6 +438,7 @@ class AsyncHumanQueue:
                 if self._running:
                     current=self.store.load_run(self.run_id)[1]
                     self._dispatch_ready_humans(current)
+                    self._pump_deliberation(current)
                     self._last_parallel_time=current.simulated_time
                     self._last_shared_due=self.engine.next_shared_due(current)
         except Exception as exc:

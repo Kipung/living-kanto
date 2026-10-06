@@ -2,7 +2,7 @@
 from __future__ import annotations
 import json,threading,copy,tempfile,os
 from pathlib import Path
-from fastapi import HTTPException
+from fastapi import HTTPException, Query
 from pydantic import BaseModel, Field
 from ..contracts import ContractError, StateUpdate, RunMetadata, WorldState, CanonicalEvent
 from ..simulation.world import WorldEngine
@@ -47,6 +47,8 @@ def interaction_mode(state):
 
 
 def install_world_routes(app,open_store,safe_run_id,creation_lock):
+    from .history_paging import install_history_paging
+    install_history_paging(app,open_store)
     controllers={};registry_lock=threading.RLock();engine_box={}
     app.state.runtime_controllers=controllers
     def engine():
@@ -91,7 +93,9 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
         with registry_lock,creation_lock(path):
             if path.exists():raise HTTPException(409,detail='run already exists')
             store=RunStore(path)
-            try:s=engine().initialize(store,req.run_id,req.seed,req.mode)
+            try:
+                s=engine().initialize(store,req.run_id,req.seed,req.mode)
+                store.optimize_storage(req.run_id)
             except Exception as exc:
                 store.close();path.unlink(missing_ok=True);fail(exc)
             app.state.stores[req.run_id]=store
@@ -99,6 +103,21 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
 
     @app.get('/runs/{run_id}/runtime')
     def runtime_status(run_id:str):return controller(run_id).status()
+
+    @app.get('/runs/{run_id}/storage')
+    def storage_status(run_id:str):return open_store(run_id).storage_status(run_id)
+
+    @app.get('/runs/{run_id}/observer/inference/{human_id}')
+    def inference_history(run_id: str, human_id: str, limit: int = Query(default=10, ge=1, le=50)):
+        c = controller(run_id)
+        with c.shared_lock:
+            if human_id not in c.actor_ids:
+                raise HTTPException(404, detail='Unknown AI person')
+            sink = getattr(c.provider, '_trace_sink', None)
+            records = sink.records(actor=human_id, limit=limit) if sink else []
+            return {'human_id': human_id, 'records': records,
+                    'audit': getattr(c.provider, 'trace_status', lambda: {'enabled': False})(),
+                    'notice': 'Recent local inference evidence. Older traces expire under the storage bound; canonical game history is retained separately.'}
 
     @app.post('/runs/{run_id}/mode')
     def change_mode(run_id:str,req:ModeRequest):
@@ -121,6 +140,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
             settings_path=Path(c.store.path).with_suffix('.runtime-settings.json')
             temporary=settings_path.with_suffix('.tmp');temporary.write_text(req.model_dump_json());temporary.replace(settings_path)
             c.provider=provider;c.concurrency=req.concurrency
+            c.configure_provider_trace()
         return c.status()
 
     @app.post('/runs/{run_id}/step')
@@ -137,7 +157,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
     def humans(run_id:str):
         _,s,_=open_store(run_id).load_run(run_id)
         # Observer inspection is deliberately separate from human private observations.
-        return {'humans':[copy.deepcopy(h) for h in s.humans.values()],'state_version':s.state_version,'pokemon':s.pokemon}
+        return {'humans':[copy.deepcopy(h) for h in s.humans.values()],'state_version':s.state_version,'pokemon':s.pokemon,'npcs':[copy.deepcopy(n) for n in s.npcs.values() if n.get('kind')=='source_resident']}
 
     @app.post('/runs/{run_id}/player/create')
     def create_player(run_id:str,req:PlayerRequest):
@@ -172,12 +192,22 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
     def intervention(run_id:str,req:Intervention):
         c=controller(run_id)
         with c.shared_lock:
-            store=open_store(run_id);_,s,_=store.load_run(run_id)
+            store=open_store(run_id);_,s,head=store.load_run(run_id)
             if interaction_mode(s)!='creative':raise HTTPException(403,detail='Creative actions require a Creative world')
             if req.author!='user':raise HTTPException(400,detail='intervention author must be user')
             h=s.humans.get(req.human_id)
             if h is None:raise HTTPException(404,detail='unknown human')
             args=req.arguments;prefix=f'humans.{req.human_id}';changes=[];before={};after={}
+            if req.kind=='source_fidelity_update':
+                from ..simulation import fidelity_update
+                if req.expected_state_version!=s.state_version:raise HTTPException(409,detail='state changed; refresh before source update')
+                if args:raise HTTPException(400,detail='Source fidelity update takes no arguments')
+                if c._running or store.get_status(run_id)!='paused':raise HTTPException(409,detail='Pause the world before a source fidelity update')
+                if s.world_facts.get('fidelity_policy',{}).get('version')==fidelity_update.POLICY:
+                    return {'state_version':s.state_version,'already_applied':True}
+                event,new=fidelity_update.build_migration_event(engine(),s,head)
+                engine().commit(store,event);c._wake.set()
+                return {'state_version':new.state_version,'event_id':event.event_id,'creative_modified':True,'source_residents':len(new.npcs)}
             if req.kind=='teleport':
                 mid=args.get('map_id');gm=engine().maps.get(mid)
                 if gm is None:raise HTTPException(400,detail='map unavailable')
@@ -302,6 +332,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
                 for event in events:store.append_event(event,event.transaction['state_hash'])
                 verified=store.replay(meta.run_id)
                 if verified.state_hash!=bundle['state_hash'] or store.load_head(meta.run_id)!=bundle['head_hash']:raise ValueError('Portable state or event-chain head hash does not match')
+                store.optimize_storage(meta.run_id)
                 store.set_status(meta.run_id,'paused')
                 store.close();store=None
                 os.replace(staged,path)

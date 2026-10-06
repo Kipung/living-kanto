@@ -1,17 +1,19 @@
 """Consensual personal duels; source link-like battles give no XP/prize or loss."""
 import copy,itertools
 from .battle import BattleSession
+from .battle_venues import personal_duel_allowed
 
-def available(state,a,b,doubles=False,*,radius=6):
+def available(state,a,b,doubles=False,*,radius=6,maps=None):
     if a==b or a not in state.humans or b not in state.humans:return False
     x,y=state.humans[a],state.humans[b]
     if x.get('activity') or y.get('activity') or x.get('service_request') or y.get('service_request'):return False
     if x.get('battle_id') or y.get('battle_id') or x.get('safari',{}).get('encounter') or y.get('safari',{}).get('encounter'):return False
     if x['map_id']!=y['map_id'] or abs(x['x']-y['x'])+abs(x['y']-y['y'])>radius:return False
+    if maps is None or not personal_duel_allowed(maps.get(x['map_id'])):return False
     return all(1<=len(t['party'])<=6 and all(pid in state.pokemon and state.pokemon[pid]['owner_id']==t['human_id'] for pid in t['party']) and sum(state.pokemon[pid]['hp']>0 for pid in t['party'])>=(2 if doubles else 1) for t in (x,y))
 
-def start_personal_duel(state,offer,rng,battle_id):
-    if offer['status']!='pending' or not available(state,offer['proposer'],offer['recipient'],offer['doubles']):raise ValueError('Challenge no longer available')
+def start_personal_duel(state,offer,rng,battle_id,*,maps=None,radius=6):
+    if offer['status']!='pending' or not available(state,offer['proposer'],offer['recipient'],offer['doubles'],maps=maps,radius=radius):raise ValueError('Challenge no longer available')
     teams=[]
     for hid in (offer['proposer'],offer['recipient']):
         party=[copy.deepcopy(state.pokemon[pid]) for pid in state.humans[hid]['party']];party.sort(key=lambda p:p['hp']<=0)

@@ -78,3 +78,23 @@ export function groupByMap(people) {
 export function walkingDuration(points,{smooth=true}={}) {
   return Math.max(360,(points.length-1)*(smooth?360:145));
 }
+
+// Recent receipts are brief display effects, not inferred future intentions.
+export function recentActivityEffects(event){
+ const choices=event.causation?.decisions?.length?event.causation.decisions:[{human_id:actorId(event),action:event.causation?.action,action_arguments:event.causation?.action_arguments}];
+ const rows=[];
+ for(const choice of choices){const id=choice.human_id,action=choice.action,args=choice.action_arguments||choice.arguments||{};if(!id)continue;
+  if(action==='talk_to'){rows.push({human_id:id,kind:'talk',icon:'💬',label:'Talking',detail:'Recent recorded speech',text:args.text});if(args.human_id&&args.human_id!==id)rows.push({human_id:args.human_id,kind:'listen',icon:'👂',label:'Listening',detail:'Addressed by recent recorded speech'});}
+  else if(action==='catch'||(action==='safari_action'&&args.choice==='ball'))rows.push({human_id:id,kind:'catch',icon:'🔴',label:'Catching',detail:'Recent recorded catch attempt'});
+ }
+ return rows;
+}
+export function activityIndicator(human,state,runtime,{effect,now=0,moving=false}={}){
+ if(effect?.until>now)return {...effect,detail:effect.detail+(moving?' · moving along a recorded route':''),recent:true};
+ if(human.battle_id||human.movement_intent?.paused_for_battle){const a=activity(human,state,runtime);return {...a,icon:'⚔️',label:a.kind==='battle'?'Battling':a.label,detail:a.label};}
+ if(human.status?.surfing||human.status?.source_forced_surfing)return {kind:'surf',icon:'🌊',label:'Surfing',detail:'Recorded active Surf traversal'};
+ if(human.status?.bicycle)return {kind:'bike',icon:'🚲',label:'Cycling',detail:'Recorded bicycle traversal'};
+ if(moving)return {kind:'movement',icon:'🚶',label:'Moving',detail:'Walking along a recorded route'};
+ const a=activity(human,state,runtime),icons={movement:'🚶',journey:'🧭',thinking:'💭',work:'🛠️',rest:'💤',queue:'⏳',ready:'●'};
+ return {...a,icon:icons[a.kind]||a.icon,label:({movement:'Moving',journey:'Travelling',thinking:'Thinking',work:'Working',rest:'Resting',queue:'Waiting',ready:'Ready'})[a.kind]||a.label,detail:a.label};
+}

@@ -54,6 +54,8 @@ class ServiceMixin:
     def service_actions(self,state,hid):
         human=state.humans[hid]
         if human.get('battle_id') or human.get('service_request'):return []
+        from .workplaces import at_service_post
+        if not at_service_post(human): return []
         queue=self.service_queue(state,human['map_id'])
         kind=queue[0]['kind'] if queue else self.service_kind(human['map_id'])
         assignment=human.get('service_assignment',{})
@@ -74,6 +76,11 @@ class ServiceMixin:
         h=state.humans[hid];mid=h['map_id'];kind=self.service_kind(mid)
         queue=copy.deepcopy(self.service_queue(state,mid));changes=[]
         def setv(path,value):changes.append({'op':'set','path':path,'value':value})
+        if action=='wait_for_service':
+            request=h.get('service_request')
+            if args or not request or request['map_id']!=mid or not any(row['request_id']==request['request_id'] for row in queue):
+                raise EngineError('Waiting requires an active local service request')
+            return [],'time.advanced',30
         if action=='cancel_service':
             request=h.get('service_request')
             if args or not request:raise EngineError('no queued service to cancel')
@@ -95,6 +102,9 @@ class ServiceMixin:
                 if set(args)!={'item','quantity'} or args['item'] not in self.shop_prices(mid) or type(args['quantity'])is not int or args['quantity']!=1:raise EngineError('invalid queued purchase')
                 cost=self.shop_prices(mid)[args['item']]
                 if h['money']<cost:raise EngineError('insufficient funds')
+                from ..mechanics.inventory import add
+                try: add(h['inventory'],args['item'],args['quantity'])
+                except ValueError as exc: raise EngineError(str(exc)) from exc
                 setv(f'humans.{hid}.money',h['money']-cost)
             request={'request_id':f'service-{state.state_version}-{hid}','human_id':hid,'map_id':mid,'kind':kind,
                      'arguments':dict(args),'reserved_payment':cost,'requested_at':state.simulated_time}
@@ -110,8 +120,11 @@ class ServiceMixin:
                 mon=copy.deepcopy(state.pokemon[pid]);heal(mon)
                 for key,value in mon.items():setv(f'pokemon.{pid}.{key}',value)
         else:
-            item=request['arguments']['item'];inventory=copy.deepcopy(customer['inventory']);entry=inventory.get(item,{'item_id':item,'quantity':0})
-            entry['quantity']+=1;inventory[item]=entry;setv(f'humans.{customer["human_id"]}.inventory',inventory)
+            from ..mechanics.inventory import add
+            item=request['arguments']['item']
+            try: inventory=add(customer['inventory'],item,request['arguments']['quantity'])
+            except ValueError as exc: raise EngineError(str(exc)) from exc
+            setv(f'humans.{customer["human_id"]}.inventory',inventory)
         duration=60 if kind=='healing' else 30
         receipt={**request,'staff_id':hid,'completed_at':state.simulated_time+duration,'duration_seconds':duration}
         setv(f'world_facts.service_queues.{mid}',queue[1:]);setv(f'world_facts.service_receipts.{request["request_id"]}',receipt)

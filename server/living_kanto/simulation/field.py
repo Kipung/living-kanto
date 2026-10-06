@@ -32,7 +32,7 @@ def objects(game_map,h):
   x,y=positions.get(key,[obj['x'],obj['y']]);out.append({'key':key,'kind':kind,'x':x,'y':y,'reveal_flag':obj.get('trainer_type')})
  return out
 
-def actor_map(game_map,h):
+def actor_map(game_map,h,state=None,*,reservations=(),ignore_origin=True):
  """Private traversal overlay; does not modify source maps or another trainer."""
  saved=h.get('field',{});revealed=set(saved.get('revealed_boulders',[]))
  if game_map.map_id in ('SeafoamIslands_B3F','SeafoamIslands_B4F'):
@@ -41,7 +41,9 @@ def actor_map(game_map,h):
   if needed.issubset(revealed) and path.exists():
    from .maps import GameMap
    game_map=GameMap.from_content(game_map.map_id,path)
- result=copy.copy(game_map);result._walk=[row[:] for row in game_map._walk];result.cells=dict(game_map.cells)
+ result=copy.copy(game_map);result._walk=[row[:] for row in game_map._walk];result.cells=dict(game_map.cells);result._blocked_tiles=set(game_map._blocked_tiles)
+ from .collision import actor_elevation,occupied_tiles,environmental_tiles
+ result._collision_elevation=actor_elevation(game_map,h)
  from .scenarios import quantity
  if not quantity(h,'bicycle'):
   for trigger in game_map.events.get('coord_events',[]):
@@ -65,7 +67,12 @@ def actor_map(game_map,h):
    x,y=tile['x'],tile['y']
    if result.in_bounds(x,y):result._walk[y][x]=not tile['collision'];result.cells[(x,y)]={**result.cells.get((x,y),{}),**tile}
  for obj in objects(game_map,h):
-  if result.in_bounds(obj['x'],obj['y']):result._walk[obj['y']][obj['x']]=False
+  if result.in_bounds(obj['x'],obj['y']):result._walk[obj['y']][obj['x']]=False;result._blocked_tiles.add((obj['x'],obj['y']))
+ for x,y in environmental_tiles(game_map,h,state):
+  if result.in_bounds(x,y):result._walk[y][x]=False;result._blocked_tiles.add((x,y))
+ result._dynamic_blocked=occupied_tiles(game_map,h,state,reservations,ignore_origin=ignore_origin)
+ for (x,y) in result._dynamic_blocked:
+  if result.in_bounds(x,y):result._walk[y][x]=False;result._blocked_tiles.add((x,y))
  return result
 
 def actions(state,h,game_map):
@@ -74,7 +81,7 @@ def actions(state,h,game_map):
   if (h['x'],h['y']-1)==(statue['x'],statue['y']) and h.get('facing','south')=='north':out.append(LegalAction(action='toggle_mansion_switch',arguments={},known_consequences={'switch_on':not h.get('field',{}).get('mansion_switch',False),'per_trainer':True,'source':game_map.events['mansion_switch']['source']}))
  surfing=bool(h.get('status',{}).get('surfing')) and permission(state,h,'SURF')
  direction=h.get('facing','south');dx,dy=DIRECTIONS.get(direction,(0,1));front=(h['x']+dx,h['y']+dy)
- if not surfing and permission(state,h,'SURF') and game_map.is_walkable(*front) and int(game_map.cells.get(front,{}).get('behavior',0)) in WATER:
+ if not surfing and permission(state,h,'SURF') and actor_map(game_map,h,state).is_walkable(*front) and int(game_map.cells.get(front,{}).get('behavior',0)) in WATER:
   out.append(LegalAction(action='surf',arguments={},known_consequences={'arrives_at':list(front),'requires':'Soul Badge and owned non-Egg Pokémon that knows Surf'}))
  if surfing and int(game_map.cells.get((h['x'],h['y']),{}).get('behavior',0)) not in WATER:
   out.append(LegalAction(action='stop_surf',arguments={},known_consequences={'on_foot':True}))
@@ -84,7 +91,7 @@ def actions(state,h,game_map):
    out.append(LegalAction(action='cut',arguments={'object_id':obj['key']},known_consequences={'per_trainer':True}))
   if obj['kind']=='boulder' and permission(state,h,'STRENGTH'):
    landing=(obj['x']+dx,obj['y']+dy)
-   if actor_map(game_map,h).is_walkable(*landing) or int(game_map.cells.get(landing,{}).get('behavior',0))==0x66:out.append(LegalAction(action='push_boulder',arguments={'object_id':obj['key'],'direction':direction},known_consequences={'arrives_at':list(landing),'per_trainer':True,'switch_story_effects':'source Seafoam falls and Victory Road pressure barriers recorded per trainer'}))
+   if actor_map(game_map,h,state).is_walkable(*landing) or int(game_map.cells.get(landing,{}).get('behavior',0))==0x66:out.append(LegalAction(action='push_boulder',arguments={'object_id':obj['key'],'direction':direction},known_consequences={'arrives_at':list(landing),'per_trainer':True,'switch_story_effects':'source Seafoam falls and Victory Road pressure barriers recorded per trainer'}))
  for door in game_map.events.get('card_key_doors',[]):
   if door['id'] not in h.get('field',{}).get('doors',[]) and abs(h['x']-door['x'])+abs(h['y']-door['y'])<=1:
    from .scenarios import quantity

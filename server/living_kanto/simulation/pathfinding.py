@@ -13,8 +13,10 @@ class ReachabilityTree:
     """
     def __init__(self, game_map, start, blocked=(), surfing=False):
         self.game_map=game_map;self.start=tuple(start);self.blocked=set(blocked)
-        if not game_map.is_walkable(*self.start):raise PathNotFound('start is blocked')
-        self.initial=(self.start,bool(surfing));self.order=count()
+        if not game_map.can_stand(*self.start):raise PathNotFound('start is blocked')
+        initial_level=int(game_map.cells.get(self.start,{}).get('elevation',0))
+        if initial_level==15:initial_level=game_map._collision_elevation or 0
+        self.initial=(self.start,bool(surfing),initial_level);self.order=count()
         self.queue=[(0,next(self.order),self.initial)];self.costs={self.initial:0}
         self.previous={self.initial:None};self.segments={};self.settled={}
 
@@ -24,13 +26,17 @@ class ReachabilityTree:
         while goal not in self.settled and self.queue:
             cost,_,node=heapq.heappop(self.queue)
             if self.costs[node]!=cost:continue
-            point,on_water=node
+            point,on_water,level=node
             self.settled.setdefault(point,node)
             for direction in ('north','west','east','south'):
-                segment=m.step_path(point,direction,surfing=on_water)
+                segment=m.step_path(point,direction,surfing=on_water,elevation=level)
                 if not segment or any(p in self.blocked for p in segment):continue
                 nxt=segment[-1];continued=on_water and int(m.cells.get(nxt,{}).get('behavior',0)) in WATER
-                successor=(nxt,continued);new_cost=cost+len(segment)
+                next_level=level
+                for p in segment:
+                    tile_level=int(m.cells.get(p,{}).get('elevation',0))
+                    if tile_level!=15:next_level=tile_level
+                successor=(nxt,continued,next_level);new_cost=cost+len(segment)
                 if new_cost<self.costs.get(successor,float('inf')) and nxt not in self.blocked and m.is_walkable(*nxt):
                     self.costs[successor]=new_cost;self.previous[successor]=node;self.segments[successor]=segment
                     heapq.heappush(self.queue,(new_cost,next(self.order),successor))

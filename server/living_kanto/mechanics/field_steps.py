@@ -5,6 +5,9 @@ from .friendship import change_friendship
 def field_steps(trainer,party,rng,*,forced=False):
     h=copy.deepcopy(trainer);mons=copy.deepcopy(party);counter=h.setdefault('field_steps',{})
     if any(p['owner_id']!=h['human_id'] for p in mons):raise ValueError('Walking party ownership mismatch')
+    counter['walked']=counter.get('walked',0)+1
+    from .renewable_items import catalog as renewable_catalog
+    counter['renewable']=min(renewable_catalog()['threshold'],counter.get('renewable',0)+1)
     counter['happiness']=(counter.get('happiness',0)+1)%128
     if counter['happiness']==0:
         for mon in mons:

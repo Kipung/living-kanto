@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 import sqlite3
 import threading
 import time
@@ -56,6 +57,22 @@ class RuntimeController(AsyncHumanQueue):
         store.set_status(run_id, "paused")
         self._shared_runtime = False
         self._init_async_queue()
+        self.configure_provider_trace()
+
+    def configure_provider_trace(self):
+        """Keep observer inference evidence beside the save, outside world history."""
+        configure = getattr(self.provider, 'configure_trace', None)
+        if callable(configure):
+            configure(Path(self.store.path).parent / 'inference-traces', self.run_id)
+
+    def _trace_outcome(self, observation, response, outcome, event=None, reason=None):
+        record = getattr(self.provider, 'record_trace_outcome', None)
+        if isinstance(response, dict) and {'action','arguments','decision_explanation'} <= response.keys():
+            response = {key: response[key] for key in ('action','arguments','decision_explanation')}
+        if response is not None and callable(record):
+            record(observation.to_dict(), response, outcome,
+                   event_id=event.event_id if event is not None else None, reason=reason,
+                   state_version=event.state_version if event is not None else None)
 
     def status(self):
         with self.shared_lock:
@@ -69,6 +86,12 @@ class RuntimeController(AsyncHumanQueue):
                     "pending_requests": sum(job.get('phase') == 'inference' and not job['future'].done() for job in self._async_jobs.values()),
                     "preparing_requests": self._preparing_request_count(),
                     "preparation_mode": self._preparation_mode,
+                    "deliberation_capacity": self._thought_capacity(),
+                    "urgent_response_capacity": self._urgent_capacity(),
+                    "deliberating_actors": list(self._thought_jobs),
+                    "accepted_deliberations": self._thought_accepted,
+                    "stale_deliberations": self._thought_stale,
+                    "deliberation_failure": self._thought_failure,
                     "model_lanes": getattr(self.provider, "lane_status", lambda: [])(),
                     "last_preparation_seconds": self._preparation_latencies[-1] if self._preparation_latencies else None,
                     "ready_queue_depth": self._ready_queue_depth,
@@ -81,7 +104,8 @@ class RuntimeController(AsyncHumanQueue):
                     "state_version": state.state_version,
                     "simulated_time": state.simulated_time,
                     "last_decision_seconds": self._latencies[-1] if self._latencies else None,
-                    "model": getattr(self.provider, "model_id", None)}
+                    "model": getattr(self.provider, "model_id", None),
+                    "inference_audit": getattr(self.provider, "trace_status", lambda: {"enabled": False})()}
 
     def start(self, speed="fastest"):
         return self.resume(speed)
@@ -203,12 +227,14 @@ class RuntimeController(AsyncHumanQueue):
                 raise ProviderError("No local human model configured")
             if len(batch_observations)>1:return self._batch_step(batch_observations,generation)
             for attempt in range(1 if continuation else 2):
+                raw = None
                 try:
                     raw = None if continuation else self.provider.complete(observation.to_dict(), correction=error)
                     choice = {"action": "journey_to", "arguments": {"map_id": continuation["destination_map"]}, "decision_explanation": continuation["explanation"]} if continuation else self._parse(raw, observation)
                     provenance = {**continuation["provenance"], "engine_continuation": True, "continuation_of_state_version": continuation["accepted_state_version"]} if continuation else {"kind": "model", "model_id": self.provider.model_id, "protocol": getattr(self.provider, "protocol", "test"), "observation_hash": observation.observation_hash(), "corrective_retry": attempt == 1, "test_provider": bool(getattr(self.provider, "test_provider", False))}
                     with self.shared_lock:
                         if generation != self._generation or self._closed:
+                            self._trace_outcome(observation, raw, "cancelled", reason="Runtime generation changed")
                             return {"accepted": False, "cancelled": True}
                         event, _ = self.engine.build_action_event(
                             self.store, self.run_id, human_id, **choice,
@@ -222,13 +248,17 @@ class RuntimeController(AsyncHumanQueue):
                         finally:
                             self.store.set_status(self.run_id, previous_status)
                         if continuation:self._continued += 1
-                        else:self._accepted += 1
+                        else:
+                            self._trace_outcome(observation, raw, "accepted", event=event)
+                            self._accepted += 1
                         self._cursor = (self.actor_ids.index(human_id) + 1) % len(self.actor_ids)
                         self._failure = None
                     return {"accepted": True, "engine_continuation": bool(continuation), "event_id": event.event_id, "state_version": event.state_version}
                 except StaleActionError:
+                    self._trace_outcome(observation, raw, "stale", reason="Actor decision boundary changed")
                     raise
                 except (ValueError, EngineError, NumberedDecisionError) as exc:
+                    self._trace_outcome(observation, raw, "engine_rejected", reason=str(exc))
                     error = str(exc)
                     if continuation:
                         raise EngineError("Accepted journey blocked: " + error) from exc
@@ -257,6 +287,7 @@ class RuntimeController(AsyncHumanQueue):
         def request(obs):
             error=None
             for attempt in range(2):
+                raw=None
                 try:
                     raw=self.provider.complete(obs.to_dict(),correction=error)
                     choice=self._parse(raw,obs)
@@ -265,8 +296,11 @@ class RuntimeController(AsyncHumanQueue):
                         if generation!=self._generation or self._closed:raise RuntimeError('Runtime request cancelled')
                         event,_=self.engine.build_action_event(self.store,self.run_id,obs.human_id,**choice,observation_version=obs.observation_version,expected_state_version=obs.state_version,decision_provenance=provenance)
                     return {'human_id':obs.human_id,**choice,'provenance':provenance,'observation_version':obs.observation_version,'expected_state_version':obs.state_version},event
-                except StaleActionError:raise
+                except StaleActionError:
+                    self._trace_outcome(obs, raw, "stale", reason="Actor decision boundary changed")
+                    raise
                 except (ValueError,EngineError,NumberedDecisionError) as exc:
+                    self._trace_outcome(obs, raw, "engine_rejected", reason=str(exc))
                     error=str(exc)
                     if attempt==0:
                         with self.shared_lock:self._retries+=1
@@ -275,9 +309,15 @@ class RuntimeController(AsyncHumanQueue):
             futures=[pool.submit(request,obs) for obs in observations]
             proposals=[future.result() for future in futures]
         with self.shared_lock:
-            if generation!=self._generation or self._closed:return {'accepted':False,'cancelled':True}
+            if generation!=self._generation or self._closed:
+                for obs, proposal in zip(observations, proposals):
+                    self._trace_outcome(obs, proposal[0], 'cancelled', reason='Runtime generation changed')
+                return {'accepted':False,'cancelled':True}
             current=self.store.load_run(self.run_id)[1]
-            if current.state_version!=observations[0].state_version:raise StaleActionError('Batch observation boundary changed; no proposals committed')
+            if current.state_version!=observations[0].state_version:
+                for obs, proposal in zip(observations, proposals):
+                    self._trace_outcome(obs, proposal[0], 'stale', reason='Batch observation boundary changed')
+                raise StaleActionError('Batch observation boundary changed; no proposals committed')
             choices=[proposal[0] for proposal in proposals]
             if all(c['action'] in {'rest','work'} for c in choices):
                 event,_=self.engine.build_activity_batch_event(self.store,self.run_id,choices)
@@ -289,6 +329,10 @@ class RuntimeController(AsyncHumanQueue):
             status=self.store.get_status(self.run_id);self.store.set_status(self.run_id,'running')
             try:self.engine.commit(self.store,event)
             finally:self.store.set_status(self.run_id,status)
+            for index, (obs, choice) in enumerate(zip(observations, choices)):
+                self._trace_outcome(obs, choice, 'accepted' if index < accepted else 'discarded',
+                                    event=event if index < accepted else None,
+                                    reason=None if index < accepted else 'Only the first general proposal was committed')
             self._accepted+=accepted;self._cursor=(self.actor_ids.index(last_actor)+1)%len(self.actor_ids);self._failure=None
             return {'accepted':True,'accepted_decisions':accepted,'event_id':event.event_id,'state_version':event.state_version,'atomic_activity_batch':accepted>1}
 

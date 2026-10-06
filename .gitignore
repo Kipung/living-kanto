@@ -28,3 +28,18 @@ work/
 # Private per-world local runtime configuration and saves
 data/local/
 *.runtime-settings.json
+
+# Local simulation state and generated/operator artifacts
+data/
+output/
+.playwright-cli/
+.DS_Store
+._*
+# Evidence is retained locally; existing tracked release evidence remains tracked.
+evidence/
+# Machine-specific credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key

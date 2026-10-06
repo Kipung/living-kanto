@@ -20,6 +20,7 @@ def start_activity(state,hid,kind,args,provenance,explanation):
  if current_activity(h) or h.get('battle_id') or h.get('service_request'):raise ScheduleError('Finish or cancel the existing activity before beginning another')
  if provenance.get('kind') not in ('model','user') or provenance.get('kind')=='model' and not provenance.get('model_id') or not explanation.strip() or len(explanation)>2000:raise ScheduleError('Activity requires accepted human decision provenance')
  energy=int(h.get('status',{}).get('energy',100))
+ if kind=='work' and h.get('workplace') and h['map_id']!=h['workplace']['map_id']:raise ScheduleError('Work requires the assigned workplace')
  if kind=='work' and (h.get('role') not in WORK_ROLES or energy<20):raise ScheduleError('This work role needs at least 20 energy')
  a={'human_id':hid,'intent_id':f'activity-{state.state_version}-{hid}','kind':kind,'start_at':state.simulated_time,'ready_at':state.simulated_time+DURATIONS[kind],'accepted_state_version':state.state_version,'provenance':copy.deepcopy(provenance),'explanation':explanation,'arguments':{},'reserved_energy':20 if kind=='work' else 0}
  p='humans.'+hid;changes=[{'op':'set','path':p+'.activity','value':a},{'op':'set','path':p+'.ready_at','value':a['ready_at']},{'op':'set','path':p+'.status.activity','value':'working' if kind=='work' else 'resting'}]

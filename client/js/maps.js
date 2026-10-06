@@ -22,17 +22,10 @@
   let generation = 0;
   async function loadMap(name) {
     const gen = ++generation;
+    const {cachedJSON,cachedImage}=await import('/client/js/artwork-cache.mjs');
     const [jsonRes, img] = await Promise.all([
-      fetch("/content/maps/" + encodeURIComponent(name) + ".json").then(r => {
-        if (!r.ok) throw new Error("map json " + name + " -> HTTP " + r.status);
-        return r.json();
-      }),
-      new Promise((res, rej) => {
-        const i = new Image();
-        i.onload = () => res(i);
-        i.onerror = () => rej(new Error("map png " + name + " failed to load"));
-        i.src = "/content/maps/" + encodeURIComponent(name) + ".png";
-      })
+      cachedJSON('/content/maps/' + encodeURIComponent(name) + '.json'),
+      cachedImage('/content/maps/' + encodeURIComponent(name) + '.png')
     ]);
     if (gen !== generation) return;
     const w = jsonRes.width || 0, h = jsonRes.height || 0;

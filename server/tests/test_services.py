@@ -21,7 +21,7 @@ def test_two_healing_customers_fifo_and_real_staff_time(game):
     queued=state(game);queue=engine.service_queue(queued,mid)
     assert [request['human_id'] for request in queue]==customers
     assert all(queued.pokemon[f'pokemon-service-{i}']['hp']==1 for i in range(2))
-    assert [a.action for a in engine.legal_actions(queued,customers[0])]==['cancel_service']
+    assert [a.action for a in engine.legal_actions(queued,customers[0])]==['wait_for_service','cancel_service']
     assert engine.service_private_info(queued,staff['human_id'])['next_customer']['human_id']==customers[0]
     request=engine.service_actions(queued,staff['human_id'])[0]
     first=act(game,staff['human_id'],request.action,request.arguments)

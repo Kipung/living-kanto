@@ -19,7 +19,7 @@ class JourneyUnavailable(ValueError):pass
 _ROUTING_IRRELEVANT=frozenset({
  'ambitions','appearance','biography','decision_history','goal','goals',
  'interests','last_decision','memories','memory_summary','model_provenance',
- 'name','personality','preferences','relationships','responsibilities',
+ 'name','personality','preferences','relationships','responsibilities','individual_life',
  'role','setup_role','setup_status',
 })
 
@@ -43,7 +43,7 @@ def plan_journey(maps,h,destination_map,*,state=None,max_nodes=256,max_tiles=100
   if best.get(node)!=distance:continue
   mid,x,y,*_=node
   if mid==destination_map:return route
-  expanded+=1;game_map=actor_map(maps[mid],actor);surfing=bool(actor.get('status',{}).get('surfing')) and state is not None and (permission(state,actor,'SURF') or actor.get('status',{}).get('source_forced_surfing',False))
+  expanded+=1;game_map=actor_map(maps[mid],actor,state);surfing=bool(actor.get('status',{}).get('surfing')) and state is not None and (permission(state,actor,'SURF') or actor.get('status',{}).get('source_forced_surfing',False))
   # Try the closest few real edge/door tiles for each destination, rather than
   # every boundary tile. Disconnected entrances remain separate search nodes.
   grouped={}
@@ -53,7 +53,11 @@ def plan_journey(maps,h,destination_map,*,state=None,max_nodes=256,max_tiles=100
   # Hash it once, rather than repeatedly serializing its private history.
   cache_key=(mid,x,y,surfing,content_hash(actor))
   for target,points in sorted(grouped.items()):
-   for point in sorted(points,key=lambda p:(abs(p[0]-x)+abs(p[1]-y),p))[:4]:
+   valid_exits=0
+   for point in sorted(points,key=lambda p:(abs(p[0]-x)+abs(p[1]-y),p)):
+    # Inaccessible boundary markers must not hide farther usable exits. One
+    # cached reachability tree checks candidates without replanning the map.
+    if valid_exits>=4:break
     try:
      tree=path_cache.get(cache_key)
      if tree is None:
@@ -68,10 +72,12 @@ def plan_journey(maps,h,destination_map,*,state=None,max_nodes=256,max_tiles=100
      after,script_steps=transition_effects(maps,after,game_map,point,dst,(nx,ny))
      dst,nx,ny=after["map_id"],after["x"],after["y"]
      if int(maps[dst].cells.get((nx,ny),{}).get("behavior",0)) not in WATER:after.setdefault("status",{})["surfing"]=False
-     if not actor_map(maps[dst],after).is_walkable(nx,ny):continue
+     if not actor_map(maps[dst],after,state,ignore_origin=False).can_stand(nx,ny):continue
     except (PathNotFound,MapLoadError,AccessDenied):continue
     cost=distance+len(path)+1+sum(len(s.get("steps",[])) for s in script_steps);next_node=(dst,nx,ny,bool(after.get("status",{}).get("surfing")),bool(after.get("access",{}).get("saffron_tea")))
-    if cost>max_tiles or cost>=best.get(next_node,float('inf')):continue
+    if cost>max_tiles:continue
+    valid_exits+=1
+    if cost>=best.get(next_node,float('inf')):continue
     best[next_node]=cost
     segment={'map_id':mid,'start':[x,y],'steps':[list(p) for p in path],'source_exit':list(point),'destination_map':dst,'destination':[nx,ny],'checkpoint_changes':checkpoint,'script_steps':script_steps,'field_after':after.get('field',{}),'status_after':after.get('status',{}),'surfing_after':bool(after.get('status',{}).get('surfing'))}
     heapq.heappush(queue,(cost,next(sequence),next_node,after,route+[segment]))
@@ -80,9 +86,12 @@ def plan_journey(maps,h,destination_map,*,state=None,max_nodes=256,max_tiles=100
 def public_destinations(maps,current):
  """Nearby cities/services/gyms from static topology; no private state."""
  graph={mid:{t for t in m.exits.values() if t in maps} for mid,m in maps.items()};todo=[current];seen={current};out=[]
+ # Offer direct geographic exits as well as nearby services. Routes and dungeon
+ # floors are useful destinations even when five closer services are locked.
+ adjacent=sorted(graph.get(current,()))
  while todo and len(out)<5:
   mid=todo.pop(0)
   if mid!=current and (mid.endswith(('_PokemonCenter_1F','_Gym','_ProfessorOaksLab')) or '_' not in mid and ('City' in mid or 'Town' in mid)):out.append(mid)
   for target in sorted(graph.get(mid,())):
    if target not in seen:seen.add(target);todo.append(target)
- return out
+ return list(dict.fromkeys(adjacent+out))

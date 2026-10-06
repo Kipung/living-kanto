@@ -53,3 +53,82 @@ def test_invalid_double_choice_does_not_store_pending_and_offer_stales_safely(ga
     with pytest.raises((EngineError,ValueError)):
         act(game,'human-001','battle_turn',{'choices':[{'type':'move','slot':4,'target':1},{'type':'move','slot':1,'target':2}]})
     assert state(game).state_hash==accepted.state_hash
+
+
+@pytest.mark.parametrize('map_id',[
+    'PalletTown_PlayersHouse_1F', 'PalletTown_ProfessorOaksLab',
+    'ViridianCity_Mart', 'ViridianCity_PokemonCenter_1F',
+])
+def test_peaceful_interiors_block_proposal_and_pending_acceptance(game,map_id):
+    proposed=setup(game,False)
+    cid=next(iter(proposed.world_facts['trainer_challenges']))
+    for hid in ('human-001','human-002'):
+        locate(game,hid,map_id)
+    before=state(game)
+    for hid in ('human-001','human-002'):
+        actions=game[0].gameplay_actions(before,hid)
+        assert not any(a.action in {'challenge_trainer','accept_challenge'} for a in actions)
+        assert any(a.action=='decline_challenge' for a in actions)
+    with pytest.raises(EngineError):
+        act(game,'human-001','challenge_trainer',{'human_id':'human-002','doubles':False})
+    with pytest.raises(EngineError):
+        act(game,'human-002','accept_challenge',{'challenge_id':cid})
+    assert state(game).state_hash==before.state_hash
+    assert state(game).world_facts['trainer_challenges'][cid]['status']=='pending'
+    # Reaching a permitted location together restores this still-live offer.
+    for hid in ('human-001','human-002'):
+        locate(game,hid,'PalletTown',(10,10))
+    accepted=act(game,'human-002','accept_challenge',{'challenge_id':cid})
+    assert game[0].active_battle(accepted,'human-001')['personal_duel']
+
+
+def test_duel_factory_rechecks_current_venue_and_preserves_active_indoor_battle(game):
+    from living_kanto.mechanics.challenges import start_personal_duel
+    proposed=setup(game,False)
+    cid=next(iter(proposed.world_facts['trainer_challenges']))
+    for hid in ('human-001','human-002'):
+        locate(game,hid,'PalletTown_ProfessorOaksLab')
+    current=state(game)
+    with pytest.raises(ValueError,match='no longer available'):
+        start_personal_duel(current,current.world_facts['trainer_challenges'][cid],
+                            random.Random(1),'blocked',maps=game[0].maps)
+    for hid in ('human-001','human-002'):
+        locate(game,hid,'PalletTown',(10,10))
+    accepted=act(game,'human-002','accept_challenge',{'challenge_id':cid})
+    # A legacy already-active indoor duel must still be finishable.
+    for hid in ('human-001','human-002'):
+        locate(game,hid,'PalletTown_ProfessorOaksLab')
+    current=state(game)
+    assert game[0].battle_actions(current,'human-001')
+    move=game[0].battle_actions(current,'human-001')[0]
+    after=act(game,'human-001',move.action,move.arguments)
+    assert game[0].active_battle(after,'human-001')['battle_id']==accepted.humans['human-001']['battle_id']
+
+
+@pytest.mark.parametrize('map_id',[
+    'PalletTown', 'Route1', 'MtMoon_1F', 'PewterCity_Gym',
+    'SaffronCity_Dojo', 'SilphCo_2F', 'PokemonTower_3F',
+    'PokemonLeague_LoreleisRoom',
+])
+def test_source_battle_venues_allow_personal_duels(game,map_id):
+    from living_kanto.mechanics.battle_venues import personal_duel_allowed
+    assert personal_duel_allowed(game[0].maps[map_id])
+
+
+def test_unknown_venue_fails_closed():
+    from living_kanto.mechanics.battle_venues import personal_duel_allowed
+    from living_kanto.simulation.maps import GameMap
+    assert not personal_duel_allowed(None)
+    assert not personal_duel_allowed(GameMap('unknown',1,1,['1'],{}))
+
+
+def test_dojo_personal_duel_acceptance_uses_owned_parties(game):
+    proposed=setup(game,False)
+    cid=next(iter(proposed.world_facts['trainer_challenges']))
+    for hid in ('human-001','human-002'):
+        locate(game,hid,'SaffronCity_Dojo')
+    accepted=act(game,'human-002','accept_challenge',{'challenge_id':cid})
+    battle=game[0].active_battle(accepted,'human-001')
+    assert battle['personal_duel']
+    assert battle['session']['challenge']['kind']=='personal'
+    assert game[1].replay('gameplay-test').state_hash==accepted.state_hash

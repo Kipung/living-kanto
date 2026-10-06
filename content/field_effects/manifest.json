@@ -1,0 +1,643 @@
+{
+  "source_revision": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "fps": 60,
+  "effects": {
+    "ripple": {
+      "image": "/content/field_effects/ripple.png",
+      "frames": [
+        {
+          "frame": 0,
+          "sx": 0,
+          "sy": 0,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 1,
+          "sx": 0,
+          "sy": 16,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 2,
+          "sx": 0,
+          "sy": 32,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 3,
+          "sx": 0,
+          "sy": 48,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 4,
+          "sx": 0,
+          "sy": 64,
+          "width": 16,
+          "height": 16
+        }
+      ],
+      "anims": {
+        "default": {
+          "symbol": "sAnim_Ripple",
+          "frames": [
+            {
+              "frame": 0,
+              "duration": 12,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 1,
+              "duration": 9,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 2,
+              "duration": 9,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 3,
+              "duration": 9,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 0,
+              "duration": 9,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 1,
+              "duration": 9,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 2,
+              "duration": 11,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 4,
+              "duration": 11,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": false,
+          "ends": true
+        }
+      },
+      "source_png": "graphics/field_effects/pics/ripple.png",
+      "source_png_sha256": "ef8fa49a1519371358eebf66a8560a114c9395a5153788962906719092de5726",
+      "palette": "graphics/field_effects/palettes/general_1.pal",
+      "palette_sha256": "d7cc5bb715cdddeb5482c311c01756ead623860e8d9f35bf2f1af4a92c9b28f9",
+      "output_sha256": "7e6bbb7b604c3538e13e6932319ea53e2996f52b369ff89bdc9912b708e897be",
+      "source_definition": "src/data/field_effects/field_effect_objects.h"
+    },
+    "splash": {
+      "image": "/content/field_effects/splash.png",
+      "frames": [
+        {
+          "frame": 0,
+          "sx": 0,
+          "sy": 0,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 1,
+          "sx": 0,
+          "sy": 16,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 2,
+          "sx": 0,
+          "sy": 32,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 3,
+          "sx": 0,
+          "sy": 48,
+          "width": 16,
+          "height": 16
+        }
+      ],
+      "anims": {
+        "default": {
+          "symbol": "sAnim_JumpBigSplash",
+          "frames": [
+            {
+              "frame": 0,
+              "duration": 8,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 1,
+              "duration": 8,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 2,
+              "duration": 8,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 3,
+              "duration": 8,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": false,
+          "ends": true
+        }
+      },
+      "source_png": "graphics/field_effects/pics/jump_big_splash.png",
+      "source_png_sha256": "8efaba678529941fdade37f18eee01ccbcb803205ad34ab939fd30651aa19e66",
+      "palette": "graphics/field_effects/palettes/general_0.pal",
+      "palette_sha256": "37553041248ee9baa86a87b0efd3fbf8642fa776b0bde9442d896b5b8891bcc6",
+      "output_sha256": "e79c69658945c4d7d4863ace57f629cab26d561bc756864a5e52a9d90d469d44",
+      "source_definition": "src/data/field_effects/field_effect_objects.h"
+    },
+    "dust": {
+      "image": "/content/field_effects/dust.png",
+      "frames": [
+        {
+          "frame": 0,
+          "sx": 0,
+          "sy": 0,
+          "width": 16,
+          "height": 8
+        },
+        {
+          "frame": 1,
+          "sx": 0,
+          "sy": 8,
+          "width": 16,
+          "height": 8
+        },
+        {
+          "frame": 2,
+          "sx": 0,
+          "sy": 16,
+          "width": 16,
+          "height": 8
+        }
+      ],
+      "anims": {
+        "default": {
+          "symbol": "sAnim_GroundImpactDust",
+          "frames": [
+            {
+              "frame": 0,
+              "duration": 8,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 1,
+              "duration": 8,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 2,
+              "duration": 8,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": false,
+          "ends": true
+        }
+      },
+      "source_png": "graphics/field_effects/pics/ground_impact_dust.png",
+      "source_png_sha256": "6a83553050540cd002a506281c9b33b332b52e7b4bdf243a554a7eca3f0cfdbe",
+      "palette": "graphics/field_effects/palettes/general_0.pal",
+      "palette_sha256": "37553041248ee9baa86a87b0efd3fbf8642fa776b0bde9442d896b5b8891bcc6",
+      "output_sha256": "95e40ae4f22103e3b198c19b4fc7477196136089019eea8748edbe58a8bbb0b0",
+      "source_definition": "src/data/field_effects/field_effect_objects.h"
+    },
+    "grass": {
+      "image": "/content/field_effects/grass.png",
+      "frames": [
+        {
+          "frame": 0,
+          "sx": 0,
+          "sy": 0,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 1,
+          "sx": 0,
+          "sy": 16,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 2,
+          "sx": 0,
+          "sy": 32,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 3,
+          "sx": 0,
+          "sy": 48,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 4,
+          "sx": 0,
+          "sy": 64,
+          "width": 16,
+          "height": 16
+        }
+      ],
+      "anims": {
+        "default": {
+          "symbol": "sAnim_TallGrass",
+          "frames": [
+            {
+              "frame": 1,
+              "duration": 10,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 2,
+              "duration": 10,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 3,
+              "duration": 10,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 4,
+              "duration": 10,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 0,
+              "duration": 10,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": false,
+          "ends": true
+        }
+      },
+      "source_png": "graphics/field_effects/pics/tall_grass.png",
+      "source_png_sha256": "6273183298ed0037801430695c718018c14058a25ccd27b7a7318519dbb45c51",
+      "palette": "graphics/field_effects/palettes/general_1.pal",
+      "palette_sha256": "d7cc5bb715cdddeb5482c311c01756ead623860e8d9f35bf2f1af4a92c9b28f9",
+      "output_sha256": "b5c10c738bf09854c113bd799dd8139fb98e43bb64d5adf67ed5938cd11a11cf",
+      "source_definition": "src/data/field_effects/field_effect_objects.h"
+    },
+    "surf": {
+      "image": "/content/field_effects/surf.png",
+      "frames": [
+        {
+          "frame": 0,
+          "sx": 0,
+          "sy": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "frame": 1,
+          "sx": 32,
+          "sy": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "frame": 2,
+          "sx": 64,
+          "sy": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "frame": 3,
+          "sx": 96,
+          "sy": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "frame": 4,
+          "sx": 128,
+          "sy": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "frame": 5,
+          "sx": 160,
+          "sy": 0,
+          "width": 32,
+          "height": 32
+        }
+      ],
+      "anims": {
+        "south": {
+          "symbol": "sSurfBlobAnim_FaceSouth",
+          "frames": [
+            {
+              "frame": 0,
+              "duration": 48,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 1,
+              "duration": 48,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": true,
+          "ends": false
+        },
+        "north": {
+          "symbol": "sSurfBlobAnim_FaceNorth",
+          "frames": [
+            {
+              "frame": 2,
+              "duration": 48,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 3,
+              "duration": 48,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": true,
+          "ends": false
+        },
+        "west": {
+          "symbol": "sSurfBlobAnim_FaceWest",
+          "frames": [
+            {
+              "frame": 4,
+              "duration": 48,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "frame": 5,
+              "duration": 48,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": true,
+          "ends": false
+        },
+        "east": {
+          "symbol": "sSurfBlobAnim_FaceEast",
+          "frames": [
+            {
+              "frame": 4,
+              "duration": 48,
+              "hFlip": true,
+              "vFlip": false
+            },
+            {
+              "frame": 5,
+              "duration": 48,
+              "hFlip": true,
+              "vFlip": false
+            }
+          ],
+          "loops": true,
+          "ends": false
+        }
+      },
+      "source_png": "graphics/object_events/pics/misc/surf_blob.png",
+      "source_png_sha256": "87a6a4815cb5b942eedeb535bc82778c5aeefcba7cd52fba4067d349f98fb3fd",
+      "palette": "graphics/object_events/palettes/player.pal",
+      "palette_sha256": "d76189cdedca19ea3c4fb5bc500380a7f6d9dc9ee31e849ec6c67bb88da8a1b1",
+      "output_sha256": "e4298e7b61a2fbb3704513d60a5b9f28fe7fd2c84c55108403b5966525622df6",
+      "source_definition": "src/data/field_effects/field_effect_objects.h:sAnimTable_SurfBlob"
+    },
+    "fly": {
+      "image": "/content/field_effects/fly.png",
+      "frames": [
+        {
+          "frame": 0,
+          "sx": 0,
+          "sy": 0,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "frame": 1,
+          "sx": 0,
+          "sy": 64,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "frame": 2,
+          "sx": 0,
+          "sy": 128,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "frame": 3,
+          "sx": 0,
+          "sy": 192,
+          "width": 64,
+          "height": 64
+        },
+        {
+          "frame": 4,
+          "sx": 0,
+          "sy": 256,
+          "width": 64,
+          "height": 64
+        }
+      ],
+      "anims": {
+        "default": {
+          "symbol": "sAnim_Bird_WithoutPlayer",
+          "frames": [
+            {
+              "frame": 0,
+              "duration": 1,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": false,
+          "ends": true
+        }
+      },
+      "source_png": "graphics/field_effects/pics/bird.png",
+      "source_png_sha256": "6b5885da142a8a75b140f8d5cbdf5d409f3573accb7f1f53f21329ffb9f318c0",
+      "palette": "graphics/object_events/palettes/player.pal",
+      "palette_sha256": "d76189cdedca19ea3c4fb5bc500380a7f6d9dc9ee31e849ec6c67bb88da8a1b1",
+      "output_sha256": "41535619bf50b40d9d14f5d9520bc57867380b3b3da71f1e6a88e131bdaa4981",
+      "source_definition": "src/data/field_effects/field_effect_objects.h:sAnimTable_Bird"
+    },
+    "cut_tree": {
+      "image": "/content/field_effects/cut_tree.png",
+      "frames": [
+        {
+          "frame": 0,
+          "sx": 0,
+          "sy": 0,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 1,
+          "sx": 16,
+          "sy": 0,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 2,
+          "sx": 32,
+          "sy": 0,
+          "width": 16,
+          "height": 16
+        },
+        {
+          "frame": 3,
+          "sx": 48,
+          "sy": 0,
+          "width": 16,
+          "height": 16
+        }
+      ],
+      "anims": {
+        "default": {
+          "ends": true,
+          "frames": [
+            {
+              "duration": 6,
+              "frame": 0,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "duration": 6,
+              "frame": 1,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "duration": 6,
+              "frame": 2,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "duration": 6,
+              "frame": 3,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": false,
+          "symbol": "sAnim_TreeCut"
+        }
+      },
+      "source_png": "graphics/object_events/pics/misc/cut_tree.png",
+      "source_png_sha256": "819545f25316a679f4c1c5697339a3bc0dcf2722a612978acd7cc6bd9f2e0dac",
+      "palette": "graphics/object_events/palettes/npc_green.pal",
+      "palette_sha256": "ec52e39c3691ed5dab197966ce5afcc550fa3c43a8b6eafea89dffef7f32c749",
+      "output_sha256": "add04470a7a53d400945ae4e99aa679a9ef5a91354885fca7117ca3720d3f2b2",
+      "source_definition": "src/data/object_events/object_event_anims.h:sAnimTable_CutTree"
+    },
+    "strength_boulder": {
+      "image": "/content/field_effects/strength_boulder.png",
+      "frames": [
+        {
+          "frame": 0,
+          "sx": 0,
+          "sy": 0,
+          "width": 16,
+          "height": 16
+        }
+      ],
+      "anims": {
+        "default": {
+          "ends": false,
+          "frames": [
+            {
+              "duration": 8,
+              "frame": 0,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "duration": 8,
+              "frame": 0,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "duration": 8,
+              "frame": 0,
+              "hFlip": false,
+              "vFlip": false
+            },
+            {
+              "duration": 8,
+              "frame": 0,
+              "hFlip": false,
+              "vFlip": false
+            }
+          ],
+          "loops": true,
+          "symbol": "sAnim_StayStill"
+        }
+      },
+      "source_png": "graphics/object_events/pics/misc/strength_boulder.png",
+      "source_png_sha256": "60c4e11133c8c23419cbdd41a9a3d80fb316914566431fb63948a782f4039762",
+      "palette": "graphics/object_events/palettes/npc_white.pal",
+      "palette_sha256": "364226740461c8f31a71727ed46fd5e3d743582c9e37015f916a216742a61e1f",
+      "output_sha256": "ffca8f86f8a0125686d9972847b9f020a54db4c391be1f651e9fca49723a51e6",
+      "source_definition": "src/data/object_events/object_event_anims.h:sAnimTable_Inanimate"
+    }
+  },
+  "adaptations": [
+    "Surf blob and Fly bird use the original player palette for shared trainers. Flash uses the source circular visibility window, not a made-up particle sprite."
+  ]
+}

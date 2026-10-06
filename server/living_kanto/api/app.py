@@ -201,6 +201,7 @@ def create_app(
             try:
                 store = RunStore(path)
                 run_id = store.create_run(metadata, state)
+                store.optimize_storage(run_id)
             except (StoreError, ContractError, ValueError) as e:
                 # Failed creation must not leave a half-owned store registered.
                 # Under the lock the file did not exist beforehand, so any

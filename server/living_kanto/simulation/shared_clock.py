@@ -36,19 +36,36 @@ class SharedClockMixin:
         try:return self.commit_changes(store,run_id,changes,kind='world.shared_clock_activated',actor='engine',explanation='Enable shared-clock accepted-intent execution; migrate existing accepted journeys',provenance={'kind':'engine'},expected_version=s.state_version)[0]
         finally:store.set_status(run_id,status)
 
+    def immediate_reply_actions(self, state, hid):
+        h = state.humans[hid]
+        if h.get('battle_id') or (h.get('movement_intent') or {}).get('forced_movement'):
+            return ()
+        from .conversation import reply_options
+        nearby = [LegalAction(action='talk_to', arguments={'human_id': other, 'text': '<message, <=200 chars>'})
+            for other, person in state.humans.items() if other != hid and person.get('map_id') == h['map_id']
+            and abs(person['x'] - h['x']) + abs(person['y'] - h['y']) <= self.interaction_radius(h)]
+        return tuple(reply_options(h, nearby))
+
     def shared_legal_override(self,state,hid):
         h=state.humans[hid]
+        replies = self.immediate_reply_actions(state, hid)
         if h.get('movement_intent') and not h.get('battle_id'):
             if h['movement_intent'].get('forced_movement'):return ()
-            return (LegalAction(action='cancel_movement',arguments={},known_consequences={'retains_reached_position':True}),)
-        if h.get('ready_at',0)>state.simulated_time and not h.get('activity') and not h.get('service_request'):return ()
+            return replies + (LegalAction(action='cancel_movement',arguments={},known_consequences={'retains_reached_position':True}),)
+        if h.get('activity'):
+            return replies
+        if h.get('ready_at',0)>state.simulated_time and not h.get('service_request'):
+            return replies
+        if h.get('service_request') and replies:
+            return replies + (LegalAction(action='cancel_service', arguments={}, known_consequences={'refund': h['service_request']['reserved_payment']}),)
         return None
 
     def shared_actor_ready(self,state,hid):
         h=state.humans[hid]
+        if self.immediate_reply_actions(state, hid): return True
         if h.get('movement_intent') and not h.get('battle_id'):return False
         if h.get('activity') or h.get('ready_at',0)>state.simulated_time:return False
-        if h.get('service_request'):return True  # Explicit cancellation remains a real human choice.
+        if h.get('service_request'):return True
         if h.get('battle_id'):
             battle=state.world_facts.get('battles',{}).get(h['battle_id'])
             if not battle:return False
@@ -60,22 +77,100 @@ class SharedClockMixin:
     def _actor_dependency(state,hid):
         h=state.humans[hid]
         # Clock-derived needs/bookkeeping do not invalidate an in-flight mind.
-        keys=('map_id','x','y','facing','party','box','inventory','money','badges','goal','memories','field','access','activity','service_request','movement_intent','battle_id')
+        keys=('map_id','x','y','facing','party','box','inventory','pc_items','pc_storage','mailbox','registered_item','trade_preferences','map_visit','field_steps','utility_items','collected_hidden_items','renewable_hidden_items','money','badges','goal','memories','field','access','activity','service_request','movement_intent','battle_id','individual_life','workplace','home_location','service_assignment')
         owned={pid:state.pokemon[pid] for pid in h.get('party',[])+h.get('box',[]) if pid in state.pokemon}
-        return content_hash({'actor':{k:h.get(k) for k in keys},'traversal_status':{k:h.get('status',{}).get(k) for k in ('surfing','source_forced_surfing','bicycle')},'pokemon':owned})
+        return content_hash({'actor':{k:h.get(k) for k in keys},'traversal_status':{k:h.get('status',{}).get(k) for k in ('surfing','source_forced_surfing','bicycle','collision_elevation')},'pokemon':owned})
+
+    @staticmethod
+    def _trade_dependency(state,offer):
+        actors={actor:{key:state.humans.get(actor,{}).get(key) for key in ('map_id','x','y','party','battle_id','activity','service_request','movement_intent')}
+                for actor in (offer['proposer'],offer['recipient'])}
+        mons={pid:state.pokemon.get(pid) for pid in (offer.get('offered_pokemon'),offer.get('counter_pokemon')) if pid}
+        if offer.get('kind')=='items':
+            for actor in actors:
+                actors[actor]['inventory']=state.humans[actor]['inventory'];actors[actor]['money']=state.humans[actor]['money']
+        return content_hash({'offer':offer,'actors':actors,'pokemon':mons})
+
+    @staticmethod
+    def _movement_occupancy(state):
+        """Physical occupants only; unrelated needs and conversations stay valid."""
+        return content_hash({"humans":{hid:{**{k:h.get(k) for k in ("map_id","x","y")},"collision_elevation":h.get("status",{}).get("collision_elevation")} for hid,h in state.humans.items()},"npcs":state.npcs})
+
+    @staticmethod
+    def _workplace_dependency(state, hid):
+        # Duty may change when local relief becomes busy or an office shift
+        # changes. Reuse the same bounded, locally observable view the actor
+        # receives; offsite colleagues' private state is not included.
+        from .workplaces import duty_info
+        duty = duty_info(state, hid)
+        return content_hash({key: duty.get(key) for key in ('on_duty', 'at_workplace', 'at_service_post')} if duty else {})
 
     def capture_decision_boundary(self,state,hid):
         observation=self.observation_for(state,hid)
         token={'actor':self._actor_dependency(state,hid),'targets':{other:content_hash({'map_id':h.get('map_id'),'x':h.get('x'),'y':h.get('y'),'party':h.get('party'),'battle_id':h.get('battle_id'),'activity':h.get('activity'),'service_request':h.get('service_request')}) for other,h in state.humans.items() if other!=hid},'queue_heads':{mid:content_hash(q[0]) for mid,q in state.world_facts.get('service_queues',{}).items() if q},'original_observation_hash':content_hash(observation.to_dict())}
+        h=state.humans[hid]
+        token['source_targets']={nid:content_hash(npc) for nid,npc in state.npcs.items() if npc.get('kind')=='source_resident' and npc.get('map_id')==h['map_id'] and abs(npc['x']-h['x'])+abs(npc['y']-h['y'])<=self.interaction_radius(h)}
+        from .source_npcs import courtesy_plan
+        token['source_passages']={a.arguments['npc_id']:content_hash(courtesy_plan(self,state,hid,a.arguments['npc_id'])) for a in observation.legal_actions if a.action=='ask_resident_to_make_way'}
+        token['reply_context'] = self._reply_context(state, hid)
+        token['workplace_duty'] = self._workplace_dependency(state, hid)
+        token['movement_options']=[content_hash({'action':a.action,'arguments':a.arguments}) for a in observation.legal_actions if a.action in ('walk_to','travel_to','journey_to','enter_map')]
+        token['movement_occupancy']=self._movement_occupancy(state)
+        token['trades']={tid:self._trade_dependency(state,offer) for tid,offer in state.world_facts.get('trade_offers',{}).items() if hid in (offer['proposer'],offer['recipient']) and offer['phase'] in ('offered','countered')}
         if state.humans[hid].get('battle_id'):
             from ..mechanics import BattleSession
             b=state.world_facts['battles'][state.humans[hid]['battle_id']]
             token['battle_request']=content_hash(BattleSession(b['session']).observation(hid))
         return observation,token
 
+    @staticmethod
+    def _reply_context(state, hid):
+        h = state.humans[hid]
+        # Tile progress and needs do not invalidate speech; a new choice,
+        # delivery, battle, or activity cancellation does. Proximity is checked
+        # again against the current legal reply menu at acceptance.
+        return content_hash({k: h.get(k) for k in ('memories', 'last_decision', 'battle_id')})
+
     def _validate_boundary(self,state,hid,choice,token):
+        if choice['action'] == 'respond_to':
+            if token.get('reply_context') != self._reply_context(state, hid):
+                raise StaleActionError('Speech context changed')
+            args = choice.get('arguments', {})
+            if not any(all(a.arguments.get(k) == args.get(k) for k in ('human_id', 'speech_id', 'disposition'))
+                       for a in self.immediate_reply_actions(state, hid)):
+                raise StaleActionError('Reply recipient or delivered message no longer available')
+            return
         if token.get('actor')!=self._actor_dependency(state,hid):raise StaleActionError('local actor dependency changed')
         args=choice.get('arguments',{});action=choice['action']
+        if action == 'plan_next_step':
+            action, args = args.get('action'), args.get('arguments', {})
+            if action in {'journey_to','travel_to','enter_map'} and token.get('movement_occupancy') != self._movement_occupancy(state):
+                still_offered = any(a.action == 'plan_next_step' and a.arguments.get('action') == action
+                                    and a.arguments.get('arguments') == args for a in self.legal_actions(state,hid))
+                if not still_offered:
+                    raise StaleActionError('planned route is no longer offered; refresh concrete step choices')
+        if action in {'work', 'enter_map', 'journey_to', 'fly_to', 'ride_elevator', 'walk_to', 'travel_to', 'take_service_post', 'leave_service_post', 'turn_to'} and 'workplace_duty' in token:
+            if token['workplace_duty'] != self._workplace_dependency(state, hid):
+                raise StaleActionError('local workplace duty or relief changed')
+        if action in {'trade_accept','trade_decline','item_trade_accept','item_trade_decline'}:
+            tid=args.get('trade_id');offer=state.world_facts.get('trade_offers',{}).get(tid)
+            if not offer or token.get('trades',{}).get(tid)!=self._trade_dependency(state,offer):
+                raise StaleActionError('trade offer or participant changed')
+            if action in {'trade_accept','item_trade_accept'} and offer.get('expires_at',state.simulated_time+1)<=state.simulated_time:
+                raise StaleActionError('trade offer expired')
+        if action in {'take_service_post','leave_service_post'}:
+            from .workplaces import post_action
+            if post_action(self,state,hid,action=='take_service_post') is None and token.get('movement_occupancy')!=self._movement_occupancy(state):
+                raise StaleActionError('local service counter passage occupancy changed')
+        if action in {'speak_to_source_resident','ask_resident_to_make_way'}:
+            nid=args.get('npc_id');npc=state.npcs.get(nid)
+            if nid in token.get('source_targets',{}) and (not npc or token['source_targets'][nid]!=content_hash(npc)):
+                raise StaleActionError('nearby source resident changed')
+            if action=='ask_resident_to_make_way':
+                from .source_npcs import courtesy_plan
+                current_plan=courtesy_plan(self,state,hid,nid)
+                if nid in token.get('source_passages',{}) and token['source_passages'][nid]!=content_hash(current_plan):
+                    raise StaleActionError('source resident passage occupancy changed')
         target=args.get('human_id')
         if target and target in token.get('targets',{}):
             h=state.humans.get(target,{})
@@ -90,15 +185,23 @@ class SharedClockMixin:
             if token['battle_request']!=content_hash(BattleSession(b['session']).observation(hid)):raise StaleActionError('own battle request changed')
 
     def _shared_event(self,state,head,changes,*,kind,causation,details=None):
+        from .entity_systems import map_visit_changes
+        changes=list(changes)+map_visit_changes(state,changes)
         from .world import expand_entity_sets
         changes=expand_entity_sets(changes)
         # apply_changes already constructs and validates an independent state.
         # Preserve the prior-hash gate, then advance its version in place rather
         # than copying the entire validated world into/from another plain dict.
-        state.verify();new=state.apply_changes(copy.deepcopy(changes));new.state_hash='';new.state_version=state.state_version+1;new.validate();new.state_hash=new.compute_state_hash()
+        state.verify();new=state.apply_changes(copy.deepcopy(changes))
+        from .task_continuity import settle
+        settled = settle(new)
+        if settled:
+            changes += settled
+            new = new.apply_changes(settled)
+        new.state_hash='';new.state_version=state.state_version+1;new.validate();new.state_hash=new.compute_state_hash()
         idx=state.state_version;eid=f'evt-{idx}-{content_hash(changes)[:24]}'
         update=StateUpdate(run_id=state.run_id,event_id=eid,event_index=idx,prior_state_version=idx,prior_state_hash=state.state_hash,previous_head=head,state_version=new.state_version,state_hash=new.state_hash,changes=changes).validate()
-        event=CanonicalEvent(run_id=state.run_id,event_id=eid,event_index=idx,state_version=new.state_version,previous_head=head,event_kind=kind,tick=new.tick,simulated_time=new.simulated_time,real_wall_time=self._wall_time(),causation=causation,affected=[{'human_id':hid} for hid in sorted({c['path'].split('.')[1] for c in changes if c.get('path','').startswith('humans.')})],before={},after={},deterministic_inputs=details or {},transaction={'kind':'state_update',**update.to_dict()},visibility={'public':True}).validate()
+        event=CanonicalEvent(run_id=state.run_id,event_id=eid,event_index=idx,state_version=new.state_version,previous_head=head,event_kind=kind,tick=new.tick,simulated_time=new.simulated_time,real_wall_time=self._wall_time(),causation=causation,affected=[{'human_id':hid} for hid in sorted({c['path'].split('.')[1] for c in changes if c.get('path','').startswith('humans.')})]+[{'npc_id':nid} for nid in sorted({c['path'].split('.')[1] for c in changes if c.get('path','').startswith('npcs.')})],before={},after={},deterministic_inputs=details or {},transaction={'kind':'state_update',**update.to_dict()},visibility={'public':True}).validate()
         return event,new
 
     def build_revalidated_action_event(self,store,run_id,hid,choice,original_observation_version,dependency_token,provenance):
@@ -112,8 +215,17 @@ class SharedClockMixin:
             changes=[{'op':'set','path':f'humans.{hid}.movement_intent','value':None}];kind='human.movement_cancelled';details={}
         elif action in ('walk_to','travel_to','journey_to','enter_map'):
             if not self.shared_actor_ready(s,hid):raise EngineError('actor already executing an accepted intention')
-            if action not in {a.action for a in self.legal_actions_for_validation(s,hid,action)}:raise EngineError('movement action unavailable')
-            steps=self._plan_movement(s,hid,action,args)
+            try:
+                if action not in {a.action for a in self.legal_actions_for_validation(s,hid,action)}:raise EngineError('movement action unavailable')
+                steps=self._plan_movement(s,hid,action,args)
+            except (EngineError,ValueError) as exc:
+                # A selected offered destination can become occupied while the
+                # local model runs. Refresh the observation instead of blaming
+                # its response and retrying the same obsolete menu.
+                offered=content_hash({'action':action,'arguments':args}) in dependency_token.get('movement_options',[])
+                if offered and dependency_token.get('movement_occupancy')!=self._movement_occupancy(s):
+                    raise StaleActionError('offered movement route changed during inference') from exc
+                raise
             intent={'kind':'scheduled_movement','intent_id':f'movement-{s.state_version}-{hid}','action':action,'arguments':copy.deepcopy(args),'explanation':explanation,'provenance':prov,'accepted_at':s.simulated_time,'accepted_state_version':s.state_version,'next_due_at':s.simulated_time+ACTION_SECONDS,'cursor':0,'steps':steps,'paused_for_battle':False}
             changes=[{'op':'set','path':f'humans.{hid}.movement_intent','value':intent}];kind='human.movement_started';details={'accepted_movement':{'human_id':hid,'intent_id':intent['intent_id'],'step_count':len(steps)}}
         else:
@@ -123,6 +235,8 @@ class SharedClockMixin:
                 value=change.get('value')
                 if isinstance(value,dict) and isinstance(value.get('completed_at'),int) and value['completed_at']>s.simulated_time:
                     value['busy_until']=value['completed_at'];value['completed_at']=s.simulated_time;value['effective_at']=s.simulated_time
+            # Speech overlaps motor/activity execution and never replaces its deadline.
+            if action == 'respond_to': duration = 0
             if duration:changes.append({'op':'set','path':f'humans.{hid}.ready_at','value':s.simulated_time+duration})
             preview=s.apply_changes(changes)
             participants={hid}
@@ -144,11 +258,13 @@ class SharedClockMixin:
                     if after.get('last_whiteout')!=before.get('last_whiteout') or intent['cursor']>=len(intent['steps']):intent=None
                     else:intent.update(next_due_at=s.simulated_time+ACTION_SECONDS,paused_for_battle=False)
                     changes.append({'op':'set','path':f'humans.{actor}.movement_intent','value':intent})
+        from .individual_life import record_decision
+        record_decision(s.humans[hid],hid,action,args,explanation,s.simulated_time,changes,source_state_version=s.state_version)
         changes.append({'op':'set','path':f'humans.{hid}.last_decision','value':{'action':action,'arguments':args,'explanation':explanation,'provenance':prov,'observation_version':original_observation_version}})
         return self._shared_event(s,head,changes,kind=kind,causation={'human_id':hid,'action':action,'action_arguments':args,'decision_explanation':explanation,'provenance':prov,'observation_version':original_observation_version},details=details)
 
     def _plan_movement(self,state,hid,action,args):
-        h=state.humans[hid];m=actor_map(self.maps[h['map_id']],h);surfing=bool(h.get('status',{}).get('surfing')) and (permission(state,h,'SURF') or h.get('status',{}).get('source_forced_surfing',False))
+        h=state.humans[hid];m=actor_map(self.maps[h['map_id']],h,state);surfing=bool(h.get('status',{}).get('surfing')) and (permission(state,h,'SURF') or h.get('status',{}).get('source_forced_surfing',False))
         if action=='enter_map':
             if set(args)!={'map_id'} or m.exit_target(h['x'],h['y'])!=args['map_id']:raise EngineError('source exit unavailable')
             return [{'kind':'transfer','map_id':h['map_id'],'source':[h['x'],h['y']],'destination_map':args['map_id']}]
@@ -244,7 +360,7 @@ class SharedClockMixin:
         if type(target_time)is not int or target_time<s.simulated_time:raise EngineError('clock target must be a future integer boundary')
         if target_time==s.simulated_time:return None
         due=self.next_shared_due(s);target=min(target_time,s.simulated_time+10,due if due is not None else target_time)
-        changes=[];routes=[];working=s
+        changes=[];routes=[];working=s;reservations=[]
         rng=random.Random(s.world_facts.get('seed',1)+s.state_version*1009)
         for hid,h in sorted(s.humans.items()):
             # Planned steps/provenance are immutable after acceptance; only
@@ -253,12 +369,18 @@ class SharedClockMixin:
             if not intent or h.get('battle_id') or intent.get('paused_for_battle') or intent['next_due_at']>target:continue
             step=intent['steps'][intent['cursor']];prefix=f'humans.{hid}.';extra=[];evidence=None;kind=None
             if step['kind']=='tile':
-                m=actor_map(self.maps[h['map_id']],h);p=tuple(step['position'])
+                m=actor_map(self.maps[h['map_id']],h,s,reservations=reservations);p=tuple(step['position'])
+                if p in m._dynamic_blocked:
+                    waits=int(intent.get('collision_waits',0))+1
+                    if waits>=8:changes.append({'op':'set','path':prefix+'movement_intent','value':None})
+                    else:changes.extend([{'op':'set','path':prefix+'movement_intent.collision_waits','value':waits},{'op':'set','path':prefix+'movement_intent.next_due_at','value':target+1}])
+                    routes.append({'human_id':hid,'interruption':'occupied tile','blocked_by':m._dynamic_blocked[p]});continue
+                intent['collision_waits']=0
                 surfing=bool(h.get('status',{}).get('surfing')) and (permission(working,h,'SURF') or h.get('status',{}).get('source_forced_surfing',False))
                 valid=any(m._step_basic((h['x'],h['y']),d,surfing=surfing)==p for d in DIRECTIONS)
                 if step['map_id']!=h['map_id'] or not valid:
                     changes.append({'op':'set','path':prefix+'movement_intent','value':None});routes.append({'human_id':hid,'interruption':'source terrain changed'});continue
-                dx,dy=p[0]-h['x'],p[1]-h['y'];facing=step.get('facing') or next((d for d,delta in DIRECTIONS.items() if delta==(dx,dy)),h.get('facing','south'))
+                dx,dy=p[0]-h['x'],p[1]-h['y'];facing=step.get('facing') or next((d for d,delta in DIRECTIONS.items() if delta==((dx>0)-(dx<0),(dy>0)-(dy<0))),h.get('facing','south'))
                 extra=[{'op':'set','path':prefix+'x','value':p[0]},{'op':'set','path':prefix+'y','value':p[1]},{'op':'set','path':prefix+'facing','value':facing}]
                 if h.get('status',{}).get('surfing') and int(m.cells.get(p,{}).get('behavior',0)) not in WATER:extra.append({'op':'set','path':prefix+'status.surfing','value':False})
                 evidence={'map_id':h['map_id'],'start':[h['x'],h['y']],'steps':[list(p)],'duration_seconds':1}
@@ -275,7 +397,10 @@ class SharedClockMixin:
                     extra,_,evidence,kind=intercept(self,source_state,hid,'travel_to',{'x':p[0],'y':p[1]},intent['provenance'],intent['explanation'],evidence,extra,1,rng=rng)
                     evidence.update(forced_movement=forced_context[1] is not None,forced_mode=forced_context[1],forced_direction=forced_context[2])
                 if not kind and int(m.cells.get(p,{}).get('behavior',0))==0x66:
-                    dst,nx,ny=resolve_transfer(self.maps,m,*p,m.exit_target(*p),surfing=True);actor,scripts=transition_effects(self.maps,h,m,p,dst,(nx,ny))
+                    try:dst,nx,ny=resolve_transfer(self.maps,m,*p,m.exit_target(*p),surfing=True,actor=h,state=s,reservations=reservations)
+                    except MapLoadError:
+                        changes.append({'op':'set','path':prefix+'movement_intent','value':None});routes.append({'human_id':hid,'interruption':'fall destination blocked'});continue
+                    actor,scripts=transition_effects(self.maps,h,m,p,dst,(nx,ny))
                     for key in ('map_id','x','y','field','status','facing'):extra.append({'op':'set','path':prefix+key,'value':actor[key]})
                     evidence.update(fall_warp={'destination_map':dst,'landing':[nx,ny]},source_scripts=scripts)
                     script_duration=sum(len(x.get('steps',[])) for x in scripts)
@@ -284,10 +409,10 @@ class SharedClockMixin:
                     following=intent['steps'][intent['cursor']+1:intent['cursor']+2]
                     if following and following[0]['kind']=='transfer' and following[0]['map_id']==h['map_id'] and following[0]['source']==list(p):intent['cursor']+=1
             else:
-                m=actor_map(self.maps[h['map_id']],h);p=tuple(step['source'])
+                m=actor_map(self.maps[h['map_id']],h,s,reservations=reservations);p=tuple(step['source'])
                 try:
                     if h['map_id']!=step['map_id'] or (h['x'],h['y'])!=p:raise EngineError('accepted source transfer origin changed')
-                    dst,nx,ny=resolve_transfer(self.maps,m,*p,step['destination_map'],surfing=bool(h.get('status',{}).get('surfing')) or int(m.cells.get(p,{}).get('behavior',0))==0x66)
+                    dst,nx,ny=resolve_transfer(self.maps,m,*p,step['destination_map'],surfing=bool(h.get('status',{}).get('surfing')) or int(m.cells.get(p,{}).get('behavior',0))==0x66,actor=h,state=s,reservations=reservations)
                     from .access import transfer_gate
                     extra.extend(transfer_gate(h,dst,working));actor,scripts=transition_effects(self.maps,h,m,p,dst,(nx,ny))
                 except (EngineError,MapLoadError,AccessDenied):
@@ -312,14 +437,21 @@ class SharedClockMixin:
             elif kind:intent.update(paused_for_battle=True,next_due_at=target+1)
             elif intent['cursor']>=len(intent['steps']):intent=None
             elif intent['next_due_at']<=target:intent['next_due_at']=target+1
+            from .collision import actor_elevation
+            final_x=next((c['value'] for c in reversed(extra) if c.get('path')==prefix+'x'),h['x'])
+            final_y=next((c['value'] for c in reversed(extra) if c.get('path')==prefix+'y'),h['y'])
+            final_cell=self.maps[final_map].cells.get((final_x,final_y),{})
+            final_level=int(final_cell.get('elevation',0));final_level=actor_elevation(self.maps[h['map_id']],h) if final_level==15 else final_level
+            extra.append({'op':'set','path':prefix+'status.collision_elevation','value':final_level})
+            reservations.append((hid,final_map,final_x,final_y,final_level))
             changes.extend(extra)
             if intent is None:changes.append({'op':'set','path':prefix+'movement_intent','value':None})
             else:
                 for key,value in intent.items():
                     if key not in h['movement_intent'] or h['movement_intent'].get(key)!=value:changes.append({'op':'set','path':prefix+'movement_intent.'+key,'value':value})
-            # Own position/owned-party deltas cannot affect another actor's next
-            # accepted tile. Refresh the verified working world only when an
-            # earlier actor mutated shared facts (e.g. another wild battle).
+            # Explicit reservations resolve same-boundary actor collisions without
+            # copying the world for every tile. Refresh other shared facts only
+            # when needed (e.g. another wild battle).
             if any(c.get('path','').startswith('world_facts.') for c in extra):
                 from .world import expand_entity_sets
                 working=s.apply_changes(expand_entity_sets(changes));working.state_hash=working.compute_state_hash()

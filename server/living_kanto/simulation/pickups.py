@@ -47,13 +47,21 @@ def candidates(human, game_map):
 
 
 def actions(human, game_map):
-    return [LegalAction(action='pick_up_item', arguments={'object_id': key},
+    from .hidden_items import front_candidates
+    hidden = [LegalAction(action='pick_up_item', arguments={'object_id': 'hidden:' + row['flag']},
+                         known_consequences={'searches_facing_tile': True, 'per_trainer_once': True})
+              for row in front_candidates(human, game_map)]
+    return hidden + [LegalAction(action='pick_up_item', arguments={'object_id': key},
                         known_consequences={'item': item, 'quantity': quantity,
                                             'source_script': script, 'per_trainer_once': True})
             for key, item, quantity, script in candidates(human, game_map)]
 
 
 def changes(human, game_map, arguments):
+    from .hidden_items import front_candidates, collection_changes
+    hidden = next((row for row in front_candidates(human, game_map)
+                   if arguments == {'object_id': 'hidden:' + row['flag']}), None)
+    if hidden is not None:return collection_changes(human, hidden)
     match = next((entry for entry in candidates(human, game_map)
                   if arguments == {'object_id': entry[0]}), None)
     if match is None:

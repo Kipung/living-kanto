@@ -1,5 +1,5 @@
-/** Source environmental objects only: campaign people are never extra residents. */
-import {loadActorFrames} from './actor-frames.js';
+/** Source objects and authoritative source residents; no extra AI minds. */
+import {loadActorFrames,drawActorFrame} from './actor-frames.js';
 const graphics={OBJ_EVENT_GFX_CUT_TREE:'cut_tree',OBJ_EVENT_GFX_PUSHABLE_BOULDER:'strength_boulder',OBJ_EVENT_GFX_SNORLAX:'snorlax',OBJ_EVENT_GFX_ITEM_BALL:'item_ball',OBJ_EVENT_GFX_FOSSIL:'fossil',OBJ_EVENT_GFX_ARTICUNO:'articuno',OBJ_EVENT_GFX_ZAPDOS:'zapdos',OBJ_EVENT_GFX_MEWTWO:'mewtwo'};
 const legends=new Set(['articuno','zapdos','mewtwo']);
 export function environmentalObjects(map,{human=null,worldFacts=null}={}){
@@ -31,6 +31,11 @@ export function environmentalObjects(map,{human=null,worldFacts=null}={}){
  }
  return out.sort((a,b)=>a.y-b.y||a.x-b.x);
 }
+export function sourceResidents(map,{npcs=null,worldFacts=null,humans=null}={}){
+ const actors=npcs??worldFacts?.source_npcs??[];
+ const occupied=Object.values(humans||{}).filter(h=>h.map_id===map.map_name);
+ return (Array.isArray(actors)?actors:Object.values(actors)).filter(n=>n.map_id===map.map_name&&!n.linked_human&&(n.kind==='source_resident'||n.source_kind==='source_npc')&&!occupied.some(h=>h.x===n.x&&h.y===n.y)).map(n=>({...n,sprite:n.appearance?.sprite??n.sprite}));
+}
 function firstFrame(actor){
  const chosen=actor.metadata.anims.ANIM_STD_FACE_SOUTH?.frames?.[0]||Object.values(actor.metadata.anims).find(a=>a.frames?.length)?.frames[0];
  const frame=actor.metadata.pic_frames.find(f=>f.frame===(chosen?.frame??0));if(!frame)return null;
@@ -42,8 +47,14 @@ function firstFrame(actor){
 }
 export function createFieldObjectRenderer({onReady=()=>{}}={}){
  const ready=new Map(),pending=new Set(),failed=new Set();
- return {draw(ctx,map,{human=null,worldFacts=null,cellSize=16}={}){
+ return {draw(ctx,map,{human=null,worldFacts=null,cellSize=16,skipKeys=[],npcs=null,humans=null}={}){
+  for(const npc of sourceResidents(map,{npcs,worldFacts,humans})){
+   const slug=npc.sprite;if(!slug)continue;
+   if(!ready.has(slug)){if(!pending.has(slug)&&!failed.has(slug)){pending.add(slug);loadActorFrames(slug).then(actor=>{ready.set(slug,{actor});pending.delete(slug);onReady()}).catch(()=>{pending.delete(slug);failed.add(slug)})}continue;}
+   const loaded=ready.get(slug);if(loaded?.actor)drawActorFrame(ctx,loaded.actor,{x:npc.x*cellSize,y:npc.y*cellSize,facing:npc.facing||'south',moving:false,scale:cellSize/16});
+  }
   for(const obj of environmentalObjects(map,{human,worldFacts})){
+   if(skipKeys.includes(obj.key))continue;
    if(!ready.has(obj.sprite)){
     if(!pending.has(obj.sprite)&&!failed.has(obj.sprite)){pending.add(obj.sprite);loadActorFrames(obj.sprite).then(actor=>{ready.set(obj.sprite,firstFrame(actor));pending.delete(obj.sprite);onReady()}).catch(()=>{pending.delete(obj.sprite);failed.add(obj.sprite)})}
     continue;

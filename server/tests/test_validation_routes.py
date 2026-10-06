@@ -25,6 +25,10 @@ def world(engine,tmp_path):
 @pytest.mark.parametrize('action,args',[('wait',{}),('rest',{}),('talk_to',{'human_id':'human-002','text':'Hello'}),('walk_to',{'direction':'north'})])
 def test_validation_skips_route_menu_and_matches_full_outcome(engine,world,monkeypatch,action,args):
  store,state=world
+ if action=='walk_to':
+  from living_kanto.simulation.field import actor_map
+  h=state.humans['human-001'];traversable=actor_map(engine.maps[h['map_id']],h,state)
+  args={'direction':next(d for d in ('north','south','east','west') if traversable.step_destination((h['x'],h['y']),d))}
  kwargs=dict(action=action,arguments=args,observation_version=state.state_version,expected_state_version=state.state_version,decision_explanation='Fixture choice',decision_provenance={'kind':'user'})
  # Use full current menu as the comparison baseline.
  with monkeypatch.context() as patch:
@@ -44,7 +48,9 @@ def test_observation_default_still_includes_routes(engine,world):
  full=engine.legal_actions(s,'human-001');fast=engine.legal_actions(s,'human-001',include_routes=False)
  assert any(a.action=='journey_to' for a in full)
  assert {a.action for a in fast}.isdisjoint({'travel_to','journey_to'})
- assert [a.to_dict() for a in fast]==[a.to_dict() for a in full if a.action not in {'travel_to','journey_to'}]
+ # Planning offers mirror the executable route menu; compare executable choices.
+ from living_kanto.simulation.task_continuity import TASK_ACTIONS
+ assert [a.to_dict() for a in fast if a.action not in TASK_ACTIONS]==[a.to_dict() for a in full if a.action not in {'travel_to','journey_to'}|TASK_ACTIONS]
 
 
 def test_fast_validation_rejects_unavailable_progression_and_invalid_direction(engine,world,monkeypatch):

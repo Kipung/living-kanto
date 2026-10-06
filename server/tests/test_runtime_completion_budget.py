@@ -47,7 +47,7 @@ def test_simultaneous_completion_backlog_yields_to_clock_and_pause(tmp_path):
     controller = RuntimeController(engine, store, 'drain', provider, concurrency=8)
     try:
         controller.resume('1')
-        wait_until(lambda: provider.active == 8)
+        wait_until(lambda: provider.active == 5)  # 2 slow-thought slots and 1 urgent slot remain reserved.
         provider.release.set()
         wait_until(lambda: any(0 < count < 8 for count in tick_model_counts), seconds=10)
         # A new in-progress atomic commit cannot hold pause behind all remaining

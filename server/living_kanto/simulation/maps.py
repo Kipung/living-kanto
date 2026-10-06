@@ -51,6 +51,8 @@ class GameMap:
         self.reference_id = reference_id
         self.source_revision = ""
         self.cells = {}
+        self._blocked_tiles = set()
+        self._collision_elevation = None
 
     @classmethod
     def from_content(cls, map_id: str, path: str | Path) -> "GameMap":
@@ -90,7 +92,10 @@ class GameMap:
                     continue
                 if target and 0 <= x < width and 0 <= y < height:
                     exits[(x, y)] = str(target)
-                    grid[y][x] = "1"  # a warp cell must be standable
+                    # Animated doors are input-triggered from the south, not ordinary walls.
+                    # Other blocked warp coordinates are landing markers only.
+                    cell = next((c for c in cells if int(c['x'])==x and int(c['y'])==y), {})
+                    if int(cell.get('behavior',0)) == 0x69: grid[y][x] = "1"
             edge_dirs = {
                 "up": "north", "down": "south", "left": "west", "right": "east",
             }
@@ -132,7 +137,11 @@ class GameMap:
     def is_walkable(self, x: int, y: int) -> bool:
         return self.in_bounds(x, y) and self._walk[y][x]
 
-    def _step_basic(self, start, direction, surfing=False):
+    def can_stand(self,x,y):
+        if not self.in_bounds(x,y) or (x,y) in self._blocked_tiles:return False
+        return self.is_walkable(x,y) or any((w.get('x'),w.get('y'))==(x,y) for w in self.events.get('warp_events',[]))
+
+    def _step_basic(self, start, direction, surfing=False, elevation=None):
         """Source movement constraints: directional walls, elevations and ledges.
 
         Ground collision alone is insufficient. Water requires explicit surfing.
@@ -142,32 +151,44 @@ class GameMap:
         vectors={"north":(0,-1),"south":(0,1),"east":(1,0),"west":(-1,0)}
         if direction not in vectors:return None
         x,y=start;dx,dy=vectors[direction];n=(x+dx,y+dy)
+        if not self.in_bounds(x,y):return None
         if not self.cells:return n if self.is_walkable(*n) else None
         old=self.cells.get((x,y),{});target=self.cells.get(n,{})
         behavior=int(target.get("behavior",0));current=int(old.get("behavior",0))
+        jumps={'east':0x38,'west':0x39,'north':0x3A,'south':0x3B}
+        if int(target.get('collision',0)) and behavior!=jumps[direction] and not (behavior==0x69 and direction=='north' and n in self.exits):return None
+        if behavior==0x69 and n in self.exits and direction!='north':return None
+        if current==0x69 and (x,y) in self.exits and direction!='south':return None
         blocks={"east":{0x30,0x34,0x36},"west":{0x31,0x35,0x37},"north":{0x32,0x34,0x35},"south":{0x33,0x36,0x37}}
         opposite={"east":"west","west":"east","north":"south","south":"north"}
         if current in blocks[direction] or behavior in blocks[opposite[direction]]:return None
-        jumps={"east":0x38,"west":0x39,"north":0x3A,"south":0x3B}
         if behavior in jumps.values():
             if jumps[direction]!=behavior:return None
             n=(x+dx*2,y+dy*2);target=self.cells.get(n,{})
+            if int(target.get("collision",0)):return None
         if not self.is_walkable(*n):return None
         water={0x10,0x11,0x12,0x13,0x15,0x1A,0x1B,0x50,0x51,0x52,0x53}
         if int(target.get("behavior",0)) in water and not surfing:return None
-        elevation=int(old.get("elevation",0));landing=int(target.get("elevation",0))
-        if elevation!=0 and landing not in (0,15,elevation) and not surfing:return None
+        elevation=(self._collision_elevation if int(old.get('elevation',0))==15 and self._collision_elevation is not None else int(old.get('elevation',0))) if elevation is None else elevation
+        landing=int(target.get('elevation',0))
+        # Native Surf permits the explicit shoreline dismount to elevation3;
+        # it does not disable arbitrary bridge/cliff elevation collision.
+        if elevation!=0 and landing not in (0,15,elevation):
+            if not (surfing and landing==3 and int(target.get('behavior',0)) not in water):return None
         return n
 
-    def step_path(self,start,direction,surfing=False):
+    def step_path(self,start,direction,surfing=False,elevation=None):
         """One input plus source forced spin tiles; returns every traversed tile.
 
         MB_SPIN_RIGHT/LEFT/UP/DOWN 0x54..57 select momentum direction; 0x58
         stops. Bounded cycles/collisions reject rather than teleporting.
         """
         if self.source_revision and int(self.cells.get(tuple(start),{}).get("behavior",0))==0x66:return None
-        first=self._step_basic(start,direction,surfing=surfing)
+        level=(self._collision_elevation if self._collision_elevation is not None else 0) if int(self.cells.get(tuple(start),{}).get('elevation',0))==15 else int(self.cells.get(tuple(start),{}).get('elevation',0))
+        if elevation is not None:level=elevation
+        first=self._step_basic(start,direction,surfing=surfing,elevation=level)
         if first is None:return None
+        if int(self.cells.get(first,{}).get('elevation',0))!=15:level=int(self.cells.get(first,{}).get('elevation',0))
         path=[first];spin={0x54:'east',0x55:'west',0x56:'north',0x57:'south'}
         behavior=int(self.cells.get(first,{}).get('behavior',0))
         currents={0x50:'east',0x51:'west',0x52:'north',0x53:'south'}
@@ -178,8 +199,9 @@ class GameMap:
                 if behavior not in currents:return path
                 direction=currents[behavior];key=(point,direction)
                 if key in seen:return None
-                seen.add(key);nxt=self._step_basic(point,direction,surfing=True)
+                seen.add(key);nxt=self._step_basic(point,direction,surfing=True,elevation=level)
                 if nxt is None:return None
+                if int(self.cells.get(nxt,{}).get('elevation',0))!=15:level=int(self.cells.get(nxt,{}).get('elevation',0))
                 path.append(nxt)
             return None
         if behavior not in spin:return path
@@ -189,8 +211,9 @@ class GameMap:
             if behavior==0x58:return path
             momentum=spin.get(behavior,momentum);key=(point,momentum)
             if key in seen:return None
-            seen.add(key);nxt=self._step_basic(point,momentum,surfing=surfing)
+            seen.add(key);nxt=self._step_basic(point,momentum,surfing=surfing,elevation=level)
             if nxt is None:return None
+            if int(self.cells.get(nxt,{}).get('elevation',0))!=15:level=int(self.cells.get(nxt,{}).get('elevation',0))
             path.append(nxt)
         return None
 
@@ -232,7 +255,7 @@ class GameMap:
         }
 
 
-def resolve_transfer(maps, current, x: int, y: int, target: str, surfing=False) -> tuple[str, int, int]:
+def resolve_transfer(maps, current, x: int, y: int, target: str, surfing=False, actor=None, state=None, reservations=()) -> tuple[str, int, int]:
     """Resolve actual source warp landing or offset-aligned adjacent edge.
 
     Connection offset locates the destination origin relative to the source:
@@ -267,8 +290,12 @@ def resolve_transfer(maps, current, x: int, y: int, target: str, surfing=False) 
             elif d=="right" and x==origin.width-1: landing=(0,y-offset)
             if landing is not None: break
     if landing is None: raise MapLoadError("no source exit to requested destination at this tile")
+    if actor is not None:
+        from .field import actor_map
+        proposed={**actor,'map_id':target_key,'x':landing[0],'y':landing[1]}
+        dest=actor_map(dest,proposed,state,reservations=reservations,ignore_origin=False)
     if not surfing and int(dest.cells.get(landing,{}).get("behavior",0)) in {0x10,0x11,0x12,0x13,0x15,0x1A,0x1B,0x50,0x51,0x52,0x53}:
         raise MapLoadError("destination requires explicit surfing; on-foot transfer unavailable")
-    if not origin.is_walkable(x,y) or not dest.is_walkable(*landing):
+    if not origin.can_stand(x,y) or not dest.can_stand(*landing):
         raise MapLoadError("source exit or exact destination tile is blocked")
     return target_key,*landing

@@ -105,6 +105,13 @@ try {
       if(effects.boost)b.boost(effects.boost,mon);
       if(effects.focusenergy)mon.addVolatile('focusenergy');
       if(effects.mist)side.addSideCondition('mist');
+      if(effects.cure_party_sleep) {
+        for(const participant of b.sides) for(const target of participant.pokemon) {
+          if(target.ability==='soundproof')continue;
+          if(target.status==='slp')target.cureStatus();
+          if(target.isActive)target.removeVolatile('nightmare');
+        }
+      }
       b.add('-item',mon,a.item.name,'[from] trainer');
     }
     if(actions.length!==2) throw Error('Both trainer decisions required');

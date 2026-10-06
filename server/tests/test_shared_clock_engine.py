@@ -95,23 +95,27 @@ def test_activation_migrates_accepted_legacy_journey_provenance(game):
 
 def test_two_source_wild_encounters_same_tick_preserve_both_and_shared_rng(game,monkeypatch):
  import living_kanto.simulation.movement_encounters as movement
- e,store=game;gm=e.maps['Route1'];grass=e.grass_cell;start=None
- for p,cell in gm.cells.items():
-  if not grass('Route1',*p):continue
-  for d,(dx,dy) in {'north':(0,-1),'south':(0,1),'east':(1,0),'west':(-1,0)}.items():
-   before=(p[0]-dx,p[1]-dy)
-   if gm.is_walkable(*before) and gm._step_basic(before,d)==p:start=before;target=p;direction=d;break
-  if start:break
- assert start
+ e,store=game;gm=e.maps['Route1'];grass=e.grass_cell;paths=[];used=set()
+ from living_kanto.simulation.field import actor_map
+ snapshot=state(game);probe={**snapshot.humans['human-001'],'map_id':'Route1'}
+ gm=actor_map(gm,probe,snapshot)
+ for target,cell in gm.cells.items():
+  if not grass('Route1',*target) or target in used:continue
+  for direction,(dx,dy) in {'north':(0,-1),'south':(0,1),'east':(1,0),'west':(-1,0)}.items():
+   start=(target[0]-dx,target[1]-dy)
+   if start not in used and gm.is_walkable(*start) and gm._step_basic(start,direction)==target:
+    paths.append((start,target,direction));used.update((start,target));break
+  if len(paths)==2:break
+ assert len(paths)==2
  for index,hid in enumerate(('human-001','human-002')):
-  locate(game,hid,'Route1',start);mon=create_pokemon('PIDGEY',5,hid,random.Random(index),identifier=f'shared-source-mon-{index}')
+  locate(game,hid,'Route1',paths[index][0]);mon=create_pokemon('PIDGEY',5,hid,random.Random(index),identifier=f'shared-source-mon-{index}')
   scenario(game,[{'op':'set','path':f'pokemon.{mon["pokemon_id"]}','value':mon},{'op':'set','path':f'humans.{hid}.party','value':[mon['pokemon_id']]}])
  row=e.encounter_table('Route1')[0]['land_mons']['mons'][0];draws=[];generators=[]
  def encounter(h,cell,table,party,rng,**kwargs):
   draws.append(rng.randrange(65536));generators.append(rng);return h,{'species':row['species'],'min_level':row['min_level'],'max_level':row['min_level']}
  monkeypatch.setattr(movement,'walking_encounter',encounter)
  activate(game)
- for hid in ('human-001','human-002'):choose(game,hid,'walk_to',{'direction':direction})
+ for index,hid in enumerate(('human-001','human-002')):choose(game,hid,'walk_to',{'direction':paths[index][2]})
  before=state(game);e.tick_shared_time(store,'gameplay-test',before.simulated_time+1);after=state(game)
  bids=[after.humans[hid]['battle_id'] for hid in ('human-001','human-002')]
  assert len(set(bids))==2 and all(bid in after.world_facts['battles'] for bid in bids)
@@ -195,4 +199,14 @@ def test_other_customer_append_does_not_invalidate_staff_head_or_purchase(game):
  after=choose(game,staff['human_id'],head.action,head.arguments,token=staff_token,version=staff_obs.state_version)
  queue=e.service_queue(after,staff['map_id']);assert len(queue)==1 and queue[0]['human_id']=='human-002'
  assert after.humans['human-001']['service_request'] is None
+ assert store.replay('gameplay-test').state_hash==after.state_hash
+
+def test_same_tick_competing_destination_waits_without_overlap_and_replays(game):
+ e,store=game
+ locate(game,'human-001','PalletTown',(9,10));locate(game,'human-002','PalletTown',(11,10));activate(game)
+ choose(game,'human-001','travel_to',{'x':10,'y':10});choose(game,'human-002','travel_to',{'x':10,'y':10})
+ before=state(game);e.tick_shared_time(store,'gameplay-test',before.simulated_time+1);after=state(game)
+ assert (after.humans['human-001']['x'],after.humans['human-001']['y'])==(10,10)
+ assert (after.humans['human-002']['x'],after.humans['human-002']['y'])==(11,10)
+ assert after.humans['human-002']['movement_intent']['collision_waits']==1
  assert store.replay('gameplay-test').state_hash==after.state_hash

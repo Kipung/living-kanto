@@ -1,0 +1,721 @@
+{
+  "actor": "mom",
+  "anim_table_symbol": "sAnimTable_Standard",
+  "anims": {
+    "ANIM_RAISE_HAND": {
+      "ends": true,
+      "frames": [
+        {
+          "duration": 0,
+          "frame": 9,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": false,
+      "symbol": "sAnim_RaiseHand"
+    },
+    "ANIM_STD_FACE_EAST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 16,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_FaceEast"
+    },
+    "ANIM_STD_FACE_NORTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 16,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_FaceNorth"
+    },
+    "ANIM_STD_FACE_SOUTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 16,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_FaceSouth"
+    },
+    "ANIM_STD_FACE_WEST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 16,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_FaceWest"
+    },
+    "ANIM_STD_GO_EAST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 8,
+          "frame": 7,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 8,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoEast"
+    },
+    "ANIM_STD_GO_FASTER_EAST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 2,
+          "frame": 7,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 8,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFasterEast"
+    },
+    "ANIM_STD_GO_FASTER_NORTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 2,
+          "frame": 5,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 6,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFasterNorth"
+    },
+    "ANIM_STD_GO_FASTER_SOUTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 2,
+          "frame": 3,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 4,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFasterSouth"
+    },
+    "ANIM_STD_GO_FASTER_WEST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 2,
+          "frame": 7,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 8,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 2,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFasterWest"
+    },
+    "ANIM_STD_GO_FASTEST_EAST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 1,
+          "frame": 7,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 8,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFastestEast"
+    },
+    "ANIM_STD_GO_FASTEST_NORTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 1,
+          "frame": 5,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 6,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFastestNorth"
+    },
+    "ANIM_STD_GO_FASTEST_SOUTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 1,
+          "frame": 3,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 4,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFastestSouth"
+    },
+    "ANIM_STD_GO_FASTEST_WEST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 1,
+          "frame": 7,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 8,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 1,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFastestWest"
+    },
+    "ANIM_STD_GO_FAST_EAST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 4,
+          "frame": 7,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 8,
+          "hFlip": true,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 2,
+          "hFlip": true,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFastEast"
+    },
+    "ANIM_STD_GO_FAST_NORTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 4,
+          "frame": 5,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 6,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFastNorth"
+    },
+    "ANIM_STD_GO_FAST_SOUTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 4,
+          "frame": 3,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 4,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFastSouth"
+    },
+    "ANIM_STD_GO_FAST_WEST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 4,
+          "frame": 7,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 8,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 4,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoFastWest"
+    },
+    "ANIM_STD_GO_NORTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 8,
+          "frame": 5,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 6,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 1,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoNorth"
+    },
+    "ANIM_STD_GO_SOUTH": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 8,
+          "frame": 3,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 4,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 0,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoSouth"
+    },
+    "ANIM_STD_GO_WEST": {
+      "ends": false,
+      "frames": [
+        {
+          "duration": 8,
+          "frame": 7,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 8,
+          "hFlip": false,
+          "vFlip": false
+        },
+        {
+          "duration": 8,
+          "frame": 2,
+          "hFlip": false,
+          "vFlip": false
+        }
+      ],
+      "loops": true,
+      "symbol": "sAnim_GoWest"
+    }
+  },
+  "availability_note": "INCBIN paths name .4bpp/.gbapal assets that are absent from this checkout; the byte-identical converted forms actually shipped (.png sheets, .pal palettes) are what get copied. No pixels were redrawn or fabricated.",
+  "descriptor_source_sha256": {
+    "src/data/object_events/object_event_anims.h": "a484f38af198398f763c1d5f239dddd4397bb4cc7eab48c2b2e992552d767b0e",
+    "src/data/object_events/object_event_graphics.h": "0ab0217ef739fe47c2cc703c863f5a4b8a4bf9b9312dc2bebb880fe0bce97cec",
+    "src/data/object_events/object_event_graphics_info.h": "fc19a22d4471e83653e80257145f08c3b6d0b59868974399541a8bc3119ef512",
+    "src/data/object_events/object_event_graphics_info_pointers.h": "a5e006f4855f19bf42c27e78f5c1866fdecccb687d228fbe608376f09ee7547c",
+    "src/data/object_events/object_event_pic_tables.h": "7210ac3a847600c1e2778d6dcd5896e641e3b19f1d203841c4911bfe50769995",
+    "src/event_object_movement.c": "920f96b45569e702dd00997e7984effb3a7677ba2b68512b939eda69c2294254"
+  },
+  "descriptor_sources": [
+    "src/data/object_events/object_event_graphics_info.h",
+    "src/data/object_events/object_event_graphics_info_pointers.h",
+    "src/data/object_events/object_event_pic_tables.h",
+    "src/data/object_events/object_event_graphics.h",
+    "src/data/object_events/object_event_anims.h",
+    "src/event_object_movement.c"
+  ],
+  "gfx_constant": "OBJ_EVENT_GFX_MOM",
+  "graphics_info": {
+    "affineAnims": "gDummySpriteAffineAnimTable",
+    "anims": "sAnimTable_Standard",
+    "disableReflectionPaletteLoad": "FALSE",
+    "height": "32",
+    "images": "sPicTable_Mom",
+    "inanimate": "FALSE",
+    "oam": "&gObjectEventBaseOam_16x32",
+    "paletteSlot": "PALSLOT_NPC_1",
+    "paletteTag": "OBJ_EVENT_PAL_TAG_NPC_BLUE",
+    "reflectionPaletteTag": "OBJ_EVENT_PAL_TAG_NONE",
+    "shadowSize": "SHADOW_SIZE_M",
+    "size": "256",
+    "subspriteTables": "gObjectEventSpriteOamTables_16x32",
+    "tileTag": "TAG_NONE",
+    "tracks": "TRACKS_FOOT",
+    "width": "16"
+  },
+  "graphics_info_symbol": "gObjectEventGraphicsInfo_Mom",
+  "palette_binding": {
+    "binding_chain": [
+      "src/data/object_events/object_event_graphics_info.h:.paletteTag",
+      "src/event_object_movement.c:sObjectEventSpritePalettes",
+      "src/data/object_events/object_event_graphics.h:INCBIN_U16",
+      "graphics/object_events/palettes/npc_blue.pal"
+    ],
+    "copied_pal": "content/actors/palettes/gObjectEventPal_NpcBlue.pal",
+    "copied_pal_sha256": "5501ce3105e8adee0807898f23e7afbc64d3023ff92e275103aea3492904d927",
+    "incbin_path_in_source": "graphics/object_events/palettes/npc_blue.gbapal",
+    "incbin_present_in_checkout": false,
+    "pal_path_in_checkout": "graphics/object_events/palettes/npc_blue.pal",
+    "pal_sha256": "5501ce3105e8adee0807898f23e7afbc64d3023ff92e275103aea3492904d927",
+    "paletteTag": "OBJ_EVENT_PAL_TAG_NPC_BLUE",
+    "palette_symbol": "gObjectEventPal_NpcBlue",
+    "resolved": true
+  },
+  "pic_frames": [
+    {
+      "byte_offset": 0,
+      "bytes": 256,
+      "frame": 0,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    },
+    {
+      "byte_offset": 256,
+      "bytes": 256,
+      "frame": 1,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    },
+    {
+      "byte_offset": 512,
+      "bytes": 256,
+      "frame": 2,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    },
+    {
+      "byte_offset": 0,
+      "bytes": 256,
+      "frame": 0,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    },
+    {
+      "byte_offset": 0,
+      "bytes": 256,
+      "frame": 0,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    },
+    {
+      "byte_offset": 256,
+      "bytes": 256,
+      "frame": 1,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    },
+    {
+      "byte_offset": 256,
+      "bytes": 256,
+      "frame": 1,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    },
+    {
+      "byte_offset": 512,
+      "bytes": 256,
+      "frame": 2,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    },
+    {
+      "byte_offset": 512,
+      "bytes": 256,
+      "frame": 2,
+      "grid_height": 4,
+      "grid_width": 2,
+      "sheet": "gObjectEventPic_Mom"
+    }
+  ],
+  "pic_table_symbol": "sPicTable_Mom",
+  "sheets": [
+    {
+      "copied_png": "content/actors/mom__gobjecteventpic_mom.png",
+      "copied_png_pixels": [
+        48,
+        32
+      ],
+      "copied_png_sha256": "4b64b41488923367f9989beda6e49f6413aadf01f0dff0af158c97f0bef884d5",
+      "fourbpp_path_in_source": "graphics/object_events/pics/people/mom.4bpp",
+      "fourbpp_present_in_checkout": false,
+      "frames": 9,
+      "grid_height": 4,
+      "grid_width": 2,
+      "is_primary": true,
+      "source_png": "graphics/object_events/pics/people/mom.png",
+      "source_png_pixels": [
+        48,
+        32
+      ],
+      "source_png_sha256": "4b64b41488923367f9989beda6e49f6413aadf01f0dff0af158c97f0bef884d5",
+      "symbol": "gObjectEventPic_Mom"
+    }
+  ],
+  "source_revision": "037335f4c725d7c9aecdac87066f2002b4bd7e14",
+  "total_pic_frames": 9
+}

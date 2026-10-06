@@ -1,9 +1,10 @@
+import {cachedJSON,cachedImage} from './artwork-cache.mjs';
 /** Original source animation descriptors; no estimated frame numbering. */
 const actors=new Map();
 export async function loadActorFrames(slug){
  if(actors.has(slug))return actors.get(slug);
- const promise=fetch('/content/actors/'+encodeURIComponent(slug)+'.json').then(r=>{if(!r.ok)throw Error('Actor descriptor unavailable');return r.json()}).then(async metadata=>{
-  const sheets=new Map();await Promise.all(metadata.sheets.map(async sheet=>{const image=new Image();await new Promise((resolve,reject)=>{image.onload=resolve;image.onerror=reject;image.src='/'+sheet.copied_png});sheets.set(sheet.copied_png,image)}));return {metadata,sheets};
+ const promise=cachedJSON('/content/actors/'+encodeURIComponent(slug)+'.json').then(async metadata=>{
+  const sheets=new Map();await Promise.all(metadata.sheets.map(async sheet=>{const image=await cachedImage('/'+sheet.copied_png);sheets.set(sheet.copied_png,image)}));return {metadata,sheets};
  });actors.set(slug,promise);return promise;
 }
 export function drawActorFrame(ctx,actor,{x,y,facing='south',moving=false,timeMs=0,scale=1}){

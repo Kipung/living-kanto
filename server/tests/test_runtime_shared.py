@@ -121,17 +121,24 @@ def test_pause_discards_late_response_and_restart_preserves_shared_save(shared_w
     finally:provider.release.set();controller.close()
 
 
-def test_fair_queue_reaches_all_hundred_people(tmp_path):
+def test_fair_queue_reaches_all_hundred_people(tmp_path,monkeypatch):
     write_fixture_map(tmp_path,width=14,height=14);engine=WorldEngine(tmp_path)
     store=RunStore(tmp_path/'hundred.db');actors=[f'human-{i:03}' for i in range(100)]
     create_fixture_run(engine,store,'hundred',actors)
     provider=ConcurrentProvider();controller=RuntimeController(engine,store,'hundred',provider,concurrency=4)
+    admissions={};dispatch=controller._dispatch_ready_humans
+    def observed_dispatch(state):
+        dispatch(state)
+        for job in controller._async_jobs.values():admissions.setdefault(job['sequence'],job['actor'])
+    monkeypatch.setattr(controller,'_dispatch_ready_humans',observed_dispatch)
     try:
         controller.resume('fastest')
         wait_until(lambda:set(obs['human_id'] for obs,_ in provider.calls)==set(actors),seconds=30)
         controller.pause()
         assert provider.maximum_active<=4
-        assert set(obs['human_id'] for obs,_ in provider.calls[:100])==set(actors)
+        # Admission is round-robin; preparation completion and HTTP starts may
+        # overtake one another without delaying an independent ready person.
+        assert set(actor for _,actor in sorted(admissions.items())[:100])==set(actors)
         assert controller.status()['failure'] is None
     finally:controller.close();store.close()
 
@@ -215,8 +222,9 @@ def test_slow_observation_preparation_yields_to_clock_and_completed_minds(tmp_pa
         controller.pause()
         assert {row['actor'] for row in captures[:4]}==set(actors)
         # A bounded batch now prepares concurrently from one detached boundary.
-        assert len({row['simulated_time'] for row in captures[:4]})==1
-        assert all(row['accepted_before']==0 for row in captures[:4])
+        assert len({row['simulated_time'] for row in captures[:3]})==1
+        assert controller.status()['deliberation_capacity']==1
+        assert all(row['accepted_before']==0 for row in captures[:3])
         assert controller.status()['failure'] is None
         assert provider.maximum_active<=4
         final=store.load_run('slow-preparation')[1]
@@ -287,14 +295,15 @@ def test_private_requests_are_simultaneous_and_bounded(tmp_path,capacity):
     controller=RuntimeController(engine,store,'capacity32',provider,concurrency=capacity)
     try:
         controller.resume('1')
-        wait_until(lambda:provider.active==capacity,seconds=25)
-        assert controller.status()['queue_depth']==capacity
-        assert len({obs['human_id'] for obs,_ in provider.calls})==capacity
-        assert provider.maximum_active==capacity
+        immediate_capacity=capacity-controller.status()["deliberation_capacity"]-controller.status()["urgent_response_capacity"]
+        wait_until(lambda:provider.active==immediate_capacity,seconds=25)
+        assert controller.status()['queue_depth']==immediate_capacity
+        assert len({obs['human_id'] for obs,_ in provider.calls})==immediate_capacity
+        assert provider.maximum_active==immediate_capacity
         # Paused old-generation HTTP jobs continue occupying the same slots.
         controller.pause();controller.resume('1')
         time.sleep(0.1)
-        assert len(provider.calls)==capacity and provider.active==capacity
+        assert len(provider.calls)==immediate_capacity and provider.active==immediate_capacity
         provider.release.set()
         wait_until(lambda:controller.status()['accepted_decisions']>=8,seconds=15)
         controller.pause()
@@ -309,3 +318,33 @@ def test_runtime_rejects_invalid_capacity(shared_world,capacity):
     engine,store=shared_world
     with pytest.raises(ValueError,match='1 through 64'):
         RuntimeController(engine,store,'shared',ConcurrentProvider(),concurrency=capacity)
+
+
+def test_slow_last_preparation_does_not_block_next_fair_round(tmp_path,monkeypatch):
+    write_fixture_map(tmp_path,width=14,height=14);engine=WorldEngine(tmp_path)
+    store=RunStore(tmp_path/'fair-delayed.db');actors=[f'human-{i:03}' for i in range(100)]
+    create_fixture_run(engine,store,'fair-delayed',actors)
+    waiting=threading.Event();release=threading.Event();capture=engine.capture_decision_boundary
+    def delayed_capture(state,actor):
+        if actor=='human-099' and not release.is_set():
+            waiting.set()
+            if not release.wait(20):raise RuntimeError('Explicit TEST delayed preparation timed out')
+        return capture(state,actor)
+    monkeypatch.setattr(engine,'capture_decision_boundary',delayed_capture)
+    provider=ConcurrentProvider();controller=RuntimeController(engine,store,'fair-delayed',provider,concurrency=4)
+    admissions={};dispatch=controller._dispatch_ready_humans
+    def observed_dispatch(state):
+        dispatch(state)
+        for job in controller._async_jobs.values():admissions.setdefault(job['sequence'],job['actor'])
+    monkeypatch.setattr(controller,'_dispatch_ready_humans',observed_dispatch)
+    try:
+        controller.resume('fastest')
+        wait_until(waiting.is_set,seconds=30)
+        wait_until(lambda:len(provider.calls)>=100,seconds=10)
+        assert 'human-099' not in {obs['human_id'] for obs,_ in provider.calls}
+        assert set(actor for _,actor in sorted(admissions.items())[:100])==set(actors)
+        assert controller.status()['failure'] is None
+        release.set()
+        wait_until(lambda:'human-099' in {obs['human_id'] for obs,_ in provider.calls})
+        assert provider.maximum_active<=4
+    finally:release.set();controller.close();store.close()

@@ -451,7 +451,14 @@ class StateUpdate(Contract):
                 f"state_update {self.event_id}: expects prior state hash "
                 f"{self.prior_state_hash}, got {state.state_hash} — stale or forked action"
             )
-        advanced = state.with_advanced_version(self.changes)
+        # The exact prior was verified above. with_advanced_version would hash
+        # that same unchanged prior a second time. Build the independent result
+        # directly, retaining the complete prior and post content-hash checks.
+        advanced = state.apply_changes(self.changes)
+        advanced.state_hash = ""
+        advanced.state_version = state.state_version + 1
+        advanced.validate()
+        advanced.state_hash = advanced.compute_state_hash()
         if advanced.state_hash != self.state_hash or advanced.state_version != self.state_version:
             raise ContractError(
                 f"state_update {self.event_id}: resulting state does not match "

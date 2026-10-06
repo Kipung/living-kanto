@@ -32,7 +32,9 @@ class GameplayMixin:
             for combination in combinations:
                 for index,choice in enumerate(combination['choices']):
                     if choice not in options[index]:options[index].append(choice)
-            return (LegalAction(action='battle_turn',arguments=combinations[0],known_consequences={'battle_version':session.version,'two_active_slot_choices':True,'active_slot_options':options,'submit_two_choices':True,'simulator_validates_pair':True}),)
+            turns=[LegalAction(action='battle_turn',arguments=combinations[0],known_consequences={'battle_version':session.version,'two_active_slot_choices':True,'active_slot_options':options,'submit_two_choices':True,'simulator_validates_pair':True})]
+            turns.extend(self.special_battle_item_actions(state,hid,session,record,combinations=combinations))
+            return tuple(turns)
         forced=req.get('forceSwitch',[False])[0]
         if not forced:
             for i,m in enumerate((req.get('active') or [{}])[0].get('moves',[]),1):
@@ -47,8 +49,30 @@ class GameplayMixin:
                 for ball in ('poke_ball','great_ball','ultra_ball','master_ball','premier_ball','luxury_ball','dive_ball','net_ball','nest_ball','repeat_ball','timer_ball'):
                     if h['inventory'].get(ball,{}).get('quantity',0)>0:acts.append(LegalAction(action='catch',arguments={'ball':ball},known_consequences={'consumes':1}))
             acts.append(LegalAction(action='flee_battle',arguments={},known_consequences={'attempt_escape':True}))
-        if not forced:acts.extend(self.inventory_actions(state,hid,battle=session))
+        if not forced:
+            acts.extend(self.inventory_actions(state,hid,battle=session))
+            acts.extend(self.special_battle_item_actions(state,hid,session,record))
         return tuple(acts)
+
+    def special_battle_item_actions(self,state,hid,session,record,*,combinations=None):
+        from ..mechanics.special_items import prepare_battle_special
+        request=session.observation(hid)['request'] or {}
+        if not request.get('active') or request.get('wait') or any(request.get('forceSwitch',[])):return []
+        actions=[]
+        for item in ('poke_flute','poke_doll','fluffy_tail'):
+            try:prepare_battle_special(state.humans[hid],item,wild=record.get('wild'),link_like=record.get('personal_duel',False))
+            except ItemError:continue
+            choices=[{'item':item}]
+            if combinations is not None and item=='poke_flute':
+                choices=[]
+                for pair in combinations:
+                    for index,choice in enumerate(pair['choices']):
+                        if choice['type']!='move':continue
+                        args={'item':item,'acting_slot':index+1,'partner_choice':pair['choices'][1-index]}
+                        if args not in choices:choices.append(args)
+            for args in choices:
+                actions.append(LegalAction(action='use_field_item',arguments=args,known_consequences={'battle_turn':True,'consumes':0 if item=='poke_flute' else 1,'guaranteed_escape':item!='poke_flute','sleep_cure_both_parties':item=='poke_flute','soundproof_immune':item=='poke_flute'}))
+        return actions
 
     def gameplay_actions(self,state,hid):
         h=state.humans[hid];acts=[]
@@ -103,31 +127,35 @@ class GameplayMixin:
             from ..mechanics.held_items import holdable
             held_options=[name for name,row in h['inventory'].items() if row.get('quantity',0)>0 and name.upper() in item_catalog() and holdable(name)]
             held_options.sort(key=lambda name:(item_catalog()[name.upper()].get('holdEffect')=='HOLD_EFFECT_NONE',name))
-            for pid in h['party']+(h['box'] if self.at_storage_pc(h) else []):
+            selected=h.get('pc_storage',{}).get('selected_pokemon')
+            for pid in h['party']+([selected] if self.at_storage_pc(h) and selected in h['box'] else []):
                 p=state.pokemon[pid]
-                if p.get('held_item'):acts.append(LegalAction(action='take_held_item',arguments={'pokemon_id':pid},known_consequences={'returns_item':p['held_item'],'same_individual':True}))
-                options=[name for name in held_options if name.upper()!=p.get('held_item')]
+                if p.get('held_item'):
+                    from ..mechanics.held_items import change_held_item
+                    try: change_held_item(h,p)
+                    except ItemError: pass
+                    else: acts.append(LegalAction(action='take_held_item',arguments={'pokemon_id':pid},known_consequences={'returns_item':p['held_item'],'same_individual':True}))
+                from ..mechanics.held_items import change_held_item
+                options=[]
+                for name in held_options:
+                    if name.upper()==p.get('held_item'):continue
+                    try:change_held_item(h,p,name)
+                    except ItemError:continue
+                    options.append(name)
                 if options:acts.append(LegalAction(action='give_held_item',arguments={'pokemon_id':pid,'item':options[0]},known_consequences={'available_items':options,'returns_current_item':p.get('held_item') or None,'validated_item_selection':True}))
         if not h.get('battle_id'):
             from ..mechanics.source_gifts import available_gifts
             for gift in available_gifts(h):acts.append(LegalAction(action='receive_source_gift',arguments={'gift_id':gift['gift_id']},known_consequences={'species':gift['species'],'level':gift['level'],'one_per_trainer':True,'source_script':gift['source_script']}))
-        for pid in h['party']+h['box']:
+        selected=h.get('pc_storage',{}).get('selected_pokemon')
+        for pid in h['party']+([selected] if self.at_storage_pc(h) and selected in h['box'] else []):
             p=state.pokemon[pid]
             for option in evolution_options(p):acts.append(LegalAction(action='evolve',arguments={'pokemon_id':pid,'species':option},known_consequences={'same_individual':True}))
             for move in p.get('pending_moves',[]):
                 if len(p['moves'])<4:acts.append(LegalAction(action='learn_move',arguments={'pokemon_id':pid,'move':move['move'],'slot':len(p['moves'])+1},known_consequences={'appends_move':True}))
                 for slot in range(1,len(p['moves'])+1):acts.append(LegalAction(action='learn_move',arguments={'pokemon_id':pid,'move':move['move'],'slot':slot},known_consequences={'replaces':p['moves'][slot-1]['move']}))
-        if self.at_storage_pc(h):
-            for pid in h['party']:
-                if any(state.pokemon[other]['hp']>0 for other in h['party'] if other!=pid) and len(h['box'])<420:acts.append(LegalAction(action='store_deposit',arguments={'pokemon_id':pid},known_consequences={'same_individual':True}))
-            if len(h['party'])<6:
-                for pid in h['box']:acts.append(LegalAction(action='store_withdraw',arguments={'pokemon_id':pid},known_consequences={'same_individual':True}))
-            from ..mechanics.storage import release_pokemon
-            owned=[state.pokemon[pid] for pid in h['party']+h['box']]
-            for mon in owned:
-                try:release_pokemon(h,mon,owned)
-                except ValueError:continue
-                acts.append(LegalAction(action='release_pokemon',arguments={'pokemon_id':mon['pokemon_id']},known_consequences={'persistent_individual':True,'ownership_ends':True,'irreversible_intention':True}))
+        acts.extend(self.pc_actions(state,hid))
+        from ..mechanics.mail import mail_actions
+        acts.extend(mail_actions(state,hid,at_pc=self.at_storage_pc(h) and h.get('pc_storage',{}).get('mode')=='mail'))
         from ..mechanics.tutors import tutor_stations
         for station in tutor_stations():
             if station['map_id']!=mid or station['tutor_id'] in h.get('used_tutors',[]) or abs(h['x']-station['x'])+abs(h['y']-station['y'])>1:continue
@@ -141,6 +169,20 @@ class GameplayMixin:
                     try:teach_tutor(h,mon,station['move'],tutor_id=station['tutor_id'],replace_slot=slot)
                     except ItemError:continue
                     acts.append(LegalAction(action='learn_from_tutor',arguments=args,known_consequences={'move':station['move'],'one_use_per_trainer':True,'source_service':True}))
+        from ..mechanics.utility_items import use_vs_seeker,use_fame_checker,use_town_map,use_teachy_tv,use_powder_jar,teachy_topics
+        from .hidden_items import use_itemfinder
+        for item,function in [('itemfinder',lambda:use_itemfinder(h,self.maps[mid],self.maps)),('vs_seeker',lambda:use_vs_seeker(state,h)),('fame_checker',lambda:use_fame_checker(state,h,vision_radius=self.interaction_radius(h))),('town_map',lambda:use_town_map(h,self.maps)),('powder_jar',lambda:use_powder_jar(h))]:
+            try:function()
+            except ItemError:continue
+            acts.append(LegalAction(action='use_field_item',arguments={'item':item},known_consequences={'reusable':True,'reads_own_device':True}))
+        for topic in teachy_topics(h):
+            try:use_teachy_tv(h,topic)
+            except ItemError:continue
+            acts.append(LegalAction(action='use_field_item',arguments={'item':'teachy_tv','topic':topic},known_consequences={'reusable':True,'educational_topic':topic}))
+        from ..mechanics.special_items import use_party_flute
+        try:use_party_flute(h,party)
+        except ItemError:pass
+        else:acts.append(LegalAction(action='use_field_item',arguments={'item':'poke_flute'},known_consequences={'reusable':True,'wakes_own_party':True}))
         from ..mechanics.field_items import apply_field_item
         for item in ('repel','super_repel','max_repel','black_flute','white_flute'):
             try:apply_field_item(h,item)
@@ -156,17 +198,18 @@ class GameplayMixin:
         acts.extend(self.inventory_actions(state,hid))
         acts.extend(self.trade_actions(state,hid))
         from ..mechanics.challenges import available
-        offers=state.world_facts.get('trainer_challenges',{})
+        from ..mechanics.utility_items import invitation_live
+        offers={key:offer for key,offer in state.world_facts.get('trainer_challenges',{}).items() if invitation_live(state,offer)}
         for offer_id,offer in offers.items():
             if offer['status']=='pending' and offer['recipient']==hid:
-                if available(state,offer['proposer'],hid,offer['doubles'],radius=self.interaction_radius(h)):acts.append(LegalAction(action='accept_challenge',arguments={'challenge_id':offer_id},known_consequences={'challenger':offer['proposer'],'challenger_name':state.humans[offer['proposer']]['name'],'personal_parties':True,'doubles':offer['doubles'],'no_prize_or_exp':'source_link_like'}))
+                if available(state,offer['proposer'],hid,offer['doubles'],radius=self.interaction_radius(h),maps=self.maps):acts.append(LegalAction(action='accept_challenge',arguments={'challenge_id':offer_id},known_consequences={'challenger':offer['proposer'],'challenger_name':state.humans[offer['proposer']]['name'],'personal_parties':True,'doubles':offer['doubles'],'no_prize_or_exp':'source_link_like'}))
                 acts.append(LegalAction(action='decline_challenge',arguments={'challenge_id':offer_id},known_consequences={'ends_offer':True}))
         for offer_id,offer in offers.items():
             if offer['status']=='pending' and offer['proposer']==hid:acts.append(LegalAction(action='decline_challenge',arguments={'challenge_id':offer_id},known_consequences={'withdraws_own_challenge':True}))
         if not any(o['proposer']==hid and o['status']=='pending' for o in offers.values()):
             for other in state.humans:
                 for doubles in (False,True):
-                    if available(state,hid,other,doubles,radius=self.interaction_radius(h)):acts.append(LegalAction(action='challenge_trainer',arguments={'human_id':other,'doubles':doubles},known_consequences={'requires_other_acceptance':True,'personal_parties':True,'no_prize_or_exp':'source_link_like'}))
+                    if available(state,hid,other,doubles,radius=self.interaction_radius(h),maps=self.maps):acts.append(LegalAction(action='challenge_trainer',arguments={'human_id':other,'doubles':doubles},known_consequences={'requires_other_acceptance':True,'personal_parties':True,'no_prize_or_exp':'source_link_like'}))
         return acts
 
     def encounter_table(self,mid):
@@ -186,6 +229,46 @@ class GameplayMixin:
         def setp(p):
             for k,v in p.items():changes.append({'op':'set','path':f'pokemon.{p["pokemon_id"]}.{k}','value':v})
         battle=self.active_battle(state,hid)
+        from .entity_systems import PC_ACTIONS, ITEM_TRADE_ACTIONS
+        if action in {'write_mail','read_mail','mail_to_pc','mail_attach','mail_discard'}:
+            from ..mechanics.mail import propose_mail
+            if (action in {'mail_to_pc','mail_attach'} or 'mail_id' in args) and not self.at_storage_pc(h):
+                raise EngineError('PC mailbox requires a physical PC')
+            updated,mons,receipt=propose_mail(h,state.pokemon,action,args,new_mail_id=f'mail-{state.state_version}-{hid}')
+            for key in ('inventory','mailbox'):
+                if updated.get(key)!=h.get(key):seth(key,updated[key])
+            for p in mons.values():
+                setp(p)
+                if 'mail' not in p:changes.append({'op':'set','path':f'pokemon.{p["pokemon_id"]}.mail','value':None})
+            seth('last_mail_action',receipt)
+            return changes,'human.inventory_changed',1
+        if action in ('register_item','unregister_item'):
+            from ..mechanics.inventory import quantity
+            if action == 'register_item':
+                if set(args) != {'item'} or args['item'].upper() not in item_catalog() or not item_catalog()[args['item'].upper()].get('registrability') or not quantity(h['inventory'],args['item']):
+                    raise EngineError('Only an owned source registrable key item can be registered')
+                seth('registered_item',args['item'].lower())
+            else:
+                if args: raise EngineError('Unregister takes no arguments')
+                seth('registered_item',None)
+            return changes,'human.inventory_changed',1
+        if action in PC_ACTIONS:
+            return self.pc_changes(state,hid,action,args)
+        if action in ITEM_TRADE_ACTIONS:
+            return self.item_trade_changes(state,hid,action,args)
+        if action == 'shop_sell_page':
+            if not self.shop_prices(h['map_id']) or set(args)!={'page'} or type(args['page']) is not int:
+                raise EngineError('Selling page requires an available shop and integer page')
+            offered=self.entity_inventory_actions(state,hid)
+            if not any(a.action==action and a.arguments==args for a in offered):raise EngineError('Selling page unavailable')
+            preferences=copy.deepcopy(h.get('trade_preferences',{}));preferences['sell_page']=args['page'];seth('trade_preferences',preferences)
+            return changes,'human.inventory_changed',1
+        if action == 'shop_sell':
+            from ..mechanics.inventory import sell_items
+            if not self.shop_prices(h['map_id']) or set(args) != {'item', 'quantity'} or h.get('battle_id'):
+                raise EngineError('Selling requires an available shop')
+            updated = sell_items(h,args['item'],args['quantity']);seth('inventory',updated['inventory']);seth('money',updated['money'])
+            return changes,'human.shopped',1
         if action=='safari_enter':
             if args or not any(a.action==action for a in self.gameplay_actions(state,hid)):raise EngineError('Safari admission unavailable')
             updated=enter_safari(h);seth('money',updated['money']);seth('safari',updated['safari']);seth('map_id','SafariZone_Center');seth('x',26);seth('y',30)
@@ -208,8 +291,32 @@ class GameplayMixin:
             for key in ('map_id','x','y','status','field','inventory','active_plan'):seth(key,updated.get(key))
             seth('last_field_escape',receipt)
             return changes,'human.field_move',5
-        if action=='use_field_item':
-            if set(args)!={'item'}:raise EngineError('Invalid field item arguments')
+        if action=='use_field_item' and not battle:
+            if set(args)!=({'item','topic'} if args.get('item')=='teachy_tv' else {'item'}):raise EngineError('Invalid field item arguments')
+            if args['item'] in ('town_map','teachy_tv','powder_jar'):
+                from ..mechanics.utility_items import use_town_map,use_teachy_tv,use_powder_jar
+                if args['item']=='town_map':updated,receipt=use_town_map(h,self.maps)
+                elif args['item']=='teachy_tv':updated,receipt=use_teachy_tv(h,args['topic'])
+                else:updated,receipt=use_powder_jar(h)
+                for key,value in updated.items():
+                    if h.get(key)!=value:seth(key,value)
+                return changes,'human.used_item',1
+            if args['item'] in ('itemfinder','vs_seeker','fame_checker'):
+                from .hidden_items import use_itemfinder
+                from ..mechanics.utility_items import use_vs_seeker,use_fame_checker
+                if args['item']=='itemfinder':updated,receipt=use_itemfinder(h,self.maps[h['map_id']],self.maps)
+                elif args['item']=='vs_seeker':
+                    updated,offers,receipt=use_vs_seeker(state,h)
+                    if offers!=state.world_facts.get('trainer_challenges',{}):changes.append({'op':'set','path':'world_facts.trainer_challenges','value':offers})
+                else:updated,receipt=use_fame_checker(state,h,vision_radius=self.interaction_radius(h))
+                for key,value in updated.items():
+                    if h.get(key)!=value:seth(key,value)
+                return changes,'human.used_item',1
+            if args['item']=='poke_flute':
+                from ..mechanics.special_items import use_party_flute
+                updated,party=use_party_flute(h,[state.pokemon[pid] for pid in h['party']])
+                for mon in party:setp(mon)
+                return changes,'human.used_item',1
             from ..mechanics.field_items import apply_field_item
             updated,result=apply_field_item(h,args['item']);seth('inventory',updated['inventory']);seth('field_encounter',updated['field_encounter']);return changes,'human.used_item',1
         if action in {'challenge_trainer','accept_challenge','decline_challenge'}:
@@ -224,7 +331,7 @@ class GameplayMixin:
                     from ..mechanics.challenges import start_personal_duel
                     # Factory receives the pending offer; acceptance and battle are one event.
                     candidate=dict(offer,status='pending');bid=f'battle-{state.state_version}-{offer["proposer"]}'
-                    session=start_personal_duel(state,candidate,rng,bid)
+                    session=start_personal_duel(state,candidate,rng,bid,maps=self.maps,radius=self.interaction_radius(h))
                     record={'battle_id':bid,'challenger':offer['proposer'],'opponent':hid,'wild':False,'personal_duel':True,'session':session.to_dict(),'turn':0,'outcome':None}
                     changes.append({'op':'set','path':f'world_facts.battles.{bid}','value':record})
                     for actor in (offer['proposer'],hid):changes.append({'op':'set','path':f'humans.{actor}.battle_id','value':bid})
@@ -245,7 +352,7 @@ class GameplayMixin:
         if action in {'use_item','teach_machine'} and not battle:
             if set(args)-{'pokemon_id','item','move_slot','replace_slot','evolution_target'}:raise EngineError('Unknown item argument')
             pid=args.get('pokemon_id')
-            if pid not in h['party']+h['box'] or pid not in state.pokemon:raise EngineError('Pokemon not owned')
+            if pid not in h['party']+(h['box'] if self.at_storage_pc(h) else []) or pid not in state.pokemon:raise EngineError('Pokemon not owned or stored individual requires a physical PC')
             if action=='teach_machine':
                 updated,p,event=teach_machine(h,state.pokemon[pid],args.get('item',''),replace_slot=args.get('replace_slot'))
             else:
@@ -369,7 +476,20 @@ class GameplayMixin:
         session=BattleSession(battle['session']);record=copy.deepcopy(battle);bid=record['battle_id'];ended=False;winner=None;response=None
         if not any(a.action==action and (action=='battle_turn' or a.arguments==args) for a in (self.battle_actions(state,hid) or ())):raise EngineError('battle action unavailable')
         if action=='battle_turn' and set(args)!={'choices'}:raise EngineError('Invalid doubles turn arguments')
-        if action=='use_item':
+        if action=='use_field_item':
+            from ..mechanics.special_items import prepare_battle_special
+            updated,effects=prepare_battle_special(h,args['item'],wild=record.get('wild'),link_like=record.get('personal_duel',False))
+            seth('inventory',updated['inventory'])
+            if effects.get('guaranteed_escape'):
+                ended=True;record['outcome']='fled';record['last_escape_succeeded']=True
+                record['last_escape_item']=args['item'].upper()
+            else:
+                own=next(team for team in session.record['teams'] if team['actor_id']==hid)
+                pid=next(row['pokemon_id'] for row,request in zip(own['party'],session.observation(hid)['request']['side']['pokemon']) if request.get('active'))
+                response=session.submit_item(hid,state.pokemon[pid],'POKE_FLUTE',effects,expected_version=session.version,acting_slot=args.get('acting_slot',1),partner_choice=args.get('partner_choice'))
+                if record['wild'] and not response['resolved']:
+                    response=session.submit(record['opponent'],self.wild_choice(session,record['opponent'],rng),expected_version=session.version)
+        elif action=='use_item':
             pid=args['pokemon_id'];trainer=copy.deepcopy(h)
             own=next(team for team in session.record['teams'] if team['actor_id']==hid)
             trainer['party']=[p['pokemon_id'] for p in own['party']]
@@ -531,7 +651,9 @@ class GameplayMixin:
             own=next(team for team in battle.record['teams'] if team['actor_id']==hid)
             trainer['party']=[p['pokemon_id'] for p in own['party']]
             ids=trainer['party']
-        else:ids=trainer['party']+trainer['box']
+        else:
+            selected=trainer.get('pc_storage',{}).get('selected_pokemon')
+            ids=trainer['party']+([selected] if self.at_storage_pc(trainer) and selected in trainer['box'] else [])
         for name,row in trainer['inventory'].items():
             quantity=row.get('quantity',0) if isinstance(row,dict) else row
             if quantity<=0:continue
@@ -564,79 +686,6 @@ class GameplayMixin:
 
     def interaction_radius(self,h):
         return 1 if self.maps[h['map_id']].events.get('requires_flash') and not h.get('field',{}).get('flash_active') else 6
-
-    def _trade_nearby(self,state,first,second):
-        a=state.humans[first];b=state.humans.get(second)
-        return bool(b and first!=second and not a.get('battle_id') and not b.get('battle_id') and a['map_id']==b['map_id'] and abs(a['x']-b['x'])+abs(a['y']-b['y'])<=min(self.interaction_radius(a),self.interaction_radius(b)))
-
-    def trade_actions(self,state,hid):
-        trainer=state.humans[hid];actions=[]
-        for oid,other in state.humans.items():
-            if not self._trade_nearby(state,hid,oid):continue
-            for pid in trainer['party']:
-                actions.append(LegalAction(action='trade_offer',arguments={'human_id':oid,'pokemon_id':pid,'wanted_species':'<original-151 species>'},known_consequences={'creates_offer':True,'requires_reciprocal_confirmation':True}))
-                if len(actions)>=12:break
-            if len(actions)>=12:break
-        for tid,offer in state.world_facts.get('trade_offers',{}).items():
-            if offer['phase'] not in ('offered','countered'):continue
-            if not self._trade_nearby(state,offer['proposer'],offer['recipient']):continue
-            if offer['phase']=='offered' and offer['recipient']==hid:
-                for pid in trainer['party']:
-                    pokemon=state.pokemon[pid]
-                    if pokemon['species']==offer['wanted_species']:
-                        public=state.pokemon[offer['offered_pokemon']]
-                        actions.append(LegalAction(action='trade_accept',arguments={'trade_id':tid,'pokemon_id':pid},known_consequences={'offers_counterpart':True,'receives_species':public['species'],'receives_level':public['level'],'requires_proposer_confirmation':True}))
-            elif offer['phase']=='countered' and offer['proposer']==hid:
-                received=state.pokemon[offer['counter_pokemon']]
-                actions.append(LegalAction(action='trade_accept',arguments={'trade_id':tid},known_consequences={'receives_species':received['species'],'receives_level':received['level'],'permanent_ownership_transfer':True}))
-            if hid in (offer['proposer'],offer['recipient']):actions.append(LegalAction(action='trade_decline',arguments={'trade_id':tid},known_consequences={'closes_offer':True}))
-        return actions
-
-    def trade_changes(self,state,hid,action,args):
-        offers=copy.deepcopy(state.world_facts.get('trade_offers',{}));h=state.humans[hid]
-        changes=[]
-        if action=='trade_offer':
-            if set(args)!={'human_id','pokemon_id','wanted_species'}:raise EngineError('Trade offer requires target, own individual and desired species')
-            target=args['human_id'];pid=args['pokemon_id'];species=normalize(str(args['wanted_species']))
-            from ..mechanics import reference_data
-            if not self._trade_nearby(state,hid,target) or pid not in h['party'] or species not in reference_data()['species']:raise EngineError('Illegal trade offer')
-            p=state.pokemon[pid]
-            if p['owner_id']!=hid:raise EngineError('Individual ownership changed')
-            tid=f'trade-{state.state_version}-{hid}'
-            # One active proposal per actor; earlier proposals remain in event history.
-            for existing in offers.values():
-                if existing['proposer']==hid and existing['phase'] in ('offered','countered'):existing['phase']='superseded'
-            offers[tid]={'trade_id':tid,'proposer':hid,'recipient':target,'offered_pokemon':pid,'wanted_species':species,'phase':'offered','offered_hash':content_hash(p),'offer_version':state.state_version}
-        else:
-            tid=args.get('trade_id');offer=offers.get(tid)
-            if not offer or offer['phase'] not in ('offered','countered') or hid not in (offer['proposer'],offer['recipient']):raise EngineError('Trade offer unavailable')
-            if action=='trade_decline':
-                if set(args)!={'trade_id'}:raise EngineError('Invalid decline arguments')
-                offer['phase']='declined'
-            elif offer['phase']=='offered':
-                if hid!=offer['recipient'] or set(args)!={'trade_id','pokemon_id'}:raise EngineError('Only recipient can offer counterpart')
-                if not self._trade_nearby(state,offer['proposer'],hid):raise EngineError('Trade partner unavailable')
-                pid=args['pokemon_id']
-                if pid not in h['party'] or state.pokemon[pid]['owner_id']!=hid or state.pokemon[pid]['species']!=offer['wanted_species']:raise EngineError('Counterpart not eligible')
-                original=state.pokemon[offer['offered_pokemon']]
-                if original['owner_id']!=offer['proposer'] or content_hash(original)!=offer['offered_hash']:raise EngineError('Offered individual changed; create new offer')
-                offer.update({'phase':'countered','counter_pokemon':pid,'counter_hash':content_hash(state.pokemon[pid]),'counter_version':state.state_version})
-            else:
-                if hid!=offer['proposer'] or set(args)!={'trade_id'}:raise EngineError('Proposer must confirm final individual exchange')
-                if not self._trade_nearby(state,hid,offer['recipient']):raise EngineError('Trade partner unavailable')
-                first=state.pokemon[offer['offered_pokemon']];second=state.pokemon[offer['counter_pokemon']]
-                if content_hash(first)!=offer['offered_hash'] or content_hash(second)!=offer['counter_hash']:raise EngineError('Trade individual changed; create new offer')
-                accepted=[{'actor_id':actor,'trade_id':tid,'accepted':True,'state_version':state.state_version,'offered_pokemon':p['pokemon_id'],'requested_pokemon':other['pokemon_id']} for actor,p,other in ((hid,first,second),(offer['recipient'],second,first))]
-                t1,p1,t2,p2,event=trade_exchange(state.humans[hid],first,state.humans[offer['recipient']],second,offers=accepted,expected_state_version=state.state_version)
-                for trainer in (t1,t2):
-                    for key in ('party','box','pokedex'):changes.append({'op':'set','path':f'humans.{trainer["human_id"]}.{key}','value':trainer[key]})
-                for p in (p1,p2):changes.append({'op':'set','path':f'pokemon.{p["pokemon_id"]}','value':p})
-                offer['phase']='completed';offer['completed_version']=state.state_version
-        inactive=[key for key,value in offers.items() if value['phase'] not in ('offered','countered')]
-        for obsolete in inactive[:-100]:offers.pop(obsolete)
-        changes.append({'op':'set','path':'world_facts.trade_offers','value':offers})
-        return changes,'human.traded' if offers[tid]['phase']=='completed' else 'world.public_event',1
-
 
     def at_storage_pc(self,trainer):
         from .field import DIRECTIONS

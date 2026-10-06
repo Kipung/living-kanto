@@ -296,7 +296,10 @@ def test_initial_placements_unique_on_foot_clear_of_source_objects(world_client)
         source=engine.maps[human['map_id']];position=(human['x'],human['y'])
         assert actor_map(source,human).is_walkable(*position)
         assert int(source.cells.get(position,{}).get('behavior',0)) not in WATER
-        assert position not in {(obj['x'],obj['y']) for obj in source.events.get('object_events',[]) if 'x' in obj and 'y' in obj}
+        source_positions={(obj['x'],obj['y']) for obj in source.events.get('object_events',[]) if 'x' in obj and 'y' in obj}
+        post=human.get('workplace',{}).get('service_post')
+        assert position not in source_positions or post and position==(post['x'],post['y'])
+        assert not any(n['map_id']==human['map_id'] and (n['x'],n['y'])==position for n in current.get('npcs',{}).values())
 
 def test_own_canonical_facts_are_private_bounded_copies(tmp_path):
     from living_kanto.simulation.world import WorldEngine

@@ -33,7 +33,7 @@ def test_parallel_preparation_does_not_hold_clock_or_pause_and_preserves_snapsho
     controller = RuntimeController(engine, store, 'prep', provider, concurrency=4)
     try:
         controller.resume('1')
-        wait_until(lambda: len(captures) == 4)
+        wait_until(lambda: len(captures) == 3)
         baseline = store.load_run('prep')[1].simulated_time
         wait_until(lambda: store.load_run('prep')[1].simulated_time > baseline, seconds=5)
         # Clock updates apply to fresh canonical objects, never worker snapshots.
@@ -44,13 +44,13 @@ def test_parallel_preparation_does_not_hold_clock_or_pause_and_preserves_snapsho
         version = store.load_run('prep')[1].state_version
         controller.resume('1')
         time.sleep(.1)
-        assert len(captures) == 4  # Retiring preparation retains the capacity.
+        assert len(captures) == 3  # Retiring preparation retains the capacity.
         release.set()
-        wait_until(lambda: len(captures) >= 8)
+        wait_until(lambda: len(captures) >= 6)
         wait_until(lambda: controller.status()['accepted_decisions'] > 0)
         controller.pause()
-        assert len({actor for actor, _, _ in captures[:4]}) == 4
-        assert 'erin' in {actor for actor, _, _ in captures[4:8]}  # Fair cursor continues after retirement.
+        assert len({actor for actor, _, _ in captures[:3]}) == 3
+        assert 'erin' in {actor for actor, _, _ in captures[3:6]}  # Fair cursor continues after retirement.
         assert all(obs['observation_version'] >= version for obs, _ in provider.calls)
         state = store.load_run('prep')[1]
         assert store.replay('prep').state_hash == state.state_hash

@@ -4,7 +4,7 @@ import subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 def test_source_objects_private_overlay_and_no_campaign_people():
-    source=(ROOT/'client/js/field-objects.js').read_text().replace("import {loadActorFrames} from './actor-frames.js';",'const loadActorFrames=()=>{throw Error("not used")};')
+    source=(ROOT/'client/js/field-objects.js').read_text().replace("import {loadActorFrames,drawActorFrame} from './actor-frames.js';",'const loadActorFrames=()=>{throw Error("not used")};')
     fixtures={name:json.loads((ROOT/f'content/maps/{name}.json').read_text()) for name in ['SeafoamIslands_B4F','Route12','CeladonCity_Condominiums_RoofRoom','PowerPlant']}
     code=source+'\nconst maps='+json.dumps(fixtures)+''';
 const assert=(value,message)=>{if(!value)throw Error(message)};

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {routeSegments,activity,battleMessages,eventText,actorId,groupByMap,walkingDuration,clockOnly,sharedClockLabel,elapsedWorldTime,worldProgress} from './model.mjs';
+import {routeSegments,activity,battleMessages,eventText,actorId,groupByMap,walkingDuration,clockOnly,sharedClockLabel,elapsedWorldTime,worldProgress,recentActivityEffects,activityIndicator} from './model.mjs';
 test('accepted journey preserves map boundaries and every path tile',()=>{
  const e={deterministic_inputs:{route:{journey:[{map_id:'PalletTown',start:[6,8],steps:[[7,8],[8,8]]},{map_id:'Route1',start:[12,39],steps:[[12,38],[11,38]]}]}}};
  assert.deepEqual(routeSegments(e),[{map:'PalletTown',points:[[6,8],[7,8],[8,8]]},{map:'Route1',points:[[12,39],[12,38],[11,38]]}]);
@@ -67,4 +67,29 @@ test('saved updates and AI decisions never stand in for world seconds',()=>{
 test('paused progress never claims live advancement or active thinking',()=>{
  const values=worldProgress({simulated_time:60,state_version:99},{accepted_decisions:8,speed:5,actual_simulated_seconds_per_wall_second:4.2,queue_depth:2,pending_requests:2,concurrency:4},'paused');
  assert.equal(values.clock,'Paused · requested 5×');assert.equal(values.thinking,'0 / 4 · 2 retiring');assert.equal(values.decisions,'8');
+});
+
+
+test('speech receipts identify the speaker and listener separately',()=>{
+ const rows=recentActivityEffects({causation:{human_id:'a',action:'talk_to',action_arguments:{human_id:'b',text:'Hello'}}});
+ assert.deepEqual(rows.map(r=>[r.human_id,r.kind,r.text]),[['a','talk','Hello'],['b','listen',undefined]]);
+});
+test('catch attempts include Safari balls but never Safari bait or ordinary battle moves',()=>{
+ const receipt=(action,args={})=>({causation:{human_id:'a',action,action_arguments:args}});
+ assert.equal(recentActivityEffects(receipt('catch',{ball:'poke_ball'}))[0].kind,'catch');
+ assert.equal(recentActivityEffects(receipt('safari_action',{choice:'ball'}))[0].kind,'catch');
+ assert.deepEqual(recentActivityEffects(receipt('safari_action',{choice:'bait'})),[]);
+ assert.deepEqual(recentActivityEffects(receipt('battle_move',{slot:1})),[]);
+});
+test('each recorded actor in a batch gets its own effect',()=>{
+ const rows=recentActivityEffects({causation:{decisions:[{human_id:'a',action:'catch'},{human_id:'b',action:'talk_to',arguments:{human_id:'c',text:'Hi'}}]}});
+ assert.deepEqual(rows.map(r=>[r.human_id,r.kind]),[['a','catch'],['b','talk'],['c','listen']]);
+});
+test('recent effects expire back to actual battle or idle state',()=>{
+ const effect={kind:'catch',icon:'🔴',label:'Catching',detail:'Recent recorded catch attempt',until:20};
+ assert.equal(activityIndicator({battle_id:'battle'},{},{},{effect,now:19}).kind,'catch');
+ assert.equal(activityIndicator({battle_id:'battle'},{},{},{effect,now:20}).kind,'battle');
+ assert.equal(activityIndicator({}, {}, {},{effect,now:21}).kind,'ready');
+ assert.equal(activityIndicator({battle_id:'battle',movement_intent:{paused_for_battle:true}}, {}, {},{moving:true}).kind,'battle');
+ assert.equal(activityIndicator({}, {}, {},{moving:true}).kind,'movement');
 });

@@ -39,7 +39,7 @@ def test_atomic_two_worker_intents_and_restart_cursor(game):
 
 def test_hundred_actor_elapsed_needs_and_deferred_pay_replay(game):
     engine,store=game
-    before=state(game);hid='human-074'
+    before=state(game);hid=next(hid for hid,h in sorted(before.humans.items()) if h['role']=='worker')
     started=act(game,hid,'work')
     assert started.simulated_time==before.simulated_time
     assert started.humans[hid]['money']==before.humans[hid]['money']
@@ -77,7 +77,7 @@ def test_pause_cancels_entire_two_response_batch(game):
 
 
 def test_due_engine_continuation_uses_no_fabricated_model_choice(game):
-    engine,store=game;hid='human-074';before=state(game)
+    engine,store=game;before=state(game);hid=next(hid for hid,h in sorted(before.humans.items()) if h['role']=='worker')
     act(game,hid,'work')
     runtime=RuntimeController(engine,store,'gameplay-test',WorkProvider(),actor_ids=[hid])
     try:

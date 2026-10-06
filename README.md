@@ -1,5 +1,7 @@
 # Living Kanto
 
+Primary development now lives on Jetson (`/home/jetson/projects/living-kanto`); Spark worker1 runs the live simulation and local inference. The Mac copy in `Desktop/Project/living-kanto` is a preserved mirror. Read [development locations and workflow](docs/DEVELOPMENT_HOME.md) before making changes. The local startup below is for isolated development worlds, not the existing production save.
+
 This is the direct-build working application for the Pokémon FireRed world described in [the project guide](docs/PROJECT_GUIDE.md). OpenRig is stopped and is not required to launch this build. Human decisions use an explicitly configured local model. Without one, worlds remain paused and can be inspected; there is no scripted or cloud fallback.
 
 ## Run locally
