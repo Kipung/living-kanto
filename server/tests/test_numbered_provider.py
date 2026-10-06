@@ -21,7 +21,8 @@ def test_numbered_http_decodes_exact_arguments_and_preserves_private_facts(proto
     class Handler(BaseHTTPRequestHandler):
         def do_POST(self):
             captured.append((self.path,json.loads(self.rfile.read(int(self.headers['Content-Length'])))))
-            text=json.dumps({'option':2,'text':'I hope to travel','decision_explanation':'Remember my intention'})
+            schema=captured[-1][1].get('response_format',{}).get('json_schema',{}).get('schema') or captured[-1][1].get('format')
+            text=json.dumps({'text':'I hope to travel'} if schema['required']==['text'] else {'option':2,'decision_explanation':'Remember my intention'})
             result={'choices':[{'message':{'content':text}}]} if protocol=='openai' else {'message':{'content':text}}
             self.send_response(200);self.end_headers();self.wfile.write(json.dumps(result).encode())
         def log_message(self,*args):pass
@@ -36,10 +37,12 @@ def test_numbered_http_decodes_exact_arguments_and_preserves_private_facts(proto
         payload=captured[0][1]
         facts=json.loads(payload['messages'][1]['content'])['facts']
         assert facts['memories']==obs['memories']
-        assert 'numbered choice' in payload['messages'][-1]['content']
+        assert 'only option and decision_explanation' in payload['messages'][-1]['content']
+        assert len(captured)==2
         schema=payload['response_format']['json_schema']['schema'] if protocol=='openai' else payload['format']
         assert schema['properties']['option']['enum']==[1,2]
         assert 'anyOf' not in schema
+        assert 'text' not in schema['properties']
     finally:server.shutdown();server.server_close();thread.join(2)
 
 
@@ -124,3 +127,31 @@ def test_async_numbered_failure_retries_with_decoder_reason(shared_world):
         assert provider.calls[:2]==[None,'This option does not offer a text placeholder']
         assert controller.status()['corrective_retries']==1
     finally:controller.close()
+
+@pytest.mark.parametrize('choice,text',[
+    ('{"option":1,"option":2,"decision_explanation":"Choice"}',None),
+    ('{"option":true,"decision_explanation":"Choice"}',None),
+    ('{"option":1,"text":"extra","decision_explanation":"Choice"}',None),
+    ('{"option":2,"decision_explanation":"Choice"}','{"text":"First","text":"Second"}'),
+    ('{"option":2,"decision_explanation":"Choice"}','{"text":"Valid","option":1}'),
+    ('{"option":2,"decision_explanation":"Choice"}','{"text":7}'),
+    ('{"option":2,"decision_explanation":"Choice"}','{"text":"   "}'),
+])
+def test_staged_decision_rejects_duplicate_extra_and_invalid_text(choice,text):
+    provider=LocalModelProvider(LocalModelConfig('http://127.0.0.1:1','test',response_protocol='numbered'))
+    outputs=iter([choice,text])
+    provider._infer=lambda *args,**kwargs:next(outputs)
+    with pytest.raises(NumberedDecisionError):provider.complete(observation())
+
+
+def test_fixed_action_needs_one_request_and_keeps_arguments():
+    provider=LocalModelProvider(LocalModelConfig('http://127.0.0.1:1','test',response_protocol='numbered'))
+    calls=[]
+    def infer(messages,schema):
+        calls.append(schema)
+        return '{"option":1,"decision_explanation":"Rest briefly"}'
+    provider._infer=infer
+    result=json.loads(provider.complete(observation()))
+    assert result=={'action':'wait','arguments':{'seconds':30},'decision_explanation':'Rest briefly'}
+    assert len(calls)==1
+    assert 'text' not in calls[0]['properties']

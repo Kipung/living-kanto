@@ -9,7 +9,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
-from .decision_wire import build_decision_wire, DecisionWireError
+from .decision_wire import build_decision_wire, DecisionWireError, TEXT_PLACEHOLDERS, _strict_object
 
 
 class ProviderError(RuntimeError):
@@ -76,7 +76,7 @@ class LocalModelProvider:
     def __init__(self, config: LocalModelConfig):
         self.config = config.validate()
         self.model_id = config.model
-        self.protocol = config.protocol if config.response_protocol == "canonical" else config.protocol + ":numbered"
+        self.protocol = config.protocol if config.response_protocol == "canonical" else config.protocol + ":numbered-staged"
         self._opener = urllib.request.build_opener(urllib.request.ProxyHandler({}), _NoRedirect())
 
     def complete(self, observation: dict, correction: str | None = None) -> str:
@@ -86,39 +86,74 @@ class LocalModelProvider:
             try:wire = build_decision_wire(observation, expand_battle_pairs=True)
             except DecisionWireError as exc:raise ProviderError(str(exc)) from exc
         observation_json = wire.serialize() if wire else json.dumps(observation, ensure_ascii=False)
-        if len(observation_json) > 131_072:
-            raise ProviderError("Private observation exceeds inference input limit; compact memory/context before retrying")
-        messages = [{"role": "system", "content": (
-            "You are this individual human in Living Kanto. Choose one engine legal action using only this private observation. "
-            "Return only a JSON object with action, arguments, decision_explanation. Explanation must be non-empty. "
-            "Use exact offered arguments; text placeholders permit your own text up to 200 characters. "
-            "Do not invent rewards or world facts. No arbitrary tools are available.")},
-            {"role": "user", "content": observation_json}]
-        if correction:
-            messages.append({"role": "user", "content": "Your previous response was rejected: " + correction + ". Return a corrected JSON action."})
-        if wire:
-            messages[0]['content'] = (
-                "You are this individual human in Living Kanto. Use only your private facts, memories, personality and goals to choose one useful offered option. "
-                "Return exactly option (integer), text (string), decision_explanation (one short clause, at most80 characters). "
-                "text must be empty unless the selected arguments.text explicitly offers a text placeholder; then write your own nonempty text of at most200 characters. "
-                "All other action arguments are fixed. When a goal is already recorded, choose a useful legal step towards it; update the goal only when facts justify a genuine change, never merely to restate it. "
-                "Prefer a useful existing journey over tile micromanagement when it serves your goal. Do not invent world facts. Return JSON only.")
-            if correction:messages[-1]['content']='Your previous proposal was rejected: '+correction+'. Return a corrected numbered choice with option, text, decision_explanation.'
-        schema = None
-        if wire:
-            schema = wire.response_schema
-            schema['properties']['decision_explanation']['maxLength'] = 80
-            schema.pop('anyOf', None)  # Benchmarked flat grammar; decoder still enforces conditional text.
+        if len(observation_json)>131_072:
+            raise ProviderError('Private observation exceeds inference input limit; compact memory/context before retrying')
+        if wire:return self._numbered(wire, observation_json, correction)
+        messages=[{'role':'system','content':(
+            'You are this individual human in Living Kanto. Choose one engine legal action using only this private observation. '
+            'Return only a JSON object with action, arguments, decision_explanation. Explanation must be non-empty. '
+            'Use exact offered arguments; text placeholders permit your own text up to 200 characters. '
+            'Do not invent rewards or world facts. No arbitrary tools are available.')},
+            {'role':'user','content':observation_json}]
+        if correction:messages.append({'role':'user','content':'Your previous response was rejected: '+correction+'. Return a corrected JSON action.'})
+        return self._infer(messages)
+
+    @staticmethod
+    def _decision_object(raw, fields):
+        try:result=json.loads(raw,object_pairs_hook=_strict_object)
+        except (ValueError,TypeError) as exc:
+            raise NumberedDecisionError('Response must be one JSON object without duplicate keys') from exc
+        if not isinstance(result,dict) or set(result)!=set(fields):
+            raise NumberedDecisionError('Response must contain exactly '+', '.join(fields))
+        return result
+
+    def _numbered(self, wire, observation_json, correction):
+        schema=wire.response_schema
+        schema.pop('anyOf',None)
+        schema['properties'].pop('text')
+        schema['properties']['decision_explanation']['maxLength']=80
+        schema['required']=['option','decision_explanation']
+        messages=[{'role':'system','content':(
+            'You are this individual human in Living Kanto. Use only your private facts, memories, personality and goals to choose one useful offered option. '
+            'Return exactly option (integer), decision_explanation (one short clause, at most80 characters). Do not include text or other fields. '
+            'All action arguments are fixed; when the chosen option offers a text placeholder, you will write its text in the next request. '
+            'When a goal is already recorded, choose a useful legal step towards it; update the goal only when facts justify a genuine change, never merely to restate it. '
+            'Prefer a useful existing journey over tile micromanagement when it serves your goal. Do not invent world facts. Return JSON only.')},
+            {'role':'user','content':observation_json}]
+        if correction:messages.append({'role':'user','content':'Your previous decision was rejected: '+correction+'. Correct your choice or required text. This request returns only option and decision_explanation.'})
+        choice=self._decision_object(self._infer(messages,schema),['option','decision_explanation'])
+        number=choice['option'];reason=choice['decision_explanation']
+        if type(number) is not int or not 1<=number<=len(wire.options):
+            raise NumberedDecisionError('Option is outside the offered menu')
+        if not isinstance(reason,str) or not reason.strip() or len(reason)>80:
+            raise NumberedDecisionError('A non-empty explanation of at most 80 characters is required')
+        selected=wire.options[number-1]
+        placeholder=selected['arguments'].get('text')
+        text=''
+        if isinstance(placeholder,str) and placeholder in TEXT_PLACEHOLDERS:
+            text_schema={'type':'object','properties':{'text':{'type':'string','minLength':1,'maxLength':200}},'required':['text'],'additionalProperties':False}
+            text_messages=[{'role':'system','content':(
+                'You are the same individual human, completing the option you just chose. Use only your own private facts, memories and personality. '
+                'Write the actual text required by that selected action. Return exactly one JSON field text, a nonempty string of at most200 characters. '
+                'Do not choose another option or invent world facts.')},
+                {'role':'user','content':observation_json},
+                {'role':'user','content':'Your selected option and explanation: '+json.dumps(choice,ensure_ascii=False)}]
+            if correction:text_messages.append({'role':'user','content':'The previous decision was rejected: '+correction+'. Correct the text if applicable.'})
+            text=self._decision_object(self._infer(text_messages,text_schema),['text'])['text']
+        try:return json.dumps(wire.decode({**choice,'text':text}),ensure_ascii=False)
+        except DecisionWireError as exc:raise NumberedDecisionError(str(exc)) from exc
+
+    def _infer(self, messages, schema=None):
         config = self.config
         if config.protocol == "openai":
             path = "/chat/completions" if config.endpoint.rstrip("/").endswith("/v1") else "/v1/chat/completions"
             payload = {"model": config.model, "messages": messages, "temperature": 0.7,
                        "max_tokens": config.max_tokens, "stream": False,
-                       "response_format": {"type": "json_schema", "json_schema": {"name":"private_choice", "schema":schema}} if wire else {"type": "json_object"},
+                       "response_format": {"type": "json_schema", "json_schema": {"name":"private_choice", "schema":schema}} if schema else {"type": "json_object"},
                        "chat_template_kwargs": {"enable_thinking": config.enable_thinking}}
         else:
             path = "/api/chat"
-            payload = {"model": config.model, "messages": messages, "format": schema if wire else "json", "stream": False,
+            payload = {"model": config.model, "messages": messages, "format": schema if schema else "json", "stream": False,
                        "options": {"num_predict": config.max_tokens}}
         headers = {"Content-Type": "application/json"}
         if config.api_key:
@@ -138,8 +173,4 @@ class LocalModelProvider:
             # Never include URL, credentials, or response body in persisted/status errors.
             raise ProviderError("Local model request failed or returned an unsupported response") from exc
 
-        if wire:
-            try:return json.dumps(wire.decode(text), ensure_ascii=False)
-            except DecisionWireError as exc:
-                raise NumberedDecisionError(str(exc)) from exc
         return text
