@@ -30,6 +30,8 @@ class Endpoint(BaseModel):
     model_id:str
     kind:str='openai'
     timeout_seconds:float=60
+    max_tokens:int=Field(default=512,ge=1,le=8192,strict=True)
+    response_protocol:str='canonical'
     concurrency:int=Field(default=1,ge=1,le=8,strict=True)
 class Step(BaseModel):
     human_id:str|None=None
@@ -59,7 +61,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
                 try:
                     if settings_path.exists():
                         settings=Endpoint.model_validate_json(settings_path.read_text());concurrency=settings.concurrency
-                        provider=LocalModelProvider(LocalModelConfig(settings.base_url,settings.model_id,settings.kind,settings.timeout_seconds))
+                        provider=LocalModelProvider(LocalModelConfig(settings.base_url,settings.model_id,settings.kind,settings.timeout_seconds,max_tokens=settings.max_tokens,response_protocol=settings.response_protocol))
                     else:provider=LocalModelProvider(LocalModelConfig.from_env())
                 except (ProviderError,ValueError):pass
                 controllers[run_id]=RuntimeController(engine(),store,run_id,provider,actor_ids=[h for h in s.humans if h!='player'],concurrency=concurrency)
@@ -110,7 +112,7 @@ def install_world_routes(app,open_store,safe_run_id,creation_lock):
 
     @app.post('/runs/{run_id}/runtime')
     def configure(run_id:str,req:Endpoint):
-        try:provider=LocalModelProvider(LocalModelConfig(req.base_url,req.model_id,req.kind,req.timeout_seconds))
+        try:provider=LocalModelProvider(LocalModelConfig(req.base_url,req.model_id,req.kind,req.timeout_seconds,max_tokens=req.max_tokens,response_protocol=req.response_protocol))
         except (ValueError,ProviderError) as exc:fail(exc)
         c=controller(run_id);c.pause()
         with c.shared_lock:

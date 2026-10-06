@@ -331,7 +331,7 @@ def test_runtime_concurrency_local_settings_restart_and_export_exclusion(tmp_pat
     app=create_app(root,content_root=ROOT/'content',client_root=ROOT/'client')
     with TestClient(app) as client:
         run=create(client)
-        settings={'base_url':'http://127.0.0.1:18880/v1','model_id':'local-test-no-request','concurrency':2}
+        settings={'base_url':'http://127.0.0.1:18880/v1','model_id':'local-test-no-request','concurrency':2,'response_protocol':'numbered','max_tokens':384}
         configured=client.post(f'/runs/{run}/runtime',json=settings)
         assert configured.status_code==200 and configured.json()['concurrency']==2
         assert client.post(f'/runs/{run}/runtime',json={**settings,'concurrency':True}).status_code==422
@@ -342,3 +342,5 @@ def test_runtime_concurrency_local_settings_restart_and_export_exclusion(tmp_pat
     with TestClient(restarted) as client:
         restored=client.get(f'/runs/{run}/runtime').json()
         assert restored['concurrency']==2 and restored['model']=='local-test-no-request'
+        config=restarted.state.get_runtime_controller(run).provider.config
+        assert config.response_protocol=='numbered' and config.max_tokens==384
