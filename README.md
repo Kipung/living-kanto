@@ -1,6 +1,8 @@
-# Living Kanto
+<picture><source media="(prefers-color-scheme: dark)" srcset=".github/banner-dark.svg"><img src=".github/banner-light.svg" width="100%" alt="Living Kanto"></picture>
 
 A persistent Pokémon world where 100 AI-driven people live their own lives: travelling, working, talking, caring for Pokémon, and pursuing ambitions in a shared Kanto.
+
+<p align="center"><img src=".github/demo.gif" width="720" alt="Replay of the simulation: residents walking through a town, each deciding where to go next"><br><sub>Replay of recorded simulation activity. Pokémon graphics belong to their owners.</sub></p>
 
 Living Kanto explores what happens when local language models make individual decisions inside a world with consistent rules and lasting consequences. Trainers can pursue badges, residents can build relationships, and everyday routines continue alongside battles and journeys. The long-term goal is to observe distinct lives and trainer careers emerge through the agents' own choices.
 
