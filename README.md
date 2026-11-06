@@ -1,4 +1,4 @@
-<picture><source media="(max-width: 640px)" srcset=".github/banner-m-light.svg"><source media="(prefers-color-scheme: dark)" srcset=".github/banner-dark.svg"><img src=".github/banner-light.svg" width="100%" alt="Living Kanto"></picture>
+<picture><source media="(max-width: 640px)" srcset=".github/banner-m.svg"><img src=".github/banner.svg" width="100%" alt="Living Kanto"></picture>
 
 A persistent Pokémon world where 100 AI-driven people live their own lives: travelling, working, talking, caring for Pokémon, and pursuing ambitions in a shared Kanto.
 
